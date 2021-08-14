@@ -10,6 +10,10 @@ import WelcomeContact from "./components/ContactTracingManager/WelcomeContactTra
 import ForgotPassword from "./components/ForgotPassword";
 import Register from "./components/Register";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { VaccineBooking } from "./components/Admin/pages/Reports/VaccineBooking";
+import VaccinationAreas from "./components/Admin/pages/Reports/VaccinationAreas";
+import HealthMeasures from "./components/Admin/pages/Reports/HealthMeasures";
+import VaccinatedDetails from "./components/VaccineManager/Reports/VaccinatedDetails";
 function App() {
   return (
     <Router>
@@ -21,9 +25,33 @@ function App() {
         <Route exact path="/admin" component={WelcomeAdmin}></Route>
         <Route exact path="/vaccine" component={WelcomeVaccine}></Route>
         <Route exact path="/ct" component={WelcomeContact}></Route>
-        <Route exact path="/admin/vaccinemanage" component={AdminVaccineManage}></Route>
+        <Route
+          exact
+          path="/admin/vaccinemanage"
+          component={AdminVaccineManage}
+        ></Route>
         <Route exact path="/admin/requests" component={Requests}></Route>
         <Route exact path="/admin/iot" component={Iot}></Route>
+        <Route
+          exact
+          path="/admin/reports/vaccinebooking"
+          component={VaccineBooking}
+        ></Route>
+        <Route
+          exact
+          path="/admin/reports/vaccinationAreas"
+          component={VaccinationAreas}
+        ></Route>
+        <Route
+          exact
+          path="/admin/reports/HealthMeasures"
+          component={HealthMeasures}
+        ></Route>
+        <Route
+          exact
+          path="/vaccine/reports/VaccinatedDetails"
+          component={VaccinatedDetails}
+        ></Route>
       </Switch>
     </Router>
   );
