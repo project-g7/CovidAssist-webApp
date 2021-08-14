@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
-import { SidebarData } from './SidebarData';
-import SubMenu from './SubMenu';
-import { IconContext } from 'react-icons/lib';
-import '../../styles/AdminDashboard.css'
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+import { SidebarData } from "./SidebarData";
+import SubMenu from "./SubMenu";
+import { IconContext } from "react-icons/lib";
+import "../../styles/AdminDashboard.css";
 // import logo from "../images/logo.png";
 import logoNew from "../../images/logoNew.png";
 
-
 const Nav = styled.div`
-  background: #7674DF;
+  z-index: 10;
+  background: #7674df;
   height: 80px;
   width: 100%;
-  position:fixed;
-  top:0;
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
 `;
 
 const NavIcon = styled(Link)`
-  ${'' /* margin-left: 2rem; */}
-  ${'' /* font-size: 2rem; */}
+  ${"" /* margin-left: 2rem; */}
+  ${"" /* font-size: 2rem; */}
   height: 80px;
   display: flex;
   justify-content: flex-start;
@@ -32,7 +32,7 @@ const NavIcon = styled(Link)`
 `;
 
 const SidebarNav = styled.nav`
-  background: #4049A0;
+  background: #4049a0;
   width: 250px;
   height: 100vh;
   display: flex;
@@ -55,24 +55,22 @@ const Sidebar = () => {
 
   return (
     <>
-      <IconContext.Provider value={{ color: '#fff' }}>
+      <IconContext.Provider value={{ color: "#fff" }}>
         <Nav>
-          <div className='a-nav-start'>
-          <img className="a-logo" src={logoNew} />
+          <div className="a-nav-start">
+            <img className="a-logo" src={logoNew} />
 
-            <h3 className='a-title'>Covid Assist</h3>
-          {/* <NavIcon to='#' className='a-nav-icon'>
+            <h3 className="a-title">Covid Assist</h3>
+            {/* <NavIcon to='#' className='a-nav-icon'>
             <FaIcons.FaBars onClick={showSidebar} />
           </NavIcon> */}
-            <h3 className='a-navbar-title'>Admin</h3>
+            <h3 className="a-navbar-title">Admin</h3>
           </div>
-          <div className='a-nav-end'>
-
-            <NavIcon to='#' className="a-user-icon">
-            <FaIcons.FaUserCircle/>
-          </NavIcon>
+          <div className="a-nav-end">
+            <NavIcon to="#" className="a-user-icon">
+              <FaIcons.FaUserCircle />
+            </NavIcon>
           </div>
-
         </Nav>
         <SidebarNav>
           <SidebarWrap>

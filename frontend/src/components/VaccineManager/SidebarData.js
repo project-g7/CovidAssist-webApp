@@ -1,14 +1,14 @@
-import React from 'react';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
-import * as IoIcons from 'react-icons/io';
-import * as RiIcons from 'react-icons/ri';
-import * as BiIcons from 'react-icons/bi';
+import React from "react";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+import * as IoIcons from "react-icons/io";
+import * as RiIcons from "react-icons/ri";
+import * as BiIcons from "react-icons/bi";
 
 export const SidebarData = [
   {
-    title: 'Dashboard',
-    path: '/vaccine',
+    title: "Dashboard",
+    path: "/vaccine",
     icon: <RiIcons.RiDashboardLine />,
     // iconClosed: <RiIcons.RiArrowDownSFill />,
     // iconOpened: <RiIcons.RiArrowUpSFill />,
@@ -27,12 +27,12 @@ export const SidebarData = [
     // ]
   },
   {
-    title: 'Reserved Vaccine List',
-    path: '/vaccine/vaccinelist',
-    icon: <BiIcons.BiFirstAid />
+    title: "Reserved Vaccine List",
+    path: "/vaccine/vaccinelist",
+    icon: <BiIcons.BiFirstAid />,
   },
   {
-    title: 'Reports',
+    title: "Reports",
     // path: '',
     icon: <IoIcons.IoIosPaper />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
@@ -40,16 +40,16 @@ export const SidebarData = [
 
     subNav: [
       {
-        title: 'Vaccinated Details',
-        path: '/vaccine/reports/reports1',
+        title: "Vaccinated Details",
+        path: "/vaccine/reports/vaccinateddetails",
         icon: <IoIcons.IoIosPaper />,
-        cName: 'sub-nav'
-      }
-    ]
+        cName: "sub-nav",
+      },
+    ],
   },
   {
-    title: 'Upcoming Bookings',
-    path: '/vaccine/upcoming',
-    icon: <FaIcons.FaRegListAlt />
+    title: "Upcoming Bookings",
+    path: "/vaccine/upcoming",
+    icon: <FaIcons.FaRegListAlt />,
   },
 ];
