@@ -1,0 +1,240 @@
+.c-navbar-title{
+    color: white;
+    /* margin-left: 10%; */
+    margin-top: 20px;
+    font-size: 22px;
+}
+
+.c-logo{
+    width: 140px;
+    height: 70px;
+    /* margin-top: 18px; */
+}
+.c-title{
+    margin-left: -40px;
+    margin-top: 20px;
+    /* display: inline-block; */
+    color: white;
+    font-size: 25px;
+}
+.c-user-icon{
+    margin-left: -25%;
+    font-size: 30px;
+    /* background-color: black; */
+    /* margin-top: -55px; */
+
+}
+
+.c-nav-icon{
+    /* margin-left: 6%; */
+    margin-top: -5px;
+    font-size: 28px;
+
+    /* background-color: black; */
+}
+
+.c-nav-start{
+    width: 34%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+
+@media (max-width:1500px) {
+
+    .c-navbar-title{
+        margin-top: 20px;
+        font-size: 18px;
+    }
+    
+    .c-logo{
+        width: 130px;
+        height: 70px;
+        /* margin-top: -10px; */
+    }
+    .c-title{
+        font-size: 20px;
+    }
+    .c-user-icon{
+        margin-left: -25%;
+        font-size: 25px;
+        /* background-color: black; */
+        /* margin-top: -55px; */
+    
+    }
+    
+    .c-nav-icon{
+        /* margin-left: 6%; */
+        margin-top: -5px;
+        font-size: 23px;
+    
+        /* background-color: black; */
+    }
+
+    .c-nav-start{
+        width: 35%;
+    
+    }
+    
+}
+
+@media (max-width:1300px) {
+
+    .c-navbar-title{
+        margin-top: 24px;
+        font-size: 17px;
+    }
+    
+    .c-logo{
+        width: 120px;
+        height: 60px;
+        /* margin-top: -10px; */
+    }
+    .c-title{
+        font-size: 17px;
+        margin-top: 24px;
+
+    }
+    .c-user-icon{
+        margin-left: -25%;
+        font-size: 25px;
+        /* background-color: black; */
+        /* margin-top: -55px; */
+    
+    }
+    
+    .c-nav-icon{
+        /* margin-left: 6%; */
+        margin-top: -5px;
+        font-size: 19px;
+    
+        /* background-color: black; */
+    }
+    .c-nav-start{
+        width: 35%;
+    
+    }
+    
+}
+
+@media (max-width:1150px) {
+
+    .c-navbar-title{
+        margin-top: 24px;
+        font-size: 15px;
+    }
+    
+    .c-logo{
+        width: 110px;
+        height: 55px;
+        margin-top: 7px;
+        margin-left: -17px;
+    }
+    .c-title{
+        font-size: 15px;
+        margin-top: 24px;
+
+    }
+    .c-user-icon{
+        margin-left: -25%;
+        font-size: 25px;
+        /* background-color: black; */
+        /* margin-top: -55px; */
+    
+    }
+    
+    .c-nav-icon{
+        /* margin-left: 6%; */
+        margin-top: -5px;
+        font-size: 17px;
+    
+        /* background-color: black; */
+    }
+    .c-nav-start{
+        width: 35%;
+    
+    }
+    
+}
+
+@media (max-width:950px) {
+
+    .c-navbar-title{
+        margin-top: 24px;
+        font-size: 15px;
+    }
+    
+    .c-logo{
+        width: 100px;
+        height: 50px;
+        margin-top: 7px;
+        margin-left: -17px;
+    }
+    .c-title{
+        font-size: 15px;
+        margin-top: 24px;
+
+    }
+    .c-user-icon{
+        margin-left: -25%;
+        font-size: 25px;
+        /* background-color: black; */
+        /* margin-top: -55px; */
+    
+    }
+    
+    .c-nav-icon{
+        /* margin-left: 6%; */
+        margin-top: -5px;
+        font-size: 17px;
+    
+        /* background-color: black; */
+    }
+    .c-nav-start{
+        width: 42%;
+    
+    }
+    
+}
+
+@media (max-width:800px) {
+
+    .c-navbar-title{
+        margin-top: 24px;
+        font-size: 14px;
+    }
+    
+    .c-logo{
+        width: 100px;
+        height: 50px;
+        margin-top: 7px;
+        margin-left: -17px;
+    }
+    .c-title{
+        font-size: 14px;
+        margin-top: 24px;
+
+    }
+    .c-user-icon{
+        margin-left: -25%;
+        font-size: 25px;
+        /* background-color: black; */
+        /* margin-top: -55px; */
+    
+    }
+    
+    .c-nav-icon{
+        /* margin-left: 6%; */
+        margin-top: -5px;
+        font-size: 15px;
+    
+        /* background-color: black; */
+    }
+    .c-nav-start{
+        width: 45%;
+    
+    }
+    
+}

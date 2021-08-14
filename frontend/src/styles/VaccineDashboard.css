@@ -1,0 +1,200 @@
+.v-navbar-title{
+    color: white;
+    /* margin-left: 10%; */
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+.v-logo{
+    width: 140px;
+    height: 70px;
+    /* margin-top: -10px; */
+}
+.v-title{
+    margin-left: -40px;
+    margin-top: 20px;
+    /* display: inline-block; */
+    color: white;
+    font-size: 25px;
+}
+.v-user-icon{
+    margin-left: -25%;
+    font-size: 30px;
+    /* background-color: black; */
+    /* margin-top: -55px; */
+
+}
+
+.v-nav-icon{
+    /* margin-left: 6%; */
+    margin-top: -5px;
+    font-size: 28px;
+
+    /* background-color: black; */
+}
+
+.v-nav-start{
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+
+@media (max-width:1600px) {
+
+    .v-navbar-title{
+        margin-top: 20px;
+        font-size: 20px;
+    }
+    
+    .v-logo{
+        width: 130px;
+        height: 70px;
+        /* margin-top: -10px; */
+    }
+    .v-title{
+        font-size: 20px;
+    }
+    .v-user-icon{
+        margin-left: -25%;
+        font-size: 25px;
+        /* background-color: black; */
+        /* margin-top: -55px; */
+    
+    }
+    
+    .v-nav-icon{
+        /* margin-left: 6%; */
+        margin-top: -5px;
+        font-size: 23px;
+    
+        /* background-color: black; */
+    }
+
+    .v-nav-start{
+        width: 28%;
+    }
+    
+    
+}
+@media (max-width:1400px) {
+    .v-nav-start{
+        width: 30%;
+    }
+}
+
+@media (max-width:1200px) {
+
+    .v-navbar-title{
+        margin-top: 24px;
+        font-size: 17px;
+    }
+    
+    .v-logo{
+        width: 120px;
+        height: 60px;
+        /* margin-top: -10px; */
+    }
+    .v-title{
+        font-size: 17px;
+        margin-top: 24px;
+
+    }
+    .v-user-icon{
+        margin-left: -25%;
+        font-size: 25px;
+        /* background-color: black; */
+        /* margin-top: -55px; */
+    
+    }
+    
+    .v-nav-icon{
+        /* margin-left: 6%; */
+        margin-top: -5px;
+        font-size: 19px;
+    
+        /* background-color: black; */
+    }
+    .v-nav-start{
+        width: 33%;
+    
+    }
+    
+}
+
+@media (max-width:1000px) {
+
+    .v-navbar-title{
+        margin-top: 24px;
+        font-size: 15px;
+    }
+    
+    .v-logo{
+        width: 110px;
+        height: 55px;
+        margin-top: 7px;
+        margin-left: -17px;
+    }
+    .v-title{
+        font-size: 15px;
+        margin-top: 24px;
+
+    }
+    .v-user-icon{
+        margin-left: -25%;
+        font-size: 25px;
+    
+    }
+    
+    .v-nav-icon{
+        /* margin-left: 6%; */
+        margin-top: -5px;
+        font-size: 17px;
+    
+        /* background-color: black; */
+    }
+    .v-nav-start{
+        width: 36%;
+    
+    }
+    
+}
+
+@media (max-width:800px) {
+
+    .v-navbar-title{
+        margin-top: 24px;
+        font-size: 14px;
+    }
+    
+    .v-logo{
+        width: 110px;
+        height: 55px;
+        margin-top: 7px;
+        margin-left: -17px;
+    }
+    .v-title{
+        font-size: 14px;
+        margin-top: 24px;
+
+    }
+    .v-user-icon{
+        margin-left: -25%;
+        font-size: 25px;
+    }
+    
+    .v-nav-icon{
+        /* margin-left: 6%; */
+        margin-top: -5px;
+        font-size: 15px;
+    
+        /* background-color: black; */
+    }
+    .v-nav-start{
+        width: 40%;
+    
+    }
+    
+}
