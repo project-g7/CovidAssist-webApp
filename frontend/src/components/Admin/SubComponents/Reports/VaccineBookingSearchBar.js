@@ -36,6 +36,7 @@ class VaccineBookingSearchBar extends React.Component {
             value={selectedOption1}
             onChange={this.handleChange1}
             options={options1}
+            label="District"
           />
         </div>
         <div className="CenterSearchbar">
@@ -43,6 +44,7 @@ class VaccineBookingSearchBar extends React.Component {
             value={selectedOption2}
             onChange={this.handleChange2}
             options={options2}
+            label="Vaccine Center"
           />
         </div>
       </div>
