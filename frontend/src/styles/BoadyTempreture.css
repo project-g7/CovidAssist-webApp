@@ -1,0 +1,24 @@
+.boxBoady1 {
+  /* width: "120%"; */
+  margin-top: -53px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1110px;
+  height: 750px;
+  margin-left: -28px;
+}
+.BoxTitle1 {
+  margin-top: 30px;
+  background-color: #4049a0;
+  color: white;
+  border-radius: 5px;
+  font-size: 10px;
+  text-align: center;
+}
+.BoxSubTitle1 {
+  background-color: #c1d7e0;
+  color: #c1d7e0;
+  margin-top: 33px;
+}

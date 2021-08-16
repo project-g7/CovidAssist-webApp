@@ -23,7 +23,7 @@ const VaccinatedDetailsChart = () => {
         </div> */}
           <Bar
             data={{
-              labels: ["Covisheild", "Sinopharm", "Sputnic V"],
+              labels: ["Oxford-AstraZeneca", "Sinopharm", "Sputnic V"],
               datasets: [
                 {
                   label: "# 1st Dose",
