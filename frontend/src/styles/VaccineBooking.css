@@ -2,7 +2,7 @@
   background-color: #c1d7e0;
   width: "120%";
   margin-top: "0%";
-  color: black;
+  color: rgb(97, 89, 89);
   font-size: medium;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
@@ -52,9 +52,9 @@
 }
 
 /* Remove extra left and right margins, due to padding */
-.row {
+/* .row {
   margin: 0 -5px;
-}
+}  */
 
 /* Clear floats after the columns */
 .row:after {

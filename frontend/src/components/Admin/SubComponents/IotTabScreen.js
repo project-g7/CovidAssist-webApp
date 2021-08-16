@@ -94,8 +94,8 @@ export default function NavTabs() {
           onChange={handleChange}
           indicatorColor="primary"
         >
-          <LinkTab label="IoT Locations"  {...a11yProps(0)} />
-          <LinkTab label="Add IoT Location" {...a11yProps(1)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="IoT Locations"  {...a11yProps(0)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Add IoT Location" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >
