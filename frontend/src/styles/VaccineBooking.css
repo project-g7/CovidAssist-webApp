@@ -50,6 +50,9 @@
   width: 25%;
   padding: 0 10px;
 }
+.column div {
+  margin-left: 15px;
+}
 
 /* Remove extra left and right margins, due to padding */
 .row {
@@ -127,7 +130,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0;
-  margin-left: -40px;
+  margin-left: 14px;
   text-align: center;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -137,13 +140,13 @@
 }
 .column1 {
   /*this can be devided into many rows*/
-  width: 20%;
+  /* width: 10%; */
   height: auto;
   display: inline-block;
   color: rgb(15, 25, 119);
   font-size: 10px;
   /*border: 1px solid black;*/
-  margin-right: -180px;
+  margin-right: 200px;
   margin-top: -auto;
 }
 .column1 div {
@@ -157,7 +160,8 @@
   /*border: 1px solid black;*/
   /* margin-right: -200px; */
   height: 465px;
-  width: 400px;
+  width: 370px;
+  margin-left: 10px;
 }
 /* .pieSize {
   margin-top: 0%;
@@ -170,7 +174,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0;
-  margin-left: -10px;
+  margin-left: 40px;
   text-align: center;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -189,9 +193,9 @@
 } */
 .BookCard2 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  width: 380px;
+  width: 300px;
   height: 180px;
-  margin-left: 680px;
+  margin-left: 740px;
   margin-top: -380px;
   border-top: #86a040;
   border-top-style: solid;
@@ -200,9 +204,9 @@
 }
 .BookCard3 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  width: 380px;
+  width: 300px;
   height: 180px;
-  margin-left: 680px;
+  margin-left: 740px;
   margin-top: 20px;
   border-top: #bc31c9;
   border-top-style: solid;
@@ -211,4 +215,36 @@
 }
 .BookCardBoady1 {
   margin-top: 15px;
+}
+.DistrictSearchbar {
+  width: 500px;
+  margin-top: 40px;
+  margin-left: 42px;
+}
+.CenterSearchbar {
+  width: 500px;
+  margin-left: 570px;
+  margin-top: -37px;
+}
+.mainBody {
+  width: "120%";
+  margin-top: -20px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1108px;
+  height: 620px;
+  margin-left: -26px;
+}
+.VaccinatedBody {
+  width: "120%";
+  margin-top: -20px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1108px;
+  height: 780px;
+  margin-left: -26px;
 }

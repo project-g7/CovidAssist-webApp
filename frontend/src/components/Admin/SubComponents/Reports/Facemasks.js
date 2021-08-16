@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../../styles/VaccinationAreas.css";
+import "../../../../styles/BoadyTempreture.css";
 import { GoogleMap, withScriptjs, withGoogleMap } from "react-google-maps";
 
 function Map() {
@@ -11,18 +11,17 @@ function Map() {
   );
 }
 const WrappedMap = withScriptjs(withGoogleMap(Map));
-
-const VaccinationArea = () => {
+const BodyTempreture = () => {
   return (
     <div className="App">
-      <div className="boxBoady">
-        <div className="BoxTitle">
+      <div className="boxBoady1">
+        {/* <div className="BoxTitle1">
           <h4>Vaccination Areas </h4>
+        </div> */}
+        <div className="BoxSubTitle1">
+          <h4>BoadyTempreture</h4>
         </div>
-        <div className="BoxSubTitle">
-          <h4>Vaccination Areas</h4>
-        </div>
-        <div style={{ width: "75vw", height: "100vh" }}>
+        <div style={{ width: "72.3vw", height: "95vh" }}>
           <WrappedMap
             googleMapURL={
               "https://maps.googleapis.com/maps/api/js?key=AIzaSyCeVMWSLojEXAAhpku0TCAL17bE73veo3o&libraries=places"
@@ -37,4 +36,4 @@ const VaccinationArea = () => {
   );
 };
 
-export default VaccinationArea;
+export default BodyTempreture;
