@@ -120,6 +120,19 @@
   justify-content: space-between;
 }
 
+.dashboard-line-chart {
+  margin-top: 60px;
+  margin-left: 190px;
+  margin-bottom: 80px;
+  padding: 10px;
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 900px;
+  height: 460px;
+}
+
 @media (max-width: 1500px) {
   .a-navbar-title {
     margin-top: 20px;

@@ -4,6 +4,7 @@ import DashboardCard1 from "../SubComponents/DashboardCard1";
 import DashboardCard2 from "../SubComponents/DashboardCard2";
 import DashboardCard3 from "../SubComponents/DashboardCard3";
 import DashboardCard4 from "../SubComponents/DashboardCard4";
+import LineGraph from '../SubComponents/Dashboard/LineGraph'
 
 const Dashboard = () => {
   return (
@@ -18,6 +19,9 @@ const Dashboard = () => {
             <div> */}
         <DashboardCard3 />
         {/* </div>     */}
+      </div>
+      <div className='container tab-screen'>
+        <LineGraph/>
       </div>
     </div>
   );

@@ -58,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
     width: '85%',
     backgroundColor: '#fff',
     marginTop: '120px',
-    marginLeft: '230px'
+    marginLeft: '230px',
+    textDecoration: 'none'
 
   },
   selected:{
@@ -68,10 +69,18 @@ const useStyles = makeStyles((theme) => ({
       }
   },
   indicator:{
-      backgroundColor:'white',
-      color : 'black'
+    backgroundColor:'white',
+    color : 'black',
+    textDecoration:'none',
+
+    '&:hover':{
+    // backgroundColor:'black',
+    textDecoration:'none',
+
+    }
+
   },
- 
+
 }));
 
 export default function NavTabs() {
@@ -88,13 +97,14 @@ export default function NavTabs() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.indicator}>
         <Tabs
+          className={classes.tabs}
           variant="fullWidth"
           value={value}
           onChange={handleChange}
           indicatorColor="primary"
         >
-          <LinkTab label="Vaccination Centers"  {...a11yProps(0)} />
-          <LinkTab label="Add Vaccination Center" {...a11yProps(1)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Vaccination Centers"  {...a11yProps(0)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Add Vaccination Center" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >
