@@ -2,7 +2,12 @@ import React from "react";
 import Select from "react-select";
 import "../../../../styles/VaccineBooking.css";
 
-const options = [
+const options1 = [
+  { value: "colombo", label: "Colombo" },
+  { value: "galle", label: "Galle" },
+  { value: "matara", label: "Matara " },
+];
+const options2 = [
   { value: "colombo", label: "Colombo" },
   { value: "galle", label: "Galle" },
   { value: "matara", label: "Matara " },
@@ -10,21 +15,39 @@ const options = [
 
 class VaccineBookingSearchBar extends React.Component {
   state = {
-    selectedOption: null,
+    selectedOption1: null,
+    selectedOption2: null,
   };
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
+  handleChange1 = (selectedOption1) => {
+    this.setState({ selectedOption1 });
+    console.log(`Option selected:`, selectedOption1);
+  };
+  handleChange2 = (selectedOption2) => {
+    this.setState({ selectedOption2 });
+    console.log(`Option selected:`, selectedOption2);
   };
   render() {
-    const { selectedOption } = this.state;
-
+    const { selectedOption1 } = this.state;
+    const { selectedOption2 } = this.state;
     return (
-      <Select
-        value={selectedOption}
-        onChange={this.handleChange}
-        options={options}
-      />
+      <div>
+        <div className="DistrictSearchbar">
+          <Select
+            value={selectedOption1}
+            onChange={this.handleChange1}
+            options={options1}
+            label="District"
+          />
+        </div>
+        <div className="CenterSearchbar">
+          <Select
+            value={selectedOption2}
+            onChange={this.handleChange2}
+            options={options2}
+            label="Vaccine Center"
+          />
+        </div>
+      </div>
     );
   }
 }

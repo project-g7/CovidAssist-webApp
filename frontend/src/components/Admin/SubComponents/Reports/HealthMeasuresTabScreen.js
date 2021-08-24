@@ -1,12 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import AddVaccineForm from './AddVaccineForm'
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import BodyTempreture from "./BodyTempreture";
+import Facemasks from "./Facemasks";
+// import AddVaccineForm from './AddVaccineForm'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -37,7 +39,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `nav-tab-${index}`,
-    'aria-controls': `nav-tabpanel-${index}`,
+    "aria-controls": `nav-tabpanel-${index}`,
   };
 }
 
@@ -55,32 +57,21 @@ function LinkTab(props) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '85%',
-    backgroundColor: '#fff',
-    marginTop: '120px',
-    marginLeft: '230px',
-    textDecoration: 'none'
-
+    width: "85%",
+    backgroundColor: "#fff",
+    marginTop: "120px",
+    marginLeft: "230px",
   },
-  selected:{
-      backgroundColor : theme.palette.background.paper,
-      '&$selected':{
-          backgroundColor : "black"
-      }
+  selected: {
+    backgroundColor: theme.palette.background.paper,
+    "&$selected": {
+      backgroundColor: "black",
+    },
   },
-  indicator:{
-    backgroundColor:'white',
-    color : 'black',
-    textDecoration:'none',
-
-    '&:hover':{
-    // backgroundColor:'black',
-    textDecoration:'none',
-
-    }
-
+  indicator: {
+    backgroundColor: "white",
+    color: "black",
   },
-
 }));
 
 export default function NavTabs() {
@@ -97,21 +88,21 @@ export default function NavTabs() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.indicator}>
         <Tabs
-          className={classes.tabs}
           variant="fullWidth"
           value={value}
           onChange={handleChange}
           indicatorColor="primary"
         >
-          <LinkTab style={{ textDecoration: 'none' }} label="Vaccination Centers"  {...a11yProps(0)} />
-          <LinkTab style={{ textDecoration: 'none' }} label="Add Vaccination Center" {...a11yProps(1)} />
+          {/* icon: <BiIcons.BiFirstAid /> */}
+          <LinkTab label="Body Tempretures" {...a11yProps(0)} />
+          <LinkTab label="Facemasks" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} >
-        Page one
+      <TabPanel value={value} index={0}>
+        <BodyTempreture />
       </TabPanel>
       <TabPanel value={value} index={1}>
-       <AddVaccineForm/>
+        <Facemasks />
       </TabPanel>
     </div>
   );
