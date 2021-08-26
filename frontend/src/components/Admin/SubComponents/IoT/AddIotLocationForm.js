@@ -13,6 +13,12 @@ import * as RiIcons from "react-icons/ri";
 import * as GrIcons from "react-icons/gr";
 import * as GiIcons from "react-icons/gi";
 import * as FaIcons from "react-icons/fa";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Axios from "axios";
 import Map from "../AddLocation";
 
 const useStyles = makeStyles((theme) => ({
@@ -74,14 +80,96 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
   },
+  districtError: {
+    marginLeft: "20px",
+    color: "red",
+  },
 }));
 
 const AddVaccineForm = () => {
   const classes = useStyles();
-  const [age, setAge] = React.useState("");
+  const [district, setDistrict] = React.useState("");
+  const [place, setPlace] = React.useState("");
+  const [districtErr, setDistrictErr] = React.useState("");
+  const [placeErr, setPlaceErr] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  const [openSuccess, setOpenSuccess] = React.useState(false);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClickSuccessOpen = () => {
+    setOpenSuccess(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleCloseSuccess = () => {
+    setOpenSuccess(false);
+  };
+
+    const handleSubmitData = () => {
+    let formData = {
+      district: district,
+      place: place,
+      lat: lat,
+      lng: lng,
+    };
+    setOpen(false);
+    Axios.post("http://localhost:3002/addIoTLocation", formData)
+      .then((res) => {
+        console.log(res.data);
+        if(res.data == "Success"){
+          handleClickSuccessOpen();
+
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleClick = () => {
+    let d = 0;
+    let p = 0;
+    console.log(district);
+    console.log(place);
+    console.log(lat);
+    console.log(lng);
+
+    if (district == "") {
+      setDistrictErr("Please select a district");
+      d = 1;
+    } else {
+      d = 0;
+      setDistrictErr("");
+    }
+    if (place == "") {
+      p = 1;
+      setPlaceErr("Please enter a place ");
+      console.log(place);
+    } else {
+      p = 0;
+      console.log(place);
+      setPlaceErr("");
+    }
+
+    if (d == 0 && p == 0) {
+      console.log("Succccceessss");
+      handleClickOpen();
+    } else {
+      console.log("noooo");
+    }
+  };
+
+  const handleDistrictChange = (event) => {
+    setDistrict(event.target.value);
+  };
+
+  const handlePlaceChange = (event) => {
+    setPlace(event.target.value);
   };
 
   let [lat, setLat] = useState(6.9022108);
@@ -107,40 +195,49 @@ const AddVaccineForm = () => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={age}
-              onChange={handleChange}
+              value={district}
+              onChange={handleDistrictChange}
             >
-              <MenuItem value={1}>Ampara</MenuItem>
-              <MenuItem value={2}>Anuradhapura</MenuItem>
-              <MenuItem value={3}>Badulla</MenuItem>
-              <MenuItem value={4}>Batticaloa</MenuItem>
-              <MenuItem value={5}>Colombo</MenuItem>
-              <MenuItem value={6}>Galle</MenuItem>
-              <MenuItem value={7}>Gampaha</MenuItem>
-              <MenuItem value={8}>Hambantota</MenuItem>
-              <MenuItem value={9}>Jaffna</MenuItem>
-              <MenuItem value={10}>Kalutara</MenuItem>
-              <MenuItem value={11}>Kandy</MenuItem>
-              <MenuItem value={12}>Kegalle</MenuItem>
-              <MenuItem value={13}>Kilinochchi</MenuItem>
-              <MenuItem value={14}>Kurunegala</MenuItem>
-              <MenuItem value={15}>Mannar</MenuItem>
-              <MenuItem value={16}>Matale</MenuItem>
-              <MenuItem value={17}>Matara</MenuItem>
-              <MenuItem value={18}>Monaragala</MenuItem>
-              <MenuItem value={19}>Mullaitivu</MenuItem>
-              <MenuItem value={20}>Nuwara Eliya</MenuItem>
-              <MenuItem value={21}>Polonnaruwa</MenuItem>
-              <MenuItem value={22}>Puttalam</MenuItem>
-              <MenuItem value={23}>Ratnapura</MenuItem>
-              <MenuItem value={24}>Trincomalee</MenuItem>
-              <MenuItem value={25}>Vavuniya</MenuItem>
+              <MenuItem value={"Ampara"}>Ampara</MenuItem>
+              <MenuItem value={"Anuradhapura"}>Anuradhapura</MenuItem>
+              <MenuItem value={"Badulla"}>Badulla</MenuItem>
+              <MenuItem value={"Batticaloa"}>Batticaloa</MenuItem>
+              <MenuItem value={"Colombo"}>Colombo</MenuItem>
+              <MenuItem value={"Galle"}>Galle</MenuItem>
+              <MenuItem value={"Gampaha"}>Gampaha</MenuItem>
+              <MenuItem value={"Hambantota"}>Hambantota</MenuItem>
+              <MenuItem value={"Jaffna"}>Jaffna</MenuItem>
+              <MenuItem value={"Kalutara"}>Kalutara</MenuItem>
+              <MenuItem value={"Kandy"}>Kandy</MenuItem>
+              <MenuItem value={"Kegalle"}>Kegalle</MenuItem>
+              <MenuItem value={"Kilinochchi"}>Kilinochchi</MenuItem>
+              <MenuItem value={"Kurunegala"}>Kurunegala</MenuItem>
+              <MenuItem value={"Mannar"}>Mannar</MenuItem>
+              <MenuItem value={"Matale"}>Matale</MenuItem>
+              <MenuItem value={"Matara"}>Matara</MenuItem>
+              <MenuItem value={"Monaragala"}>Monaragala</MenuItem>
+              <MenuItem value={"Mullaitivu"}>Mullaitivu</MenuItem>
+              <MenuItem value={"Nuwara Eliya"}>Nuwara Eliya</MenuItem>
+              <MenuItem value={"Polonnaruwa"}>Polonnaruwa</MenuItem>
+              <MenuItem value={"Puttalam"}>Puttalam</MenuItem>
+              <MenuItem value={"Ratnapura"}>Ratnapura</MenuItem>
+              <MenuItem value={"Trincomalee"}>Trincomalee</MenuItem>
+              <MenuItem value={"Vavuniya"}>Vavuniya</MenuItem>
             </Select>
           </FormControl>
+          <div className={classes.districtError}>{districtErr}</div>
+
           <div className={classes.place}>
             <RiIcons.RiHospitalLine style={{ marginTop: "32px" }} />
-            <TextField id="input-grid" label="Place" className={classes.root} />
+            <TextField
+              id="input-grid"
+              label="Place"
+              className={classes.root}
+              value={place}
+              onChange={handlePlaceChange}
+            />
           </div>
+          <div className={classes.districtError}>{placeErr}</div>
 
           <div>
             <form className={classes.latlng} noValidate autoComplete="off">
@@ -169,7 +266,7 @@ const AddVaccineForm = () => {
             </form>
           </div>
           <div className={classes.btn}>
-            <Button variant="outlined" color="primary">
+            <Button variant="outlined" color="primary" onClick={handleClick}>
               Add IoT Location
             </Button>
           </div>
@@ -178,6 +275,47 @@ const AddVaccineForm = () => {
           <Map updateLocation={handleLocation} />
         </div>
       </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Add new IoT location"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure ?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleSubmitData} color="primary" autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openSuccess}
+        onClose={handleCloseSuccess}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Successfull!"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Successfully added the IoT Location.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseSuccess} color="primary" autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
