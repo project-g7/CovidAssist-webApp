@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from "../AdminSidebar";
-import IotTabScreen from  '../SubComponents/IotTabScreen'
+import IotTabScreen from  '../SubComponents/IoT/IotTabScreen'
 
 
 const Iot = () => {
