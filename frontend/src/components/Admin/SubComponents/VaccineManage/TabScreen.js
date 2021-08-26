@@ -6,7 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import AddIotLocationForm from './AddIotLocationForm'
+import AddVaccineForm from './AddVaccineForm'
+import AddVaccine from './AddVaccine'
+import VaccineCenters from './VaccineCenters'
 
 
 function TabPanel(props) {
@@ -59,7 +61,8 @@ const useStyles = makeStyles((theme) => ({
     width: '85%',
     backgroundColor: '#fff',
     marginTop: '120px',
-    marginLeft: '230px'
+    marginLeft: '230px',
+    textDecoration: 'none'
 
   },
   selected:{
@@ -69,10 +72,18 @@ const useStyles = makeStyles((theme) => ({
       }
   },
   indicator:{
-      backgroundColor:'white',
-      color : 'black'
+    backgroundColor:'white',
+    color : 'black',
+    textDecoration:'none',
+
+    '&:hover':{
+    // backgroundColor:'black',
+    textDecoration:'none',
+
+    }
+
   },
- 
+
 }));
 
 export default function NavTabs() {
@@ -89,20 +100,25 @@ export default function NavTabs() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.indicator}>
         <Tabs
+          className={classes.tabs}
           variant="fullWidth"
           value={value}
           onChange={handleChange}
           indicatorColor="primary"
         >
-          <LinkTab style={{ textDecoration: 'none' }} label="IoT Locations"  {...a11yProps(0)} />
-          <LinkTab style={{ textDecoration: 'none' }} label="Add IoT Location" {...a11yProps(1)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Vaccination Centers"  {...a11yProps(0)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Add Vaccination Center" {...a11yProps(1)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Vaccines" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >
-        Page one
+        <VaccineCenters/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <AddIotLocationForm/>
+       <AddVaccineForm/>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+       <AddVaccine/>
       </TabPanel>
     </div>
   );

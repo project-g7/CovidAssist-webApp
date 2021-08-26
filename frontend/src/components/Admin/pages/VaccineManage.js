@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from "../AdminSidebar";
-import TabScreen from '../SubComponents/TabScreen'
+import TabScreen from '../SubComponents/VaccineManage/TabScreen'
 
 
 const VaccineManage = () => {

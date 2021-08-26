@@ -1,9 +1,9 @@
 import React from "react";
 import "../../../styles/AdminDashboard.css";
-import DashboardCard1 from "../SubComponents/DashboardCard1";
-import DashboardCard2 from "../SubComponents/DashboardCard2";
-import DashboardCard3 from "../SubComponents/DashboardCard3";
-import DashboardCard4 from "../SubComponents/DashboardCard4";
+import DashboardCard1 from "../SubComponents/Dashboard/DashboardCard1";
+import DashboardCard2 from "../SubComponents/Dashboard/DashboardCard2";
+import DashboardCard3 from "../SubComponents/Dashboard/DashboardCard3";
+import DashboardCard4 from "../SubComponents/Dashboard/DashboardCard4";
 import LineGraph from "../SubComponents/Dashboard/LineGraph";
 
 const Dashboard = () => {

@@ -31,8 +31,17 @@
   width: 1108px;
   height: 600px;
   margin-left: -26px;
+  /* padding-left: 50px; */
 }
 .heding {
   background-color: #c1d7e0;
-  color: #c1d7e0;
+  color: rgb(15, 25, 119);
+  display: flex;
+  justify-content: center;
+}
+
+.addform{
+  padding-left: 40px;
+  padding-right: 20px;
+  padding-top: 30px;
 }

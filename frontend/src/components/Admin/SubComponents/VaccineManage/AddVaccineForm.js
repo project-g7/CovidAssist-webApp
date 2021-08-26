@@ -13,8 +13,13 @@ import * as GrIcons from "react-icons/gr";
 import * as GiIcons from "react-icons/gi";
 import * as FaIcons from "react-icons/fa";
 import Button from "@material-ui/core/Button";
-import Map from "./AddLocation";
-import "../../../styles/VaccinationAreas.css";
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import Map from "../AddLocation";
+import "../../../../styles/VaccinationAreas.css";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -79,12 +84,26 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
   },
+  date:{
+    margin: theme.spacing(1),
+    marginTop: "20px",
+  }
 }));
 
 const AddVaccineForm = () => {
   const classes = useStyles();
   const [district, setDistrict] = React.useState("");
   const [vaccine, setVaccine] = React.useState("");
+
+  const [selectedStartDate, setStartDate] = React.useState(new Date());
+  const [selectedEndDate, setEndDate] = React.useState(new Date());
+
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+  };
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+  };
 
   const handleChangeDistrict = (event) => {
     setDistrict(event.target.value);
@@ -105,7 +124,7 @@ const AddVaccineForm = () => {
   return (
     <div className="AddBody">
       <div className="heding">
-        <h3>Add Vaccine</h3>
+        <h3>Add Vaccine Center</h3>
       </div>
       <div className="addform">
         <div className="locationForm">
@@ -207,6 +226,35 @@ const AddVaccineForm = () => {
               </div>
             </form>
           </div>
+          <div className={classes.date}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                label="Select Start Date"
+                format="MM/dd/yyyy"
+                value={selectedStartDate}
+                onChange={handleStartDateChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change date",
+                }}
+              />
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                label="Select End Date"
+                format="MM/dd/yyyy"
+                value={selectedEndDate}
+                onChange={handleEndDateChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change date",
+                }}
+                style={{ marginLeft: "20px" }}
+
+              />
+            </MuiPickersUtilsProvider>
+          </div>
+
           <div className={classes.btn}>
             <Button variant="outlined" color="primary">
               Add Vaccine Center
