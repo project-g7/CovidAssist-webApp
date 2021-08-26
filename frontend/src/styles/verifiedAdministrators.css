@@ -3,10 +3,9 @@
     height: 40px;
     display: flex;
     border: 1px bold black;
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
+    border-radius: 7px;
     padding: 5px;
-    border-right: none;
+
 
 }
 .searchBar button{
@@ -15,4 +14,35 @@
     background-color:rgb(201, 200, 207);
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
+}
+/* table */
+
+.table_container{
+    display: flex;
+    direction: column;
+    gap: 10px;
+    padding: 10px;
+    margin-top: 25px;
+}
+
+table{
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+    background-color:rgb(147 138 138);
+    
+
+}
+
+th,td{
+    border: 5px solid white;
+    text-align: center;
+    height:50px;
+    color:blue;
+    background-color:rgb(213, 209, 209);
+
+}
+th{
+    color: white;
+    background-color:#ffffff17;
 }

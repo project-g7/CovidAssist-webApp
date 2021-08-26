@@ -109,6 +109,35 @@ app.post("/login", (req, res) => {
   ); 
 });
 
+
+// approve request 
+
+app.get("/verifiedAdministrators", (req, res)=>{
+  db.query("SELECT user_id, user_name, user_role FROM covidAssist.web_user WHERE status=1", (err, result)=>{
+    if(err){
+      console.log("Error ---1")
+      res.send(err);
+    }else{
+      res.send(result);
+      console.log("Success");
+      // console.log(result);
+    }
+  })
+});
+
+app.get("/unverifiedAdministrators", (req, res)=>{
+  db.query("SELECT user_id, user_name, user_role FROM covidAssist.web_user WHERE status=0", (err, result)=>{
+    if(err){
+      console.log("Error ---1")
+      res.send(err);
+    }else{
+      res.send(result);
+      console.log("Success");
+      // console.log(result);
+    }
+  })
+});
+
 app.listen(3002, () => {
   console.log("your server is running port 3002");
 });
