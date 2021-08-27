@@ -6,10 +6,13 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import AddVaccineForm from './AddVaccineForm'
+import VerifiedAdministrators from './VerifiedAdministrators'
+import UnverifiedAdministrators from './UnverifiedAdministrators'
+
+// import AddVaccineForm from './AddVaccineForm'
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+    const { children, value, index, ...other } = props;
 
   return (
     <div
@@ -58,8 +61,7 @@ const useStyles = makeStyles((theme) => ({
     width: '85%',
     backgroundColor: '#fff',
     marginTop: '120px',
-    marginLeft: '230px',
-    textDecoration: 'none'
+    marginLeft: '230px'
 
   },
   selected:{
@@ -69,18 +71,10 @@ const useStyles = makeStyles((theme) => ({
       }
   },
   indicator:{
-    backgroundColor:'white',
-    color : 'black',
-    textDecoration:'none',
-
-    '&:hover':{
-    // backgroundColor:'black',
-    textDecoration:'none',
-
-    }
-
+      backgroundColor:'white',
+      color : 'black'
   },
-
+ 
 }));
 
 export default function NavTabs() {
@@ -97,21 +91,21 @@ export default function NavTabs() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.indicator}>
         <Tabs
-          className={classes.tabs}
           variant="fullWidth"
           value={value}
           onChange={handleChange}
           indicatorColor="primary"
         >
-          <LinkTab style={{ textDecoration: 'none' }} label="Vaccination Centers"  {...a11yProps(0)} />
-          <LinkTab style={{ textDecoration: 'none' }} label="Add Vaccination Center" {...a11yProps(1)} />
+          <LinkTab label="Verified Administrators"  {...a11yProps(0)} />
+          <LinkTab label="Unverified Administrators" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >
-        Page one
+        
+        <VerifiedAdministrators />
       </TabPanel>
       <TabPanel value={value} index={1}>
-       <AddVaccineForm/>
+        <UnverifiedAdministrators />
       </TabPanel>
     </div>
   );

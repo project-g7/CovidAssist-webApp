@@ -141,7 +141,7 @@ class Map extends React.Component {
           <AsyncMap
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeVMWSLojEXAAhpku0TCAL17bE73veo3o&libraries=places"
             loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: '450px', width: '450px'}} />}
+            containerElement={<div style={{ height: '550px', width: '450px'}} />}
             mapElement={<div style={{ height: `100%` }} />}
           />
         </div>

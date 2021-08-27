@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AddIotLocationForm from './AddIotLocationForm'
+import IotLocations from './IotLocations'
 
 
 function TabPanel(props) {
@@ -99,7 +100,7 @@ export default function NavTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >
-        Page one
+        <IotLocations/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AddIotLocationForm/>
