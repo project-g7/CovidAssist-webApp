@@ -1,6 +1,7 @@
 import React from "react";
 import Select from "react-select";
 import "../../../../styles/VaccineBooking.css";
+import InputLabel from "@material-ui/core/InputLabel";
 
 const options1 = [
   { value: "colombo", label: "Colombo" },
@@ -32,18 +33,22 @@ class VaccineBookingSearchBar extends React.Component {
     return (
       <div>
         <div className="DistrictSearchbar">
+          <InputLabel id="demo-simple-select-label">District</InputLabel>
           <Select
             value={selectedOption1}
             onChange={this.handleChange1}
             options={options1}
-            label="District"
+            labelId="demo-simple-select-label"
           />
         </div>
         <div className="CenterSearchbar">
+          {/* <InputLabel id="demo-simple-select-label">Vaccine Center</InputLabel> */}
+
           <Select
             value={selectedOption2}
             onChange={this.handleChange2}
             options={options2}
+            labelId="demo-simple-select-label"
             label="Vaccine Center"
           />
         </div>
