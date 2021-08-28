@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from "react";
 import Axios from "axios";
+import CenterTable from './CenterTable'
 
 
 const VaccineCenters = () => {
@@ -20,7 +21,8 @@ const VaccineCenters = () => {
       <div className="heding">
         <h3>Vaccine Centers</h3>
       </div>
-      <div className="table_container">
+      <CenterTable/>
+      {/* <div className="table_container">
         <table>
           <thead>
             <th>Center ID</th>
@@ -57,7 +59,7 @@ const VaccineCenters = () => {
               })}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
   );
 };

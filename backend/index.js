@@ -175,35 +175,95 @@ app.post("/addVaccineCenter", (req, res) => {
   const dose3 = Number(req.body.dose3Amount);
   const latitude = req.body.lat;
   const longitude = req.body.lng;
-  const startDate = req.body.startDate.substring(0,10);
-  const endDate = req.body.endDate.substring(0,10);
-
+  const startDate = new Date(req.body.startDate.substring(0, 10));
+  const endDate = new Date(req.body.endDate.substring(0, 10));
+  let n = (endDate - startDate) / (1000 * 60 * 60 * 24);
+  let i = 0;
 
   db.query(
-    "INSERT INTO covidAssist.vaccine_center(admin_id,name,district,start_date,end_date,longitude,latitude) VALUES(?,?,?,?,?,?,?) ",
-    [1,place,district,startDate,endDate,longitude,latitude],
-    (err, result) => {
-      if (err) {
-        console.log("Error add center");
-        console.log(err);
-        res.send(err);
+    "SELECT vaccine_id FROM vaccine WHERE vaccine_name = ?",
+    [vaccine],
+    (errVid, resultVid) => {
+      if (errVid) {
+        console.log(errVid);
       } else {
-        db.query("UPDATE covidAssist.vaccine SET dose_1_quantity = dose_1_quantity - ?,dose_2_quantity = dose_2_quantity - ?,dose_3_quantity = dose_3_quantity - ? WHERE vaccine_name = ? ",
-        [dose1,dose2,dose3,vaccine],
-        (errUpdate,resultUpdate) => {
-          if(errUpdate){
-            console.log("Error in update");
-            console.log(errUpdate);
-          }else{
-            console.log("updated");
-            res.send("Success");
+        console.log(resultVid[0].vaccine_id);
+        let vaccineId = resultVid[0].vaccine_id;
+        db.query(
+          "INSERT INTO covidAssist.vaccine_center(admin_id,name,district,start_date,end_date,longitude,latitude) VALUES(?,?,?,?,?,?,?) ",
+          [1, place, district, startDate, endDate, longitude, latitude],
+          (err, result) => {
+            if (err) {
+              console.log("Error add center");
+              console.log(err);
+              res.send(err);
+            } else {
+              db.query(
+                "SELECT center_id FROM vaccine_center WHERE name = ? ",
+                [place],
+                (errCid, resCid) => {
+                  if (errCid) {
+                    console.log(errCid);
+                  } else {
+                    console.log(resCid);
+                    console.log(resCid[0].center_id);
+                    let centerId = resCid[0].center_id;
+
+                    db.query(
+                      "UPDATE covidAssist.vaccine SET dose_1_quantity = dose_1_quantity - ?,dose_2_quantity = dose_2_quantity - ?,dose_3_quantity = dose_3_quantity - ? WHERE vaccine_name = ? ",
+                      [dose1, dose2, dose3, vaccine],
+                      (errUpdate, resultUpdate) => {
+                        if (errUpdate) {
+                          console.log("Error in update");
+                          console.log(errUpdate);
+                        } else {
+                          db.query(
+                            "INSERT INTO covidAssist.vaccine_center_vaccine(vaccine_id,vaccine_center_id,dose_1_quantity,dose_2_quantity,dose_3_quantity) VALUES(?,?,?,?,?)",
+                            [vaccineId, centerId, dose1, dose2, dose3],
+                            (errVaccine, resVaccine) => {
+                              if (errVaccine) {
+                                console.log(errVaccine);
+                              } else {
+                                startDate.setDate(startDate.getDate() - 1); //number  of days to add, e.x. 15 days
+                                while (i <= n) {
+                                  startDate.setDate(startDate.getDate() + 1); //number  of days to add, e.x. 15 days
+                                  var dateFormated = startDate
+                                    .toISOString()
+                                    .substr(0, 10);
+                                  // console.log(dateFormated);
+                                  db.query(
+                                    "INSERT INTO available_time(center_id,date,`8.00-10.00`,`10.00-12.00`,`1.00-3.00`,`3.00-5.00`) VALUES(?,?,?,?,?,?)",
+                                    [centerId, dateFormated, 0, 0, 0, 0],
+                                    (errAvailable, resAvailable) => {
+                                      if (errAvailable) {
+                                        console.log(errAvailable);
+                                      } else {
+                                        console.log("updated");
+                                      }
+                                    }
+                                  );
+                                  i = i + 1;
+                                }
+                                res.send("Success");
+                              }
+                            }
+                          );
+                        }
+                      }
+                    );
+                  }
+                }
+              );
+
+              // console.log(result);
+            }
           }
-        })
-        // console.log(result);
+        );
       }
     }
   );
 });
+
 app.post("/addIoTLocation", (req, res) => {
   const district = req.body.district;
   const place = req.body.place;
@@ -214,7 +274,7 @@ app.post("/addIoTLocation", (req, res) => {
 
   db.query(
     "INSERT INTO covidAssist.iot_device(admin_id,district,place,longitude,latitude) VALUES(?,?,?,?,?) ",
-    [1,district,place,longitude,latitude],
+    [1, district, place, longitude, latitude],
     (err, result) => {
       if (err) {
         console.log("Error add iot");
@@ -229,6 +289,80 @@ app.post("/addIoTLocation", (req, res) => {
   );
 });
 
+app.post("/updateVaccine", (req, res) => {
+  const id = req.body.vaccine_id;
+  const dose1 = req.body.dose_1_quantity;
+  const dose2 = req.body.dose_2_quantity;
+  const dose3 = req.body.dose_3_quantity;
+  db.query(
+    "UPDATE covidAssist.vaccine SET dose_1_quantity = ?,dose_2_quantity = ?,dose_3_quantity = ? WHERE vaccine_id = ?",
+    [dose1, dose2, dose3, id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("Success");
+        console.log("Success");
+      }
+    }
+  );
+});
+
+app.post("/addVaccine", (req, res) => {
+  const vaccine = req.body.vaccine;
+  const dose1 = Number(req.body.dose1Amount);
+  const dose2 = Number(req.body.dose2Amount);
+  const dose3 = Number(req.body.dose3Amount);
+
+  db.query(
+    "INSERT INTO covidAssist.vaccine(vaccine_name,dose_1_quantity,dose_2_quantity,dose_3_quantity) VALUES(?,?,?,?) ",
+    [vaccine, dose1, dose2, dose3],
+    (err, result) => {
+      if (err) {
+        console.log("Error add vaccine");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send("Success");
+        console.log("Success");
+        // console.log(result);
+      }
+    }
+  );
+});
+
+app.get("/vaccineCenterDetails", (req, res) => {
+  const id = req.query.id;
+  console.log(id);
+  db.query(
+    "Select * from vaccine_center WHERE center_id = ?",
+    [id],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
+    }
+  );
+});
+app.get("/vaccineCenterVaccineDetails", (req, res) => {
+  const id = req.query.id;
+  console.log(id);
+  db.query(
+    "Select * from vaccine_center_vaccine WHERE vaccine_center_id = ?",
+    [id],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
+    }
+  );
+});
 app.listen(3002, () => {
   console.log("your server is running port 3002");
 });
