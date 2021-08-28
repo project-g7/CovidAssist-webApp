@@ -316,7 +316,7 @@ const AddVaccineForm = () => {
                   value={vaccine}
                   onChange={handleChangeVaccine}
                 >
-                  <MenuItem value={"Covisheild"}>Covisheild</MenuItem>
+                  <MenuItem value={"Oxford-AstraZeneca"}>Oxford-AstraZeneca</MenuItem>
                   <MenuItem value={"Sinopharm"}>Sinopharm</MenuItem>
                   <MenuItem value={"Sputnic V"}>Sputnic V</MenuItem>
                 </Select>
