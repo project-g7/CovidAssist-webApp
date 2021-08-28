@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import Welcome from "./components/Welcome";
 import WelcomeAdmin from "./components/Admin/WelcomeAdmin";
 import AdminVaccineManage from "./components/Admin/pages/VaccineManage";
+import DisplayCenter from "./components/Admin/pages/DisplayCenter";
 import Requests from "./components/Admin/pages/Requests";
 import Iot from "./components/Admin/pages/Iot";
 import WelcomeVaccine from "./components/VaccineManager/WelcomeVaccine";
@@ -51,6 +52,11 @@ function App() {
           exact
           path="/vaccine/reports/VaccinatedDetails"
           component={VaccinatedDetails}
+        ></Route>
+        <Route
+          exact
+          path="/admin/vaccinemanage/center"
+          component={DisplayCenter}
         ></Route>
       </Switch>
     </Router>
