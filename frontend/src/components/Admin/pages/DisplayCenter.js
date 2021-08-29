@@ -11,16 +11,17 @@ const useStyles = makeStyles((theme) => ({
   tset: {
     display: "flex",
     width: "50%",
-    backgroundColor: "rgb(201, 200, 207)",
+    backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
+    color:"rgb(96, 79, 255)",
     margin: "5px",
   },
   set: {
     display: "flex",
     width: "50%",
     fontSize: "20px",
-    backgroundColor: "rgb(201, 200, 207)",
+    backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
     margin: "5px",
@@ -73,7 +74,8 @@ const DisplayCenter = () => {
         params: { id: id },
       })
       .then((res) => {
-        console.log(res.data[0]);
+        console.log(res);
+        console.log(JSON.parse(res.data));
         setVaccineData(res.data[0]);
       })
       .catch((err) => {

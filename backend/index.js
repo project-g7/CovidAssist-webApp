@@ -357,8 +357,23 @@ app.get("/vaccineCenterVaccineDetails", (req, res) => {
       if (error) {
         console.log(error);
       } else {
-        console.log(result);
-        res.send(result);
+        console.log(result[0].vaccine_id);
+        const vid = result[0].vaccine_id;
+        res.write('vdata',result);
+
+        db.query(
+          "SELECT vaccine_name from vaccine WHERE vaccine_id = ?",
+          [vid],
+          (errVaccine, resultVaccine) => {
+            if (errVaccine) {
+              console.log(errVaccine);
+            } else {
+              console.log(resultVaccine);
+              res.write('date',resultVaccine);
+              res.end();
+            }
+          }
+        );
       }
     }
   );
