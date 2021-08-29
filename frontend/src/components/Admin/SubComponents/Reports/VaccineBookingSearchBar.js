@@ -26,11 +26,13 @@ class VaccineBookingSearchBar extends Component {
       district: "",
       vaccine_center: "",
       name: "",
+      dis:[]
     };
   }
 
   componentDidMount() {
     this.apicall();
+    this.getDistrict();
   }
   async apicall() {
     const response = await fetch(
@@ -39,6 +41,14 @@ class VaccineBookingSearchBar extends Component {
     );
     const users = await response.json();
     this.setState({ data: users });
+  }
+  async getDistrict() {
+    const response = await fetch(
+      `http://localhost:3002/getDistrictVaccinecenter`,
+      { method: "GET" }
+    );
+    const users = await response.json();
+    this.setState({ dis: users });
   }
 
   // state = {
@@ -98,7 +108,7 @@ class VaccineBookingSearchBar extends Component {
                   // this.props.updateDistrict({ district: text });
                 }
               >
-                {this.state.data.map((district, index) => {
+                {this.state.dis.map((district, index) => {
                   return (
                     <MenuItem value={district.district}>
                       {district.district}

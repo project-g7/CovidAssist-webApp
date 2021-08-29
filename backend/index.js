@@ -469,9 +469,27 @@ app.get("/districtAndVaccinecenter", (req, res) => {
     }
   );
 });
+app.get("/getDistrictVaccinecenter", (req, res) => {
+  db.query(
+    "SELECT DISTINCT district FROM covidAssist.vaccine_center",
+    (err, result) => {
+      if (err) {
+        console.log("Error District");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Distict selected successful");
+        console.log(result);
+      }
+    }
+  );
+});
+
+
 app.get("/VaccineSelecteDistrict", (req, res) => {
   //const district = request.query.selectdistrict;
-  const center = request.query.selectcenter;
+  const center = req.query.selectcenter;
   db.query(
     "SELECT center_id FROM covidAssist.vaccine_center WHERE name=?",
     [center],
@@ -569,8 +587,23 @@ app.get("/vaccineCenterVaccineDetails", (req, res) => {
       if (error) {
         console.log(error);
       } else {
-        console.log(result);
-        res.send(result);
+        console.log(result[0].vaccine_id);
+        const vid = result[0].vaccine_id;
+        res.write('vdata',result);
+
+        db.query(
+          "SELECT vaccine_name from vaccine WHERE vaccine_id = ?",
+          [vid],
+          (errVaccine, resultVaccine) => {
+            if (errVaccine) {
+              console.log(errVaccine);
+            } else {
+              console.log(resultVaccine);
+              res.write('date',resultVaccine);
+              res.end();
+            }
+          }
+        );
       }
     }
   );
