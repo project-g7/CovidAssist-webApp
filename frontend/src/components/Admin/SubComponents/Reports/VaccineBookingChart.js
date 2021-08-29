@@ -1,8 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Bar, Pie, Doughnut, Line, Bubble, Radar } from "react-chartjs-2";
 import "../../../../styles/VaccineBooking.css";
 import VaccineBookingSearchBar from "./VaccineBookingSearchBar";
+
 function VaccineBookingChart() {
+  const [selectdistrict, setSelectDistrict] = useState("");
+  const [selectcenter, setSelectCenter] = useState("");
+
+  const handleDistrict = (selectdistrict) => {
+    setSelectDistrict(selectdistrict.district);
+    console.log(selectdistrict.district);
+    console.log("11111111111111111111");
+  };
+
+  const handleVaccineCenter = (select) => {
+    setSelectCenter(select.name);
+    console.log(selectcenter);
+    console.log(select.name);
+    console.log("22222222222222222");
+    fetchData(selectcenter);
+  };
+  useEffect(() => {
+    console.log("%%%%%%%%%%%%%%%%%%%%%%%%");
+  }, []);
+
+  const fetchData = async (selectcenter) => {
+    console.log("3333333333");
+    console.log(selectdistrict);
+    console.log(selectcenter);
+    // const encodedDistrict = encodeURIComponent(selectdistrict);
+    // console.log(encodedDistrict);
+    const encodeVaccineCenter = encodeURIComponent(selectcenter);
+    console.log(encodeVaccineCenter);
+    const response = await fetch(
+      `http://localhost:3002/VaccineSelecteDistrict?selectcenter=${encodeVaccineCenter}`,
+      { method: "GET" }
+    );
+    console.log("44444444");
+    const results = await response.json();
+    // setdate(results);
+    console.log("pqr");
+    //console.log(dates);
+  };
+
   return (
     <div className="App">
       <div className="mainBody">
@@ -14,7 +54,10 @@ function VaccineBookingChart() {
       </div> */}
 
         <div>
-          <VaccineBookingSearchBar />
+          <VaccineBookingSearchBar
+            updateDistrict={handleDistrict}
+            updateVaccineCenter={handleVaccineCenter}
+          />
         </div>
         <div className="MainChart">
           <Bar

@@ -3,6 +3,7 @@ const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
 const crypto = require("crypto");
+const { request } = require("http");
 
 app.use(cors());
 app.use(express.json());
@@ -175,30 +176,31 @@ app.post("/addVaccineCenter", (req, res) => {
   const dose3 = Number(req.body.dose3Amount);
   const latitude = req.body.lat;
   const longitude = req.body.lng;
-  const startDate = req.body.startDate.substring(0,10);
-  const endDate = req.body.endDate.substring(0,10);
-
+  const startDate = req.body.startDate.substring(0, 10);
+  const endDate = req.body.endDate.substring(0, 10);
 
   db.query(
     "INSERT INTO covidAssist.vaccine_center(admin_id,name,district,start_date,end_date,longitude,latitude) VALUES(?,?,?,?,?,?,?) ",
-    [1,place,district,startDate,endDate,longitude,latitude],
+    [1, place, district, startDate, endDate, longitude, latitude],
     (err, result) => {
       if (err) {
         console.log("Error add center");
         console.log(err);
         res.send(err);
       } else {
-        db.query("UPDATE covidAssist.vaccine SET dose_1_quantity = dose_1_quantity - ?,dose_2_quantity = dose_2_quantity - ?,dose_3_quantity = dose_3_quantity - ? WHERE vaccine_name = ? ",
-        [dose1,dose2,dose3,vaccine],
-        (errUpdate,resultUpdate) => {
-          if(errUpdate){
-            console.log("Error in update");
-            console.log(errUpdate);
-          }else{
-            console.log("updated");
-            res.send("Success");
+        db.query(
+          "UPDATE covidAssist.vaccine SET dose_1_quantity = dose_1_quantity - ?,dose_2_quantity = dose_2_quantity - ?,dose_3_quantity = dose_3_quantity - ? WHERE vaccine_name = ? ",
+          [dose1, dose2, dose3, vaccine],
+          (errUpdate, resultUpdate) => {
+            if (errUpdate) {
+              console.log("Error in update");
+              console.log(errUpdate);
+            } else {
+              console.log("updated");
+              res.send("Success");
+            }
           }
-        })
+        );
         // console.log(result);
       }
     }
@@ -214,7 +216,7 @@ app.post("/addIoTLocation", (req, res) => {
 
   db.query(
     "INSERT INTO covidAssist.iot_device(admin_id,district,place,longitude,latitude) VALUES(?,?,?,?,?) ",
-    [1,district,place,longitude,latitude],
+    [1, district, place, longitude, latitude],
     (err, result) => {
       if (err) {
         console.log("Error add iot");
@@ -224,6 +226,217 @@ app.post("/addIoTLocation", (req, res) => {
         res.send("Success");
         console.log("Success");
         // console.log(result);
+      }
+    }
+  );
+});
+// Vaccinated details - ADMIN dashboard card details
+app.get("/vaccineFirstDose", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS countF FROM covidAssist.booking WHERE status=1 AND dose_1 =1 ",
+    (err, result) => {
+      if (err) {
+        console.log("Error 1st Dose");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Calculated Successfuly");
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/vaccineSecondDose", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS countS FROM covidAssist.booking WHERE status=1 AND dose_2 =1",
+    (err, result) => {
+      if (err) {
+        console.log("Error 2nd Dose");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Calculated Successfuly-dose2");
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/vaccineFirstSecondDose", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS countFS FROM covidAssist.booking WHERE status=1 AND (dose_2 =1 AND dose_1 = 1)",
+    (err, result) => {
+      if (err) {
+        console.log("Error 2st Dose");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Calculated Successfuly-dose2");
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/vaccineBooking", (req, res) => {
+  db.query(
+    "SELECT COUNT(booking_id) AS booking FROM covidAssist.booking ",
+    (err, result) => {
+      if (err) {
+        console.log("Error registerd people");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Calculated Successfuly-registerd people");
+        console.log(result);
+      }
+    }
+  );
+});
+//vaccinated bar chart-Admin dashboard
+app.get("/sputnikVfirstDose", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS sputnikV1 FROM covidAssist.booking WHERE vaccine_id=1 AND status=1 AND dose_1=1; ",
+    (err, result) => {
+      if (err) {
+        console.log("Error sputnik v dose1");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("sputnik v dose1 successful");
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/sputnikVsecondDose", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS sputnikV2 FROM covidAssist.booking WHERE status=1 AND vaccine_id=1 AND dose_2=1;; ",
+    (err, result) => {
+      if (err) {
+        console.log("Error sputnik v dose2");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("sputnik v dose2 successful");
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/astraZenecaFirstDose", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) as astra1 FROM covidAssist.booking WHERE status=1 AND vaccine_id=2 AND dose_1=1;; ",
+    (err, result) => {
+      if (err) {
+        console.log("Error AstraZeneca  dose1");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("AstraZeneca  dose1 successful");
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/astraZenecaSecondDose", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) as astra2 FROM covidAssist.booking WHERE status=1 AND vaccine_id=2 AND dose_2=1 ",
+    (err, result) => {
+      if (err) {
+        console.log("Error AstraZeneca  dose2");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("AstraZeneca  dose2 successful");
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/sinopharmFirstDose", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) as sinopharm1 FROM covidAssist.booking WHERE status=1 AND vaccine_id=3 AND dose_1=1 ",
+    (err, result) => {
+      if (err) {
+        console.log("Error Sinopharm  dose1");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Sinopharm  dose1 successful");
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/sinopharmSecondDose", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) as sinopharm2 FROM covidAssist.booking WHERE status=1 AND vaccine_id=3 AND dose_2=1 ",
+    (err, result) => {
+      if (err) {
+        console.log("Error Sinopharm  dose2");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Sinopharm  dose2 successful");
+        console.log(result);
+      }
+    }
+  );
+});
+
+// Booked vaccines- Admin dashboard
+app.get("/districtAndVaccinecenter", (req, res) => {
+  db.query(
+    "SELECT DISTINCT(district),center_id,name FROM covidAssist.vaccine_center",
+    (err, result) => {
+      if (err) {
+        console.log("Error District");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Distict selected successful");
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/VaccineSelecteDistrict", (req, res) => {
+  //const district = request.query.selectdistrict;
+  const center = request.query.selectcenter;
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_center WHERE name=?",
+    [center],
+    (err, result) => {
+      if (err) {
+        console.log("Error select center");
+        // console.log(err);
+        // res.send(err);
+      } else {
+        console.log(result[0].center_id);
+        let centerId = result[0].center_id;
+        db.query(
+          "SELECT COUNT(mobile_user_id) AS book FROM covidAssist.booking WHERE center_id=?",
+          [centerId],
+          (errCenter, resultCenter) => {
+            if (errCenter) {
+              console.log("Error booking!!!!");
+            } else {
+              res.send(resultCenter);
+              console.log(resultCenter);
+              console.log("successful center selected!!!!!!!");
+            }
+          }
+        );
       }
     }
   );
