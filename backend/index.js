@@ -469,9 +469,27 @@ app.get("/districtAndVaccinecenter", (req, res) => {
     }
   );
 });
+app.get("/getDistrictVaccinecenter", (req, res) => {
+  db.query(
+    "SELECT DISTINCT district FROM covidAssist.vaccine_center",
+    (err, result) => {
+      if (err) {
+        console.log("Error District");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Distict selected successful");
+        console.log(result);
+      }
+    }
+  );
+});
+
+
 app.get("/VaccineSelecteDistrict", (req, res) => {
   //const district = request.query.selectdistrict;
-  const center = request.query.selectcenter;
+  const center = req.query.selectcenter;
   db.query(
     "SELECT center_id FROM covidAssist.vaccine_center WHERE name=?",
     [center],

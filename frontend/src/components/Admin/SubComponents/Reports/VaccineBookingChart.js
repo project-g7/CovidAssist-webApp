@@ -6,6 +6,7 @@ import VaccineBookingSearchBar from "./VaccineBookingSearchBar";
 function VaccineBookingChart() {
   const [selectdistrict, setSelectDistrict] = useState("");
   const [selectcenter, setSelectCenter] = useState("");
+  const [bookings, setBookings] = useState(0);
 
   const handleDistrict = (selectdistrict) => {
     setSelectDistrict(selectdistrict.district);
@@ -18,19 +19,19 @@ function VaccineBookingChart() {
     console.log(selectcenter);
     console.log(select.name);
     console.log("22222222222222222");
-    fetchData(selectcenter);
+    fetchData(select.name);
   };
   useEffect(() => {
     console.log("%%%%%%%%%%%%%%%%%%%%%%%%");
   }, []);
 
-  const fetchData = async (selectcenter) => {
+  const fetchData = async (center) => {
     console.log("3333333333");
     console.log(selectdistrict);
-    console.log(selectcenter);
+    console.log(center);
     // const encodedDistrict = encodeURIComponent(selectdistrict);
     // console.log(encodedDistrict);
-    const encodeVaccineCenter = encodeURIComponent(selectcenter);
+    const encodeVaccineCenter = encodeURIComponent(center);
     console.log(encodeVaccineCenter);
     const response = await fetch(
       `http://localhost:3002/VaccineSelecteDistrict?selectcenter=${encodeVaccineCenter}`,
@@ -38,9 +39,11 @@ function VaccineBookingChart() {
     );
     console.log("44444444");
     const results = await response.json();
+    console.log(results[0].book);
+    setBookings(results[0].book);
     // setdate(results);
     console.log("pqr");
-    //console.log(dates);
+    // console.log(dates);
   };
 
   return (
@@ -137,7 +140,7 @@ function VaccineBookingChart() {
           <div className="BookCard2">
             <div className="BookCardBoady1">
               <h5>Total No.of Booked Vaccines </h5>
-              <h2>1966</h2>
+              <h2>{bookings}</h2>
             </div>
           </div>
           <div className="BookCard3">
