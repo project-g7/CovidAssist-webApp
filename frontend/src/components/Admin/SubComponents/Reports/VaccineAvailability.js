@@ -1,10 +1,85 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Bar, Pie, Doughnut, Line, Bubble, Radar } from "react-chartjs-2";
 import "../../../../styles/VaccineBooking.css";
 import VaccineBookingCard1 from "./VaccineBookingCard1";
+import Axios from "axios";
+
 // import VaccineBookingCard2 from "./VaccineBookingCard2";
 // import VaccineBookingCard3 from "./VaccineBookingCard3";
 function VaccineBookingChart() {
+  const [sputnikVdose1, setSputnikVdose1] = useState("");
+  const [sputnikVdose2, setSputnikVdose2] = useState("");
+  const [astraZeneca1, setAstraZeneca1] = useState("");
+  const [astraZeneca2, setAstraZeneca2] = useState("");
+  const [sinopharm1, setSinopharm1] = useState("");
+  const [sinopharm2, setSinopharm2] = useState("");
+
+  useEffect(() => {
+    Axios.get("http://localhost:3002/sputnikVfirstDose")
+      .then((res) => {
+        console.log(res.data[0].sputnikV1);
+        setSputnikVdose1(res.data[0].sputnikV1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3002/sputnikVsecondDose")
+      .then((res) => {
+        console.log(res.data[0].sputnikV2);
+        setSputnikVdose2(res.data[0].sputnikV2);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3002/astraZenecaFirstDose")
+      .then((res) => {
+        console.log(res.data[0].astra1);
+        setAstraZeneca1(res.data[0].astra1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3002/astraZenecaSecondDose")
+      .then((res) => {
+        console.log(res.data[0].astra2);
+        setAstraZeneca2(res.data[0].astra2);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3002/sinopharmFirstDose")
+      .then((res) => {
+        console.log(res.data[0].sinopharm1);
+        setSinopharm1(res.data[0].sinopharm1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3002/sinopharmSecondDose")
+      .then((res) => {
+        console.log(res.data[0].sinopharm2);
+        setSinopharm2(res.data[0].sinopharm2);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="App">
       <div className="VaccinatedBody">
@@ -28,7 +103,7 @@ function VaccineBookingChart() {
               datasets: [
                 {
                   label: "# 1st Dose",
-                  data: [12000, 13000, 14000],
+                  data: [astraZeneca1, sinopharm1, sputnikVdose1],
                   backgroundColor: [
                     "rgba(255, 99, 132)",
                     "rgba(54, 162, 235)",
@@ -51,7 +126,7 @@ function VaccineBookingChart() {
                 },
                 {
                   label: "# 2nd Dose",
-                  data: [5000, 6000, 9000],
+                  data: [astraZeneca2, sinopharm2, sputnikVdose2],
                   backgroundColor: [
                     // "rgba(255, 99, 132)",
                     // "rgba(54, 162, 235)",
