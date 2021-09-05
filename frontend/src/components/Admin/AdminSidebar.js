@@ -67,9 +67,29 @@ const Sidebar = () => {
             <h3 className="a-navbar-title">Admin</h3>
           </div>
           <div className="a-nav-end">
-            <NavIcon to="#" className="a-user-icon">
-              <FaIcons.FaUserCircle />
-            </NavIcon>
+            {/* <div className="a-user-icon ">
+              <div className="profile-wrapper">
+                <div className="dropbtn">
+                  <FaIcons.FaUserCircle />
+                </div>
+                <div></div>
+              </div>
+            </div> */}
+            <div className="user-icon">
+              <div className="drop-icon">
+                <FaIcons.FaUserCircle />
+              </div>
+
+              <div className="menu">
+                <Link to="/admin/profile" className="profile-text">
+                  My Profile
+                  <br />
+                </Link>
+                <Link to="/" className="profile-text">
+                  Log Out
+                </Link>
+              </div>
+            </div>
           </div>
         </Nav>
         <SidebarNav>

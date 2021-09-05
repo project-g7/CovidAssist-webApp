@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Axios from "axios";
@@ -17,20 +17,26 @@ const Login = () => {
       Password: Password,
       UserName: UserName,
     }).then((res) => {
-      // console.log(res.data);
+      console.log(res.data);
       if (res.data.message) {
         setLoginError(res.data.message);
         setLogged("");
       } else {
         setLoginError("");
+        console.log("===============");
         console.log(res.data);
         setLogged("You have logged in as " + res.data[0].first_name);
         let userRole = res.data[0].user_role;
-        if(userRole == 'admin'){
+        let obj = {
+          user_id: res.data[0].user_id,
+          user_name: res.data[0].user_name,
+        };
+        sessionStorage.setItem("sessionStorageData", JSON.stringify(obj));
+        if (userRole == "admin") {
           window.location.href = "/admin";
-        }else if(userRole == 'Vaccine Manager'){
+        } else if (userRole == "Vaccine Manager") {
           window.location.href = "/vaccine";
-        }else if(userRole == 'Contact Tracing Manager'){
+        } else if (userRole == "Contact Tracing Manager") {
           window.location.href = "/ct";
         }
       }
@@ -39,6 +45,15 @@ const Login = () => {
   // const display = ()=>{
   //   console.log(UserName + " " + Password);
   // }
+  useEffect(() => {
+    let obj = {
+      user_id: "",
+      user_name: "",
+    };
+    sessionStorage.setItem("sessionStorageData", JSON.stringify(obj));
+  }, []);
+
+
   return (
     <div className="login">
       <h1 className="logH1">LogIn</h1>

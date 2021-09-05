@@ -589,7 +589,7 @@ app.get("/vaccineCenterVaccineDetails", (req, res) => {
       } else {
         console.log(result[0].vaccine_id);
         const vid = result[0].vaccine_id;
-        res.write('vdata',result);
+        // res.write('vdata',result);
 
         db.query(
           "SELECT vaccine_name from vaccine WHERE vaccine_id = ?",
@@ -599,8 +599,13 @@ app.get("/vaccineCenterVaccineDetails", (req, res) => {
               console.log(errVaccine);
             } else {
               console.log(resultVaccine);
-              res.write('date',resultVaccine);
-              res.end();
+              // res.write('date',resultVaccine);
+              // res.end();
+              let arr = [];
+              arr.push(result);
+              arr.push(resultVaccine);
+              // res.send(result,resultVaccine);
+              res.send(arr);
             }
           }
         );
@@ -608,6 +613,53 @@ app.get("/vaccineCenterVaccineDetails", (req, res) => {
     }
   );
 });
+
+
+app.get("/myprofile",(req,res)=>{
+  const userId = req.query.id;
+  console.log(userId);
+  db.query("SELECT * FROM web_user WHERE user_id = ?",[userId],
+  (error,result)=>{
+    if(error){
+      console.log(error);
+    }else{
+      console.log(result);
+      res.send(result);
+    }
+  })
+})
+
+
+app.post("/editprofile",(req,res)=>{
+  const first_name = req.body.firstName;
+  const last_name = req.body.lastName;
+  const user_name = req.body.username;
+  const nic = req.body.nic;
+  const email = req.body.email;
+  const address = req.body.address;
+  const contact_number = req.body.contactNumber;
+
+  db.query("UPDATE web_user SET first_name = ?, last_name = ?, nic = ? , email = ?, address = ? , contact_number = ? WHERE user_name = ?",
+  [first_name,last_name,nic,email,address,contact_number,user_name],
+  (error,result)=>{
+    if(error){
+      console.log(error);
+    }else{
+      console.log(result);
+      console.log("Ssss");
+      res.send("Success");
+    }
+  })
+})
+
+app.get("/test",(req,res)=>{
+  console.log("test api");
+  const name = "Limal Manjitha";
+  const nic = "983091563v";
+  const district = "Colombo";
+  const spawn = require("child_process").spawn;
+  const pythonProcess = spawn('python',["certi.py", name, nic, district]);
+})
 app.listen(3002, () => {
   console.log("your server is running port 3002");
 });
