@@ -652,6 +652,59 @@ app.post("/editprofile",(req,res)=>{
   })
 })
 
+
+app.get("/getcentercount", (req, res) => {
+  db.query(
+    "SELECT COUNT(center_id) AS centerCount FROM covidAssist.vaccine_center",
+    (err, result) => {
+      if (err) {
+        console.log("Error count");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("count successful");
+        console.log(result);
+      }
+    }
+  );
+});
+
+app.get("/getiotcount", (req, res) => {
+  db.query(
+    "SELECT COUNT(place_id) AS iotCount FROM covidAssist.iot_device",
+    (err, result) => {
+      if (err) {
+        console.log("Error iot");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("successful");
+        console.log(result);
+      }
+    }
+  );
+});
+
+app.get("/getrequestcount", (req, res) => {
+  db.query(
+    "SELECT COUNT(user_id) AS requestCount FROM covidAssist.web_user WHERE status = ?",[0],
+    (err, result) => {
+      if (err) {
+        console.log("Error requsets");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(" successful");
+        console.log(result);
+      }
+    }
+  );
+});
+
+
 app.get("/test",(req,res)=>{
   console.log("test api");
   const name = "Limal Manjitha";
