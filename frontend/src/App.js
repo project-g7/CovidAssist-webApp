@@ -15,6 +15,8 @@ import { VaccineBooking } from "./components/Admin/pages/Reports/VaccineBooking"
 import VaccinationAreas from "./components/Admin/pages/Reports/VaccinationAreas";
 import HealthMeasures from "./components/Admin/pages/Reports/HealthMeasures";
 import VaccinatedDetails from "./components/VaccineManager/Reports/VaccinatedDetails";
+import ReservedVaccineList from "./components/VaccineManager/pages/ReservedVaccineList";
+
 function App() {
   return (
     <Router>
@@ -57,6 +59,11 @@ function App() {
           exact
           path="/admin/vaccinemanage/center"
           component={DisplayCenter}
+        ></Route>
+         <Route
+          exact
+          path="/vaccine/vaccinelist"
+          component={ReservedVaccineList}
         ></Route>
       </Switch>
     </Router>
