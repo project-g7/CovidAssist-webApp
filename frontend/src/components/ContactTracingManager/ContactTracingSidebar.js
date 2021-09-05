@@ -64,9 +64,21 @@ const Sidebar = () => {
           </div>
           <div className='c-nav-end'>
 
-            <NavIcon to='#' className="c-user-icon">
-            <FaIcons.FaUserCircle onClick={showSidebar} />
-          </NavIcon>
+           <div className="user-icon">
+              <div className="drop-icon">
+                <FaIcons.FaUserCircle />
+              </div>
+
+              <div className="menu">
+                <Link to="/ct/profile" className="profile-text">
+                  My Profile
+                  <br />
+                </Link>
+                <Link to="/" className="profile-text">
+                  Log Out
+                </Link>
+              </div>
+            </div>
           </div>
 
         </Nav>

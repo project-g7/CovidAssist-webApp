@@ -64,9 +64,21 @@ const Sidebar = () => {
             <h3 className="v-navbar-title">Vaccine Manager</h3>
           </div>
           <div className="v-nav-end">
-            <NavIcon to="#" className="v-user-icon">
-              <FaIcons.FaUserCircle onClick={showSidebar} />
-            </NavIcon>
+            <div className="user-icon">
+              <div className="drop-icon">
+                <FaIcons.FaUserCircle />
+              </div>
+
+              <div className="menu">
+                <Link to="/vaccine/profile" className="profile-text">
+                  My Profile
+                  <br />
+                </Link>
+                <Link to="/" className="profile-text">
+                  Log Out
+                </Link>
+              </div>
+            </div>
           </div>
         </Nav>
         <SidebarNav sidebar={sidebar}>
