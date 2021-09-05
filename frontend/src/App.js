@@ -19,6 +19,8 @@ import { VaccineBooking } from "./components/Admin/pages/Reports/VaccineBooking"
 import VaccinationAreas from "./components/Admin/pages/Reports/VaccinationAreas";
 import HealthMeasures from "./components/Admin/pages/Reports/HealthMeasures";
 import VaccinatedDetails from "./components/VaccineManager/Reports/VaccinatedDetails";
+import ReservedVaccineList from "./components/VaccineManager/pages/ReservedVaccineList";
+
 function App() {
   const [loggedIn,setLoggedIn] = useState(true);
   return (
@@ -63,6 +65,11 @@ function App() {
           path="/admin/vaccinemanage/center"
           component={DisplayCenter}
         ></Route>
+         <Route
+          exact
+          path="/vaccine/vaccinelist"
+          component={ReservedVaccineList}
+        ></Route>
         <Route
           exact
           path="/admin/profile"
@@ -77,6 +84,7 @@ function App() {
           exact
           path="/ct/profile"
           component={ctProfile}
+
         ></Route>
       </Switch>
     </Router>
