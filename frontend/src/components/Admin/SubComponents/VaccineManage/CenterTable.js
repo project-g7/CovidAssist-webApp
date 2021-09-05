@@ -69,16 +69,17 @@ export class CenterTable extends Component {
   }
 
   render() {
-    const linkFormatter = (cell, row, rowIndex) => {
-      return (
-        <a href={cell} target="_blank">
-          See mail
-        </a>
-      );
-    };
-    const selectRow = () => {
-      console.log("row selected");
-    };
+    // const linkFormatter = (cell, row, rowIndex) => {
+    //   return (
+    //     <a href={cell} target="_blank">
+    //       See mail
+    //     </a>
+    //   );
+    // };
+    // const selectRow = () => {
+    //   console.log("row selected");
+    // };
+
     const options = {
       page: 0,
       sizePerPageList: [

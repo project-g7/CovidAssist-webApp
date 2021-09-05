@@ -133,6 +133,134 @@
   height: 460px;
 }
 
+.tooltip {
+  /* position: relative; */
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  color: #000;
+  background-color: #000;
+  z-index: 11;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 15;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.profile-wrapper{
+  overflow: hidden;
+  min-width:150px;
+  max-width: 250px;
+  text-align: right;
+  float:right;
+  margin-right: 10px;  
+}
+
+.profile-wrapper .dropbtn {
+  border: none;
+  outline: none;
+  color:#007042;
+  background-color: inherit;
+  font-family: inherit;
+  margin-right: 0;
+  display: inline-block;
+  
+
+}
+.profile-wrapper :hover
+{
+  color:#067D68;
+
+}
+
+.user-icon{
+  overflow: hidden;
+  min-width:150px;
+  max-width: 250px;
+  text-align: right;
+  float:right;
+  margin-right: 10px;
+}
+.drop-icon{
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+
+.profile-text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px 8px 16px;
+  list-style: none;
+  height: 30px;
+}
+
+.profile-text:hover{
+  text-decoration: none;
+  color: #ffffff;
+  background-color: rgb(10, 111, 243);
+  font-size: 18px;
+  /* width: 95%; */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* padding: 0 16px; */
+  border-radius: 4px;
+  margin-top: px;
+}
+
+.menu {
+  display:none;
+  position: absolute;
+  background-color: #ffffff;
+  /* opacity: 0.9; */
+  font-size: 18px;
+  /* margin-top: 1rem; */
+  margin-left: -2rem;
+  min-width: 200px;
+  /* height: 100%; */
+  /* min-height: 150px; */
+  box-shadow: 0px 1px 1px 0px #5e5e5e;
+  z-index: 1;
+  padding: 7px 16px;
+  border-radius: 4px;
+}
+
+.menu Link:hover {
+  background-color: #001572;
+}
+
+.user-icon:hover .menu
+{
+  display: block;
+}
+
 @media (max-width: 1500px) {
   .a-navbar-title {
     margin-top: 20px;

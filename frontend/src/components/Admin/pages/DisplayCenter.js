@@ -74,9 +74,9 @@ const DisplayCenter = () => {
         params: { id: id },
       })
       .then((res) => {
-        console.log(res);
-        console.log(JSON.parse(res.data));
-        setVaccineData(res.data[0]);
+        console.log(res.data[0][0]);
+        // console.log(JSON.parse(res.data));
+        setVaccineData(res.data[0][0]);
       })
       .catch((err) => {
         console.log(err);
