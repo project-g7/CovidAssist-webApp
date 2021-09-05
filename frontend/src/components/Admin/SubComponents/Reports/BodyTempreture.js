@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../../../styles/BoadyTempreture.css";
-import { GoogleMap, withScriptjs, withGoogleMap } from "react-google-maps";
-
+import {
+  GoogleMap,
+  withScriptjs,
+  withGoogleMap,
+  Marker,
+  InfoWindow,
+} from "react-google-maps";
+import mapstyles from "./mapstyles";
 function Map() {
+  useEffect(() => {
+    // fetchData();
+  }, []);
   return (
     <GoogleMap
       defaultZoom={10}
       defaultCenter={{ lat: 5.95492, lng: 80.554955 }}
-    />
+      defaultOptions={{ styles: mapstyles }}
+    ></GoogleMap>
   );
 }
 const WrappedMap = withScriptjs(withGoogleMap(Map));
