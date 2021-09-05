@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
-export class CenterTable extends Component {
+export class VaccinatedList extends Component {
   linkFormatter = (cell, row, rowIndex) => {
     console.log(cell);
     console.log(row);
@@ -69,17 +69,16 @@ export class CenterTable extends Component {
   }
 
   render() {
-    // const linkFormatter = (cell, row, rowIndex) => {
-    //   return (
-    //     <a href={cell} target="_blank">
-    //       See mail
-    //     </a>
-    //   );
-    // };
-    // const selectRow = () => {
-    //   console.log("row selected");
-    // };
-
+    const linkFormatter = (cell, row, rowIndex) => {
+      return (
+        <a href={cell} target="_blank">
+          See mail
+        </a>
+      );
+    };
+    const selectRow = () => {
+      console.log("row selected");
+    };
     const options = {
       page: 0,
       sizePerPageList: [
@@ -141,4 +140,4 @@ export class CenterTable extends Component {
   }
 }
 
-export default CenterTable;
+export default VaccinatedList
