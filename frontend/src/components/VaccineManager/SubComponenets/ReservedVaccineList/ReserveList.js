@@ -4,6 +4,7 @@ import axios from "axios";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import * as BiIcons from "react-icons/bi";
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
@@ -11,16 +12,16 @@ export class ReserveList extends Component {
   linkFormatter = (cell, row, rowIndex) => {
     console.log(cell);
     console.log(row);
-    console.log("Confirm");
-     axios.get("http://localhost:3002/confirmvaccine", { params: { book: row.booking_id } }).then((res) => {
-      console.log(res.data);
+    // console.log("Confirm");
+    //  axios.get("http://localhost:3002/confirmvaccine", { params: { book: row.booking_id } }).then((res) => {
+    //   console.log(res.data);
       
-    });
+    // });
   
     //  console.log(cell);
     return (
-      <Link>
-        View Center 
+      <Link to={"/vaccine/vaccinelist"}>
+           <BiIcons.BiFirstAid />
       </Link>
     );
   };
@@ -57,7 +58,7 @@ export class ReserveList extends Component {
       },
       {
         dataField: "link",
-        text: "View",
+        text: "Confirm",
         formatter: this.linkFormatter,
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
@@ -120,10 +121,10 @@ export class ReserveList extends Component {
         console.log(`clicked on row with index: ${rowIndex}`);
         console.log("nshhshhs");
         console.log(e);
-        // axios.get("http://localhost:3002/confirmvaccine", { params: { book: row.booking_id } }).then((res) => {
-        //     console.log(res.data);
+        axios.get("http://localhost:3002/confirmvaccine", { params: { book: row.booking_id } }).then((res) => {
+            console.log(res.data);
             
-        //   });
+          });
         // console.log(e);
       },
       onMouseEnter: (e, row, rowIndex) => {
