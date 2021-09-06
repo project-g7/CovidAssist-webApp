@@ -660,6 +660,82 @@ app.get("/test",(req,res)=>{
   const spawn = require("child_process").spawn;
   const pythonProcess = spawn('python',["certi.py", name, nic, district]);
 })
+app.get("/reservedList", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
+  
+  db.query("SELECT CONCAT(first_name,' ',last_name) AS fullname,nic,center_id,address FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id WHERE date=curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?;", [vid], (err, result) => {
+    if (err) {
+      console.log("Error center");
+      console.log(err);
+      res.send(err);
+    } else {
+      res.send(result);
+      console.log("Successhggg");
+      // console.log(result);
+    }
+  });
+}
+}
+);
+});
+app.get("/vaccinatedList", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
+  
+  db.query("SELECT CONCAT(first_name,' ',last_name) AS fullname,nic,center_id,address FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id WHERE date=curdate() AND booking.status=1 AND is_cancel=0 AND center_id=?;", [vid], (err, result) => {
+    if (err) {
+      console.log("Error center");
+      console.log(err);
+      res.send(err);
+    } else {
+      res.send(result);
+      console.log("Successhggg");
+      // console.log(result);
+    }
+  });
+}
+}
+);
+});
+
+app.get("/confirmvaccine", (req, res) => {
+  const id =  req.query.book;
+  console.log(id);
+  console.log("no");
+  db.query(
+    "UPDATE booking SET status=1 WHERE booking_id=?",
+    [id],
+    (err, result) => {
+      if (err) {
+        console.log("Error add iot");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send("Success book");
+        console.log("Success");
+        // console.log(result);
+      }
+    }
+  );
+});
+
 app.listen(3002, () => {
   console.log("your server is running port 3002");
 });

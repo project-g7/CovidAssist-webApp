@@ -1,73 +1,158 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import "../../../../styles/verifiedAdministrators.css";
-import Axios from "axios";
-import  { useEffect, useState } from "react";
+import React, { Component } from "react";
+import BootstrapTable from "react-bootstrap-table-next";
+import axios from "axios";
+import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
+// import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
-function ReserveList(){
-    const[employeeList, getEmployeeList] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
+export class ReserveList extends Component {
+  linkFormatter = (cell, row, rowIndex) => {
+    console.log(cell);
+    console.log(row);
+    console.log("Confirm");
+     axios.get("http://localhost:3002/confirmvaccine", { params: { book: row.booking_id } }).then((res) => {
+      console.log(res.data);
+      
+    });
+  
+    //  console.log(cell);
+    return (
+      <Link>
+        View Center 
+      </Link>
+    );
+  };
+  state = {
+    centers: [],
+    book: [],
+    columns: [
+      {
+        dataField: "nic",
+        text: "NIC",
+        headerStyle: {
+          backgroundColor: "rgb(96, 79, 255)",
+          justifyContent:"center"
+        },
+      },
+      {
+        dataField: "fullname",
+        text: "Name",
+        filter: textFilter(),
+        headerStyle: {
+          backgroundColor: "rgb(96, 79, 255)",
+          display:"flex",
+          justifyContent:"space-around",
+          alignItems: "center",
+        }
+      },
+      {
+        dataField: "address",
+        text: "Address",
+        sort: true,
+        headerStyle: {
+          backgroundColor: "rgb(96, 79, 255)",
+        }
+      },
+      {
+        dataField: "link",
+        text: "View",
+        formatter: this.linkFormatter,
+        headerStyle: {
+          backgroundColor: "rgb(96, 79, 255)",
+        }
+      },
+    ],
+  };
 
-    useEffect(() => {
-        // loadDataOnlyOnce();
-        Axios.get("http://localhost:3002/unverifiedAdministrators").then(res => {
-        // console.log(res.data);
-        getEmployeeList(res.data);
-        });
-    }, [])
-    return(
-        <div>
-            <div className="searchBar">
-                <input 
-                    type="text"  
-                    className = "searchBar" 
-                    placeholder="Search User" 
-                    onChange={(event)=>{
-                        setSearchTerm(event.target.value);
-                }}>
-                </input>
-            </div>
-            <div className="table_container">
-                <table>
-                    <thead>
-                        <th>User ID</th>
-                        <th>User Name</th>
-                        <th>User Role</th>
-                    </thead>
-                    <tbody>
-                        {employeeList.filter(value=>{
-                            if(searchTerm==""){
-                                return value;
-                            }else if(value.user_name.toLowerCase().includes(searchTerm.toLocaleLowerCase())){
-                                return value;
-                            }else if(value.user_role.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())){
-                                return value;
-                            }
-                        }).map((value,i)=>{
-                            const key = `employee${i}`;
-                            return( 
-                                <tr key={key}>
-                                    <td>{value.user_id}</td>
-                                    <td>{value.user_name }</td>
-                                    <td>{value.user_role}</td>
-                                </tr>
-                                );
-                            })}
-                        </tbody>
-                </table>
-            </div>
-                
+  componentDidMount() {
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+    console.log(data.user_name);
+
+    axios.get("http://localhost:3002/reservedList", { params: { id: data.user_id } }).then((res) => {
+      console.log(res.data);
+      this.setState({
+        centers: res.data,
+      });
+    });
+  }
+
+  render() {
+    const linkFormatter = (cell, row, rowIndex) => {
+      return (
+        <a href={cell} target="_blank">
+          See mail
+        </a>
+      );
+    };
+    const selectRow = () => {
+      console.log("row selected");
+    };
+    const options = {
+      page: 0,
+      sizePerPageList: [
+        {
+          text: "5",
+          value: 5,
+        },
+        {
+          text: "10",
+          value: 10,
+        },
+        {
+          text: "All",
+          value: this.state.centers.length,
+        },
+      ],
+      sizePerPage: 8,
+      pageStartIndex: 0,
+      paginationSize: 3,
+      prePage: "Prev",
+      nextPage: "Next",
+      firstPage: "First",
+      lastPage: "Last",
+      paginationPosition: "top",
+    };
+    const tableRowEvents = {
+      onClick: (e, row, rowIndex) => {
+        console.log(`clicked on row with index: ${rowIndex}`);
+        console.log("nshhshhs");
+        console.log(e);
+        // axios.get("http://localhost:3002/confirmvaccine", { params: { book: row.booking_id } }).then((res) => {
+        //     console.log(res.data);
             
+        //   });
+        // console.log(e);
+      },
+      onMouseEnter: (e, row, rowIndex) => {
+        // console.log(`enter on row with index: ${rowIndex}`);
+      },
+    };
+
+    // var rowOptions = {
+    //   onRowClick: {selectRow}
+    // };
+    return (
+      <div>
+        <div className="container">
+          <div className="container" style={{ marginTop: "30px" }}>
+            <BootstrapTable
+              bootstrap4
+              hover
+              keyField="id"
+              data={this.state.centers}
+              columns={this.state.columns}
+              filter={filterFactory()}
+              pagination={paginationFactory(options)}
+              //   rowStyle={{ backgroundColor: "blue" }}
+              rowEvents={tableRowEvents}
+            />
+          </div>
         </div>
-    )
+      </div>
+    );
+  }
 }
 export default  ReserveList

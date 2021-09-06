@@ -22,15 +22,15 @@ export class VaccinatedList extends Component {
     centers: [],
     columns: [
       {
-        dataField: "center_id",
-        text: "Id",
+        dataField: "nic",
+        text: "NIC",
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
           justifyContent:"center"
         },
       },
       {
-        dataField: "name",
+        dataField: "fullname",
         text: "Name",
         filter: textFilter(),
         headerStyle: {
@@ -41,8 +41,8 @@ export class VaccinatedList extends Component {
         }
       },
       {
-        dataField: "district",
-        text: "District",
+        dataField: "address",
+        text: "Address",
         sort: true,
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
@@ -60,7 +60,11 @@ export class VaccinatedList extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:3002/vaccineCenters").then((res) => {
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+    console.log(data.user_name);
+
+    axios.get("http://localhost:3002/vaccinatedList", { params: { id: data.user_id } }).then((res) => {
       console.log(res.data);
       this.setState({
         centers: res.data,
@@ -107,7 +111,7 @@ export class VaccinatedList extends Component {
     const tableRowEvents = {
       onClick: (e, row, rowIndex) => {
         console.log(`clicked on row with index: ${rowIndex}`);
-        console.log(row);
+        console.log("nshhshhs");
         // console.log(e);
       },
       onMouseEnter: (e, row, rowIndex) => {
