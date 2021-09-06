@@ -37,3 +37,11 @@
   box-shadow: 0 4px 8px 0 rgba(65, 57, 57, 0.993);
   /* margin-left: 5px; */
 }
+.font1 {
+  margin-top: 10px;
+  font-weight: bold;
+}
+.font2 {
+  margin-top: 10px;
+  color: red;
+}
