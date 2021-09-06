@@ -908,7 +908,7 @@ app.get("/reservedList", (req, res) => {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
   
-  db.query("SELECT CONCAT(first_name,' ',last_name) AS fullname,nic,center_id,address FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id WHERE date=curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?;", [vid], (err, result) => {
+  db.query("SELECT CONCAT(first_name,' ',last_name) AS fullname,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id WHERE date=curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?;", [vid], (err, result) => {
     if (err) {
       console.log("Error center");
       console.log(err);
