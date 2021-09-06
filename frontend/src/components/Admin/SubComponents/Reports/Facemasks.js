@@ -15,6 +15,7 @@ function Map() {
   const [selecteFacemMask, setselecteFacemMask] = useState(null);
   useEffect(() => {
     fetchData();
+    fethData();
   }, []);
 
   const fetchData = async () => {
@@ -39,7 +40,7 @@ function Map() {
     <GoogleMap
       defaultZoom={10}
       defaultCenter={{ lat: 5.95492, lng: 80.554955 }}
-      defaultOptions={{ styles: mapstyles }}
+      // defaultOptions={{ styles: mapstyles }}
     >
       {facemask.map((masks) => (
         <Marker
@@ -49,7 +50,18 @@ function Map() {
             lng: Number(masks.longitude),
           }}
           onClick={() => {
-            setselecteFacemMask(masks);
+            var arr1 = new Array(masks);
+            for (let i = 0; i < notfacemask.length; i++) {
+              if (masks.place_id == notfacemask[i].place_id) {
+                var arr = notfacemask[i];
+              }
+            }
+            var arr2 = new Array(arr);
+
+            const mergedArr = { ...arr1[0], ...arr2[0] };
+            console.log(mergedArr);
+            setselecteFacemMask(mergedArr);
+            // setselecteFacemMask(masks);
           }}
         />
       ))}
@@ -65,7 +77,9 @@ function Map() {
         >
           <div>
             <b>
-              <h5>FaceMasks Details</h5>
+              <h5>
+                <b>FaceMasks Details</b>
+              </h5>
             </b>
 
             <h6>
@@ -73,7 +87,13 @@ function Map() {
             </h6>
 
             <h6>
-              <b>No.of.People Wearing Facemask : {selecteFacemMask.facemask}</b>
+              <b>No.of.People Wearing Mask Properly : </b>
+              {selecteFacemMask.facemask}
+            </h6>
+
+            <h6>
+              <b>No.of.People Not Wearing Mask Properly : </b>
+              {selecteFacemMask.Notmask}
             </h6>
           </div>
         </InfoWindow>
