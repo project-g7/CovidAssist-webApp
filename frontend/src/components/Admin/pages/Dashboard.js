@@ -20,15 +20,10 @@ const Dashboard = () => {
   return (
     <div className="container">
       <div className="row d-body">
-        {/* <div className = 'd-right'> */}
-        <DashboardCard1 />
-        {/* </div>    
-            <div>     */}
+        <DashboardCard4 />
+        <DashboardCard1 />  
         <DashboardCard2 />
-        {/* </div>
-            <div> */}
         <DashboardCard3 />
-        {/* </div>     */}
       </div>
       <div className="container tab-screen">
         <LineGraph />

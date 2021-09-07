@@ -48,7 +48,7 @@
   /* width: auto; */
   /* align-items: center; */
   justify-content: space-between;
-  margin-left: 290px;
+  margin-left: 250px;
   margin-right: 20px;
   margin-top: 100px;
   /* left: 0; */
@@ -134,6 +134,19 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 900px;
   height: 460px;
+}
+
+.dashboard-line-chart-admin {
+  margin-top: 60px;
+  margin-left: -90px;
+  margin-bottom: 80px;
+  padding: 10px;
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 700px;
+  height: 430px;
 }
 
 .tooltip {
