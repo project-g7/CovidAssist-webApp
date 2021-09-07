@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 # template1.png is the template
 # certificate
-template_path = 'vaccineCard.png'
+template_path = 'images/vaccineCard.png'
 
 name = sys.argv[1]
 nic = sys.argv[2]
