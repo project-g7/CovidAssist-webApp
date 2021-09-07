@@ -15,10 +15,14 @@ template_path = 'images/vaccineCard.png'
 name = sys.argv[1]
 nic = sys.argv[2]
 address = sys.argv[3]
-vaccine = sys.argv[4]
-center = sys.argv[5]
-date = sys.argv[6]
-print(date)
+vaccine2 = sys.argv[4]
+center2 = sys.argv[5]
+date2 = sys.argv[6]
+vaccine1 = sys.argv[7]
+center1 = sys.argv[8]
+date1 = sys.argv[9]
+
+# print(date1)
 
 # name = "Limal Manjitha"
 # nic = "9830956v"
@@ -101,18 +105,33 @@ for i in range(1, 2):
                font,
                font_size,
                font_color, 2)
-    cv.putText(img, vaccine,
+    cv.putText(img, vaccine1,
                (447, 865),
                font,
                font_size,
                font_color, 2)
-    cv.putText(img, center,
+    cv.putText(img, center1,
                (447, 936),
                font,
                font_size,
                font_color, 2)
-    cv.putText(img, date,
+    cv.putText(img, date1,
                (447, 1008),
+               font,
+               font_size,
+               font_color, 2)
+    cv.putText(img, vaccine2,
+               (447, 1220),
+               font,
+               font_size,
+               font_color, 2)
+    cv.putText(img, center2,
+               (447, 1291),
+               font,
+               font_size,
+               font_color, 2)
+    cv.putText(img, date2,
+               (447, 1361),
                font,
                font_size,
                font_color, 2)

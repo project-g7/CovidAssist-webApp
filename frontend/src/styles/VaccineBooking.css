@@ -68,6 +68,8 @@
 .card {
   /* box-shadow: -1px -5px 50px 10px rgb(219, 217, 230) inset; */
   font-size: 18px;
+  transition: transform 0.2s;
+
   padding: 16px;
   text-align: center;
   background-color: white;
