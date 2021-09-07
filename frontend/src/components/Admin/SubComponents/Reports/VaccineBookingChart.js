@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Bar, Pie, Doughnut, Line, Bubble, Radar } from "react-chartjs-2";
 import "../../../../styles/VaccineBooking.css";
 import VaccineBookingSearchBar from "./VaccineBookingSearchBar";
-
+import { format } from "date-fns";
 function VaccineBookingChart() {
   const [selectdistrict, setSelectDistrict] = useState("");
   const [selectcenter, setSelectCenter] = useState("");
@@ -120,8 +120,12 @@ function VaccineBookingChart() {
       setavailDose1(resultDetails[0].booked);
       console.log(resultDetails[0].booked);
       console.log(availDose1);
-      console.log(resultDetails[0].date.substring(0, 10));
-      setDate1(resultDetails[0].date.substring(0, 10));
+
+      var date = format(new Date(), "yyyy-MM-dd");
+      console.log(date);
+      setDate1(date);
+      // console.log(resultDetails[0].date.substring(0, 10));
+      // setDate1(resultDetails[0].date.substring(0, 10));
     } else if (typeof resultDetails.value == "BookingDetailsError") {
       availDose1 = 0;
     }
@@ -143,8 +147,14 @@ function VaccineBookingChart() {
       setavailDose2(resultDetails2[0].booked);
       console.log(resultDetails2[0].booked);
 
-      console.log(resultDetails2[0].date.substring(0, 10));
-      setDate2(resultDetails2[0].date.substring(0, 10));
+      let date = format(new Date(), "yyyy-MM-dd");
+      let dateone = new Date(date);
+      dateone.setDate(dateone.getDate() + 1);
+      let newDate1 = dateone.toISOString().substring(0, 10);
+      console.log(newDate1);
+      setDate2(newDate1);
+      // console.log(resultDetails2[0].date.substring(0, 10));
+      // setDate2(resultDetails2[0].date.substring(0, 10));
     } else if (typeof resultDetails2.value == "BookingDetails2Error") {
       availDose2 = 0;
     }
@@ -166,8 +176,15 @@ function VaccineBookingChart() {
       setavailDose3(resultDetails3[0].booked);
       console.log(resultDetails3[0].booked);
 
-      console.log(resultDetails3[0].date.substring(0, 10));
-      setDate3(resultDetails3[0].date.substring(0, 10));
+      let date = format(new Date(), "yyyy-MM-dd");
+      let datetwo = new Date(date);
+      datetwo.setDate(datetwo.getDate() + 2);
+      let newDate2 = datetwo.toISOString().substring(0, 10);
+      console.log(newDate2);
+      setDate3(newDate2);
+
+      // console.log(resultDetails3[0].date.substring(0, 10));
+      // setDate3(resultDetails3[0].date.substring(0, 10));
     } else if (typeof resultDetails3.value == "BookingDetails3Error") {
       availDose3 = 0;
     }
@@ -189,8 +206,15 @@ function VaccineBookingChart() {
       setavailDose4(resultDetails4[0].booked);
       console.log(resultDetails4[0].booked);
 
-      console.log(resultDetails4[0].date.substring(0, 10));
-      setDate4(resultDetails4[0].date.substring(0, 10));
+      let date = format(new Date(), "yyyy-MM-dd");
+      let datethree = new Date(date);
+      datethree.setDate(datethree.getDate() + 3);
+      let newDate3 = datethree.toISOString().substring(0, 10);
+      console.log(newDate3);
+      setDate4(newDate3);
+
+      // console.log(resultDetails4[0].date.substring(0, 10));
+      // setDate4(resultDetails4[0].date.substring(0, 10));
     } else if (typeof resultDetails4.value == "BookingDetails4Error") {
       availDose4 = 0;
     }

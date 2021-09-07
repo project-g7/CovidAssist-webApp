@@ -7,7 +7,7 @@
     "Lucida Sans", Arial, sans-serif;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 1150px;
-  height: 850px;
+  height: 920px;
   margin-left: 260px;
 }
 .HeadLine {
@@ -24,7 +24,7 @@
 }
 .VaccineChart {
   /* margin-top: 50px; */
-  margin-top: 50px;
+  margin-top: 30px;
   display: flex;
   justify-content: space-between;
   padding: 0;
@@ -35,6 +35,91 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 600px;
   height: 450px;
+}
+.fonts {
+  margin-top: 10px;
+  color: #dd0925;
+  font-weight: bold;
+}
+.columns2 {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  /* margin-top: 10px; */
+  margin-left: 60px;
+}
+.columns3 {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  /* margin-top: 10px; */
+  /* margin-left: 300px; */
+}
+.columns4 {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  /* margin-top: 10px; */
+  /* margin-left: 500px; */
+}
+.columns2 div {
+  margin-left: 25px;
+}
+.cards3 {
+  /* box-shadow: -1px -5px 50px 10px rgb(219, 217, 230) inset; */
+  font-size: 18px;
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  border-bottom: #9840a0;
+  /* border-width: 50px; */
+  border-bottom-style: solid;
+  border-width: 10px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: #44361b;
+  width: 300px;
+  height: 110px;
+  margin-top: 20px;
+  margin-left: 70px;
+  box-shadow: 0 4px 8px 0 rgba(65, 57, 57, 0.993);
+}
+.cards4 {
+  /* box-shadow: -1px -5px 50px 10px rgb(219, 217, 230) inset; */
+  font-size: 18px;
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  border-bottom: #9840a0;
+  /* border-width: 50px; */
+  border-bottom-style: solid;
+  border-width: 10px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: #44361b;
+  width: 300px;
+  height: 110px;
+  margin-top: 20px;
+  margin-left: 110px;
+  box-shadow: 0 4px 8px 0 rgba(65, 57, 57, 0.993);
+}
+.cards2 {
+  /* box-shadow: -1px -5px 50px 10px rgb(219, 217, 230) inset; */
+  font-size: 18px;
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  border-bottom: #9840a0;
+  /* border-width: 50px; */
+  border-bottom-style: solid;
+  border-width: 10px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: #44361b;
+  width: 300px;
+  height: 110px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px 0 rgba(65, 57, 57, 0.993);
 }
 .PieChart1 {
   /* margin-left: 60px; */

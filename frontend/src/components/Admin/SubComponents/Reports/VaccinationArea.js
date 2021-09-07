@@ -12,8 +12,8 @@ import {
 function Map() {
   const [mapset, setMap] = useState([]);
   const [selectedCenter, setselectedCenter] = useState(null);
-  const [totalVaccinated, setTotalVaccinated] = useState(0);
-  const [booking, setBooking] = useState([]);
+  const [totalVaccinated, setTotalVaccinated] = useState([]);
+  const [booking, setBooking] = useState(null);
   useEffect(() => {
     fetchData();
     fetcData();
@@ -50,7 +50,19 @@ function Map() {
           }}
           onClick={() => {
             // setselectedCenter(centers);
-            setBooking(centers, totalVaccinated);
+            var arr1 = new Array(centers);
+            for (let i = 0; i < totalVaccinated.length; i++) {
+              if (centers.center_id == totalVaccinated[i].center_id) {
+                var arr = totalVaccinated[i];
+              }
+            }
+            var arr2 = new Array(arr);
+
+            const mergedArr = { ...arr1[0], ...arr2[0] };
+            console.log(mergedArr);
+            setBooking(mergedArr);
+            // console.log(booking);
+            // setBooking(centers);
           }}
           // icon={{
           //   url: "../../../../images/outline_maps_home_work_black_24dp.PNG",
@@ -67,6 +79,7 @@ function Map() {
           onCloseClick={() => {
             // setselectedCenter(null);
             setBooking(null);
+            console.log(booking);
           }}
         >
           <div>
@@ -84,12 +97,12 @@ function Map() {
             </h6>
 
             <h6>
-              <b>StartDate :</b> {booking.start_date}
+              <b>StartDate :</b> {booking.start_date.substring(0, 10)}
             </h6>
 
             <h6>
               <b>EndDate : </b>
-              {booking.end_date}
+              {booking.end_date.substring(0, 10)}
             </h6>
 
             <h6>
@@ -97,11 +110,12 @@ function Map() {
             </h6>
 
             <h6>
-              <b>Total Vaccinations : {booking.TotalVaccinated}</b>
+              <b>Total Vaccinations : {booking.TotalBooking}</b>
             </h6>
 
             <h6>
-              <b>Pending Vaccinations : </b>
+              <b>Pending Vaccinations :</b>
+              {booking.total - booking.TotalBooking}
             </h6>
           </div>
         </InfoWindow>
@@ -117,6 +131,7 @@ const VaccinationArea = () => {
       <div className="boxBoady">
         <div className="BoxTitle">
           <h4>Vaccination Areas </h4>
+          {/* <h4>{booking.center_id} </h4> */}
         </div>
         <div className="BoxSubTitle">
           <h4>Vaccination Areas</h4>
