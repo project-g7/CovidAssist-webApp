@@ -1370,11 +1370,11 @@ app.get("/reservedList", (req, res) => {
         const vid = result[0].center_id;
 
         db.query(
-          "SELECT CONCAT(first_name,' ',last_name) AS fullname,vaccine_name,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id sINNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE date=curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?;",
+          "SELECT CONCAT(first_name,' ',last_name) AS fullname,vaccine_name,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id INNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE date=curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?;",
           [vid],
           (err, result) => {
             if (err) {
-              console.log("Error center");
+              console.log("Error center3");
               console.log(err);
               res.send(err);
             } else {
@@ -1406,7 +1406,7 @@ app.get("/vaccinatedList", (req, res) => {
           [vid],
           (err, result) => {
             if (err) {
-              console.log("Error center");
+              console.log("Error center1");
               console.log(err);
               res.send(err);
             } else {
@@ -1563,11 +1563,11 @@ app.get("/upcommingbookings", (req, res) => {
         const vid = result[0].center_id;
 
         db.query(
-          "SELECT CONCAT(first_name,' ',last_name) AS fullname,vaccine_name,date,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id INNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE date>curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?;",
+          "SELECT CONCAT(first_name,' ',last_name) AS fullname,vaccine_name,date,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id INNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE date>curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?",
           [vid],
           (err, result) => {
             if (err) {
-              console.log("Error center");
+              console.log("Error center2");
               console.log(err);
               res.send(err);
             } else {
