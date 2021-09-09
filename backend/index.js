@@ -1234,7 +1234,8 @@ app.get("/vaccineCenterVaccineDetails", (req, res) => {
         console.log(result);
         res.send(result);
       }
-  })
+    }
+  );
 });
 
 app.get("/myprofile", (req, res) => {
@@ -1312,7 +1313,6 @@ app.get("/getiotcount", (req, res) => {
   );
 });
 
-
 app.get("/getuserscount", (req, res) => {
   db.query(
     "SELECT COUNT(mobile_user_id) AS userCount FROM covidAssist.mobile_user",
@@ -1370,7 +1370,7 @@ app.get("/reservedList", (req, res) => {
         const vid = result[0].center_id;
 
         db.query(
-          "SELECT CONCAT(first_name,' ',last_name) AS fullname,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id WHERE date=curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?;",
+          "SELECT CONCAT(first_name,' ',last_name) AS fullname,vaccine_name,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id sINNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE date=curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?;",
           [vid],
           (err, result) => {
             if (err) {
@@ -1388,6 +1388,7 @@ app.get("/reservedList", (req, res) => {
     }
   );
 });
+
 app.get("/vaccinatedList", (req, res) => {
   const userId = req.query.id;
   db.query(
@@ -1401,7 +1402,7 @@ app.get("/vaccinatedList", (req, res) => {
         const vid = result[0].center_id;
 
         db.query(
-          "SELECT CONCAT(first_name,' ',last_name) AS fullname,nic,center_id,address FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id WHERE date=curdate() AND booking.status=1 AND is_cancel=0 AND center_id=?;",
+          "SELECT CONCAT(first_name,' ',last_name) AS fullname,vaccine_name,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id INNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE date=curdate() AND booking.status=1 AND is_cancel=0 AND center_id=?;",
           [vid],
           (err, result) => {
             if (err) {
@@ -1496,10 +1497,21 @@ app.get("/confirmvaccine", (req, res) => {
                               let newDate1 = date1
                                 .toISOString()
                                 .substring(0, 10);
-                                for(let i=0;i<2;i++){
-                                  const spawn = require("child_process").spawn;
-                                  const pythonProcess = spawn("python", ["certi2.py", name, nic, address,vaccine,center,newDate,vaccine1,center1,newDate1]);
-                                }
+                              for (let i = 0; i < 2; i++) {
+                                const spawn = require("child_process").spawn;
+                                const pythonProcess = spawn("python", [
+                                  "certi2.py",
+                                  name,
+                                  nic,
+                                  address,
+                                  vaccine,
+                                  center,
+                                  newDate,
+                                  vaccine1,
+                                  center1,
+                                  newDate1,
+                                ]);
+                              }
                             }
                           }
                         );
@@ -1538,7 +1550,102 @@ app.get("/getcenterdistrict", (req, res) => {
     }
   );
 });
+app.get("/upcommingbookings", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
 
+        db.query(
+          "SELECT CONCAT(first_name,' ',last_name) AS fullname,vaccine_name,date,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id INNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE date>curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?;",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error center");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log(result);
+              // console.log(result);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+app.get("/getvaccinecenter", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
+
+        db.query(
+          "SELECT name FROM vaccine_center WHERE center_id=?;",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error center");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log(result);
+              // console.log(result);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+app.get("/RegisterDetails", (req, res) => {
+  const id = req.query.id;
+  console.log("no id found");
+  console.log(id);
+  db.query(
+    "SELECT CONCAT(first_name,' ',last_name) AS fullname,date,dose,time,id_type,nic,address,gender,booking_id FROM covidAssist.booking INNER JOIN mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id WHERE booking.booking_id=?;",
+    [id],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
+    }
+  );
+});
+app.get("/BookedVaccine", (req, res) => {
+  const id = req.query.id;
+  console.log("no id found");
+  console.log(id);
+  db.query(
+    "SELECT vaccine_name FROM covidAssist.booking INNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE booking.booking_id=?;",
+    [id],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
+    }
+  );
+});
 
 app.listen(3002, () => {
   console.log("your server is running port 3002");
