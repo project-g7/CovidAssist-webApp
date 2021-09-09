@@ -751,7 +751,418 @@ app.get("/notfacemasks", (req, res) => {
     }
   );
 });
+//report-vaccine manager
+app.get("/firstDoseCount", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS firstDose FROM covidAssist.booking WHERE dose =1 AND status=1 AND center_id = ?",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount[0].firstDose);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+app.get("/secondDoseCount", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS secondDose FROM covidAssist.booking WHERE dose =2 AND status=1 AND center_id = ?",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount[0].secondDose);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+app.get("/firstsecondDoseCount", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS firstsecondDose FROM covidAssist.booking WHERE (dose_1 =1 AND dose_2 =1) AND status=1 AND center_id = ?",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount[0].firstsecondDose);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+app.get("/registerCount", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS registerCount FROM covidAssist.booking WHERE center_id = ?",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount[0].registerCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+//vaccine manager report chart
+app.get("/firstDoseCount1", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS firstDose1 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(date,CURDATE())=0) ORDER BY date ASC",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
 
+app.get("/firstDoseCount2", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS firstDose2 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(date,CURDATE())=1) ORDER BY date ASC",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+app.get("/firstDoseCount3", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS firstDose3 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(date,CURDATE())=2) ORDER BY date ASC",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+app.get("/firstDoseCount4", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS firstDose4 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(date,CURDATE())=3) ORDER BY date ASC",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+app.get("/secondDoseCount1", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS secondDose1 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(date,CURDATE())=0) ORDER BY date ASC",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+app.get("/secondDoseCount2", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS secondDose2 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(date,CURDATE())=1) ORDER BY date ASC",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+app.get("/secondDoseCount3", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS secondDose3 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(date,CURDATE())=2) ORDER BY date ASC",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+app.get("/secondDoseCount4", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(booking_id) AS secondDose4 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(date,CURDATE())=3) ORDER BY date ASC",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+app.get("/vaccineCenterDistrict", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT name,district FROM covidAssist.vaccine_center WHERE center_id = ?",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+app.get("/vaccineName", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(err);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT vaccine_id FROM covidAssist.vaccine_center_vaccine WHERE vaccine_center_id=?",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              let vaccineID = resultCount[0].vaccine_id;
+              console.log(vaccineID);
+              db.query(
+                "SELECT vaccine_name FROM covidAssist.vaccine WHERE vaccine_id=?",
+                [vaccineID],
+                (errorVaccine, resultVaccine) => {
+                  if (errorVaccine) {
+                    console.log(err);
+                  } else {
+                    console.log(resultVaccine);
+                    res.send(resultVaccine);
+                  }
+                }
+              );
+            }
+          }
+        );
+      }
+    }
+  );
+});
 app.post("/updateVaccine", (req, res) => {
   const id = req.body.vaccine_id;
   const dose1 = req.body.dose_1_quantity;
@@ -888,14 +1299,85 @@ app.post("/editprofile", (req, res) => {
   );
 });
 
+app.get("/getcentercount", (req, res) => {
+  db.query(
+    "SELECT COUNT(center_id) AS centerCount FROM covidAssist.vaccine_center",
+    (err, result) => {
+      if (err) {
+        console.log("Error count");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("count successful");
+        console.log(result);
+      }
+    }
+  );
+});
+
+app.get("/getiotcount", (req, res) => {
+  db.query(
+    "SELECT COUNT(place_id) AS iotCount FROM covidAssist.iot_device",
+    (err, result) => {
+      if (err) {
+        console.log("Error iot");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("successful");
+        console.log(result);
+      }
+    }
+  );
+});
+
+
+app.get("/getuserscount", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS userCount FROM covidAssist.mobile_user",
+    (err, result) => {
+      if (err) {
+        console.log("Error user");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("successful");
+        console.log(result);
+      }
+    }
+  );
+});
+
+app.get("/getrequestcount", (req, res) => {
+  db.query(
+    "SELECT COUNT(user_id) AS requestCount FROM covidAssist.web_user WHERE status = ?",
+    [0],
+    (err, result) => {
+      if (err) {
+        console.log("Error requsets");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(" successful");
+        console.log(result);
+      }
+    }
+  );
+});
+
 app.get("/test", (req, res) => {
   console.log("test api");
   const name = "Limal Manjitha";
   const nic = "983091563v";
   const district = "Colombo";
   const spawn = require("child_process").spawn;
-  const pythonProcess = spawn('python',["certi.py", name, nic, district]);
-})
+  const pythonProcess = spawn("python", ["certi.py", name, nic, district]);
+});
+
 app.get("/reservedList", (req, res) => {
   const userId = req.query.id;
   db.query(
@@ -907,8 +1389,9 @@ app.get("/reservedList", (req, res) => {
       } else {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
+
   
-  db.query("SELECT CONCAT(first_name,' ',last_name) AS fullname,vaccine_name,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id INNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE date=curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?;", [vid], (err, result) => {
+  db.query("SELECT CONCAT(first_name,' ',last_name) AS fullname,vaccine_name,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id sINNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE date=curdate() AND booking.status=0 AND is_cancel=0 AND center_id=?;", [vid], (err, result) => {
     if (err) {
       console.log("Error center");
       console.log(err);
@@ -917,11 +1400,9 @@ app.get("/reservedList", (req, res) => {
       res.send(result);
       console.log("Successhggg");
       // console.log(result);
+
     }
-  });
-}
-}
-);
+  );
 });
 app.get("/vaccinatedList", (req, res) => {
   const userId = req.query.id;
@@ -934,6 +1415,7 @@ app.get("/vaccinatedList", (req, res) => {
       } else {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
+
   
   db.query("SELECT CONCAT(first_name,' ',last_name) AS fullname,vaccine_name,nic,center_id,address,booking_id FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id INNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE date=curdate() AND booking.status=1 AND is_cancel=0 AND center_id=?;", [vid], (err, result) => {
     if (err) {
@@ -944,15 +1426,14 @@ app.get("/vaccinatedList", (req, res) => {
       res.send(result);
       console.log("Successhggg");
       // console.log(result);
+
+      
     }
-  });
-}
-}
-);
+  );
 });
 
 app.get("/confirmvaccine", (req, res) => {
-  const id =  req.query.book;
+  const id = req.query.book;
   console.log(id);
   console.log("no");
   db.query(
@@ -964,13 +1445,95 @@ app.get("/confirmvaccine", (req, res) => {
         console.log(err);
         res.send(err);
       } else {
-        res.send("Success book");
+        db.query(
+          "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
+          [id],
+          (errorSelect, resultSelect) => {
+            if (errorSelect) {
+            } else {
+              console.log(resultSelect);
+              let userId = resultSelect[0].mobile_user_id;
+              let name =
+                resultSelect[0].first_name + " " + resultSelect[0].last_name;
+              let nic = resultSelect[0].nic;
+              let address = resultSelect[0].address;
+              let dose = resultSelect[0].dose;
+              let vaccine = resultSelect[0].vaccine_name;
+              let center = resultSelect[0].name;
+              let date = new Date(
+                resultSelect[0].date.toISOString().substring(0, 10)
+              );
+              date.setDate(date.getDate() + 1);
+              let newDate = date.toISOString().substring(0, 10);
+              console.log(date.toISOString().substring(0, 10));
+              if (dose == 1) {
+                const spawn = require("child_process").spawn;
+                const pythonProcess = spawn("python", [
+                  "certi.py",
+                  name,
+                  nic,
+                  address,
+                  vaccine,
+                  center,
+                  newDate,
+                ]);
+              } else if (dose == 2) {
+                db.query(
+                  "SELECT * FROM booking WHERE mobile_user_id = ? AND status = ? AND dose = ?",
+                  [userId, 1, 1],
+                  (errorUser, resultUser) => {
+                    if (errorUser) {
+                      console.log(errorUser);
+                    } else {
+                      console.log("===========");
+                      console.log(resultUser.length);
+                      if (resultUser.length > 0) {
+                        let bookingId = resultUser[0].booking_id;
+                        db.query(
+                          "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
+                          [bookingId],
+                          (errorDoseOne, resultDoseOne) => {
+                            if (errorDoseOne) {
+                              console.log(errorDoseOne);
+                            } else {
+                              console.log("$$$$$$$$$");
+                              let vaccine1 = resultDoseOne[0].vaccine_name;
+                              let center1 = resultDoseOne[0].name;
+                              let date1 = new Date(
+                                resultDoseOne[0].date
+                                  .toISOString()
+                                  .substring(0, 10)
+                              );
+                              date1.setDate(date1.getDate() + 1);
+                              let newDate1 = date1
+                                .toISOString()
+                                .substring(0, 10);
+                                for(let i=0;i<2;i++){
+                                  const spawn = require("child_process").spawn;
+                                  const pythonProcess = spawn("python", ["certi2.py", name, nic, address,vaccine,center,newDate,vaccine1,center1,newDate1]);
+                                }
+                            }
+                          }
+                        );
+                      }
+                    }
+                  }
+                );
+              }
+            }
+            // console.log(resultSelect[0].booking_id);
+            // let dose = resultSelect[0].dose;
+            // let userId = resultSelect[0].mobile_user_id;
+          }
+        );
+        // res.send("Success book");
         console.log("Success");
         // console.log(result);
       }
     }
   );
 });
+
 app.get("/upcommingbookings", (req, res) => {
   const userId = req.query.id;
   db.query(
@@ -1059,6 +1622,7 @@ app.get("/BookedVaccine", (req, res) => {
     }
   );
 });
+
 
 app.listen(3002, () => {
   console.log("your server is running port 3002");
