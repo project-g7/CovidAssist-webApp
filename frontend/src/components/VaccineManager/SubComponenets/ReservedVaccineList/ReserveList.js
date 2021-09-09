@@ -5,6 +5,7 @@ import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import * as BiIcons from "react-icons/bi";
+import '../../../../styles/vaccinated.css';
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
@@ -20,12 +21,13 @@ export class ReserveList extends Component {
   
     //  console.log(cell);
     return (
-      <Link to={"/vaccine/vaccinelist"}>
-           <BiIcons.BiFirstAid />
+      <Link to={"/vaccine/CheckBookingDetails?id=" + row.booking_id}>
+          View Details  
       </Link>
     );
   };
   state = {
+      checked: 0,
     centers: [],
     book: [],
     columns: [
@@ -57,8 +59,15 @@ export class ReserveList extends Component {
         }
       },
       {
+        dataField: "vaccine_name",
+        text: "Vaccine",
+        headerStyle: {
+          backgroundColor: "rgb(96, 79, 255)",
+        }
+      },
+      {
         dataField: "link",
-        text: "Confirm",
+        text: "View",
         formatter: this.linkFormatter,
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
@@ -77,6 +86,12 @@ export class ReserveList extends Component {
       this.setState({
         centers: res.data,
       });
+    });
+    axios.get("http://localhost:3002/getvaccinecenter", { params: { id: data.user_id } }).then((res) => {
+      console.log(res.data);
+      this.setState({
+        name: res.data[0].name,
+      }); 
     });
   }
 
@@ -121,10 +136,10 @@ export class ReserveList extends Component {
         console.log(`clicked on row with index: ${rowIndex}`);
         console.log("nshhshhs");
         console.log(e);
-        axios.get("http://localhost:3002/confirmvaccine", { params: { book: row.booking_id } }).then((res) => {
-            console.log(res.data);
+        // axios.get("http://localhost:3002/confirmvaccine", { params: { book: row.booking_id } }).then((res) => {
+        //     console.log(res.data);
             
-          });
+        //   });
         // console.log(e);
       },
       onMouseEnter: (e, row, rowIndex) => {
@@ -139,6 +154,7 @@ export class ReserveList extends Component {
       <div>
         <div className="container">
           <div className="container" style={{ marginTop: "30px" }}>
+          <div className="tabletitle"><h4>{this.state.name}</h4></div> 
             <BootstrapTable
               bootstrap4
               hover
