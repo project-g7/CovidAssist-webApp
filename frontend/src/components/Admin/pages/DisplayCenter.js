@@ -74,9 +74,9 @@ const DisplayCenter = () => {
         params: { id: id },
       })
       .then((res) => {
-        console.log(res.data[0][0]);
+        console.log(res.data[0]);
         // console.log(JSON.parse(res.data));
-        setVaccineData(res.data[0][0]);
+        setVaccineData(res.data[0]);
       })
       .catch((err) => {
         console.log(err);
@@ -122,7 +122,7 @@ const DisplayCenter = () => {
                 <h4>Vaccine</h4>
               </div>
               <div className={classes.set}>
-                <p>{data.name}</p>
+                <p>{vaccineData.vaccine_name}</p>
               </div>
             </div>
             <div className={classes.vset}>
@@ -165,7 +165,7 @@ const DisplayCenter = () => {
                 <h4>Assinged Manager</h4>
               </div>
               <div className={classes.set}>
-                <p>{data.name}</p>
+                <p>{data.first_name+" "+data.last_name}</p>
               </div>
             </div>
           </div>
