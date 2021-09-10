@@ -106,11 +106,13 @@ function Map() {
             </h6>
 
             <h6>
-              <b>Total Bookings : {booking.total}</b>
+              <b>Total Bookings : </b>
+              {booking.total}
             </h6>
 
             <h6>
-              <b>Total Vaccinations : {booking.TotalBooking}</b>
+              <b>Total Vaccinations : </b>
+              {booking.TotalBooking}
             </h6>
 
             <h6>

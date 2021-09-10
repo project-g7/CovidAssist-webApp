@@ -696,7 +696,8 @@ app.get("/VaccineBookedDetails4", (req, res) => {
 //vaccination areas-Admin dashboard
 app.get("/mapMarkerCenters", (req, res) => {
   db.query(
-    "SELECT count(booking_id)as total,vaccine_center.center_id,vaccine_center.name,vaccine_center.district,vaccine_center.start_date,vaccine_center.end_date,vaccine_center.longitude,vaccine_center.latitude,vaccine.vaccine_name FROM covidAssist.vaccine_center INNER JOIN covidAssist.vaccine_center_vaccine ON vaccine_center.center_id=vaccine_center_vaccine.vaccine_center_id INNER JOIN covidAssist.vaccine ON vaccine.vaccine_id = vaccine_center_vaccine.vaccine_id INNER JOIN covidAssist.booking ON vaccine_center.center_id=booking.center_id group by name;",
+    "SELECT count(booking_id)as total,vaccine_center.center_id,vaccine_center.name,vaccine_center.district,vaccine_center.start_date,vaccine_center.end_date,vaccine_center.longitude,vaccine_center.latitude,vaccine.vaccine_name FROM covidAssist.vaccine_center INNER JOIN covidAssist.vaccine_center_vaccine ON vaccine_center.center_id=vaccine_center_vaccine.vaccine_center_id INNER JOIN covidAssist.vaccine ON vaccine.vaccine_id = vaccine_center_vaccine.vaccine_id INNER JOIN covidAssist.booking ON vaccine_center.center_id=booking.center_id group by name",
+
     (error, result) => {
       if (error) {
         console.log("Error select center");
@@ -725,7 +726,7 @@ app.get("/TotalVaccinated", (req, res) => {
 });
 app.get("/facemasks", (req, res) => {
   db.query(
-    "SELECT facemask.facemask_id,facemask.place_id,facemask.date_time,facemask.facemask_status,iot_device.district,iot_device.place,iot_device.longitude,iot_device.latitude, COUNT(facemask_id) AS facemask FROM covidAssist.facemask INNER JOIN covidAssist.iot_device ON facemask.place_id=iot_device.place_id WHERE facemask.facemask_status=1",
+    "SELECT facemask.facemask_id,facemask.place_id,facemask.date_time,facemask.facemask_status,iot_device.district,iot_device.place,iot_device.longitude,iot_device.latitude, COUNT(facemask_id) AS facemask FROM covidAssist.facemask INNER JOIN covidAssist.iot_device ON facemask.place_id=iot_device.place_id WHERE facemask.facemask_status=1 group by facemask.place_id",
     (error, result) => {
       if (error) {
         console.log("Error facemask");
@@ -739,10 +740,38 @@ app.get("/facemasks", (req, res) => {
 });
 app.get("/notfacemasks", (req, res) => {
   db.query(
-    "SELECT facemask.facemask_id,facemask.place_id,facemask.date_time,facemask.facemask_status,iot_device.district,iot_device.place,iot_device.longitude,iot_device.latitude, COUNT(facemask_id) AS Notmask FROM covidAssist.facemask INNER JOIN covidAssist.iot_device ON facemask.place_id=iot_device.place_id WHERE facemask.facemask_status=0 ;",
+    "SELECT facemask.facemask_id,facemask.place_id,facemask.date_time,facemask.facemask_status,iot_device.district,iot_device.place,iot_device.longitude,iot_device.latitude, COUNT(facemask_id) AS Notmask FROM covidAssist.facemask INNER JOIN covidAssist.iot_device ON facemask.place_id=iot_device.place_id WHERE facemask.facemask_status=0 group by facemask.place_id;",
     (error, result) => {
       if (error) {
         console.log("Error Notfacemask");
+      } else {
+        res.send(result);
+        console.log(result);
+        console.log("-----------------successfully----------------");
+      }
+    }
+  );
+});
+app.get("/bodytempreture", (req, res) => {
+  db.query(
+    "SELECT temperature.temperature_id,temperature.place_id,temperature.temperature_value,temperature.status,iot_device.district,iot_device.place,iot_device.longitude,iot_device.latitude, count(temperature.temperature_id) AS temperature FROM covidAssist.temperature INNER JOIN covidAssist.iot_device ON temperature.place_id=iot_device.place_id GROUP BY temperature.place_id",
+    (error, result) => {
+      if (error) {
+        console.log("Error bodytemparature");
+      } else {
+        res.send(result);
+        console.log(result);
+        console.log("-----------------successfully----------------");
+      }
+    }
+  );
+});
+app.get("/bodytempreturecount", (req, res) => {
+  db.query(
+    "SELECT COUNT(facemask_id) AS count ,place_id FROM covidAssist.facemask group by place_id",
+    (error, result) => {
+      if (error) {
+        console.log("Error facemask count");
       } else {
         res.send(result);
         console.log(result);
@@ -1333,7 +1362,6 @@ app.get("/getiotcount", (req, res) => {
   );
 });
 
-
 app.get("/getuserscount", (req, res) => {
   db.query(
     "SELECT COUNT(mobile_user_id) AS userCount FROM covidAssist.mobile_user",
@@ -1517,10 +1545,21 @@ app.get("/confirmvaccine", (req, res) => {
                               let newDate1 = date1
                                 .toISOString()
                                 .substring(0, 10);
-                                for(let i=0;i<2;i++){
-                                  const spawn = require("child_process").spawn;
-                                  const pythonProcess = spawn("python", ["certi2.py", name, nic, address,vaccine,center,newDate,vaccine1,center1,newDate1]);
-                                }
+                              for (let i = 0; i < 2; i++) {
+                                const spawn = require("child_process").spawn;
+                                const pythonProcess = spawn("python", [
+                                  "certi2.py",
+                                  name,
+                                  nic,
+                                  address,
+                                  vaccine,
+                                  center,
+                                  newDate,
+                                  vaccine1,
+                                  center1,
+                                  newDate1,
+                                ]);
+                              }
                             }
                           }
                         );
