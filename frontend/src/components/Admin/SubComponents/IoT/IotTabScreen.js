@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AddIotLocationForm from './AddIotLocationForm'
 import IotLocations from './IotLocations'
+import TemperatureReport from './TemperatureReport'
+import TempNew from './TempNew'
 
 
 function TabPanel(props) {
@@ -97,6 +99,7 @@ export default function NavTabs() {
         >
           <LinkTab style={{ textDecoration: 'none' }} label="IoT Locations"  {...a11yProps(0)} />
           <LinkTab style={{ textDecoration: 'none' }} label="Add IoT Location" {...a11yProps(1)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Upload Temperature Report" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >
@@ -104,6 +107,10 @@ export default function NavTabs() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AddIotLocationForm/>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        {/* <TemperatureReport/> */}
+        <TempNew/>
       </TabPanel>
     </div>
   );
