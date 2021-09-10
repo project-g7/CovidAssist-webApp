@@ -70,7 +70,7 @@ const VaccinatedDetailsChart = () => {
         setFirstDoseCount2(res.data[0].firstDose2);
         let date = format(new Date(), "yyyy-MM-dd");
         let dateone = new Date(date);
-        dateone.setDate(dateone.getDate() + 1);
+        dateone.setDate(dateone.getDate() - 1);
         let newDate1 = dateone.toISOString().substring(0, 10);
         console.log(newDate1);
         setDate2(newDate1);
@@ -92,7 +92,7 @@ const VaccinatedDetailsChart = () => {
         setFirstDoseCount3(res.data[0].firstDose3);
         let date = format(new Date(), "yyyy-MM-dd");
         let datetwo = new Date(date);
-        datetwo.setDate(datetwo.getDate() + 2);
+        datetwo.setDate(datetwo.getDate() - 2);
         let newDate2 = datetwo.toISOString().substring(0, 10);
         console.log(newDate2);
         setDate3(newDate2);
@@ -114,7 +114,7 @@ const VaccinatedDetailsChart = () => {
         setFirstDoseCount4(res.data[0].firstDose4);
         let date = format(new Date(), "yyyy-MM-dd");
         let datethree = new Date(date);
-        datethree.setDate(datethree.getDate() + 3);
+        datethree.setDate(datethree.getDate() - 3);
         let newDate3 = datethree.toISOString().substring(0, 10);
         console.log(newDate3);
         setDate4(newDate3);

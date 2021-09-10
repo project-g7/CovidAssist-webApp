@@ -55,29 +55,29 @@ const VaccineBookingCard1 = () => {
     >
       <div class="column">
         <div class="card">
-          <h5>1st Dose Vaccinated People</h5>
-          <p>{dose1}</p>
+          <h5 class="fstyle">1st Dose Vaccinated People</h5>
+          <p class="fstyles">{dose1}</p>
         </div>
       </div>
 
       <div class="column">
         <div class="card">
-          <h5>2d Dose Vaccinated People</h5>
-          <p>{dose2}</p>
+          <h5 class="fstyle">2d Dose Vaccinated People</h5>
+          <p class="fstyles">{dose2}</p>
         </div>
       </div>
 
       <div class="column">
         <div class="card">
-          <h5>1st & 2nd Doses Vaccinated People</h5>
-          <p>{dose1dose2}</p>
+          <h5 class="fstyle">1st & 2nd Doses Vaccinated People</h5>
+          <p class="fstyles">{dose1dose2}</p>
         </div>
       </div>
 
       <div class="column">
         <div class="card">
-          <h5>No.of Registered People</h5>
-          <p>{register}</p>
+          <h5 class="fstyle">No.of Registered People</h5>
+          <p class="fstyles">{register}</p>
         </div>
       </div>
     </div>
