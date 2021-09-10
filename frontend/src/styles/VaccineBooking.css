@@ -250,3 +250,13 @@
   height: 780px;
   margin-left: -26px;
 }
+.fstyle {
+  margin-top: 10px;
+  font-weight: bold;
+  color: black;
+}
+.fstyles {
+  color: red;
+  margin-top: 10px;
+  font-weight: bold;
+}
