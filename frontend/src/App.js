@@ -24,6 +24,7 @@ import Upcomingbookings from "./components/VaccineManager/pages/Upcomingbookings
 import RegisterDetails from "./components/VaccineManager/pages/RegisterDetails";
 import UpcomingRegisterDetails from "./components/VaccineManager/pages/UpcomingRegisterDetails";
 import CheckBookingDetails from "./components/VaccineManager/pages/CheckBookingDetails";
+// import WelcomeVaccine from "./components/Vaccine/WelcomeVaccine";
 
 function App() {
   const [loggedIn,setLoggedIn] = useState(true);
