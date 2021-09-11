@@ -19,6 +19,7 @@ const Nav = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-between;
+  top:0;
   align-items: center;
 `;
 
