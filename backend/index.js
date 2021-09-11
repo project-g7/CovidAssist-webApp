@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "database-1.ctdegncxgy0s.us-east-2.rds.amazonaws.com",
+  host: "covid-assist-db.cdbjavxo0vob.us-east-2.rds.amazonaws.com",
   user: "admin",
   password: "admin1234",
   database: "covidAssist",
@@ -1074,7 +1074,7 @@ app.get("/secondDoseCount3", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -1083,7 +1083,7 @@ app.get("/secondDoseCount3", (req, res) => {
           [centerID],
           (errorCount, resultCount) => {
             if (errorCount) {
-              console.log(err);
+              console.log(errorCount);
             } else {
               console.log(resultCount);
               res.send(resultCount);
