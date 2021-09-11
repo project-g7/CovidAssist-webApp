@@ -789,7 +789,7 @@ app.get("/firstDoseCount", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -817,7 +817,7 @@ app.get("/secondDoseCount", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -845,7 +845,7 @@ app.get("/firstsecondDoseCount", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -873,7 +873,7 @@ app.get("/registerCount", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -902,7 +902,7 @@ app.get("/firstDoseCount1", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -931,7 +931,7 @@ app.get("/firstDoseCount2", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -959,7 +959,7 @@ app.get("/firstDoseCount3", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -988,7 +988,7 @@ app.get("/firstDoseCount4", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -1017,7 +1017,7 @@ app.get("/secondDoseCount1", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -1046,7 +1046,7 @@ app.get("/secondDoseCount2", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -1102,7 +1102,7 @@ app.get("/secondDoseCount4", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -1131,7 +1131,7 @@ app.get("/vaccineCenterDistrict", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
@@ -1160,7 +1160,7 @@ app.get("/vaccineName", (req, res) => {
     [userid],
     (error, result) => {
       if (error) {
-        console.log(err);
+        console.log(error);
       } else {
         let centerID = result[0].center_id;
         console.log(centerID);
