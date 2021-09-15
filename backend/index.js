@@ -1584,8 +1584,9 @@ app.get("/reservedList", (req, res) => {
               console.log(err);
               res.send(err);
             } else {
+              console.log(result);
               res.send(result);
-              console.log("Successhggg");
+              console.log("Successhggg123");
               // console.log(result);
             }
           }
@@ -1636,7 +1637,7 @@ app.get("/confirmvaccine", (req, res) => {
     [id],
     (err, result) => {
       if (err) {
-        console.log("Error add iot");
+        console.log("Error booking");
         console.log(err);
         res.send(err);
       } else {
