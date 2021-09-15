@@ -20,6 +20,9 @@ import VaccinationAreas from "./components/Admin/pages/Reports/VaccinationAreas"
 import HealthMeasures from "./components/Admin/pages/Reports/HealthMeasures";
 import VaccinatedDetails from "./components/VaccineManager/Reports/VaccinatedDetails";
 import ReservedVaccineList from "./components/VaccineManager/pages/ReservedVaccineList";
+import DisplayVerifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayVerifiedAdministrators"
+import DisplayUnverifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayUnverifiedAdministrator"
+
 
 function App() {
   const [loggedIn,setLoggedIn] = useState(true);
@@ -85,6 +88,16 @@ function App() {
           path="/ct/profile"
           component={ctProfile}
 
+        ></Route>
+        <Route 
+          exact
+          path='/admin/requests/verifiedAdministrators'
+          component={DisplayVerifiedAdministrators}
+        ></Route>
+        <Route 
+          exact
+          path='/admin/requests/unverifiedAdministrators'
+          component={DisplayUnverifiedAdministrators}
         ></Route>
       </Switch>
     </Router>
