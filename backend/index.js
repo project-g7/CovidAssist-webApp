@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "database-1.ctdegncxgy0s.us-east-2.rds.amazonaws.com",
+  host: "covid-assist-db.cdbjavxo0vob.us-east-2.rds.amazonaws.com",
   user: "admin",
   password: "admin1234",
   database: "covidAssist",
@@ -110,35 +110,91 @@ app.post("/login", (req, res) => {
 
 app.get("/verifiedAdministrators", (req, res) => {
   db.query(
-    "SELECT user_id, user_name, user_role FROM covidAssist.web_user WHERE status=1",
+    "SELECT user_id, concat(first_name, ' ', last_name ) as name , user_role FROM covidAssist.web_user WHERE status=1",
     (err, result) => {
       if (err) {
+        console.log("Error inside verifiedAdministrators");
         console.log("Error ---1");
         res.send(err);
       } else {
         res.send(result);
-        console.log("Success");
+        // console.log("Success");
         // console.log(result);
+      }
+    }
+  );
+
+  
+});
+
+app.get("/unverifiedAdministrators", (req, res) => {
+  db.query(
+    "SELECT user_id, concat(first_name, ' ', last_name ) as name, user_role FROM covidAssist.web_user WHERE status=0",
+    (err, result) => {
+      if (err) {
+        console.log("Error ---2");
+        res.send(err);
+      } else {
+        res.send(result);
+        // console.log("Success");
+        console.log(result);
       }
     }
   );
 });
 
-app.get("/unverifiedAdministrators", (req, res) => {
+app.get("/verifiedAdminDetails", (req, res) => {
+  const id = req.query.id;
   db.query(
-    "SELECT user_id, user_name, user_role FROM covidAssist.web_user WHERE status=0",
+    "SELECT user_id, user_name, first_name, last_name, address, contact_number, email, user_role FROM covidAssist.web_user  WHERE user_id = ?",
+    [id],
     (err, result) => {
       if (err) {
-        console.log("Error ---1");
+        console.log("Error ---3");
         res.send(err);
       } else {
         res.send(result);
-        console.log("Success");
+        // console.log("Success");
         // console.log(result);
       }
     }
   );
 });
+app.get("/adminVaccineCenter", (req, res) => {
+  const id = req.query.id;
+  db.query(
+    "SELECT vaccine_center.center_id, concat(vaccine_center.name,' ', vaccine_center.district) as assigned_center FROM covidAssist.vaccine_manager, covidAssist.vaccine_center where vaccine_center.center_id = vaccine_manager.center_id and vaccine_manager.user_id = ?;",
+    [id],
+    (err, result) => {
+      if (err) {
+        console.log("Error ---4");
+        res.send(err);
+      } else {
+        res.send(result);
+        // console.log("Success");
+        // console.log(result);
+      }
+    }
+  );
+});
+app.get("/iotCenters", (req, res) => {
+  const id = req.query.id;
+  db.query(
+    "SELECT place_id,place,district FROM covidAssist.iot_device;",
+    (err, result) => {
+      if (err) {
+        console.log("Error ---4");
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Success");
+        console.log(result);
+      }
+    }
+  );
+});
+
+
 
 app.get("/vaccines", (req, res) => {
   db.query("SELECT * FROM covidAssist.vaccine", (err, result) => {
@@ -147,16 +203,53 @@ app.get("/vaccines", (req, res) => {
       res.send(err);
     } else {
       res.send(result);
-      console.log("Success");
+      // console.log("Success");
       // console.log(result);
     }
   });
 });
+// accept adminitrator request
+app.post("/assignAdmins", (req, res) => {
+  const id = req.body.id;
+  const place = req.body.place;
+  db.query("update covidAssist.web_user set status = 1 where user_id = ?" ,[id], (err, result)=>{
+    if(err){
+      // console.log("Error in web user update query");
+      console.log(err);
+      res.send(err);
+    }else{
+      db.query("insert into covidAssist.vaccine_manager(user_id, center_id) values (?, ?)",[id,place],(err, result)=>{
+        if(err){
+          console.log(err);
+          res.send(err);
+        }else{
+          // console.log("updated");
+        }
+      })
+    }
+  })
+})
+// reject the administrator request
+app.post("/rejectAdmins", (req, res) => {
+  const id = req.body.id;
+  const place = req.body.place;
+  db.query("update covidAssist.web_user set status = 2 where user_id = ?" ,[id], (err, result)=>{
+    if(err){
+      // console.log("Error in web user update query");
+      console.log(err);
+      res.send(err);
+    }else{
+        console.log("updated");
+      }
+})
+});
 
-app.get("/vaccineCenters", (req, res) => {
-  db.query("SELECT * FROM covidAssist.vaccine_center", (err, result) => {
+// get vaccine center list 
+
+app.get("/getVaccineCenterList", (req, res) => {
+  db.query("SELECT vaccine_center.center_id, concat(vaccine_center.name,' ', vaccine_center.district) as center_name FROM covidAssist.vaccine_center  left join covidAssist.vaccine_manager on vaccine_center.center_id = vaccine_manager.center_id where vaccine_manager.user_id is null;", (err, result) => {
     if (err) {
-      console.log("Error center");
+      // console.log("Error center");
       console.log(err);
       res.send(err);
     } else {
