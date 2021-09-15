@@ -87,8 +87,13 @@ function Map() {
             </h6>
 
             <h6>
-              <b>No.of.People Wearing Mask Properly : </b>
+              <b>No.of.People Wearing Mask : </b>
               {selecteFacemMask.facemask}
+            </h6>
+
+            <h6>
+              <b>No.of.People Wearing Mask Properly : </b>
+              {selecteFacemMask.facemask - selecteFacemMask.Notmask}
             </h6>
 
             <h6>
