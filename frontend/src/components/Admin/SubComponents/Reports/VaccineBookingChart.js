@@ -79,6 +79,7 @@ function VaccineBookingChart() {
     if (typeof result.value == "undefined") {
       setVaccine(result);
       //vaccine name
+      console.log(result);
       setVaccineName(result[0].vaccine_name);
       console.log(result[0].vaccine_name);
       console.log(result[0].dose);
@@ -99,7 +100,7 @@ function VaccineBookingChart() {
         dose2 = 0;
       }
       console.log("***************************");
-    } else if (typeof result.value == "NoBookingAvailable") {
+    } else if (result.value == "NoBookingAvailable") {
       dose1 = 0;
       dose2 = 0;
     }
