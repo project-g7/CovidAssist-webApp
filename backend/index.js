@@ -292,7 +292,7 @@ app.post("/addIoTLocation", (req, res) => {
 // Vaccinated details - ADMIN dashboard card details
 app.get("/vaccineFirstDose", (req, res) => {
   db.query(
-    "SELECT COUNT(mobile_user_id) AS countF FROM covidAssist.booking WHERE status=1 AND dose_1 =1 ",
+    "SELECT COUNT(mobile_user_id) AS countF FROM covidAssist.booking WHERE status=1 AND dose =1 ",
     (err, result) => {
       if (err) {
         console.log("Error 1st Dose");
@@ -308,7 +308,7 @@ app.get("/vaccineFirstDose", (req, res) => {
 });
 app.get("/vaccineSecondDose", (req, res) => {
   db.query(
-    "SELECT COUNT(mobile_user_id) AS countS FROM covidAssist.booking WHERE status=1 AND dose_2 =1",
+    "SELECT COUNT(mobile_user_id) AS countS FROM covidAssist.booking WHERE status=1 AND dose =2",
     (err, result) => {
       if (err) {
         console.log("Error 2nd Dose");
@@ -340,7 +340,7 @@ app.get("/vaccineFirstSecondDose", (req, res) => {
 });
 app.get("/vaccineBooking", (req, res) => {
   db.query(
-    "SELECT COUNT(booking_id) AS booking FROM covidAssist.booking ",
+    "SELECT COUNT(booking_id) AS booking FROM covidAssist.booking WHERE is_cancel=0 ",
     (err, result) => {
       if (err) {
         console.log("Error registerd people");
@@ -357,7 +357,7 @@ app.get("/vaccineBooking", (req, res) => {
 //vaccinated bar chart-Admin dashboard
 app.get("/sputnikVfirstDose", (req, res) => {
   db.query(
-    "SELECT COUNT(mobile_user_id) AS sputnikV1 FROM covidAssist.booking WHERE vaccine_id=1 AND status=1 AND dose_1=1; ",
+    "SELECT COUNT(mobile_user_id) AS sputnikV1 FROM covidAssist.booking WHERE vaccine_id=1 AND status=1 AND dose=1; ",
     (err, result) => {
       if (err) {
         console.log("Error sputnik v dose1");
@@ -373,7 +373,7 @@ app.get("/sputnikVfirstDose", (req, res) => {
 });
 app.get("/sputnikVsecondDose", (req, res) => {
   db.query(
-    "SELECT COUNT(mobile_user_id) AS sputnikV2 FROM covidAssist.booking WHERE status=1 AND vaccine_id=1 AND dose_2=1;; ",
+    "SELECT COUNT(mobile_user_id) AS sputnikV2 FROM covidAssist.booking WHERE status=1 AND vaccine_id=1 AND dose=2;; ",
     (err, result) => {
       if (err) {
         console.log("Error sputnik v dose2");
@@ -389,7 +389,7 @@ app.get("/sputnikVsecondDose", (req, res) => {
 });
 app.get("/astraZenecaFirstDose", (req, res) => {
   db.query(
-    "SELECT COUNT(mobile_user_id) as astra1 FROM covidAssist.booking WHERE status=1 AND vaccine_id=2 AND dose_1=1;; ",
+    "SELECT COUNT(mobile_user_id) as astra1 FROM covidAssist.booking WHERE status=1 AND vaccine_id=2 AND dose=1;; ",
     (err, result) => {
       if (err) {
         console.log("Error AstraZeneca  dose1");
@@ -405,7 +405,7 @@ app.get("/astraZenecaFirstDose", (req, res) => {
 });
 app.get("/astraZenecaSecondDose", (req, res) => {
   db.query(
-    "SELECT COUNT(mobile_user_id) as astra2 FROM covidAssist.booking WHERE status=1 AND vaccine_id=2 AND dose_2=1 ",
+    "SELECT COUNT(mobile_user_id) as astra2 FROM covidAssist.booking WHERE status=1 AND vaccine_id=2 AND dose=2 ",
     (err, result) => {
       if (err) {
         console.log("Error AstraZeneca  dose2");
@@ -421,7 +421,7 @@ app.get("/astraZenecaSecondDose", (req, res) => {
 });
 app.get("/sinopharmFirstDose", (req, res) => {
   db.query(
-    "SELECT COUNT(mobile_user_id) as sinopharm1 FROM covidAssist.booking WHERE status=1 AND vaccine_id=3 AND dose_1=1 ",
+    "SELECT COUNT(mobile_user_id) as sinopharm1 FROM covidAssist.booking WHERE status=1 AND vaccine_id=3 AND dose1=1 ",
     (err, result) => {
       if (err) {
         console.log("Error Sinopharm  dose1");
@@ -437,7 +437,7 @@ app.get("/sinopharmFirstDose", (req, res) => {
 });
 app.get("/sinopharmSecondDose", (req, res) => {
   db.query(
-    "SELECT COUNT(mobile_user_id) as sinopharm2 FROM covidAssist.booking WHERE status=1 AND vaccine_id=3 AND dose_2=1 ",
+    "SELECT COUNT(mobile_user_id) as sinopharm2 FROM covidAssist.booking WHERE status=1 AND vaccine_id=3 AND dose=2 ",
     (err, result) => {
       if (err) {
         console.log("Error Sinopharm  dose2");
@@ -446,6 +446,64 @@ app.get("/sinopharmSecondDose", (req, res) => {
       } else {
         res.send(result);
         console.log("Sinopharm  dose2 successful");
+        console.log(result);
+      }
+    }
+  );
+});
+
+app.get("/PieChart1", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user.mobile_user_id) AS piechart1 From covidAssist.mobile_user INNER JOIN covidAssist.booking ON mobile_user.mobile_user_id=booking.mobile_user_id WHERE booking.status = 1 AND (mobile_user.age BETWEEN 18 AND 29) ",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/PieChart2", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user.mobile_user_id) AS piechart2 From covidAssist.mobile_user INNER JOIN covidAssist.booking ON mobile_user.mobile_user_id=booking.mobile_user_id WHERE booking.status = 1 AND (mobile_user.age BETWEEN 30 AND 59) ",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/PieChart3", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user.mobile_user_id) AS piechart3 From covidAssist.mobile_user INNER JOIN covidAssist.booking ON mobile_user.mobile_user_id=booking.mobile_user_id WHERE booking.status = 1 AND (mobile_user.age >=60) ",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+
+app.get("/VaccineregPeople", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS reg From covidAssist.booking WHERE booking.status = 1  ",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
         console.log(result);
       }
     }
@@ -501,7 +559,7 @@ app.get("/VaccineSelecteDistrict", (req, res) => {
         console.log(result[0].center_id);
         let centerId = result[0].center_id;
         db.query(
-          "SELECT COUNT(mobile_user_id) AS book FROM covidAssist.booking WHERE center_id=? AND status=0 ",
+          "SELECT COUNT(mobile_user_id) AS book FROM covidAssist.booking WHERE center_id=? AND status=0 AND is_cancel=0 ",
           [centerId],
           (errCenter, resultCenter) => {
             if (errCenter) {
@@ -529,7 +587,7 @@ app.get("/VaccineTypeSelecteDistrict", (req, res) => {
         console.log(result[0].center_id);
         let centerId = result[0].center_id;
         db.query(
-          "SELECT count(dose) AS count , vaccine.vaccine_name,dose FROM covidAssist.booking INNER JOIN covidAssist.vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE center_id=? AND date= CURDATE() AND status=0 group by dose;",
+          "SELECT count(dose) AS count , vaccine.vaccine_name,dose FROM covidAssist.booking INNER JOIN covidAssist.vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE center_id=? AND date= CURDATE() AND status=0 AND is_cancel=0 group by dose;",
           [centerId],
           (errCenter, resultCenter) => {
             if (errCenter) {
@@ -564,7 +622,7 @@ app.get("/VaccineBookedDetails", (req, res) => {
         console.log(resultCenter[0].center_id);
         let centerId = resultCenter[0].center_id;
         db.query(
-          "SELECT COUNT(booking_id) AS booked ,date FROM covidAssist.booking WHERE center_id = ? AND status = 0 AND (datediff(date,CURDATE()))=0 ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS booked ,date FROM covidAssist.booking WHERE center_id = ? AND status = 0 AND (datediff(date,CURDATE())=0) AND is_cancel = 0 ORDER BY date ASC",
           [centerId],
           (errBooked, resultBooked) => {
             if (errBooked) {
@@ -600,7 +658,7 @@ app.get("/VaccineBookedDetails2", (req, res) => {
         console.log(resultCenter[0].center_id);
         let centerId = resultCenter[0].center_id;
         db.query(
-          "SELECT COUNT(booking_id) AS booked ,date FROM covidAssist.booking WHERE center_id = ? AND status = 0 AND datediff(date,CURDATE())=1 ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS booked ,date FROM covidAssist.booking WHERE center_id = ? AND status = 0 AND (datediff(date,CURDATE())=1) AND is_cancel = 0 ORDER BY date ASC",
           [centerId],
           (errBooked, resultBooked) => {
             if (errBooked) {
@@ -636,7 +694,7 @@ app.get("/VaccineBookedDetails3", (req, res) => {
         console.log(resultCenter[0].center_id);
         let centerId = resultCenter[0].center_id;
         db.query(
-          "SELECT COUNT(booking_id) AS booked ,date FROM covidAssist.booking WHERE center_id = ? AND status = 0 AND (datediff(date,CURDATE())=2) ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS booked ,date FROM covidAssist.booking WHERE center_id = ? AND status = 0 AND (datediff(date,CURDATE())=2) AND is_cancel = 0 ORDER BY date ASC",
           [centerId],
           (errBooked, resultBooked) => {
             if (errBooked) {
@@ -672,7 +730,7 @@ app.get("/VaccineBookedDetails4", (req, res) => {
         console.log(resultCenter[0].center_id);
         let centerId = resultCenter[0].center_id;
         db.query(
-          "SELECT COUNT(booking_id) AS booked ,date FROM covidAssist.booking WHERE center_id = ? AND status = 0 AND (datediff(date,CURDATE())=3) ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS booked ,date FROM covidAssist.booking WHERE center_id = ? AND status = 0 AND (datediff(date,CURDATE())=3) AND is_cancel = 0 ORDER BY date ASC",
           [centerId],
           (errBooked, resultBooked) => {
             if (errBooked) {
@@ -696,7 +754,7 @@ app.get("/VaccineBookedDetails4", (req, res) => {
 //vaccination areas-Admin dashboard
 app.get("/mapMarkerCenters", (req, res) => {
   db.query(
-    "SELECT count(booking_id)as total,vaccine_center.center_id,vaccine_center.name,vaccine_center.district,vaccine_center.start_date,vaccine_center.end_date,vaccine_center.longitude,vaccine_center.latitude,vaccine.vaccine_name FROM covidAssist.vaccine_center INNER JOIN covidAssist.vaccine_center_vaccine ON vaccine_center.center_id=vaccine_center_vaccine.vaccine_center_id INNER JOIN covidAssist.vaccine ON vaccine.vaccine_id = vaccine_center_vaccine.vaccine_id INNER JOIN covidAssist.booking ON vaccine_center.center_id=booking.center_id group by name",
+    "SELECT count(booking_id)as total,vaccine_center.center_id,vaccine_center.name,vaccine_center.district,vaccine_center.start_date,vaccine_center.end_date,vaccine_center.longitude,vaccine_center.latitude,vaccine.vaccine_name FROM covidAssist.vaccine_center INNER JOIN covidAssist.vaccine_center_vaccine ON vaccine_center.center_id=vaccine_center_vaccine.vaccine_center_id INNER JOIN covidAssist.vaccine ON vaccine.vaccine_id = vaccine_center_vaccine.vaccine_id INNER JOIN covidAssist.booking ON vaccine_center.center_id=booking.center_id WHERE booking.is_cancel = 0 group by name",
 
     (error, result) => {
       if (error) {
@@ -878,7 +936,7 @@ app.get("/registerCount", (req, res) => {
         let centerID = result[0].center_id;
         console.log(centerID);
         db.query(
-          "SELECT COUNT(booking_id) AS registerCount FROM covidAssist.booking WHERE center_id = ?",
+          "SELECT COUNT(booking_id) AS registerCount FROM covidAssist.booking WHERE center_id = ? AND is_cancel=0",
           [centerID],
           (errorCount, resultCount) => {
             if (errorCount) {
@@ -907,7 +965,7 @@ app.get("/firstDoseCount1", (req, res) => {
         let centerID = result[0].center_id;
         console.log(centerID);
         db.query(
-          "SELECT COUNT(booking_id) AS firstDose1 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(date,CURDATE())=0) ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS firstDose1 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(CURDATE(),date)=0) ORDER BY date ASC",
           [centerID],
           (errorCount, resultCount) => {
             if (errorCount) {
@@ -936,7 +994,7 @@ app.get("/firstDoseCount2", (req, res) => {
         let centerID = result[0].center_id;
         console.log(centerID);
         db.query(
-          "SELECT COUNT(booking_id) AS firstDose2 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(date,CURDATE())=1) ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS firstDose2 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(CURDATE(),date)=1) ORDER BY date ASC",
           [centerID],
           (errorCount, resultCount) => {
             if (errorCount) {
@@ -964,7 +1022,7 @@ app.get("/firstDoseCount3", (req, res) => {
         let centerID = result[0].center_id;
         console.log(centerID);
         db.query(
-          "SELECT COUNT(booking_id) AS firstDose3 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(date,CURDATE())=2) ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS firstDose3 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(CURDATE(),date)=2) ORDER BY date ASC",
           [centerID],
           (errorCount, resultCount) => {
             if (errorCount) {
@@ -993,7 +1051,7 @@ app.get("/firstDoseCount4", (req, res) => {
         let centerID = result[0].center_id;
         console.log(centerID);
         db.query(
-          "SELECT COUNT(booking_id) AS firstDose4 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(date,CURDATE())=3) ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS firstDose4 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=1 AND status = 1 AND (datediff(CURDATE(),date)=3) ORDER BY date ASC",
           [centerID],
           (errorCount, resultCount) => {
             if (errorCount) {
@@ -1022,7 +1080,7 @@ app.get("/secondDoseCount1", (req, res) => {
         let centerID = result[0].center_id;
         console.log(centerID);
         db.query(
-          "SELECT COUNT(booking_id) AS secondDose1 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(date,CURDATE())=0) ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS secondDose1 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(CURDATE(),date)=0) ORDER BY date ASC",
           [centerID],
           (errorCount, resultCount) => {
             if (errorCount) {
@@ -1051,7 +1109,7 @@ app.get("/secondDoseCount2", (req, res) => {
         let centerID = result[0].center_id;
         console.log(centerID);
         db.query(
-          "SELECT COUNT(booking_id) AS secondDose2 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(date,CURDATE())=1) ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS secondDose2 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(CURDATE(),date)=1) ORDER BY date ASC",
           [centerID],
           (errorCount, resultCount) => {
             if (errorCount) {
@@ -1079,7 +1137,7 @@ app.get("/secondDoseCount3", (req, res) => {
         let centerID = result[0].center_id;
         console.log(centerID);
         db.query(
-          "SELECT COUNT(booking_id) AS secondDose3 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(date,CURDATE())=2) ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS secondDose3 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(CURDATE(),date)=2) ORDER BY date ASC",
           [centerID],
           (errorCount, resultCount) => {
             if (errorCount) {
@@ -1107,7 +1165,7 @@ app.get("/secondDoseCount4", (req, res) => {
         let centerID = result[0].center_id;
         console.log(centerID);
         db.query(
-          "SELECT COUNT(booking_id) AS secondDose4 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(date,CURDATE())=3) ORDER BY date ASC",
+          "SELECT COUNT(booking_id) AS secondDose4 ,date FROM covidAssist.booking WHERE center_id = ? AND dose=2 AND status = 1 AND (datediff(CURDATE(),date)=3) ORDER BY date ASC",
           [centerID],
           (errorCount, resultCount) => {
             if (errorCount) {
@@ -1125,7 +1183,9 @@ app.get("/secondDoseCount4", (req, res) => {
 
 app.get("/vaccineCenterDistrict", (req, res) => {
   const userid = req.query.id;
+  console.log("hhhhhhhhhhhhhhhhhhhhh");
   console.log(userid);
+  console.log("hhhhhhhhhhhhhhhhhhhhh");
   db.query(
     "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
     [userid],
@@ -1192,6 +1252,123 @@ app.get("/vaccineName", (req, res) => {
     }
   );
 });
+
+app.get("/vaccinatedPieChart1", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(mobile_user.mobile_user_id) AS AgeCount1 From covidAssist.mobile_user INNER JOIN covidAssist.booking ON mobile_user.mobile_user_id=booking.mobile_user_id WHERE booking.status = 1 AND (mobile_user.age BETWEEN 18 AND 29) AND booking.center_id = ?",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+app.get("/vaccinatedPieChart2", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(mobile_user.mobile_user_id) AS AgeCount2 From covidAssist.mobile_user INNER JOIN covidAssist.booking ON mobile_user.mobile_user_id=booking.mobile_user_id WHERE booking.status = 1 AND (mobile_user.age BETWEEN 30 AND 59) AND booking.center_id = ?",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+app.get("/vaccinatedPieChart3", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(mobile_user.mobile_user_id) AS AgeCount3 From covidAssist.mobile_user INNER JOIN covidAssist.booking ON mobile_user.mobile_user_id=booking.mobile_user_id WHERE booking.status = 1 AND (mobile_user.age >=60) AND booking.center_id = ?",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+app.get("/vaccinatedPeople", (req, res) => {
+  const userid = req.query.id;
+  console.log(userid);
+  db.query(
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    [userid],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        let centerID = result[0].center_id;
+        console.log(centerID);
+        db.query(
+          "SELECT COUNT(mobile_user_id) AS AgeCountPeople From covidAssist.booking WHERE status = 1 AND booking.center_id = ?",
+          [centerID],
+          (errorCount, resultCount) => {
+            if (errorCount) {
+              console.log(err);
+            } else {
+              console.log(resultCount);
+              res.send(resultCount);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
 app.post("/updateVaccine", (req, res) => {
   const id = req.body.vaccine_id;
   const dose1 = req.body.dose_1_quantity;
