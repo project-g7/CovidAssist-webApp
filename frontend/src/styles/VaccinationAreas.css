@@ -1,0 +1,108 @@
+.boxBoady {
+  /* width: "120%"; */
+  margin-top: 100px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1150px;
+  height: 700px;
+  margin-left: 260px;
+}
+.BoxTitle {
+  margin-top: 30px;
+  background-color: #4049a0;
+  color: white;
+  border-radius: 5px;
+  font-size: 10px;
+  text-align: center;
+}
+.BoxSubTitle {
+  background-color: #c1d7e0;
+  color: #c1d7e0;
+}
+.AddBody {
+  width: "120%";
+  margin-top: -20px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1108px;
+  height: 650px;
+  margin-left: -26px;
+  /* padding-left: 50px; */
+}
+.AddBodyTemp {
+  width: "120%";
+  margin-top: -20px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1108px;
+  height: 750px;
+  margin-left: -26px;
+  /* padding-left: 50px; */
+}
+.AddBody-profile {
+  width: "120%";
+  margin-top: -20px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1108px;
+  height: 650px;
+  margin-left: -26px;
+  /* padding-left: 50px; */
+}
+.AddBody-center {
+  width: "120%";
+  margin-top: 120px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1108px;
+  height: 650px;
+  margin-left: 230px;
+  margin-bottom: 50px;
+  /* padding-left: 50px; */
+}
+.AddBody-center2 {
+  width: "120%";
+  margin-top: 120px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1108px;
+  height: 720px;
+  margin-left: 230px;
+  margin-bottom: 50px;
+  /* padding-left: 50px; */
+}
+.heding {
+  background-color: #c1d7e0;
+  color: rgb(15, 25, 119);
+  display: flex;
+  justify-content: center;
+}
+.heding-center {
+  background-color: #c1d7e0;
+  color: rgb(15, 25, 119);
+  display: flex;
+}
+
+.addform{
+  padding-left: 40px;
+  padding-right: 20px;
+  padding-top: 30px;
+}
+
+.vaccine-inputs{
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+}

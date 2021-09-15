@@ -1,0 +1,262 @@
+.Title {
+  background-color: #c1d7e0;
+  width: "120%";
+  margin-top: "0%";
+  color: rgb(15, 25, 119);
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.pieChart {
+  /* margin-top: 100px; */
+  margin-left: 100px;
+
+  /* height: 600px; */
+  size: 10;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: rgb(43, 46, 226);
+  background-color: rgba(255, 255, 255, 0.95);
+  height: 385px;
+  width: 1500px;
+  /* margin-bottom: 15px; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding-top: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
+  /*border: 1px solid black;*/
+}
+.SelectDistrict {
+  width: 100;
+  margin-left: 10;
+}
+.BarChartTitle {
+  margin-top: 15px;
+  background-color: white;
+  color: rgb(43, 46, 226);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.dashe {
+  font-size: 16px; /*modifed*/
+  margin-left: 1%;
+  padding-top: 30px; /*modifed*/
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif; /*modifed*/
+}
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+.column div {
+  margin-left: 25px;
+}
+
+/* Remove extra left and right margins, due to padding */
+/* .row {
+  margin: 0 -5px;
+}  */
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.card {
+  /* box-shadow: -1px -5px 50px 10px rgb(219, 217, 230) inset; */
+  font-size: 18px;
+  transition: transform 0.2s;
+
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  border-bottom: #4049a0;
+  /* border-width: 50px; */
+  border-bottom-style: solid;
+  border-width: 10px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: #44361b;
+  width: 230px;
+  height: 160px;
+  margin-top: 20px;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .column1 {
+    /*this can be devided into many rows*/
+    width: 20%;
+    height: auto;
+    display: inline-block;
+    color: rgb(190, 25, 25);
+    font-size: 10px;
+    /*border: 1px solid black;*/
+    margin-right: -800px;
+  }
+  .column1 div {
+    background-color: rgba(255, 255, 255, 0.95);
+    height: 165px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding-top: 25px;
+    padding-left: 5px;
+    padding-right: 5px;
+    /*border: 1px solid black;*/
+    margin-right: -200px;
+  }
+
+  /* Style the counter cards */
+  .card {
+    /* box-shadow: -1px -5px 50px 10px rgb(219, 217, 230) inset; */
+    /* box-shadow: 0 12px 12px 0 rgba(0, 0, 0, 0.2),
+      0 16px 20px 0 rgba(0, 0, 0, 0.19); */
+    box-shadow: 0 4px 8px 0 rgba(65, 57, 57, 0.993);
+    padding: 16px;
+    text-align: center;
+    background-color: white;
+  }
+}
+
+.Main {
+  /* margin-top: 50px; */
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin-left: 14px;
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 700px;
+  height: 465px;
+}
+.column1 {
+  /*this can be devided into many rows*/
+  /* width: 10%; */
+  height: auto;
+  display: inline-block;
+  color: rgb(15, 25, 119);
+  font-size: 10px;
+  /*border: 1px solid black;*/
+  margin-right: 200px;
+  margin-top: -auto;
+}
+.column1 div {
+  background-color: rgba(255, 255, 255, 0.95);
+  height: 165px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding-top: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
+  /*border: 1px solid black;*/
+  /* margin-right: -200px; */
+  height: 465px;
+  width: 370px;
+  margin-left: 10px;
+}
+/* .pieSize {
+  margin-top: 0%;
+} */
+.MainPie {
+  margin-top: 0px;
+}
+.MainChart {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin-left: 40px;
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 700px;
+  height: 380px;
+}
+.BookCard1 {
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  /* width: 100%; */
+  height: 385px;
+  margin-left: 30px;
+}
+/* .BookCard1 div {
+  width: 100%;
+} */
+.BookCard2 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 300px;
+  height: 180px;
+  margin-left: 740px;
+  margin-top: -380px;
+  border-top: #86a040;
+  border-top-style: solid;
+  border-width: 50px;
+  color: black;
+}
+.BookCard3 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 300px;
+  height: 180px;
+  margin-left: 740px;
+  margin-top: 20px;
+  border-top: #bc31c9;
+  border-top-style: solid;
+  border-width: 50px;
+  color: black;
+}
+.BookCardBoady1 {
+  margin-top: 15px;
+}
+.DistrictSearchbar {
+  width: 500px;
+  margin-top: 40px;
+  margin-left: 42px;
+}
+.CenterSearchbar {
+  width: 500px;
+  margin-left: 570px;
+  margin-top: -46px;
+}
+.mainBody {
+  width: "120%";
+  margin-top: -20px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1108px;
+  height: 620px;
+  margin-left: -26px;
+}
+.VaccinatedBody {
+  width: "120%";
+  margin-top: -20px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1108px;
+  height: 780px;
+  margin-left: -26px;
+}
+.fstyle {
+  margin-top: 10px;
+  font-weight: bold;
+  color: black;
+}
+.fstyles {
+  color: red;
+  margin-top: 10px;
+  font-weight: bold;
+}

@@ -1,0 +1,49 @@
+.columns1 {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+.columns1 div {
+  margin-left: 19px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.rows1 {
+  margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.rows1:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.cards1 {
+  /* box-shadow: -1px -5px 50px 10px rgb(219, 217, 230) inset; */
+  font-size: 18px;
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  border-bottom: #4049a0;
+  /* border-width: 50px; */
+  border-bottom-style: solid;
+  border-width: 10px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: #44361b;
+  width: 230px;
+  height: 160px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px 0 rgba(65, 57, 57, 0.993);
+  /* margin-left: 5px; */
+}
+.font1 {
+  margin-top: 10px;
+  font-weight: bold;
+  color: black;
+}
+.font2 {
+  margin-top: 10px;
+  color: red;
+  font-weight: bold;
+}
