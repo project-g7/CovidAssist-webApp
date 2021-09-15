@@ -112,12 +112,12 @@ function Map() {
 
             <h6>
               <b>Total Vaccinations : </b>
-              {booking.TotalBooking}
+              {booking.TotalBooking = Number(booking.TotalBooking) || 0  }
             </h6>
 
             <h6>
               <b>Pending Vaccinations :</b>
-              {booking.total - booking.TotalBooking}
+              {booking.total - Number(booking.TotalBooking)}
             </h6>
           </div>
         </InfoWindow>
