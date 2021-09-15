@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -107,6 +107,15 @@ const useStyles = makeStyles((theme) => ({
 
 const AddVaccineForm = () => {
   const classes = useStyles();
+
+  useEffect(() => {
+    Axios.get("http://localhost:3002/getVaccines").then((res) => {
+      console.log(res.data);
+      setVaccineData(res.data);
+    });
+  }, [])
+
+  const [vaccineData,setVaccineData] = useState([]);
   const [district, setDistrict] = React.useState("");
   const [vaccine, setVaccine] = React.useState("");
   const [place, setPlace] = React.useState("");
@@ -316,9 +325,12 @@ const AddVaccineForm = () => {
                   value={vaccine}
                   onChange={handleChangeVaccine}
                 >
-                  <MenuItem value={"Oxford-AstraZeneca"}>Oxford-AstraZeneca</MenuItem>
+                  {/* <MenuItem value={"Oxford-AstraZeneca"}>Oxford-AstraZeneca</MenuItem>
                   <MenuItem value={"Sinopharm"}>Sinopharm</MenuItem>
-                  <MenuItem value={"Sputnic V"}>Sputnic V</MenuItem>
+                  <MenuItem value={"Sputnic V"}>Sputnic V</MenuItem> */}
+                  {vaccineData.map((vaccine,i)=>(
+                    <MenuItem key={i} value={vaccine.vaccine_name}>{vaccine.vaccine_name}</MenuItem>
+                  ))}
                 </Select>
               </FormControl>
               <div className={classes.districtError}>{vaccineErr}</div>

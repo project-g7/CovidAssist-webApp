@@ -11,8 +11,8 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
 const WelcomeAdmin = () => {
   return (
-    <div className='d-full'>
-      <div className='d-bar'>
+    <div>
+      <div>
         <Sidebar />
       </div>
         <Dashboard/>

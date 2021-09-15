@@ -1141,7 +1141,7 @@ app.get("/secondDoseCount3", (req, res) => {
           [centerID],
           (errorCount, resultCount) => {
             if (errorCount) {
-              console.log(err);
+              console.log(errorCount);
             } else {
               console.log(resultCount);
               res.send(resultCount);
@@ -1852,6 +1852,41 @@ app.get("/BookedVaccine", (req, res) => {
     }
   );
 });
+
+app.post("/addTemperatureReport", (req, res) => {
+
+  console.log(req.body);
+  // console.log(req);
+  // console.log("sssss");
+  for (let i = 0; i < req.body.length - 1; i++) {
+    const time = req.body[i].time;
+    const placeId = req.body[i].place_id;
+    const temperature = req.body[i].Temperature;
+    db.query(
+      "INSERT INTO temperature(place_id,temperature_value,date_time,status) VALUES(?,?,?,?)",
+      [placeId, temperature, time, 1],
+      (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Success");
+        }
+      }
+    );
+  }
+  res.send("Success");
+});
+
+app.get("/getVaccines",(req,res)=>{
+  db.query("SELECT vaccine_name FROM vaccine",(error,result)=>{
+    if(error){
+      console.log(error);
+    }else{
+      console.log(result);
+      res.send(result);
+    }
+  })
+})
 
 app.listen(3002, () => {
   console.log("your server is running port 3002");

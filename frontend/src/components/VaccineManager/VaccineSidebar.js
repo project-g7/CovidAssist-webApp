@@ -7,7 +7,7 @@ import { SidebarData } from "./SidebarData";
 import SubMenu from "./SubMenu";
 import { IconContext } from "react-icons/lib";
 import "../../styles/VaccineDashboard.css";
-import "../../styles/AdminDashboard.css";
+// import "../../styles/AdminDashboard.css";
 // import logo from "../images/logo.png";
 import logoNew from "../../images/logoNew.png";
 
@@ -19,6 +19,7 @@ const Nav = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-between;
+  top:0;
   align-items: center;
 `;
 
