@@ -226,7 +226,6 @@ const AddVaccineForm = () => {
             </Select>
           </FormControl>
           <div className={classes.districtError}>{districtErr}</div>
-
           <div className={classes.place}>
             <RiIcons.RiHospitalLine style={{ marginTop: "32px" }} />
             <TextField
