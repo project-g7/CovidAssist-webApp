@@ -48,6 +48,7 @@ const DisplayCenter = () => {
 
   const [data, setData] = useState([]);
   const [vaccineData, setVaccineData] = useState([]);
+  const [managerData, setManagerData] = useState([]);
   const search = useLocation().search;
   useEffect(() => {
     const id = new URLSearchParams(search).get("id");
@@ -55,6 +56,7 @@ const DisplayCenter = () => {
 
     fetchCenterData(id);
     fetchVaccineData(id);
+    fetchManagerData(id);
   }, []);
 
   const fetchCenterData = (id) => {
@@ -77,6 +79,20 @@ const DisplayCenter = () => {
         console.log(res.data[0]);
         // console.log(JSON.parse(res.data));
         setVaccineData(res.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const fetchManagerData = (id) => {
+    axios
+      .get("http://localhost:3002/vaccineCenterManagerDetails", {
+        params: { id: id },
+      })
+      .then((res) => {
+        console.log(res.data[0]);
+        // console.log(JSON.parse(res.data));
+        setManagerData(res.data[0]);
       })
       .catch((err) => {
         console.log(err);
@@ -165,7 +181,7 @@ const DisplayCenter = () => {
                 <h4>Assinged Manager</h4>
               </div>
               <div className={classes.set}>
-                <p>{data.first_name+" "+data.last_name}</p>
+                <p>{managerData.name}</p>
               </div>
             </div>
           </div>

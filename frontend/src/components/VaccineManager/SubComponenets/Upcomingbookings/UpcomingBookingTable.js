@@ -156,7 +156,7 @@ export class UpcomingBookingTable extends Component {
     //   onRowClick: {selectRow}
     // };
     return (
-      <div>
+      <div className="AddBody-req">
         <div className="container">
           <div className="container" style={{ marginTop: "30px" }}>
           <div className="tabletitle"><h4>{this.state.name}</h4></div> 

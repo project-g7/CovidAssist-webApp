@@ -140,9 +140,12 @@ export class VaccinatedList extends Component {
     // };
     return (
     
-      <div>   
+      <div className="AddBody-req">
+      <div className="heding">
+          <h3>Vaccinated List</h3>
+        </div>   
         <div className="container"> 
-          <div className="container" style={{ marginTop: "30px" }}>
+          <div className="container" style={{ marginTop: "10px" }}>
          <div className="tabletitle"><h4>{this.state.name}</h4></div> 
             <BootstrapTable
               bootstrap4

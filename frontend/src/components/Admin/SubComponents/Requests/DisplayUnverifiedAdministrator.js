@@ -51,16 +51,19 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
     },
     formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-        marginLeft: "15px",
+        // margin: theme.spacing(1),
+        minWidth: 200,
+        // marginLeft: "15px",
         
     },btn: {
-        margin: theme.spacing(1),
+        marginLeft:'800px',
+        width : '200px',
+        // margin: theme.spacing(1),
         // margin: "30px 0px",
         display: "flex",
+        justifyContent:"space-between"
     },buttonStyle:{
-        marginRight: " 50px",
+        // marginRight: " 50px",
         marginTop: "15px",
         marginBottom: "15px",
     },visibility:{
@@ -329,7 +332,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                             </Button>
                         </div>
                         <div className={classes.buttonStyle}>
-                            <Button className = {classes.buttonStyle} variant="outlined" color="primary" onClick={handleRejectClick}>
+                            <Button className = {classes.buttonStyle} variant="outlined" color="secondary" onClick={handleRejectClick}>
                                 Reject
                             </Button>
                         </div>

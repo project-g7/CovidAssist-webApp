@@ -96,7 +96,7 @@ export default function NavTabs() {
           onChange={handleChange}
           indicatorColor="primary"
         >
-          <LinkTab label="Upcoming Bookings"  {...a11yProps(0)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Upcoming Bookings"  {...a11yProps(0)} />
         
         </Tabs>
       </AppBar>
