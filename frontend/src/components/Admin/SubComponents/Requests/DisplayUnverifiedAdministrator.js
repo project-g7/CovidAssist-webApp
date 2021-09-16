@@ -66,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
     },visibility:{
         display: "flex",
         display:"none"
+    },vaccineCenterError:{
+        marginLeft: "20px",
+        color: "red",
     }
 }));
 
@@ -81,6 +84,8 @@ const DisplayUnverifiedAdministrators = ()=>{
     const [rejectOpen, setRejectOpen] = React.useState(false);
     const [openSuccess, setOpenSuccess] = React.useState(false);
     const [rejectOpenSucces, setRejectOpenSuccess] = React.useState(false);
+    const [lable, setLable] = useState("");
+    const [successLable, setSuccessLabel] = useState("");
 
     useEffect(() => {
         const id = new URLSearchParams(search).get("id")
@@ -117,9 +122,11 @@ const DisplayUnverifiedAdministrators = ()=>{
     
             if( v==0){
                 console.log("Succccceessss");
+                setLable("Assign to vaccination center");
                 handleClickOpen();
             }
         }else if(data.user_role == "Contact Tracing Manager"){
+            setLable("Accept Requet");
             handleClickOpen();
         }
         
@@ -178,8 +185,10 @@ const DisplayUnverifiedAdministrators = ()=>{
             axios.post("http://localhost:3002/assignAdmins",formData).then((res)=>{
             console.log(res.data);
             if(res.data == "Success"){
+                setSuccessLabel("Successfully assigned vaccination center.");
                 handleClickSuccessOpen();
                 console.log("data passed");
+                
             }
             
             }).catch((err)=>{
@@ -190,8 +199,10 @@ const DisplayUnverifiedAdministrators = ()=>{
             axios.post("http://localhost:3002/acceptAdmins",formData).then((res)=>{
             console.log(res.data);
             if(res.data == "Success"){
+                setSuccessLabel("Request Accepted");
                 handleClickSuccessOpen();
                 console.log("data passed");
+                
             }
             
             }).catch((err)=>{
@@ -204,6 +215,7 @@ const DisplayUnverifiedAdministrators = ()=>{
     };
     const handleChangeVaccineCenter = (event) => {
         setVaccineCenter(event.target.value);
+        setVaccineCenterError("");
     };
     return(
         <div>
@@ -305,6 +317,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                                         ))}
                                     </Select>
                                 </FormControl>
+                                <div className={classes.vaccineCenterError}>{vaccineCenterError}</div>
 
                             </div>
                         </div>
@@ -334,7 +347,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                 aria-describedby="alert-dialog-description"
                 >
                 <DialogTitle id="alert-dialog-title">
-                    {"Assign to vaccination center"}
+                    {lable}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
@@ -361,7 +374,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Successfully assigned vaccination center.
+                        {successLable}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
