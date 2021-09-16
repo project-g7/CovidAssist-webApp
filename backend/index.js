@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const cors = require("cors");
 const crypto = require("crypto");
 const { request } = require("http");
+const nodemailer = require("nodemailer");
 
 app.use(cors());
 app.use(express.json());
@@ -25,7 +26,7 @@ app.post("/create", (req, res) => {
   const gender = req.body.Gender;
   const contact_number = req.body.ContactNumber;
   const password = req.body.Password;
-  const status = 1;
+  const status = 0;
   const user_role = req.body.UserRole;
   const user_name = req.body.UserName;
   const hash = crypto.createHash("md5").update(password).digest("hex");
@@ -123,8 +124,6 @@ app.get("/verifiedAdministrators", (req, res) => {
       }
     }
   );
-
-  
 });
 
 app.get("/unverifiedAdministrators", (req, res) => {
@@ -194,8 +193,6 @@ app.get("/iotCenters", (req, res) => {
   );
 });
 
-
-
 app.get("/vaccines", (req, res) => {
   db.query("SELECT * FROM covidAssist.vaccine", (err, result) => {
     if (err) {
@@ -212,52 +209,139 @@ app.get("/vaccines", (req, res) => {
 app.post("/assignAdmins", (req, res) => {
   const id = req.body.id;
   const place = req.body.place;
-  db.query("update covidAssist.web_user set status = 1 where user_id = ?" ,[id], (err, result)=>{
-    if(err){
-      // console.log("Error in web user update query");
-      console.log(err);
-      res.send(err);
-    }else{
-      db.query("insert into covidAssist.vaccine_manager(user_id, center_id) values (?, ?)",[id,place],(err, result)=>{
-        if(err){
-          console.log(err);
-          res.send(err);
-        }else{
-          // console.log("updated");
-        }
-      })
+  db.query(
+    "update covidAssist.web_user set status = 1 where user_id = ?",
+    [id],
+    (err, result) => {
+      if (err) {
+        // console.log("Error in web user update query");
+        console.log(err);
+        res.send(err);
+      } else {
+        db.query(
+          "insert into covidAssist.vaccine_manager(user_id, center_id) values (?, ?)",
+          [id, place],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+              res.send(err);
+            } else {
+              db.query(
+                "select web_user.email, concat(vaccine_center.name,' ', vaccine_center.district) as center from web_user inner join vaccine_manager on vaccine_manager.user_id = web_user.user_id inner join vaccine_center on vaccine_manager.center_id = vaccine_center.center_id where vaccine_manager.user_id = ?",
+                [id],
+                (errorEmail, resultEmail) => {
+                  if (errorEmail) {
+                    console.log(errorEmail);
+                  } else {
+                    console.log(resultEmail);
+                    var email = resultEmail[0].email;
+                    var center = resultEmail[0].center;
+                    let mailTransporter = nodemailer.createTransport({
+                      service: "gmail",
+                      auth: {
+                        user: "g7titans@gmail.com",
+                        pass: "titans@123",
+                      },
+                    });
+
+                    let mailDetails = {
+                      from: '"CovidAssist Admin" <g7titans@gmail.com>',
+                      to: email,
+                      subject: "Vaccine Manager Verification",
+                      text: `Your request for a vaccine manager at CovidAssist has been approved. You have assign to ${center} vaccine center.`,
+                    };
+
+                    mailTransporter.sendMail(mailDetails, function (err, data) {
+                      if (err) {
+                        console.log("Error Occurs");
+                        console.log(err);
+                      } else {
+                        console.log("Email sent successfully");
+                      }
+                    });
+                  }
+                }
+              );
+
+              // console.log("updated");
+            }
+          }
+        );
+      }
     }
-  })
-})
+  );
+});
 // reject the administrator request
 app.post("/rejectAdmins", (req, res) => {
   const id = req.body.id;
   const place = req.body.place;
-  db.query("update covidAssist.web_user set status = 2 where user_id = ?" ,[id], (err, result)=>{
-    if(err){
-      // console.log("Error in web user update query");
-      console.log(err);
-      res.send(err);
-    }else{
+  db.query(
+    "update covidAssist.web_user set status = 2 where user_id = ?",
+    [id],
+    (err, result) => {
+      if (err) {
+        // console.log("Error in web user update query");
+        console.log(err);
+        res.send(err);
+      } else {
         console.log("updated");
+        db.query(
+          "select email from web_user where user_id = ?",
+          [id],
+          (errorEmail, resultEmail) => {
+            if (errorEmail) {
+              console.log(errorEmail);
+            } else {
+              console.log(resultEmail);
+              var email = resultEmail[0].email;
+              let mailTransporter = nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                  user: "g7titans@gmail.com",
+                  pass: "titans@123",
+                },
+              });
+
+              let mailDetails = {
+                from: '"CovidAssist Admin" <g7titans@gmail.com>',
+                to: email,
+                subject: "Vaccine Manager Verification",
+                text: `Your request for a vaccine manager at CovidAssist has been rejected.`,
+              };
+
+              mailTransporter.sendMail(mailDetails, function (err, data) {
+                if (err) {
+                  console.log("Error Occurs");
+                  console.log(err);
+                } else {
+                  console.log("Email sent successfully");
+                }
+              });
+            }
+          }
+        );
       }
-})
+    }
+  );
 });
 
-// get vaccine center list 
+// get vaccine center list
 
 app.get("/getVaccineCenterList", (req, res) => {
-  db.query("SELECT vaccine_center.center_id, concat(vaccine_center.name,' ', vaccine_center.district) as center_name FROM covidAssist.vaccine_center  left join covidAssist.vaccine_manager on vaccine_center.center_id = vaccine_manager.center_id where vaccine_manager.user_id is null;", (err, result) => {
-    if (err) {
-      // console.log("Error center");
-      console.log(err);
-      res.send(err);
-    } else {
-      res.send(result);
-      console.log("Success");
-      // console.log(result);
+  db.query(
+    "SELECT vaccine_center.center_id, concat(vaccine_center.name,' ', vaccine_center.district) as center_name FROM covidAssist.vaccine_center  left join covidAssist.vaccine_manager on vaccine_center.center_id = vaccine_manager.center_id where vaccine_manager.user_id is null;",
+    (err, result) => {
+      if (err) {
+        // console.log("Error center");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Success");
+        // console.log(result);
+      }
     }
-  });
+  );
 });
 
 app.post("/addVaccineCenter", (req, res) => {
@@ -1520,6 +1604,21 @@ app.get("/vaccineCenterDetails", (req, res) => {
     }
   );
 });
+
+app.get("/vaccineCenters", (req, res) => {
+  db.query("SELECT * FROM covidAssist.vaccine_center", (err, result) => {
+    if (err) {
+      console.log("Error center");
+      console.log(err);
+      res.send(err);
+    } else {
+      res.send(result);
+      console.log("Success");
+      // console.log(result);
+    }
+  });
+});
+
 app.get("/vaccineCenterVaccineDetails", (req, res) => {
   const id = req.query.id;
   console.log(id);
@@ -1948,7 +2047,6 @@ app.get("/BookedVaccine", (req, res) => {
 });
 
 app.post("/addTemperatureReport", (req, res) => {
-
   console.log(req.body);
   // console.log(req);
   // console.log("sssss");
@@ -1971,16 +2069,16 @@ app.post("/addTemperatureReport", (req, res) => {
   res.send("Success");
 });
 
-app.get("/getVaccines",(req,res)=>{
-  db.query("SELECT vaccine_name FROM vaccine",(error,result)=>{
-    if(error){
+app.get("/getVaccines", (req, res) => {
+  db.query("SELECT vaccine_name FROM vaccine", (error, result) => {
+    if (error) {
       console.log(error);
-    }else{
+    } else {
       console.log(result);
       res.send(result);
     }
-  })
-})
+  });
+});
 
 app.listen(3002, () => {
   console.log("your server is running port 3002");

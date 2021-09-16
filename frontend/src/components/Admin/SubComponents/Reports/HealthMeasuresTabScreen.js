@@ -94,8 +94,8 @@ export default function NavTabs() {
           indicatorColor="primary"
         >
           {/* icon: <BiIcons.BiFirstAid /> */}
-          <LinkTab label="Body Tempretures" {...a11yProps(0)} />
-          <LinkTab label="Facemasks" {...a11yProps(1)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Body Tempretures" {...a11yProps(0)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Facemasks" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
