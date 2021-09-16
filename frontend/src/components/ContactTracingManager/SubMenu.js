@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const SidebarLink = styled(Link)`
   display: flex;
@@ -12,12 +12,19 @@ const SidebarLink = styled(Link)`
   height: 80px;
   text-decoration: none;
   font-size: 18px;
+  color: #fff;
 
   &:hover {
     color: #fff;
-    background: #00126B;
+    background: #00126b;
     border-left: 4px solid #000935;
     cursor: pointer;
+    text-decoration: none;
+  }
+
+  &:focus {
+    text-decoration: none;
+    color: #fff;
   }
 `;
 
@@ -26,7 +33,7 @@ const SidebarLabel = styled.span`
 `;
 
 const DropdownLink = styled(Link)`
-  background: #4049A0;
+  background: #4049a0;
   height: 60px;
   padding-left: 3rem;
   display: flex;
@@ -36,8 +43,14 @@ const DropdownLink = styled(Link)`
   font-size: 18px;
 
   &:hover {
-    background: #00126B;
+    background: #00126b;
     cursor: pointer;
+    text-decoration: none;
+  }
+
+  &:focus {
+    text-decoration: none;
+    color: #fff;
   }
 `;
 

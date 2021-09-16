@@ -2,13 +2,16 @@ import React,{ useState, useEffect }  from "react";
 import axios from "axios";
 
 const DashboardCard3 = () => {
-  const [requests, setRequests] = useState("");
+  const [cancelled, setcancelled] = useState("");
   useEffect(() => {
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+    console.log(data.user_name);
     axios
-      .get("http://localhost:3002/getrequestcount")
+      .get("http://localhost:3002/getcancelcount",{ params: { id: data.user_id } })
       .then((res) => {
         console.log(res.data);
-        setRequests(res.data[0].requestCount)
+        setcancelled(res.data[0].canceled_bookings)
 
       })
       .catch((err) => {
@@ -18,10 +21,10 @@ const DashboardCard3 = () => {
   return (
     <div class="card">
       <b>
-        <p class="dash">Requests to Approve</p>
+        <p class="dash">Cancelled Bookings Today</p>
       </b>
       <b>
-        <p class="infor">{requests}</p>
+        <p class="infor">{cancelled}</p>
       </b>
     </div>
   );

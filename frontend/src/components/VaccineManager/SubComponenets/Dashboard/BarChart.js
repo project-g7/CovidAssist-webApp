@@ -153,7 +153,7 @@ class BarChart extends Component {
         const y = yScale(d.value);
         const width = xScale.bandwidth();
         const height = svgHeight - svgMargin.bottom - svgScrollHeight - y;
-        const fill = d.color;
+        const fill = "#0080ff";
 
         return {
           index,

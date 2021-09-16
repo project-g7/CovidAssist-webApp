@@ -20,6 +20,9 @@ import VaccinationAreas from "./components/Admin/pages/Reports/VaccinationAreas"
 import HealthMeasures from "./components/Admin/pages/Reports/HealthMeasures";
 import VaccinatedDetails from "./components/VaccineManager/Reports/VaccinatedDetails";
 import ReservedVaccineList from "./components/VaccineManager/pages/ReservedVaccineList";
+import DisplayVerifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayVerifiedAdministrators"
+import DisplayUnverifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayUnverifiedAdministrator"
+
 import Upcomingbookings from "./components/VaccineManager/pages/Upcomingbookings"; 
 import RegisterDetails from "./components/VaccineManager/pages/RegisterDetails";
 import UpcomingRegisterDetails from "./components/VaccineManager/pages/UpcomingRegisterDetails";
@@ -90,7 +93,17 @@ function App() {
           path="/ct/profile"   
           component={ctProfile}
         ></Route>
-         <Route
+        <Route 
+          exact
+          path='/admin/requests/verifiedAdministrators'
+          component={DisplayVerifiedAdministrators}
+        ></Route>
+        <Route 
+          exact
+          path='/admin/requests/unverifiedAdministrators'
+          component={DisplayUnverifiedAdministrators}
+        ></Route>
+        <Route
           exact
           path="/vaccine/upcoming"   
           component={Upcomingbookings}
@@ -100,7 +113,7 @@ function App() {
           path="/vaccine/RegisterDetails"   
           component={RegisterDetails}
         ></Route>
-         <Route
+        <Route
           exact
           path="/vaccine/UpcomingRegisterDetails"   
           component={UpcomingRegisterDetails}
