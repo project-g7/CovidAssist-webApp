@@ -1,4 +1,4 @@
-import React,{ useState, useEffect }  from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const DashboardCard4 = () => {
@@ -8,18 +8,17 @@ const DashboardCard4 = () => {
     data = JSON.parse(data);
     console.log(data.user_name);
     axios
-      .get("http://localhost:3002/getVaccine",{ params: { id: data.user_id } })
+      .get("http://localhost:3002/getVaccine", { params: { id: data.user_id } })
       .then((res) => {
         console.log(res.data);
-        setvaccine_name(res.data[0].vaccine_name)
-
+        setvaccine_name(res.data[0].vaccine_name);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
   return (
-    <div class="card">
+    <div class="cardww">
       <b>
         <p class="dash">Vaccine Name</p>
       </b>
