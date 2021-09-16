@@ -10,8 +10,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
-    color: "rgb(96, 79, 255)",
+    color: "blue",
     margin: "5px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   set: {
     display: "flex",
@@ -21,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: "15px",
     margin: "5px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
+    fontWeight: "bold",
+    color: "black",
   },
   vset: {
     display: "flex",
@@ -36,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
     width: "90%",
     display: "flex",
     justifyContent: "center",
+  },
+  fontzz: {
+    fontSize: "20px",
   },
 }));
 const MyProfile = () => {
@@ -57,7 +64,6 @@ const MyProfile = () => {
       .catch((err) => {
         console.log(err);
       });
-
   };
   useEffect(() => {
     getSessionData();
@@ -73,7 +79,7 @@ const MyProfile = () => {
         <div className={classes.all}>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>First Name</h4>
+              <h4 className={classes.fontzz}>First Name</h4>
             </div>
             <div className={classes.set}>
               {" "}
@@ -82,7 +88,7 @@ const MyProfile = () => {
           </div>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>Last Name</h4>
+              <h4 className={classes.fontzz}>Last Name</h4>
             </div>
             <div className={classes.set}>
               <p>{data.last_name}</p>
@@ -90,7 +96,7 @@ const MyProfile = () => {
           </div>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>Username</h4>
+              <h4 className={classes.fontzz}>Username</h4>
             </div>
             <div className={classes.set}>
               <p>{data.user_name}</p>
@@ -98,7 +104,7 @@ const MyProfile = () => {
           </div>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>NIC Number</h4>
+              <h4 className={classes.fontzz}>NIC Number</h4>
             </div>
             <div className={classes.set}>
               <p>{data.nic}</p>
@@ -106,7 +112,7 @@ const MyProfile = () => {
           </div>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>Email</h4>
+              <h4 className={classes.fontzz}>Email</h4>
             </div>
             <div className={classes.set}>
               <p>{data.email}</p>
@@ -114,7 +120,7 @@ const MyProfile = () => {
           </div>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>Address</h4>
+              <h4 className={classes.fontzz}>Address</h4>
             </div>
             <div className={classes.set}>
               <p>{data.address}</p>
@@ -122,7 +128,7 @@ const MyProfile = () => {
           </div>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>Contact Number</h4>
+              <h4 className={classes.fontzz}>Contact Number</h4>
             </div>
             <div className={classes.set}>
               <p>{data.contact_number}</p>
@@ -130,7 +136,7 @@ const MyProfile = () => {
           </div>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>Vaccine Center</h4>
+              <h4 className={classes.fontzz}>Vaccine Center</h4>
             </div>
             <div className={classes.set}>
               <p>{data.contact_number}</p>
