@@ -77,9 +77,7 @@ function Map() {
         >
           <div>
             <b>
-              <h5>
-                <b>FaceMasks Details</b>
-              </h5>
+              <h5>FaceMasks Details</h5>
             </b>
 
             <h6>
@@ -87,18 +85,21 @@ function Map() {
             </h6>
 
             <h6>
-              <b>No.of.People Wearing Mask : </b>
-              {selecteFacemMask.facemask}
-            </h6>
-
-            <h6>
-              <b>No.of.People Wearing Mask Properly : </b>
-              {selecteFacemMask.facemask - selecteFacemMask.Notmask}
+              <b>Total No.of.People : </b>
+              {Number(selecteFacemMask.facemask)}
             </h6>
 
             <h6>
               <b>No.of.People Not Wearing Mask Properly : </b>
-              {selecteFacemMask.Notmask}
+              {
+                (selecteFacemMask.Notmask =
+                  Number(selecteFacemMask.Notmask) || 0)
+              }
+            </h6>
+
+            <h6>
+              <b>No.of.People Wearing Mask Properly : </b>
+              {selecteFacemMask.facemask - Number(selecteFacemMask.Notmask)}
             </h6>
           </div>
         </InfoWindow>

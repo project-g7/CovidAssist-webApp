@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
-import {event as currentEvent} from 'd3';
+import { event as currentEvent } from "d3";
 import axios from "axios";
 
 // import "./BarChart.css";
@@ -41,7 +41,7 @@ class BarChart extends Component {
       padding,
       sliceStart: 0,
       sliceWidth,
-      centers : [],
+      centers: [],
 
       xScale: d3
         .scaleBand()
@@ -69,27 +69,27 @@ class BarChart extends Component {
       scrollSelectorX: svgScrollMargin.left,
 
       bars: [],
-      scrollBars: []
+      scrollBars: [],
     };
 
     this.xAxis = d3.axisBottom().scale(this.state.xScale);
     this.yAxis = d3
       .axisLeft()
       .scale(this.state.yScale)
-      .tickFormat(d => `${d}`);
+      .tickFormat((d) => `${d}`);
   }
 
-  xAxisRef = element => {
+  xAxisRef = (element) => {
     this.setState({ xAxisRef: element });
     d3.select(element).call(this.xAxis);
   };
 
-  yAxisRef = element => {
+  yAxisRef = (element) => {
     this.setState({ yAxisRef: element });
     d3.select(element).call(this.yAxis);
   };
 
-  scrollRef = element => {
+  scrollRef = (element) => {
     this.setState({ scrollRef: element });
     d3.select(element).call(d3.drag().on("drag", this.scrollDrag));
   };
@@ -116,13 +116,12 @@ class BarChart extends Component {
     }
   };
 
-
-  calculateBars = newSliceStart => {
+  calculateBars = (newSliceStart) => {
     // const  data  = this.props.data;
- 
+
     // const data = this.state.centers;
-    const {data} = this.props;
-    
+    const { data } = this.props;
+
     console.log(data);
     let {
       xScale,
@@ -131,7 +130,7 @@ class BarChart extends Component {
       sliceWidth,
       svgHeight,
       svgMargin,
-      svgScrollHeight
+      svgScrollHeight,
     } = this.state;
 
     if (newSliceStart !== undefined) {
@@ -140,8 +139,8 @@ class BarChart extends Component {
 
     const activityDomain = data
       .slice(sliceStart, sliceStart + sliceWidth)
-      .map(d => d.activity);
-    const valueMax = d3.max(data, d => d.value);
+      .map((d) => d.activity);
+    const valueMax = d3.max(data, (d) => d.value);
 
     xScale.domain(activityDomain);
     yScale.domain([0, valueMax]);
@@ -153,7 +152,7 @@ class BarChart extends Component {
         const y = yScale(d.value);
         const width = xScale.bandwidth();
         const height = svgHeight - svgMargin.bottom - svgScrollHeight - y;
-        const fill = "#0080ff";
+        const fill = "rgba(153, 102, 252)";
 
         return {
           index,
@@ -161,7 +160,7 @@ class BarChart extends Component {
           y,
           height,
           width,
-          fill
+          fill,
         };
       });
 
@@ -172,8 +171,8 @@ class BarChart extends Component {
     const { data } = this.props;
     const { xScrollScale, yScrollScale, svgHeight } = this.state;
 
-    const scrollActivityDomain = data.map(d => d.activity);
-    const valueMax = d3.max(data, d => d.value);
+    const scrollActivityDomain = data.map((d) => d.activity);
+    const valueMax = d3.max(data, (d) => d.value);
 
     xScrollScale.domain(scrollActivityDomain);
     yScrollScale.domain([0, valueMax]);
@@ -191,14 +190,14 @@ class BarChart extends Component {
         scrollY,
         scrollWidth,
         scrollHeight,
-        scrollFill
+        scrollFill,
       };
     });
 
     return scrollBars;
   };
 
-  calculateScrolSellector = scrollBarsLength => {
+  calculateScrolSellector = (scrollBarsLength) => {
     const { sliceWidth, svgWidth, svgScrollMargin } = this.state;
 
     const scaleWidth = svgWidth - svgScrollMargin.right - svgScrollMargin.left;
@@ -214,7 +213,7 @@ class BarChart extends Component {
       scrollSelectorWidth,
       scrollSelectorMinX,
       scrollSelectorMaxX,
-      scrollBandWidth
+      scrollBandWidth,
     };
   };
 
@@ -222,7 +221,7 @@ class BarChart extends Component {
     // if (this.props.data == undefined) {
     //   return;
     // }
-// console.log("dd");
+    // console.log("dd");
     const bars = this.calculateBars();
     const scrollBars = this.calculateScrollBars();
     const selector = this.calculateScrolSellector(scrollBars.length);
@@ -233,27 +232,27 @@ class BarChart extends Component {
   };
 
   componentDidMount = () => {
-      //  axios
-      // .get("http://localhost:3002/getcenterdistrict")
-      // .then((res) => {
-      //   console.log(res.data);
-      //   // setData(res.data);
-      //   // setCenters(res.data[0].centerCount);
-      //   let arr = [];
-      //   for(let i=0;i<res.data.length;i++){
-      //     arr.push({
-      //       activity: res.data[i].activity,
-      //       value: res.data[i].value,
-      //       color: "#2A78E4"
-      //     })
-      //   }
-      //   console.log(arr);
-      //   this.setState({ centers: arr });
-      //   // setData(arr);
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
+    //  axios
+    // .get("http://localhost:3002/getcenterdistrict")
+    // .then((res) => {
+    //   console.log(res.data);
+    //   // setData(res.data);
+    //   // setCenters(res.data[0].centerCount);
+    //   let arr = [];
+    //   for(let i=0;i<res.data.length;i++){
+    //     arr.push({
+    //       activity: res.data[i].activity,
+    //       value: res.data[i].value,
+    //       color: "#2A78E4"
+    //     })
+    //   }
+    //   console.log(arr);
+    //   this.setState({ centers: arr });
+    //   // setData(arr);
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });
     this.calculateChart();
   };
 
@@ -265,56 +264,58 @@ class BarChart extends Component {
   render() {
     return (
       <div className="Add-chart-body">
-       <div className="heading-chart">
-        <h3>Vaccine Centers</h3>
-      </div>
-      <div className="chart-body">
-        <svg width={this.state.svgWidth} height={this.state.svgHeight}>
-        {this.state.bars.map((d, i) => (
-          <rect
-            key={i}
-            x={d.x}
-            y={d.y}
-            width={d.width}
-            height={d.height}
-            fill={d.fill}
-          />
-        ))}
+        <div className="heading-chart">
+          <h3>Vaccine Centers</h3>
+        </div>
+        <div className="chart-body">
+          <svg width={this.state.svgWidth} height={this.state.svgHeight}>
+            {this.state.bars.map((d, i) => (
+              <rect
+                key={i}
+                x={d.x}
+                y={d.y}
+                width={d.width}
+                height={d.height}
+                fill={d.fill}
+              />
+            ))}
 
-        {this.state.scrollBars.map((d, i) => (
-          <rect
-            key={i}
-            x={d.scrollX}
-            y={d.scrollY}
-            width={d.scrollWidth}
-            height={d.scrollHeight}
-            fill={d.scrollFill}
-          />
-        ))}
+            {this.state.scrollBars.map((d, i) => (
+              <rect
+                key={i}
+                x={d.scrollX}
+                y={d.scrollY}
+                width={d.scrollWidth}
+                height={d.scrollHeight}
+                fill={d.scrollFill}
+              />
+            ))}
 
-        <rect
-          ref={this.scrollRef}
-          className="scroll-selector"
-          x={this.state.scrollSelectorX}
-          y={this.state.svgHeight - this.state.svgScrollHeight}
-          width={this.state.scrollSelectorWidth}
-          height={this.state.svgScrollHeight}
-        />
+            <rect
+              ref={this.scrollRef}
+              className="scroll-selector"
+              x={this.state.scrollSelectorX}
+              y={this.state.svgHeight - this.state.svgScrollHeight}
+              width={this.state.scrollSelectorWidth}
+              height={this.state.svgScrollHeight}
+            />
 
-        <g>
-          <g
-            ref={this.xAxisRef}
-            transform={`translate(0, ${this.state.svgHeight -
-              this.state.svgMargin.bottom -
-              this.state.svgScrollHeight})`}
-          />
-          <g
-            ref={this.yAxisRef}
-            transform={`translate(${this.state.svgMargin.left}, 0)`}
-          />
-        </g>
-      </svg>
-      </div>
+            <g>
+              <g
+                ref={this.xAxisRef}
+                transform={`translate(0, ${
+                  this.state.svgHeight -
+                  this.state.svgMargin.bottom -
+                  this.state.svgScrollHeight
+                })`}
+              />
+              <g
+                ref={this.yAxisRef}
+                transform={`translate(${this.state.svgMargin.left}, 0)`}
+              />
+            </g>
+          </svg>
+        </div>
       </div>
     );
   }

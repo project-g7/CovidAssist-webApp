@@ -14,17 +14,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
-    color:"rgb(96, 79, 255)",
+    color: "blue",
     margin: "5px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   set: {
     display: "flex",
     width: "50%",
     fontSize: "20px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
     backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
     margin: "5px",
+    fontWeight: "bold",
+    color: "black",
   },
   vset: {
     display: "flex",
@@ -37,9 +41,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "30px",
   },
   heading: {
-      width:"90%",
-    display:'flex',
+    width: "90%",
+    display: "flex",
     justifyContent: "center",
+  },
+  fontsi: {
+    fontSize: "20px",
   },
 }));
 
@@ -61,7 +68,7 @@ const DisplayCenter = () => {
 
   const fetchCenterData = (id) => {
     axios
-      .get("http://localhost:3002/vaccineCenterDetails", { params: { id: id} })
+      .get("http://localhost:3002/vaccineCenterDetails", { params: { id: id } })
       .then((res) => {
         console.log(res.data[0]);
         setData(res.data[0]);
@@ -118,7 +125,7 @@ const DisplayCenter = () => {
           <div className={classes.all}>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Vacicne Center name</h4>
+                <h4 className={classes.fontsi}>Vacicne Center name</h4>
               </div>
               <div className={classes.set}>
                 {" "}
@@ -127,7 +134,7 @@ const DisplayCenter = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>District</h4>
+                <h4 className={classes.fontsi}>District</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.district}</p>
@@ -135,7 +142,7 @@ const DisplayCenter = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Vaccine</h4>
+                <h4 className={classes.fontsi}>Vaccine</h4>
               </div>
               <div className={classes.set}>
                 <p>{vaccineData.vaccine_name}</p>
@@ -143,7 +150,7 @@ const DisplayCenter = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Dose 1 Quantity</h4>
+                <h4 className={classes.fontsi}>Dose 1 Quantity</h4>
               </div>
               <div className={classes.set}>
                 <p>{vaccineData.dose_1_quantity}</p>
@@ -151,7 +158,7 @@ const DisplayCenter = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Dose 2 Quantity</h4>
+                <h4 className={classes.fontsi}>Dose 2 Quantity</h4>
               </div>
               <div className={classes.set}>
                 <p>{vaccineData.dose_2_quantity}</p>
@@ -159,7 +166,7 @@ const DisplayCenter = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Dose 3 Quantity</h4>
+                <h4 className={classes.fontsi}>Dose 3 Quantity</h4>
               </div>
               <div className={classes.set}>
                 <p>{vaccineData.dose_3_quantity}</p>
@@ -167,7 +174,7 @@ const DisplayCenter = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Available Dates</h4>
+                <h4 className={classes.fontsi}>Available Dates</h4>
               </div>
               <div className={classes.set}>
                 <p>
@@ -178,7 +185,7 @@ const DisplayCenter = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Assinged Manager</h4>
+                <h4 className={classes.fontsi}>Assinged Manager</h4>
               </div>
               <div className={classes.set}>
                 <p>{managerData.name}</p>
