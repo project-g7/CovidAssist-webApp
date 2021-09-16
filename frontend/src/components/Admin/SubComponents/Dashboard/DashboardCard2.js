@@ -15,9 +15,12 @@ const DashboardCard2 = () => {
       });
   }, []);
   return (
-    <div class="card">
+    <div class="cardw">
       <b>
-        <p class="dash">Public IOT Places</p>
+        <p class="dash">
+          Public IOT <br />
+          Places
+        </p>
       </b>
       <b>
         <p class="infor">{iotPlaces}</p>

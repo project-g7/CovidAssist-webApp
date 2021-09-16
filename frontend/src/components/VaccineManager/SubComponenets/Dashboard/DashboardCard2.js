@@ -8,7 +8,9 @@ const DashboardCard2 = () => {
     data = JSON.parse(data);
     console.log(data.user_name);
     axios
-      .get("http://localhost:3002/getCompletedbookings",{ params: { id: data.user_id } })
+      .get("http://localhost:3002/getCompletedbookings", {
+        params: { id: data.user_id },
+      })
       .then((res) => {
         console.log(res.data);
         setcompletedBokkings(res.data[0].completed_bookings);
@@ -18,7 +20,7 @@ const DashboardCard2 = () => {
       });
   }, []);
   return (
-    <div class="card">
+    <div class="cardww">
       <b>
         <p class="dash">Completed Bookings Today</p>
       </b>
