@@ -1855,7 +1855,6 @@ app.get("/BookedVaccine", (req, res) => {
 });
 
 app.post("/addTemperatureReport", (req, res) => {
-
   console.log(req.body);
   // console.log(req);
   // console.log("sssss");
@@ -1878,16 +1877,16 @@ app.post("/addTemperatureReport", (req, res) => {
   res.send("Success");
 });
 
-app.get("/getVaccines",(req,res)=>{
-  db.query("SELECT vaccine_name FROM vaccine",(error,result)=>{
-    if(error){
+app.get("/getVaccines", (req, res) => {
+  db.query("SELECT vaccine_name FROM vaccine", (error, result) => {
+    if (error) {
       console.log(error);
-    }else{
+    } else {
       console.log(result);
       res.send(result);
     }
-  })
-})
+  });
+});
 
 app.listen(3002, () => {
   console.log("your server is running port 3002");

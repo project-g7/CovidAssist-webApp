@@ -267,8 +267,8 @@ function VaccineBookingChart() {
                       label: ["Covisheild"],
                       data: [
                         (pieChart1 / regPeople) * 100,
-                        (pieChart2 / regPeople) * 100,
-                        (pieChart2 / regPeople) * 100,
+                        // (pieChart2 / regPeople) * 100,
+                        // (pieChart2 / regPeople) * 100,
                       ], //calculate the presantage value
                       backgroundColor: [
                         "rgba(255, 99, 132)",
