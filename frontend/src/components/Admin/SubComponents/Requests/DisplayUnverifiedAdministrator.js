@@ -75,7 +75,9 @@ const DisplayUnverifiedAdministrators = ()=>{
     const [vaccineCenterList,setVaccineCenterList ]= useState([]);
     const [vaccineCenterError, setVaccineCenterError] = useState("");
     const [open, setOpen] = React.useState(false);
+    const [rejectOpen, setRejectOpen] = React.useState(false);
     const [openSuccess, setOpenSuccess] = React.useState(false);
+    const [rejectOpenSucces, setRejectOpenSuccess] = React.useState(false);
 
     useEffect(() => {
         const id = new URLSearchParams(search).get("id")
@@ -113,6 +115,10 @@ const DisplayUnverifiedAdministrators = ()=>{
         }
     }
 
+    const handleRejectClick=()=>{
+        setRejectOpen(true);
+    }
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -125,16 +131,22 @@ const DisplayUnverifiedAdministrators = ()=>{
     const handleClickSuccessOpen = () => {
         setOpenSuccess(true);
     };
+    const handleRejectClose = () => {
+        setRejectOpen(false);
+    };
+    const handleRejectSuccessClose=()=>{
+        setRejectOpenSuccess(false);
+    }
 
     const handleRejectData  = ()=>{
         let formData ={
             id : user_id,
         };
-        
+        setRejectOpen(false);
         axios.post("http://localhost:3002/rejectAdmins",formData).then((res)=>{
             console.log(res.data);
             if(res.data == "Success"){
-                handleClickSuccessOpen();
+                setRejectOpenSuccess(true);
                 console.log("data passed");
             }
             
@@ -149,6 +161,7 @@ const DisplayUnverifiedAdministrators = ()=>{
             id : user_id,
             place : vaccineCenter
         };
+        setOpen(false);
         
         axios.post("http://localhost:3002/assignAdmins",formData).then((res)=>{
             console.log(res.data);
@@ -276,7 +289,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                             </Button>
                         </div>
                         <div className={classes.buttonStyle}>
-                            <Button className = {classes.buttonStyle} variant="outlined" color="primary" onClick={handleRejectData}>
+                            <Button className = {classes.buttonStyle} variant="outlined" color="primary" onClick={handleRejectClick}>
                                 Reject
                             </Button>
                         </div>
@@ -333,6 +346,49 @@ const DisplayUnverifiedAdministrators = ()=>{
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseSuccess} color="primary" autoFocus> Ok</Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Dialog boxes for reject request */}
+            <Dialog
+                open={rejectOpen}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                >
+                <DialogTitle id="alert-dialog-title">
+                    {"Reject request"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleRejectClose} color="primary" >
+                        Cancel
+                    </Button>
+                    <Button onClick={handleRejectData} color="primary" autoFocus>
+                        Ok
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog 
+                open={rejectOpenSucces}
+                onClose={handleRejectSuccessClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Successfull!"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Successfully Removed request.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleRejectSuccessClose} color="primary" autoFocus> Ok</Button>
                 </DialogActions>
             </Dialog>
         </div>

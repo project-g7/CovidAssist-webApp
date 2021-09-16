@@ -224,6 +224,7 @@ app.post("/assignAdmins", (req, res) => {
           res.send(err);
         }else{
           // console.log("updated");
+          res.send("Success")
         }
       })
     }
@@ -239,7 +240,8 @@ app.post("/rejectAdmins", (req, res) => {
       console.log(err);
       res.send(err);
     }else{
-        console.log("updated");
+        // console.log("");
+        res.send("Success");
       }
 })
 });
