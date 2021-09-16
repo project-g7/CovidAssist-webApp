@@ -2,13 +2,16 @@ import React,{ useState, useEffect }  from "react";
 import axios from "axios";
 
 const DashboardCard4 = () => {
-  const [users, setUsers] = useState("");
+  const [vaccine_name, setvaccine_name] = useState("");
   useEffect(() => {
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+    console.log(data.user_name);
     axios
-      .get("http://localhost:3002/getuserscount")
+      .get("http://localhost:3002/getVaccine",{ params: { id: data.user_id } })
       .then((res) => {
         console.log(res.data);
-        setUsers(res.data[0].userCount)
+        setvaccine_name(res.data[0].vaccine_name)
 
       })
       .catch((err) => {
@@ -18,10 +21,10 @@ const DashboardCard4 = () => {
   return (
     <div class="card">
       <b>
-        <p class="dash">Total Mobile App users</p>
+        <p class="dash">Vaccine Name</p>
       </b>
       <b>
-        <p class="infor">{users}</p>
+        <h1 class="infor">{vaccine_name}</h1>
       </b>
     </div>
   );

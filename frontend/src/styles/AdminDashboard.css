@@ -310,6 +310,20 @@
   margin-left: 30px;
   border-radius: 10px;
 }
+.pie-chart-body2{
+  width: "100%";
+  margin-top: 40px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 400px;
+  height: 500px;
+  margin-bottom: 50px;
+  margin-left: 100px;
+  /* margin-right: 100px; */
+  border-radius: 10px;
+}
 .chart-body{
   display: flex;
   justify-content: center;

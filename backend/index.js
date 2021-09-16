@@ -1675,7 +1675,217 @@ app.get("/BookedVaccine", (req, res) => {
     }
   );
 });
+app.get("/bookingcount", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
+  db.query(
+    "SELECT count(booking_id)as total_bookings FROM covidAssist.booking WHERE is_cancel=0 AND date=curdate() AND center_id=?",
+    [vid],
+    (err, result) => {
+      if (err) {
+        console.log("Error count");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("count successful");
+        console.log(result);
+       }
+     }
+   );
+  }
+ }
+);
+});
+app.get("/getCompletedbookings", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
+  db.query(
+    "SELECT count(booking_id) as completed_bookings FROM covidAssist.booking WHERE status=1 AND is_cancel=0 AND date=curdate() AND center_id=?",
+    [vid],
+    (err, result) => {
+      if (err) {
+        console.log("Error count");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("count successful");
+        console.log(result);
+       }
+     }
+   );
+  }
+ }
+);
+});
+app.get("/getcancelcount", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
+  db.query(
+    "SELECT count(booking_id) as canceled_bookings FROM covidAssist.booking WHERE is_cancel=1 AND date=curdate() AND center_id=?",
+    [vid],
+    (err, result) => {
+      if (err) {
+        console.log("Error count");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("count successful");
+        console.log(result);
+       }
+     }
+   );
+  }
+ }
+);
+});
+app.get("/getVaccine", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
+  db.query(
+    "SELECT vaccine_name FROM covidAssist.vaccine_center_vaccine INNER JOIN vaccine ON vaccine_center_vaccine.vaccine_id=vaccine.vaccine_id WHERE vaccine_center_vaccine.vaccine_center_id=?",
+    [vid],
+    (err, result) => {
+      if (err) {
+        console.log("Error count");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("count successful");
+        console.log(result);
+       }
+     }
+   );
+  }
+ }
+);
+});
+app.get("/monthlybookings", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
+  db.query(
+    "SELECT count(booking_id)as total_bookings FROM covidAssist.booking WHERE month(date)=month(CURRENT_DATE()) AND YEAR(CURRENT_DATE())=YEAR(date) AND is_cancel=0 AND center_id=?",
+    [vid],
+    (err, result) => {
+      if (err) {
+        console.log("Error count");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("count successful");
+        console.log(result);
+       }
+     }
+   );
+  }
+ }
+);
+});
 
+app.get("/monthlycompletedbookings", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
+  db.query(
+    "SELECT count(booking_id)as completed_bookings FROM covidAssist.booking WHERE month(date)=month(CURRENT_DATE()) AND YEAR(CURRENT_DATE())=YEAR(date) AND status=1 AND center_id=?",
+    [vid],
+    (err, result) => {
+      if (err) {
+        console.log("Error count");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("count successful");
+        console.log(result);
+       }
+     }
+   );
+  }
+ }
+);
+});
+app.get("/getupcomingbookingsdate", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
+  db.query(
+    "SELECT count(booking.booking_id) as value, cast(booking.date as date) as activity FROM booking WHERE status=0 AND is_cancel=0 AND center_id=? GROUP BY date ORDER BY date ASC limit 4",
+    [vid],
+    (err, result) => {
+      if (err) {
+        console.log("Error center district");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(" successful");
+        console.log(result);
+      }
+    }
+  );
+}
+}
+);
+});
 app.listen(3002, () => {
   console.log("your server is running port 3002");
 });
