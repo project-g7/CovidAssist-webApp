@@ -68,6 +68,8 @@
 .card {
   /* box-shadow: -1px -5px 50px 10px rgb(219, 217, 230) inset; */
   font-size: 18px;
+  transition: transform 0.2s;
+
   padding: 16px;
   text-align: center;
   background-color: white;
@@ -247,4 +249,14 @@
   width: 1108px;
   height: 780px;
   margin-left: -26px;
+}
+.fstyle {
+  margin-top: 10px;
+  font-weight: bold;
+  color: black;
+}
+.fstyles {
+  color: red;
+  margin-top: 10px;
+  font-weight: bold;
 }

@@ -6,14 +6,13 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import AddIotLocationForm from './AddIotLocationForm'
-import IotLocations from './IotLocations'
-import TemperatureReport from './TemperatureReport'
-import TempNew from './TempNew'
+import Upcomingbookings from './UpcomingBookingTable';
 
+
+// import AddVaccineForm from './AddVaccineForm'
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+    const { children, value, index, ...other } = props;
 
   return (
     <div
@@ -97,20 +96,13 @@ export default function NavTabs() {
           onChange={handleChange}
           indicatorColor="primary"
         >
-          <LinkTab style={{ textDecoration: 'none' }} label="IoT Locations"  {...a11yProps(0)} />
-          <LinkTab style={{ textDecoration: 'none' }} label="Add IoT Location" {...a11yProps(1)} />
-          <LinkTab style={{ textDecoration: 'none' }} label="Upload Temperature Report" {...a11yProps(2)} />
+          <LinkTab label="Upcoming Bookings"  {...a11yProps(0)} />
+        
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >
-        <IotLocations/>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <AddIotLocationForm/>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        {/* <TemperatureReport/> */}
-        <TempNew/>
+        
+        <Upcomingbookings/>
       </TabPanel>
     </div>
   );

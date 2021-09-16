@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../../../styles/AdminDashboard.css";
-import DashboardCard1 from "../SubComponents/Dashboard/DashboardCard1";
-import DashboardCard2 from "../SubComponents/Dashboard/DashboardCard2";
-import DashboardCard3 from "../SubComponents/Dashboard/DashboardCard3";
-import DashboardCard4 from "../SubComponents/Dashboard/DashboardCard4";
-import LineGraph from "../SubComponents/Dashboard/LineGraph";
-import BarChart from "../SubComponents/Dashboard/BarChart";
-import PieChart from "../SubComponents/Dashboard/PieChart";
+import DashboardCard1 from "../SubComponenets/Dashboard/DashboardCard1";
+import DashboardCard2 from "../SubComponenets/Dashboard/DashboardCard2";
+import DashboardCard3 from "../SubComponenets/Dashboard/DashboardCard3";
+import DashboardCard4 from "../SubComponenets/Dashboard/DashboardCard4";
+// import LineGraph from "../SubComponents/Dashboard/LineGraph";
+import BarChart from "../SubComponenets/Dashboard/BarChart";
+import PieChart from "../SubComponenets/Dashboard/PieChart";
 import axios from "axios";
 
 const Dashboard = () => {
@@ -18,6 +18,8 @@ const Dashboard = () => {
 
   useEffect(() => {
 
+    // getCenterData();
+    // fetchData();
     getCenterData();
   }, []);
 
@@ -45,6 +47,17 @@ const Dashboard = () => {
       });
   };
 
+
+    const fetchData = async () => {
+    const response = await fetch(`http://localhost:3002/getcenterdistrict`, {
+      method: "GET",
+    });
+    const results = await response.json();
+    console.log(results);
+    setData(results);
+  };
+
+
   return (
     <div className="container">
       <div className="row d-body">
@@ -60,6 +73,7 @@ const Dashboard = () => {
         <PieChart/>
       </div>
     </div>
+    
   );
 };
 

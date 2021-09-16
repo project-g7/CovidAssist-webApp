@@ -23,6 +23,11 @@ import ReservedVaccineList from "./components/VaccineManager/pages/ReservedVacci
 import DisplayVerifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayVerifiedAdministrators"
 import DisplayUnverifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayUnverifiedAdministrator"
 
+import Upcomingbookings from "./components/VaccineManager/pages/Upcomingbookings"; 
+import RegisterDetails from "./components/VaccineManager/pages/RegisterDetails";
+import UpcomingRegisterDetails from "./components/VaccineManager/pages/UpcomingRegisterDetails";
+import CheckBookingDetails from "./components/VaccineManager/pages/CheckBookingDetails";
+// import WelcomeVaccine from "./components/Vaccine/WelcomeVaccine";
 
 function App() {
   const [loggedIn,setLoggedIn] = useState(true);
@@ -85,9 +90,8 @@ function App() {
         ></Route>
         <Route
           exact
-          path="/ct/profile"
+          path="/ct/profile"   
           component={ctProfile}
-
         ></Route>
         <Route 
           exact
@@ -99,6 +103,27 @@ function App() {
           path='/admin/requests/unverifiedAdministrators'
           component={DisplayUnverifiedAdministrators}
         ></Route>
+        <Route
+          exact
+          path="/vaccine/upcoming"   
+          component={Upcomingbookings}
+        ></Route>
+          <Route
+          exact
+          path="/vaccine/RegisterDetails"   
+          component={RegisterDetails}
+        ></Route>
+        <Route
+          exact
+          path="/vaccine/UpcomingRegisterDetails"   
+          component={UpcomingRegisterDetails}
+        ></Route>
+          <Route
+          exact
+          path="/vaccine/CheckBookingDetails"   
+          component={CheckBookingDetails}
+        ></Route>
+        
       </Switch>
     </Router>
   );

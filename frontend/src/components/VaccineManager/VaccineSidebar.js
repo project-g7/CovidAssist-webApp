@@ -5,9 +5,10 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "./SidebarData";
 import SubMenu from "./SubMenu";
+import * as FiIcons from "react-icons/fi";
 import { IconContext } from "react-icons/lib";
 import "../../styles/VaccineDashboard.css";
-import "../../styles/AdminDashboard.css";
+// import "../../styles/AdminDashboard.css";
 // import logo from "../images/logo.png";
 import logoNew from "../../images/logoNew.png";
 
@@ -19,6 +20,7 @@ const Nav = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-between;
+  top:0;
   align-items: center;
 `;
 
@@ -72,10 +74,12 @@ const Sidebar = () => {
 
               <div className="menu">
                 <Link to="/vaccine/profile" className="profile-text">
+                <FaIcons.FaUserCircle style={{color:'balck'}} />
                   My Profile
                   <br />
                 </Link>
                 <Link to="/" className="profile-text">
+                <FiIcons.FiLogOut style={{color:'balck'}} /> 
                   Log Out
                 </Link>
               </div>
