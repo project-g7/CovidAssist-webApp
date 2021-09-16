@@ -291,6 +291,7 @@ app.post("/acceptAdmins", (req, res) => {
         }
       })
     }
+})
 });
 // reject the administrator request
 app.post("/rejectAdmins", (req, res) => {
