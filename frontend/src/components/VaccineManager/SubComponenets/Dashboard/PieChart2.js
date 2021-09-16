@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import { Doughnut } from "react-chartjs-2";
 import Axios from "axios";
 
-const PieChart = () => {
+const PieChart2 = () => {
      const [dose1, setDose1] = useState("");
   const [dose2, setDose2] = useState("");
   const [dose1dose2, setDose1Dose2] = useState("");
@@ -42,20 +42,20 @@ const [users, setUsers] = useState("");
   }, []);
 
   const data = {
-    labels: ["Total Bookings", "Completed Bookings", "Pending Bookings"],
+    labels: ["Total Bookings", "Completed Bookings", "Not Vaccinated"],
     datasets: [
       {
         label: "# of Votes",
         data: [dose1, dose1dose2,(dose1 -dose1dose2)],
         backgroundColor: [
-          "rgba(0,255,255)",
-          "rgba(153, 102, 252)",
-          "rgba(255, 99, 132)",
+          "rgba(255,255,0, 0.2)",
+          "rgba(112,128,144, 0.2)",
+          "rgba(255, 99, 132, 0.2)",
         ],
         borderColor: [
-          "rgba(0,255,255, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 99, 132,1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 99, 132, 1)",
         ],
         borderWidth: 1,
       },
@@ -63,9 +63,9 @@ const [users, setUsers] = useState("");
   };
   return (
     <div>
-      <div className="pie-chart-body2">
+      <div className="pie-chart-body">
         <div className="heading-piechart">
-          <h3>Monthly Bookings</h3>
+          <h3>Today Bookings</h3>
         </div>
         <Doughnut data={data} />
       </div>
@@ -73,4 +73,4 @@ const [users, setUsers] = useState("");
   );
 };
 
-export default PieChart;
+export default PieChart2;
