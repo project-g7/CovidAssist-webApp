@@ -63,6 +63,9 @@ const useStyles = makeStyles((theme) => ({
         marginRight: " 50px",
         marginTop: "15px",
         marginBottom: "15px",
+    },visibility:{
+        display: "flex",
+        display:"none"
     }
 }));
 
@@ -83,6 +86,8 @@ const DisplayUnverifiedAdministrators = ()=>{
         const id = new URLSearchParams(search).get("id")
         setUserId(id);
         fetchVerifiedAdminData(id);
+        
+
         // fetchVerifiedAdminVaccineCenter(id);
     },[]);
     useEffect(() => {
@@ -102,17 +107,22 @@ const DisplayUnverifiedAdministrators = ()=>{
 
     const handleClick=()=>{
         let v = 0;
-        if(vaccineCenter == ""){
-            v=1;
-            setVaccineCenterError("Please assign a vaccine center. ")
-        }else{
-            setVaccineCenterError("");
-        }
-
-        if( v==0){
-            console.log("Succccceessss");
+        if(data.user_role == "Vaccine Manager"){
+            if(vaccineCenter == ""){
+                v=1;
+                setVaccineCenterError("Please assign a vaccine center. ")
+            }else{
+                setVaccineCenterError("");
+            }
+    
+            if( v==0){
+                console.log("Succccceessss");
+                handleClickOpen();
+            }
+        }else if(data.user_role == "Contact Tracing Manager"){
             handleClickOpen();
         }
+        
     }
 
     const handleRejectClick=()=>{
@@ -157,23 +167,40 @@ const DisplayUnverifiedAdministrators = ()=>{
     };
     
     const handleSubmitData  = ()=>{
+
         let formData ={
             id : user_id,
             place : vaccineCenter
         };
         setOpen(false);
-        
-        axios.post("http://localhost:3002/assignAdmins",formData).then((res)=>{
+
+        if(data.user_role == "Vaccine Manager"){
+            axios.post("http://localhost:3002/assignAdmins",formData).then((res)=>{
             console.log(res.data);
             if(res.data == "Success"){
                 handleClickSuccessOpen();
                 console.log("data passed");
             }
             
-        }).catch((err)=>{
-            console.log(err);
-            console.log("error in")
-        });
+            }).catch((err)=>{
+                console.log(err);
+                console.log("error in")
+            });
+        }else if(data.user_role == "Contact Tracing Manager"){
+            axios.post("http://localhost:3002/acceptAdmins",formData).then((res)=>{
+            console.log(res.data);
+            if(res.data == "Success"){
+                handleClickSuccessOpen();
+                console.log("data passed");
+            }
+            
+            }).catch((err)=>{
+                console.log(err);
+                console.log("error in")
+            });
+        }
+        
+        
     };
     const handleChangeVaccineCenter = (event) => {
         setVaccineCenter(event.target.value);
@@ -262,7 +289,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                                 <p>{data.user_role}</p>
                             </div>
                         </div>
-                        <div className={classes.vset}>
+                        <div className= {classes.vset} style={{display: data.user_role == 'Vaccine Manager' ? '' : 'none' }}>
                             <div className={classes.tset}>
                                 <h4>Assigned Center</h4>
                             </div>
@@ -293,20 +320,13 @@ const DisplayUnverifiedAdministrators = ()=>{
                                 Reject
                             </Button>
                         </div>
-                        
-                        
-                        {/* <div className={classes.buttonStyle}>
-                            <button onClick={handleSubmitData} className={classes.buttonAccept}>Accept</button>
-                        </div> */}
-                        {/* <div className={classes.buttonStyle}>
-                            <button onClick={handleRejectData} className={classes.buttonReject}>Reject</button>
-                        </div> */}
                     </div>
                     
                         
 
                 </div>
             </div>
+            {/* dialog boxes for accept request */}
             <Dialog
                 open={open}
                 onClose={handleClose}

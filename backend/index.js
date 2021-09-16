@@ -208,7 +208,7 @@ app.get("/vaccines", (req, res) => {
     }
   });
 });
-// accept adminitrator request
+// accept vaccine manager  request
 app.post("/assignAdmins", (req, res) => {
   const id = req.body.id;
   const place = req.body.place;
@@ -219,6 +219,28 @@ app.post("/assignAdmins", (req, res) => {
       res.send(err);
     }else{
       db.query("insert into covidAssist.vaccine_manager(user_id, center_id) values (?, ?)",[id,place],(err, result)=>{
+        if(err){
+          console.log(err);
+          res.send(err);
+        }else{
+          // console.log("updated");
+          res.send("Success")
+        }
+      })
+    }
+  })
+})
+// accept contact tracing manager  request
+app.post("/acceptAdmins", (req, res) => {
+  const id = req.body.id;
+  const place = req.body.place;
+  db.query("update covidAssist.web_user set status = 1 where user_id = ?" ,[id], (err, result)=>{
+    if(err){
+      // console.log("Error in web user update query");
+      console.log(err);
+      res.send(err);
+    }else{
+      db.query("insert into covidAssist.contact_tracing_manager(user_id) values (?)",[id],(err, result)=>{
         if(err){
           console.log(err);
           res.send(err);
