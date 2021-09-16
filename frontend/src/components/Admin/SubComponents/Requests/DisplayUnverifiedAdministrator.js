@@ -63,6 +63,12 @@ const useStyles = makeStyles((theme) => ({
         marginRight: " 50px",
         marginTop: "15px",
         marginBottom: "15px",
+    },visibility:{
+        display: "flex",
+        display:"none"
+    },vaccineCenterError:{
+        marginLeft: "20px",
+        color: "red",
     }
 }));
 
@@ -75,12 +81,18 @@ const DisplayUnverifiedAdministrators = ()=>{
     const [vaccineCenterList,setVaccineCenterList ]= useState([]);
     const [vaccineCenterError, setVaccineCenterError] = useState("");
     const [open, setOpen] = React.useState(false);
+    const [rejectOpen, setRejectOpen] = React.useState(false);
     const [openSuccess, setOpenSuccess] = React.useState(false);
+    const [rejectOpenSucces, setRejectOpenSuccess] = React.useState(false);
+    const [lable, setLable] = useState("");
+    const [successLable, setSuccessLabel] = useState("");
 
     useEffect(() => {
         const id = new URLSearchParams(search).get("id")
         setUserId(id);
         fetchVerifiedAdminData(id);
+        
+
         // fetchVerifiedAdminVaccineCenter(id);
     },[]);
     useEffect(() => {
@@ -100,17 +112,28 @@ const DisplayUnverifiedAdministrators = ()=>{
 
     const handleClick=()=>{
         let v = 0;
-        if(vaccineCenter == ""){
-            v=1;
-            setVaccineCenterError("Please assign a vaccine center. ")
-        }else{
-            setVaccineCenterError("");
-        }
-
-        if( v==0){
-            console.log("Succccceessss");
+        if(data.user_role == "Vaccine Manager"){
+            if(vaccineCenter == ""){
+                v=1;
+                setVaccineCenterError("Please assign a vaccine center. ")
+            }else{
+                setVaccineCenterError("");
+            }
+    
+            if( v==0){
+                console.log("Succccceessss");
+                setLable("Assign to vaccination center");
+                handleClickOpen();
+            }
+        }else if(data.user_role == "Contact Tracing Manager"){
+            setLable("Accept Requet");
             handleClickOpen();
         }
+        
+    }
+
+    const handleRejectClick=()=>{
+        setRejectOpen(true);
     }
 
     const handleClickOpen = () => {
@@ -125,16 +148,22 @@ const DisplayUnverifiedAdministrators = ()=>{
     const handleClickSuccessOpen = () => {
         setOpenSuccess(true);
     };
+    const handleRejectClose = () => {
+        setRejectOpen(false);
+    };
+    const handleRejectSuccessClose=()=>{
+        setRejectOpenSuccess(false);
+    }
 
     const handleRejectData  = ()=>{
         let formData ={
             id : user_id,
         };
-        
+        setRejectOpen(false);
         axios.post("http://localhost:3002/rejectAdmins",formData).then((res)=>{
             console.log(res.data);
             if(res.data == "Success"){
-                handleClickSuccessOpen();
+                setRejectOpenSuccess(true);
                 console.log("data passed");
             }
             
@@ -145,25 +174,48 @@ const DisplayUnverifiedAdministrators = ()=>{
     };
     
     const handleSubmitData  = ()=>{
+
         let formData ={
             id : user_id,
             place : vaccineCenter
         };
-        
-        axios.post("http://localhost:3002/assignAdmins",formData).then((res)=>{
+        setOpen(false);
+
+        if(data.user_role == "Vaccine Manager"){
+            axios.post("http://localhost:3002/assignAdmins",formData).then((res)=>{
             console.log(res.data);
             if(res.data == "Success"){
+                setSuccessLabel("Successfully assigned vaccination center.");
                 handleClickSuccessOpen();
                 console.log("data passed");
+                
             }
             
-        }).catch((err)=>{
-            console.log(err);
-            console.log("error in")
-        });
+            }).catch((err)=>{
+                console.log(err);
+                console.log("error in")
+            });
+        }else if(data.user_role == "Contact Tracing Manager"){
+            axios.post("http://localhost:3002/acceptAdmins",formData).then((res)=>{
+            console.log(res.data);
+            if(res.data == "Success"){
+                setSuccessLabel("Request Accepted");
+                handleClickSuccessOpen();
+                console.log("data passed");
+                
+            }
+            
+            }).catch((err)=>{
+                console.log(err);
+                console.log("error in")
+            });
+        }
+        
+        
     };
     const handleChangeVaccineCenter = (event) => {
         setVaccineCenter(event.target.value);
+        setVaccineCenterError("");
     };
     return(
         <div>
@@ -249,7 +301,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                                 <p>{data.user_role}</p>
                             </div>
                         </div>
-                        <div className={classes.vset}>
+                        <div className= {classes.vset} style={{display: data.user_role == 'Vaccine Manager' ? '' : 'none' }}>
                             <div className={classes.tset}>
                                 <h4>Assigned Center</h4>
                             </div>
@@ -265,6 +317,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                                         ))}
                                     </Select>
                                 </FormControl>
+                                <div className={classes.vaccineCenterError}>{vaccineCenterError}</div>
 
                             </div>
                         </div>
@@ -276,24 +329,17 @@ const DisplayUnverifiedAdministrators = ()=>{
                             </Button>
                         </div>
                         <div className={classes.buttonStyle}>
-                            <Button className = {classes.buttonStyle} variant="outlined" color="primary" onClick={handleRejectData}>
+                            <Button className = {classes.buttonStyle} variant="outlined" color="primary" onClick={handleRejectClick}>
                                 Reject
                             </Button>
                         </div>
-                        
-                        
-                        {/* <div className={classes.buttonStyle}>
-                            <button onClick={handleSubmitData} className={classes.buttonAccept}>Accept</button>
-                        </div> */}
-                        {/* <div className={classes.buttonStyle}>
-                            <button onClick={handleRejectData} className={classes.buttonReject}>Reject</button>
-                        </div> */}
                     </div>
                     
                         
 
                 </div>
             </div>
+            {/* dialog boxes for accept request */}
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -301,7 +347,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                 aria-describedby="alert-dialog-description"
                 >
                 <DialogTitle id="alert-dialog-title">
-                    {"Assign to vaccination center"}
+                    {lable}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
@@ -328,11 +374,54 @@ const DisplayUnverifiedAdministrators = ()=>{
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Successfully assigned vaccination center.
+                        {successLable}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseSuccess} color="primary" autoFocus> Ok</Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Dialog boxes for reject request */}
+            <Dialog
+                open={rejectOpen}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                >
+                <DialogTitle id="alert-dialog-title">
+                    {"Reject request"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleRejectClose} color="primary" >
+                        Cancel
+                    </Button>
+                    <Button onClick={handleRejectData} color="primary" autoFocus>
+                        Ok
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog 
+                open={rejectOpenSucces}
+                onClose={handleRejectSuccessClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Successfull!"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Successfully Removed request.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleRejectSuccessClose} color="primary" autoFocus> Ok</Button>
                 </DialogActions>
             </Dialog>
         </div>
