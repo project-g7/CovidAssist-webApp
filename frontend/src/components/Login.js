@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Axios from "axios";
 import { useState } from "react";
 import "../styles/Login.css";
-import logo from "../images/logo.png";
+import logo from "../images/newLogo.png";
 import { BiUserCircle } from "react-icons/bi";
 import { RiLockPasswordFill } from "react-icons/ri";
 const Login = () => {

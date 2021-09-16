@@ -287,6 +287,43 @@ app.post("/acceptAdmins", (req, res) => {
           res.send(err);
         }else{
           // console.log("updated");
+          db.query(
+          "select email from web_user where user_id = ?",
+          [id],
+          (errorEmail, resultEmail) => {
+            if (errorEmail) {
+              console.log(errorEmail);
+            } else {
+              console.log(resultEmail);
+              var email = resultEmail[0].email;
+              let mailTransporter = nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                  user: "g7titans@gmail.com",
+                  pass: "titans@123",
+                },
+              });
+
+              let mailDetails = {
+                from: '"CovidAssist Admin" <g7titans@gmail.com>',
+                to: email,
+                subject: "Vaccine Manager Verification",
+                text: `Your request for a Contact tracing manager at CovidAssist has been approved.`,
+              };
+
+              mailTransporter.sendMail(mailDetails, function (err, data) {
+                if (err) {
+                  console.log("Error Occurs");
+                  console.log(err);
+                } else {
+                  console.log("Email sent successfully");
+                }
+              });
+            }
+          }
+        );
+
+
           res.send("Success")
         }
       })
@@ -1614,7 +1651,7 @@ app.get("/vaccineCenterDetails", (req, res) => {
   const id = req.query.id;
   console.log(id);
   db.query(
-    "Select vaccine_center.name, vaccine_center.district,vaccine_center.start_date,vaccine_center.end_date, vaccine_manager.user_id, web_user.first_name,web_user.last_name from vaccine_center INNER JOIN vaccine_manager ON vaccine_center.center_id = vaccine_manager.center_id INNER JOIN web_user ON vaccine_manager.user_id = web_user.user_id WHERE vaccine_center.center_id = ?",
+    "Select vaccine_center.name, vaccine_center.district,vaccine_center.start_date,vaccine_center.end_date from vaccine_center WHERE vaccine_center.center_id = ?",
     [id],
     (error, result) => {
       if (error) {
@@ -1622,6 +1659,36 @@ app.get("/vaccineCenterDetails", (req, res) => {
       } else {
         console.log(result);
         res.send(result);
+      }
+    }
+  );
+});
+app.get("/vaccineCenterManagerDetails", (req, res) => {
+  const id = req.query.id;
+  console.log(id);
+  db.query(
+    "Select user_id from vaccine_manager WHERE center_id = ?",
+    [id],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+        if(result.length > 0){
+          let user_id = result[0].user_id;
+          db.query("Select concat(first_name,' ',last_name) as name from web_user where user_id = ? ",[user_id],
+          (errorName,resultName)=>{
+            if(errorName){
+              console.log(errorName);
+            }else{
+              console.log(resultName);
+              res.send(resultName);
+            }
+          })
+        }else{
+
+        res.send([{"name":"No assigned manager"}]);
+        }
       }
     }
   );

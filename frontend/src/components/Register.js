@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { useState } from "react";
 import Axios from "axios";
 import "../styles/Register.css";
-import logo from "../images/logo.png";
+import logo from "../images/newLogo.png";
 import { BiUserCircle } from "react-icons/bi";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaRegAddressCard } from "react-icons/fa";
@@ -154,7 +154,7 @@ const Register = () => {
       <h1 className="RegisterH1">Registration</h1>
       <div className="Register_1">
         <div className="R-div_img">
-          <img className="R-logo" src={logo} />
+          <img className="logo2" src={logo} />
         </div>
         <div className="Registration_content">
           <form className="R-form">
@@ -301,7 +301,8 @@ const Register = () => {
               </div>
               <div className="R-right">
                 <div className="R-input-div2">
-                  <div className="R-divInput">
+                  <div className="R-divInputRadio">
+                  <div>
                     <input
                       type="radio"
                       value="Male"
@@ -312,6 +313,8 @@ const Register = () => {
                       }}
                     />
                     Male
+                    </div>
+                    <div>
                     <input
                       type="radio"
                       value="Female"
@@ -322,6 +325,7 @@ const Register = () => {
                       }}
                     />
                     Female
+                    </div>
                   </div>
                   <div style={{ fontSize: 12, color: "red" }}>{GenderErr}</div>
                 </div>
@@ -405,7 +409,7 @@ const Register = () => {
                   </div>
                 </div>
                 <div className="input-div3">
-                  <button className="R-btn" value="Register" onClick={Validate}>
+                  <button className="R-btnr" value="Register" onClick={Validate}>
                     Register
                   </button>
                   <div style={{ fontSize: 16, color: "green" ,fontWeight:"bold"}}>{Created}</div>

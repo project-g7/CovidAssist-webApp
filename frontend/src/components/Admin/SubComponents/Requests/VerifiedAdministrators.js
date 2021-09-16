@@ -34,7 +34,7 @@ function VerifiedAdministrators(){
     //     this.router.transitionTo('index');
     // }
     return(
-        <div>
+        <div className="AddBody-req">
             <div>
                 <div className="heding">
                     <h3>Verified Administrators</h3>
