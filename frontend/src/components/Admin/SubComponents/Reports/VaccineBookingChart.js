@@ -75,33 +75,57 @@ function VaccineBookingChart() {
     console.log("99999999999999999999");
     const result = await response.json();
     console.log(result.value);
-
+    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+    console.log(result.length);
+    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     if (typeof result.value == "undefined") {
       setVaccine(result);
-      //vaccine name
       setVaccineName(result[0].vaccine_name);
-      console.log(result[0].vaccine_name);
-      console.log(result[0].dose);
-      // console.log(result[1].dose);
-      if (result[0].dose == 1) {
-        //1st dose count
-        setDose1(result[0].count);
-        console.log(result[0].count);
-      } else if (result[0].dose == 2) {
-        //2nd dose count
-        setDose2(result[0].count);
-        console.log(result[0].count);
-      } else if (result[1].dose == 2) {
-        //2nd dose count
-        setDose2(result[1].count);
-        console.log(result[1].count);
-      } else if (!result[1].dose) {
-        dose2 = 0;
+      if (result.length == 1) {
+        if (result[0].dose == 1) {
+          setDose1(result[0].count);
+          setDate2(0);
+          console.log(result[0].count);
+        } else if (result[0].dose == 2) {
+          setDose2(result[0].count);
+          setDate1(0);
+          console.log(result[0].count);
+        }
       }
+      if (result.length == 2) {
+        if (result[0].dose == 1) {
+          setDose1(result[0].count);
+          console.log(result[0].count);
+        }
+        if (result[1].dose == 2) {
+          setDose2(result[1].count);
+          console.log(result[1].count);
+        }
+      }
+      //vaccine name
+      // setVaccineName(result[0].vaccine_name);
+      // console.log(result[0].vaccine_name);
+      // console.log(result[0].dose);
+      // // console.log(result[1].dose);
+      // if (result[0].dose == 1) {
+      //   //1st dose count
+      //   setDose1(result[0].count);
+      //   console.log(result[0].count);
+      // } else if (result[0].dose == 2) {
+      //   //2nd dose count
+      //   setDose2(result[0].count);
+      //   console.log(result[0].count);
+      // } else if (result[1].dose == 2) {
+      //   //2nd dose count
+      //   setDose2(result[1].count);
+      //   console.log(result[1].count);
+      // } else if (!result[1].dose) {
+      //   dose2 = 0;
+      // }
       console.log("***************************");
-    } else if (typeof result.value == "NoBookingAvailable") {
-      dose1 = 0;
-      dose2 = 0;
+    } else if (result.value == "NoBookingAvailable") {
+      setDate1(0);
+      setDate2(0);
     }
   };
   const feData = async (booked) => {
@@ -126,8 +150,8 @@ function VaccineBookingChart() {
       setDate1(date);
       // console.log(resultDetails[0].date.substring(0, 10));
       // setDate1(resultDetails[0].date.substring(0, 10));
-    } else if (typeof resultDetails.value == "BookingDetailsError") {
-      availDose1 = 0;
+    } else if (resultDetails.value == "BookingDetailsError") {
+      setavailDose1(0);
     }
   };
 
@@ -155,8 +179,8 @@ function VaccineBookingChart() {
       setDate2(newDate1);
       // console.log(resultDetails2[0].date.substring(0, 10));
       // setDate2(resultDetails2[0].date.substring(0, 10));
-    } else if (typeof resultDetails2.value == "BookingDetails2Error") {
-      availDose2 = 0;
+    } else if (resultDetails2.value == "BookingDetails2Error") {
+      setDate2(0);
     }
   };
 
@@ -185,8 +209,8 @@ function VaccineBookingChart() {
 
       // console.log(resultDetails3[0].date.substring(0, 10));
       // setDate3(resultDetails3[0].date.substring(0, 10));
-    } else if (typeof resultDetails3.value == "BookingDetails3Error") {
-      availDose3 = 0;
+    } else if (resultDetails3.value == "BookingDetails3Error") {
+      setDate3(0);
     }
   };
 
@@ -215,8 +239,8 @@ function VaccineBookingChart() {
 
       // console.log(resultDetails4[0].date.substring(0, 10));
       // setDate4(resultDetails4[0].date.substring(0, 10));
-    } else if (typeof resultDetails4.value == "BookingDetails4Error") {
-      availDose4 = 0;
+    } else if (resultDetails4.value == "BookingDetails4Error") {
+      setDate4(0);
     }
   };
 

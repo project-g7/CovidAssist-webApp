@@ -1,7 +1,7 @@
 .a-navbar-title {
   color: white;
   /* margin-left: 10%; */
-  margin-top: 20px;
+  margin-top: 15px;
   font-size: 25px;
 }
 
@@ -13,7 +13,7 @@
 
 .a-title {
   margin-left: -40px;
-  margin-top: 20px;
+  margin-top: 15px;
   /* display: inline-block; */
   color: white;
   font-size: 25px;
@@ -230,7 +230,7 @@
 
 .profile-text{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   padding: 8px 10px 8px 16px;
   list-style: none;

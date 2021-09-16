@@ -59,7 +59,7 @@ const DisplayCenter = () => {
 
   const fetchCenterData = (id) => {
     axios
-      .get("http://localhost:3002/vaccineCenterDetails", { params: { id: id } })
+      .get("http://localhost:3002/vaccineCenterDetails", { params: { id: id} })
       .then((res) => {
         console.log(res.data[0]);
         setData(res.data[0]);

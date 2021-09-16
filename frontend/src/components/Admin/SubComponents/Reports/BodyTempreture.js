@@ -82,11 +82,12 @@ function Map() {
             </h6>
 
             <h6>
+              <b>Total No.of.People :</b> {tempreture.count}
+            </h6>
+
+            <h6>
               <b>No.of.People with High Temperature :</b>{" "}
               {tempreture.temperature}
-            </h6>
-            <h6>
-              <b>Total No.of.People :</b> {tempreture.count}
             </h6>
           </div>
         </InfoWindow>
