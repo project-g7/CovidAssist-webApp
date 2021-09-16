@@ -12,8 +12,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
-    color: "rgb(96, 79, 255)",
+    color: "blue",
     margin: "5px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   set: {
     display: "flex",
@@ -23,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "25px",
     alignItems: "center",
     margin: "5px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
+    fontWeight: "bold",
+    color: "black",
   },
   vset: {
     display: "flex",
@@ -44,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "30px",
     display: "flex",
     alignItems: "",
+  },
+  fontt: {
+    fontSize: "20px",
   },
 }));
 const EditProfile = () => {
@@ -79,7 +86,6 @@ const EditProfile = () => {
       .catch((err) => {
         console.log(err);
       });
-      
   };
 
   const saveData = () => {
@@ -96,13 +102,11 @@ const EditProfile = () => {
       .post("http://localhost:3002/editprofile", formData)
       .then((res) => {
         console.log(res.data);
-        
       })
       .catch((err) => {
         console.log(err);
       });
-      getSessionData();
-
+    getSessionData();
   };
   useEffect(() => {
     getSessionData();
@@ -118,7 +122,7 @@ const EditProfile = () => {
         <div className={classes.all}>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>First Name</h4>
+              <h4 className={classes.fontt}>First Name</h4>
             </div>
             <div className={classes.set}>
               {/* <p>{data.first_name}</p> */}
@@ -135,7 +139,7 @@ const EditProfile = () => {
           </div>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>Last Name</h4>
+              <h4 className={classes.fontt}>Last Name</h4>
             </div>
             <div className={classes.set}>
               <input
@@ -167,7 +171,7 @@ const EditProfile = () => {
           </div> */}
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>NIC Number</h4>
+              <h4 className={classes.fontt}>NIC Number</h4>
             </div>
             <div className={classes.set}>
               <input
@@ -184,7 +188,7 @@ const EditProfile = () => {
           </div>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>Email</h4>
+              <h4 className={classes.fontt}>Email</h4>
             </div>
             <div className={classes.set}>
               <input
@@ -200,7 +204,7 @@ const EditProfile = () => {
           </div>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>Address</h4>
+              <h4 className={classes.fontt}>Address</h4>
             </div>
             <div className={classes.set}>
               <input
@@ -216,7 +220,7 @@ const EditProfile = () => {
           </div>
           <div className={classes.vset}>
             <div className={classes.tset}>
-              <h4>Contact Number</h4>
+              <h4 className={classes.fontt}>Contact Number</h4>
             </div>
             <div className={classes.set}>
               <input
