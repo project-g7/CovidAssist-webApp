@@ -1920,115 +1920,337 @@ app.get("/vaccinatedList", (req, res) => {
 
 app.get("/confirmvaccine", (req, res) => {
   const id = req.query.book;
-  console.log(id);
+  const dose = req.query.dose;
+  console.log(dose);
   console.log("no");
-  db.query(
-    "UPDATE booking SET status=1 WHERE booking_id=?",
-    [id],
-    (err, result) => {
-      if (err) {
-        console.log("Error booking");
-        console.log(err);
-        res.send(err);
-      } else {
-        db.query(
-          "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
-          [id],
-          (errorSelect, resultSelect) => {
-            if (errorSelect) {
-            } else {
-              console.log(resultSelect);
-              let userId = resultSelect[0].mobile_user_id;
-              let name =
-                resultSelect[0].first_name + " " + resultSelect[0].last_name;
-              let nic = resultSelect[0].nic;
-              let address = resultSelect[0].address;
-              let dose = resultSelect[0].dose;
-              let vaccine = resultSelect[0].vaccine_name;
-              let center = resultSelect[0].name;
-              let date = new Date(
-                resultSelect[0].date.toISOString().substring(0, 10)
-              );
-              date.setDate(date.getDate() + 1);
-              let newDate = date.toISOString().substring(0, 10);
-              console.log(date.toISOString().substring(0, 10));
-              if (dose == 1) {
-                const spawn = require("child_process").spawn;
-                const pythonProcess = spawn("python", [
-                  "certi.py",
-                  name,
-                  nic,
-                  address,
-                  vaccine,
-                  center,
-                  newDate,
-                ]);
-              } else if (dose == 2) {
-                db.query(
-                  "SELECT * FROM booking WHERE mobile_user_id = ? AND status = ? AND dose = ?",
-                  [userId, 1, 1],
-                  (errorUser, resultUser) => {
-                    if (errorUser) {
-                      console.log(errorUser);
-                    } else {
-                      console.log("===========");
-                      console.log(resultUser.length);
-                      if (resultUser.length > 0) {
-                        let bookingId = resultUser[0].booking_id;
-                        db.query(
-                          "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
-                          [bookingId],
-                          (errorDoseOne, resultDoseOne) => {
-                            if (errorDoseOne) {
-                              console.log(errorDoseOne);
-                            } else {
-                              console.log("$$$$$$$$$");
-                              let vaccine1 = resultDoseOne[0].vaccine_name;
-                              let center1 = resultDoseOne[0].name;
-                              let date1 = new Date(
-                                resultDoseOne[0].date
+  if(dose==1){
+    db.query(
+      "UPDATE booking SET status=1,dose_1=1 WHERE booking_id=?",
+      [id],
+      (err, result) => {
+        if (err) {
+          console.log("Error booking");
+          console.log(err);
+          res.send(err);
+        } else {
+          db.query(
+            "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
+            [id],
+            (errorSelect, resultSelect) => {
+              if (errorSelect) {
+              } else {
+                console.log(resultSelect);
+                let userId = resultSelect[0].mobile_user_id;
+                let name =
+                  resultSelect[0].first_name + " " + resultSelect[0].last_name;
+                let nic = resultSelect[0].nic;
+                let address = resultSelect[0].address;
+                let dose = resultSelect[0].dose;
+                let vaccine = resultSelect[0].vaccine_name;
+                let center = resultSelect[0].name;
+                let date = new Date(
+                  resultSelect[0].date.toISOString().substring(0, 10)
+                );
+                date.setDate(date.getDate() + 1);
+                let newDate = date.toISOString().substring(0, 10);
+                console.log(date.toISOString().substring(0, 10));
+                if (dose == 1) {
+                  const spawn = require("child_process").spawn;
+                  const pythonProcess = spawn("python", [
+                    "certi.py",
+                    name,
+                    nic,
+                    address,
+                    vaccine,
+                    center,
+                    newDate,
+                  ]);
+                } else if (dose == 2) {
+                  db.query(
+                    "SELECT * FROM booking WHERE mobile_user_id = ? AND status = ? AND dose = ?",
+                    [userId, 1, 1],
+                    (errorUser, resultUser) => {
+                      if (errorUser) {
+                        console.log(errorUser);
+                      } else {
+                        console.log("===========");
+                        console.log(resultUser.length);
+                        if (resultUser.length > 0) {
+                          let bookingId = resultUser[0].booking_id;
+                          db.query(
+                            "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
+                            [bookingId],
+                            (errorDoseOne, resultDoseOne) => {
+                              if (errorDoseOne) {
+                                console.log(errorDoseOne);
+                              } else {
+                                console.log("$$$$$$$$$");
+                                let vaccine1 = resultDoseOne[0].vaccine_name;
+                                let center1 = resultDoseOne[0].name;
+                                let date1 = new Date(
+                                  resultDoseOne[0].date
+                                    .toISOString()
+                                    .substring(0, 10)
+                                );
+                                date1.setDate(date1.getDate() + 1);
+                                let newDate1 = date1
                                   .toISOString()
-                                  .substring(0, 10)
-                              );
-                              date1.setDate(date1.getDate() + 1);
-                              let newDate1 = date1
-                                .toISOString()
-                                .substring(0, 10);
-                              for (let i = 0; i < 2; i++) {
-                                const spawn = require("child_process").spawn;
-                                const pythonProcess = spawn("python", [
-                                  "certi2.py",
-                                  name,
-                                  nic,
-                                  address,
-                                  vaccine,
-                                  center,
-                                  newDate,
-                                  vaccine1,
-                                  center1,
-                                  newDate1,
-                                ]);
+                                  .substring(0, 10);
+                                for (let i = 0; i < 2; i++) {
+                                  const spawn = require("child_process").spawn;
+                                  const pythonProcess = spawn("python", [
+                                    "certi2.py",
+                                    name,
+                                    nic,
+                                    address,
+                                    vaccine,
+                                    center,
+                                    newDate,
+                                    vaccine1,
+                                    center1,
+                                    newDate1,
+                                  ]);
+                                }
                               }
                             }
-                          }
-                        );
+                          );
+                        }
                       }
                     }
-                  }
-                );
+                  );
+                }
               }
+              // console.log(resultSelect[0].booking_id);
+              // let dose = resultSelect[0].dose;
+              // let userId = resultSelect[0].mobile_user_id;
             }
-            // console.log(resultSelect[0].booking_id);
-            // let dose = resultSelect[0].dose;
-            // let userId = resultSelect[0].mobile_user_id;
-          }
-        );
-        // res.send("Success book");
-        console.log("Success");
-        // console.log(result);
+          );
+          // res.send("Success book");
+          console.log("Success");
+          // console.log(result);
+        }
       }
-    }
-  );
+    );
+  }
+ else if(dose==2){
+    db.query(
+      "UPDATE booking SET status=1,dose_2=1 WHERE booking_id=?",
+      [id],
+      (err, result) => {
+        if (err) {
+          console.log("Error booking");
+          console.log(err);
+          res.send(err);
+        } else {
+          db.query(
+            "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
+            [id],
+            (errorSelect, resultSelect) => {
+              if (errorSelect) {
+              } else {
+                console.log(resultSelect);
+                let userId = resultSelect[0].mobile_user_id;
+                let name =
+                  resultSelect[0].first_name + " " + resultSelect[0].last_name;
+                let nic = resultSelect[0].nic;
+                let address = resultSelect[0].address;
+                let dose = resultSelect[0].dose;
+                let vaccine = resultSelect[0].vaccine_name;
+                let center = resultSelect[0].name;
+                let date = new Date(
+                  resultSelect[0].date.toISOString().substring(0, 10)
+                );
+                date.setDate(date.getDate() + 1);
+                let newDate = date.toISOString().substring(0, 10);
+                console.log(date.toISOString().substring(0, 10));
+                if (dose == 1) {
+                  const spawn = require("child_process").spawn;
+                  const pythonProcess = spawn("python", [
+                    "certi.py",
+                    name,
+                    nic,
+                    address,
+                    vaccine,
+                    center,
+                    newDate,
+                  ]);
+                } else if (dose == 2) {
+                  db.query(
+                    "SELECT * FROM booking WHERE mobile_user_id = ? AND status = ? AND dose = ?",
+                    [userId, 1, 1],
+                    (errorUser, resultUser) => {
+                      if (errorUser) {
+                        console.log(errorUser);
+                      } else {
+                        console.log("===========");
+                        console.log(resultUser.length);
+                        if (resultUser.length > 0) {
+                          let bookingId = resultUser[0].booking_id;
+                          db.query(
+                            "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
+                            [bookingId],
+                            (errorDoseOne, resultDoseOne) => {
+                              if (errorDoseOne) {
+                                console.log(errorDoseOne);
+                              } else {
+                                console.log("$$$$$$$$$");
+                                let vaccine1 = resultDoseOne[0].vaccine_name;
+                                let center1 = resultDoseOne[0].name;
+                                let date1 = new Date(
+                                  resultDoseOne[0].date
+                                    .toISOString()
+                                    .substring(0, 10)
+                                );
+                                date1.setDate(date1.getDate() + 1);
+                                let newDate1 = date1
+                                  .toISOString()
+                                  .substring(0, 10);
+                                for (let i = 0; i < 2; i++) {
+                                  const spawn = require("child_process").spawn;
+                                  const pythonProcess = spawn("python", [
+                                    "certi2.py",
+                                    name,
+                                    nic,
+                                    address,
+                                    vaccine,
+                                    center,
+                                    newDate,
+                                    vaccine1,
+                                    center1,
+                                    newDate1,
+                                  ]);
+                                }
+                              }
+                            }
+                          );
+                        }
+                      }
+                    }
+                  );
+                }
+              }
+              // console.log(resultSelect[0].booking_id);
+              // let dose = resultSelect[0].dose;
+              // let userId = resultSelect[0].mobile_user_id;
+            }
+          );
+          // res.send("Success book");
+          console.log("Success");
+          // console.log(result);
+        }
+      }
+    );
+  }
+  else if(dose==3){
+    db.query(
+      "UPDATE booking SET status=1,dose_3=1 WHERE booking_id=?",
+      [id],
+      (err, result) => {
+        if (err) {
+          console.log("Error booking");
+          console.log(err);
+          res.send(err);
+        } else {
+          db.query(
+            "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
+            [id],
+            (errorSelect, resultSelect) => {
+              if (errorSelect) {
+              } else {
+                console.log(resultSelect);
+                let userId = resultSelect[0].mobile_user_id;
+                let name =
+                  resultSelect[0].first_name + " " + resultSelect[0].last_name;
+                let nic = resultSelect[0].nic;
+                let address = resultSelect[0].address;
+                let dose = resultSelect[0].dose;
+                let vaccine = resultSelect[0].vaccine_name;
+                let center = resultSelect[0].name;
+                let date = new Date(
+                  resultSelect[0].date.toISOString().substring(0, 10)
+                );
+                date.setDate(date.getDate() + 1);
+                let newDate = date.toISOString().substring(0, 10);
+                console.log(date.toISOString().substring(0, 10));
+                if (dose == 1) {
+                  const spawn = require("child_process").spawn;
+                  const pythonProcess = spawn("python", [
+                    "certi.py",
+                    name,
+                    nic,
+                    address,
+                    vaccine,
+                    center,
+                    newDate,
+                  ]);
+                } else if (dose == 2) {
+                  db.query(
+                    "SELECT * FROM booking WHERE mobile_user_id = ? AND status = ? AND dose = ?",
+                    [userId, 1, 1],
+                    (errorUser, resultUser) => {
+                      if (errorUser) {
+                        console.log(errorUser);
+                      } else {
+                        console.log("===========");
+                        console.log(resultUser.length);
+                        if (resultUser.length > 0) {
+                          let bookingId = resultUser[0].booking_id;
+                          db.query(
+                            "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
+                            [bookingId],
+                            (errorDoseOne, resultDoseOne) => {
+                              if (errorDoseOne) {
+                                console.log(errorDoseOne);
+                              } else {
+                                console.log("$$$$$$$$$");
+                                let vaccine1 = resultDoseOne[0].vaccine_name;
+                                let center1 = resultDoseOne[0].name;
+                                let date1 = new Date(
+                                  resultDoseOne[0].date
+                                    .toISOString()
+                                    .substring(0, 10)
+                                );
+                                date1.setDate(date1.getDate() + 1);
+                                let newDate1 = date1
+                                  .toISOString()
+                                  .substring(0, 10);
+                                for (let i = 0; i < 2; i++) {
+                                  const spawn = require("child_process").spawn;
+                                  const pythonProcess = spawn("python", [
+                                    "certi2.py",
+                                    name,
+                                    nic,
+                                    address,
+                                    vaccine,
+                                    center,
+                                    newDate,
+                                    vaccine1,
+                                    center1,
+                                    newDate1,
+                                  ]);
+                                }
+                              }
+                            }
+                          );
+                        }
+                      }
+                    }
+                  );
+                }
+              }
+              // console.log(resultSelect[0].booking_id);
+              // let dose = resultSelect[0].dose;
+              // let userId = resultSelect[0].mobile_user_id;
+            }
+          );
+          // res.send("Success book");
+          console.log("Success");
+          // console.log(result);
+        }
+      }
+    );
+  }
+  
 });
 
 app.get("/getcenterdistrict", (req, res) => {
@@ -2214,24 +2436,26 @@ app.get("/getcancelcount", (req, res) => {
       } else {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
-        db.query(
-          "SELECT count(booking_id) as canceled_bookings FROM covidAssist.booking WHERE is_cancel=1 AND date=curdate() AND center_id=?",
-          [vid],
-          (err, result) => {
-            if (err) {
-              console.log("Error count");
-              console.log(err);
-              res.send(err);
-            } else {
-              res.send(result);
-              console.log("count successful");
-              console.log(result);
-            }
-          }
-        );
-      }
-    }
-  );
+
+  db.query(
+    "SELECT count(booking_id) as canceled_bookings FROM covidAssist.booking WHERE is_cancel=0 AND status=0 AND date=curdate() AND center_id=?",
+    [vid],
+    (err, result) => {
+      if (err) {
+        console.log("Error count");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("count successful");
+        console.log(result);
+       }
+     }
+   );
+  }
+ }
+);
+
 });
 app.get("/getVaccine", (req, res) => {
   const userId = req.query.id;

@@ -166,10 +166,12 @@ const UpcomingRegisterDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4 className={classes.fontl}>Gender</h4>
+
+                <h4 className={classes.fontxx}>Time</h4>
+
               </div>
               <div className={classes.set}>
-                <p>{data.gender}</p>
+                <p>{data.time}</p>
               </div>
             </div>
           </div>
