@@ -22,7 +22,7 @@ const DashboardCard3 = () => {
   return (
     <div class="cardww">
       <b>
-        <p class="dash">Cancelled Bookings Today</p>
+        <p class="dash">Pending Bookings Today</p>
       </b>
       <b>
         <p class="infor">{cancelled}</p>
