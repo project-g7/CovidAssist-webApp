@@ -161,10 +161,10 @@ const RegisterDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Gender</h4>
+                <h4>Time</h4>
               </div>
               <div className={classes.set}>
-                <p>{data.gender}</p>
+                <p>{data.time}</p>
               </div>
             </div>
           </div>

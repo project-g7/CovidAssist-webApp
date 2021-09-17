@@ -98,7 +98,7 @@ const CheckBookingDetails = () => {
       });
   };
   const handleClick = (id) => {
-       axios.get("http://localhost:3002/confirmvaccine", { params: { book: data.booking_id } }).then((res) => {
+       axios.get("http://localhost:3002/confirmvaccine", { params: { book: data.booking_id,dose: data.dose } }).then((res) => {
       console.log(res.data);
       
     });   alert("Confirmed");
@@ -116,7 +116,7 @@ const CheckBookingDetails = () => {
         <div className="AddBody-center2">
           <div className="heding-center">
             <div className={classes.icon}>
-              <Link to="/vaccine/upcoming">
+              <Link to="/vaccine/vaccinelist">
                 <IoIcons.IoArrowBack />
               </Link>
             </div>
@@ -186,10 +186,10 @@ const CheckBookingDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Gender</h4>
+                <h4>Time</h4>
               </div>
               <div className={classes.set}>
-                <p>{data.gender}</p>
+                <p>{data.time}</p>
               </div>           
             </div>
             <div className={classes.vset}>
