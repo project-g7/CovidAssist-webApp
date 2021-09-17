@@ -1,12 +1,12 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import Axios from "axios";
 
 const PieChart = () => {
-     const [dose1, setDose1] = useState("");
+  const [dose1, setDose1] = useState("");
   const [dose2, setDose2] = useState("");
   const [dose1dose2, setDose1Dose2] = useState("");
-const [users, setUsers] = useState("");
+  const [users, setUsers] = useState("");
   useEffect(() => {
     Axios.get("http://localhost:3002/vaccineFirstDose")
       .then((res) => {
@@ -17,7 +17,7 @@ const [users, setUsers] = useState("");
         console.log(error);
       });
 
-      Axios.get("http://localhost:3002/vaccineFirstSecondDose")
+    Axios.get("http://localhost:3002/vaccineFirstSecondDose")
       .then((res) => {
         console.log(res.data[0].countFS);
         setDose1Dose2(res.data[0].countFS);
@@ -26,12 +26,10 @@ const [users, setUsers] = useState("");
         console.log(error);
       });
 
-      Axios
-      .get("http://localhost:3002/getuserscount")
+    Axios.get("http://localhost:3002/getuserscount")
       .then((res) => {
         console.log(res.data);
-        setUsers(res.data[0].userCount)
-
+        setUsers(res.data[0].userCount);
       })
       .catch((err) => {
         console.log(err);
@@ -43,7 +41,7 @@ const [users, setUsers] = useState("");
     datasets: [
       {
         label: "# of Votes",
-        data: [dose1, dose1dose2, users-(dose1 + dose1dose2)],
+        data: [dose1, dose1dose2, users - (dose1 + dose1dose2)],
         backgroundColor: [
           "rgba(255, 206, 86, 0.2)",
           "rgba(54, 162, 235, 0.2)",
