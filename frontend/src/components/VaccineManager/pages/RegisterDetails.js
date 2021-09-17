@@ -14,8 +14,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
-    color:"rgb(96, 79, 255)",
+    color: "blue",
     margin: "5px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   set: {
     display: "flex",
@@ -25,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: "15px",
     margin: "5px",
+    fontWeight: "bold",
+    color: "black",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   vset: {
     display: "flex",
@@ -37,9 +41,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "30px",
   },
   heading: {
-      width:"90%",
-    display:'flex',
+    width: "90%",
+    display: "flex",
     justifyContent: "center",
+  },
+  fontxx: {
+    fontSize: "20px",
   },
 }));
 
@@ -102,7 +109,7 @@ const RegisterDetails = () => {
           <div className={classes.all}>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Full name</h4>
+                <h4 className={classes.fontxx}>Full name</h4>
               </div>
               <div className={classes.set}>
                 {" "}
@@ -111,7 +118,7 @@ const RegisterDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>NIC</h4>
+                <h4 className={classes.fontxx}>NIC</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.nic}</p>
@@ -119,7 +126,7 @@ const RegisterDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Vaccine</h4>
+                <h4 className={classes.fontxx}>Vaccine</h4>
               </div>
               <div className={classes.set}>
                 <p>{vaccineData.vaccine_name}</p>
@@ -127,7 +134,7 @@ const RegisterDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Dose</h4>
+                <h4 className={classes.fontxx}>Dose</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.dose}</p>
@@ -135,7 +142,7 @@ const RegisterDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>ID type</h4>
+                <h4 className={classes.fontxx}>ID type</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.id_type}</p>
@@ -143,7 +150,7 @@ const RegisterDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Address</h4>
+                <h4 className={classes.fontxx}>Address</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.address}</p>
@@ -151,17 +158,15 @@ const RegisterDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Booked Date</h4>
+                <h4 className={classes.fontxx}>Booked Date</h4>
               </div>
               <div className={classes.set}>
-                <p>
-                  {data.date && data.date.substring(0, 10)}
-                </p>
+                <p>{data.date && data.date.substring(0, 10)}</p>
               </div>
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Gender</h4>
+                <h4 className={classes.fontxx}>Gender</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.gender}</p>

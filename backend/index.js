@@ -270,65 +270,72 @@ app.post("/assignAdmins", (req, res) => {
       }
     }
   );
-})
+});
 // accept contact tracing manager  request
 app.post("/acceptAdmins", (req, res) => {
   const id = req.body.id;
   const place = req.body.place;
-  db.query("update covidAssist.web_user set status = 1 where user_id = ?" ,[id], (err, result)=>{
-    if(err){
-      // console.log("Error in web user update query");
-      console.log(err);
-      res.send(err);
-    }else{
-      db.query("insert into covidAssist.contact_tracing_manager(user_id) values (?)",[id],(err, result)=>{
-        if(err){
-          console.log(err);
-          res.send(err);
-        }else{
-          // console.log("updated");
-          db.query(
-          "select email from web_user where user_id = ?",
+  db.query(
+    "update covidAssist.web_user set status = 1 where user_id = ?",
+    [id],
+    (err, result) => {
+      if (err) {
+        // console.log("Error in web user update query");
+        console.log(err);
+        res.send(err);
+      } else {
+        db.query(
+          "insert into covidAssist.contact_tracing_manager(user_id) values (?)",
           [id],
-          (errorEmail, resultEmail) => {
-            if (errorEmail) {
-              console.log(errorEmail);
+          (err, result) => {
+            if (err) {
+              console.log(err);
+              res.send(err);
             } else {
-              console.log(resultEmail);
-              var email = resultEmail[0].email;
-              let mailTransporter = nodemailer.createTransport({
-                service: "gmail",
-                auth: {
-                  user: "g7titans@gmail.com",
-                  pass: "titans@123",
-                },
-              });
+              // console.log("updated");
+              db.query(
+                "select email from web_user where user_id = ?",
+                [id],
+                (errorEmail, resultEmail) => {
+                  if (errorEmail) {
+                    console.log(errorEmail);
+                  } else {
+                    console.log(resultEmail);
+                    var email = resultEmail[0].email;
+                    let mailTransporter = nodemailer.createTransport({
+                      service: "gmail",
+                      auth: {
+                        user: "g7titans@gmail.com",
+                        pass: "titans@123",
+                      },
+                    });
 
-              let mailDetails = {
-                from: '"CovidAssist Admin" <g7titans@gmail.com>',
-                to: email,
-                subject: "Vaccine Manager Verification",
-                text: `Your request for a Contact tracing manager at CovidAssist has been approved.`,
-              };
+                    let mailDetails = {
+                      from: '"CovidAssist Admin" <g7titans@gmail.com>',
+                      to: email,
+                      subject: "Vaccine Manager Verification",
+                      text: `Your request for a Contact tracing manager at CovidAssist has been approved.`,
+                    };
 
-              mailTransporter.sendMail(mailDetails, function (err, data) {
-                if (err) {
-                  console.log("Error Occurs");
-                  console.log(err);
-                } else {
-                  console.log("Email sent successfully");
+                    mailTransporter.sendMail(mailDetails, function (err, data) {
+                      if (err) {
+                        console.log("Error Occurs");
+                        console.log(err);
+                      } else {
+                        console.log("Email sent successfully");
+                      }
+                    });
+                  }
                 }
-              });
+              );
+
+              res.send("Success");
             }
           }
         );
-
-
-          res.send("Success")
-        }
-      })
+      }
     }
-})
+  );
 });
 // reject the administrator request
 app.post("/rejectAdmins", (req, res) => {
@@ -657,7 +664,7 @@ app.get("/astraZenecaSecondDose", (req, res) => {
 });
 app.get("/sinopharmFirstDose", (req, res) => {
   db.query(
-    "SELECT COUNT(mobile_user_id) as sinopharm1 FROM covidAssist.booking WHERE status=1 AND vaccine_id=3 AND dose1=1 ",
+    "SELECT COUNT(mobile_user_id) as sinopharm1 FROM covidAssist.booking WHERE status=1 AND vaccine_id=3 AND dose=1 ",
     (err, result) => {
       if (err) {
         console.log("Error Sinopharm  dose1");
@@ -1674,20 +1681,22 @@ app.get("/vaccineCenterManagerDetails", (req, res) => {
         console.log(error);
       } else {
         console.log(result);
-        if(result.length > 0){
+        if (result.length > 0) {
           let user_id = result[0].user_id;
-          db.query("Select concat(first_name,' ',last_name) as name from web_user where user_id = ? ",[user_id],
-          (errorName,resultName)=>{
-            if(errorName){
-              console.log(errorName);
-            }else{
-              console.log(resultName);
-              res.send(resultName);
+          db.query(
+            "Select concat(first_name,' ',last_name) as name from web_user where user_id = ? ",
+            [user_id],
+            (errorName, resultName) => {
+              if (errorName) {
+                console.log(errorName);
+              } else {
+                console.log(resultName);
+                res.send(resultName);
+              }
             }
-          })
-        }else{
-
-        res.send([{"name":"No assigned manager"}]);
+          );
+        } else {
+          res.send([{ name: "No assigned manager" }]);
         }
       }
     }
@@ -2145,24 +2154,24 @@ app.get("/bookingcount", (req, res) => {
       } else {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
-  db.query(
-    "SELECT count(booking_id)as total_bookings FROM covidAssist.booking WHERE is_cancel=0 AND date=curdate() AND center_id=?",
-    [vid],
-    (err, result) => {
-      if (err) {
-        console.log("Error count");
-        console.log(err);
-        res.send(err);
-      } else {
-        res.send(result);
-        console.log("count successful");
-        console.log(result);
-       }
-     }
-   );
-  }
- }
-);
+        db.query(
+          "SELECT count(booking_id)as total_bookings FROM covidAssist.booking WHERE is_cancel=0 AND date=curdate() AND center_id=?",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error count");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log("count successful");
+              console.log(result);
+            }
+          }
+        );
+      }
+    }
+  );
 });
 app.get("/getCompletedbookings", (req, res) => {
   const userId = req.query.id;
@@ -2175,24 +2184,24 @@ app.get("/getCompletedbookings", (req, res) => {
       } else {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
-  db.query(
-    "SELECT count(booking_id) as completed_bookings FROM covidAssist.booking WHERE status=1 AND is_cancel=0 AND date=curdate() AND center_id=?",
-    [vid],
-    (err, result) => {
-      if (err) {
-        console.log("Error count");
-        console.log(err);
-        res.send(err);
-      } else {
-        res.send(result);
-        console.log("count successful");
-        console.log(result);
-       }
-     }
-   );
-  }
- }
-);
+        db.query(
+          "SELECT count(booking_id) as completed_bookings FROM covidAssist.booking WHERE status=1 AND is_cancel=0 AND date=curdate() AND center_id=?",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error count");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log("count successful");
+              console.log(result);
+            }
+          }
+        );
+      }
+    }
+  );
 });
 app.get("/getcancelcount", (req, res) => {
   const userId = req.query.id;
@@ -2205,24 +2214,24 @@ app.get("/getcancelcount", (req, res) => {
       } else {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
-  db.query(
-    "SELECT count(booking_id) as canceled_bookings FROM covidAssist.booking WHERE is_cancel=1 AND date=curdate() AND center_id=?",
-    [vid],
-    (err, result) => {
-      if (err) {
-        console.log("Error count");
-        console.log(err);
-        res.send(err);
-      } else {
-        res.send(result);
-        console.log("count successful");
-        console.log(result);
-       }
-     }
-   );
-  }
- }
-);
+        db.query(
+          "SELECT count(booking_id) as canceled_bookings FROM covidAssist.booking WHERE is_cancel=1 AND date=curdate() AND center_id=?",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error count");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log("count successful");
+              console.log(result);
+            }
+          }
+        );
+      }
+    }
+  );
 });
 app.get("/getVaccine", (req, res) => {
   const userId = req.query.id;
@@ -2235,24 +2244,24 @@ app.get("/getVaccine", (req, res) => {
       } else {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
-  db.query(
-    "SELECT vaccine_name FROM covidAssist.vaccine_center_vaccine INNER JOIN vaccine ON vaccine_center_vaccine.vaccine_id=vaccine.vaccine_id WHERE vaccine_center_vaccine.vaccine_center_id=?",
-    [vid],
-    (err, result) => {
-      if (err) {
-        console.log("Error count");
-        console.log(err);
-        res.send(err);
-      } else {
-        res.send(result);
-        console.log("count successful");
-        console.log(result);
-       }
-     }
-   );
-  }
- }
-);
+        db.query(
+          "SELECT vaccine_name FROM covidAssist.vaccine_center_vaccine INNER JOIN vaccine ON vaccine_center_vaccine.vaccine_id=vaccine.vaccine_id WHERE vaccine_center_vaccine.vaccine_center_id=?",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error count");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log("count successful");
+              console.log(result);
+            }
+          }
+        );
+      }
+    }
+  );
 });
 app.get("/monthlybookings", (req, res) => {
   const userId = req.query.id;
@@ -2265,24 +2274,24 @@ app.get("/monthlybookings", (req, res) => {
       } else {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
-  db.query(
-    "SELECT count(booking_id)as total_bookings FROM covidAssist.booking WHERE month(date)=month(CURRENT_DATE()) AND YEAR(CURRENT_DATE())=YEAR(date) AND is_cancel=0 AND center_id=?",
-    [vid],
-    (err, result) => {
-      if (err) {
-        console.log("Error count");
-        console.log(err);
-        res.send(err);
-      } else {
-        res.send(result);
-        console.log("count successful");
-        console.log(result);
-       }
-     }
-   );
-  }
- }
-);
+        db.query(
+          "SELECT count(booking_id)as total_bookings FROM covidAssist.booking WHERE month(date)=month(CURRENT_DATE()) AND YEAR(CURRENT_DATE())=YEAR(date) AND is_cancel=0 AND center_id=?",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error count");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log("count successful");
+              console.log(result);
+            }
+          }
+        );
+      }
+    }
+  );
 });
 
 app.get("/monthlycompletedbookings", (req, res) => {
@@ -2296,24 +2305,24 @@ app.get("/monthlycompletedbookings", (req, res) => {
       } else {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
-  db.query(
-    "SELECT count(booking_id)as completed_bookings FROM covidAssist.booking WHERE month(date)=month(CURRENT_DATE()) AND YEAR(CURRENT_DATE())=YEAR(date) AND status=1 AND center_id=?",
-    [vid],
-    (err, result) => {
-      if (err) {
-        console.log("Error count");
-        console.log(err);
-        res.send(err);
-      } else {
-        res.send(result);
-        console.log("count successful");
-        console.log(result);
-       }
-     }
-   );
-  }
- }
-);
+        db.query(
+          "SELECT count(booking_id)as completed_bookings FROM covidAssist.booking WHERE month(date)=month(CURRENT_DATE()) AND YEAR(CURRENT_DATE())=YEAR(date) AND status=1 AND center_id=?",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error count");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log("count successful");
+              console.log(result);
+            }
+          }
+        );
+      }
+    }
+  );
 });
 app.get("/getupcomingbookingsdate", (req, res) => {
   const userId = req.query.id;
@@ -2326,24 +2335,24 @@ app.get("/getupcomingbookingsdate", (req, res) => {
       } else {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
-  db.query(
-    "SELECT count(booking.booking_id) as value, cast(booking.date as date) as activity FROM booking WHERE status=0 AND is_cancel=0 AND center_id=? GROUP BY date ORDER BY date ASC limit 4",
-    [vid],
-    (err, result) => {
-      if (err) {
-        console.log("Error center district");
-        console.log(err);
-        res.send(err);
-      } else {
-        res.send(result);
-        console.log(" successful");
-        console.log(result);
+        db.query(
+          "SELECT count(booking.booking_id) as value, cast(booking.date as date) as activity FROM booking WHERE status=0 AND is_cancel=0 AND center_id=? GROUP BY date ORDER BY date ASC limit 4",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error center district");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log(" successful");
+              console.log(result);
+            }
+          }
+        );
       }
     }
   );
-}
-}
-);
 });
 
 app.post("/addTemperatureReport", (req, res) => {

@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import axios from "axios";
-import filterFactory, { textFilter,dateFilter } from "react-bootstrap-table2-filter";
+import filterFactory, {
+  textFilter,
+  dateFilter,
+} from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import '../../../../styles/vaccinated.css';
+import "../../../../styles/vaccinated.css";
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
@@ -16,7 +19,7 @@ export class VaccinatedList extends Component {
     return (
       <Link to={"/vaccine/RegisterDetails?id=" + row.booking_id}>
         View Details
-      </Link> 
+      </Link>
     );
   };
   state = {
@@ -28,7 +31,7 @@ export class VaccinatedList extends Component {
         text: "NIC",
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-          justifyContent:"center"
+          justifyContent: "center",
         },
       },
       {
@@ -37,10 +40,10 @@ export class VaccinatedList extends Component {
         filter: textFilter(),
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-          display:"flex",
-          justifyContent:"space-around",
+          display: "flex",
+          justifyContent: "space-around",
           alignItems: "center",
-        }
+        },
       },
       {
         dataField: "address",
@@ -48,14 +51,14 @@ export class VaccinatedList extends Component {
         sort: true,
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-        }
+        },
       },
       {
         dataField: "vaccine_name",
         text: "Vaccine",
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-        }
+        },
       },
       {
         dataField: "link",
@@ -63,7 +66,7 @@ export class VaccinatedList extends Component {
         formatter: this.linkFormatter,
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-        }
+        },
       },
     ],
   };
@@ -73,19 +76,26 @@ export class VaccinatedList extends Component {
     data = JSON.parse(data);
     console.log(data.user_name);
 
-    axios.get("http://localhost:3002/vaccinatedList", { params: { id: data.user_id } }).then((res) => {
-      console.log(res.data);
-      this.setState({
-        centers: res.data,
-       
-      }); 
-    });
-    axios.get("http://localhost:3002/getvaccinecenter", { params: { id: data.user_id } }).then((res) => {
-      console.log(res.data);
-      this.setState({
-        name: res.data[0].name,
-      }); 
-    });
+    axios
+      .get("http://localhost:3002/vaccinatedList", {
+        params: { id: data.user_id },
+      })
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          centers: res.data,
+        });
+      });
+    axios
+      .get("http://localhost:3002/getvaccinecenter", {
+        params: { id: data.user_id },
+      })
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          name: res.data[0].name,
+        });
+      });
   }
 
   render() {
@@ -139,14 +149,15 @@ export class VaccinatedList extends Component {
     //   onRowClick: {selectRow}
     // };
     return (
-    
       <div className="AddBody-req">
-      <div className="heding">
+        <div className="heding">
           <h3>Vaccinated List</h3>
-        </div>   
-        <div className="container"> 
+        </div>
+        <div className="container">
           <div className="container" style={{ marginTop: "10px" }}>
-         <div className="tabletitle"><h4>{this.state.name}</h4></div> 
+            <div className="tabletitle">
+              <h4 className="titlename">Center Name : {this.state.name}</h4>
+            </div>
             <BootstrapTable
               bootstrap4
               hover
@@ -166,4 +177,4 @@ export class VaccinatedList extends Component {
   }
 }
 
-export default VaccinatedList
+export default VaccinatedList;

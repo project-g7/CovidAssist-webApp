@@ -7,7 +7,7 @@ import * as IoIcons from "react-icons/io5";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
-import '../../../styles/vaccinated.css';
+import "../../../styles/vaccinated.css";
 
 const useStyles = makeStyles((theme) => ({
   tset: {
@@ -16,8 +16,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
-    color:"rgb(96, 79, 255)",
+    color: "blue",
     margin: "5px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   fset: {
     display: "flex",
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
-    color:"rgb(96, 79, 255)",
+    color: "rgb(96, 79, 255)",
     margin: "5px",
     justifyContent: "center",
     color: "blue",
@@ -38,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: "15px",
     margin: "5px",
+    fontWeight: "bold",
+    color: "black",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   vset: {
     display: "flex",
@@ -52,9 +56,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "30px",
   },
   heading: {
-      width:"90%",
-    display:'flex',
+    width: "90%",
+    display: "flex",
     justifyContent: "center",
+  },
+  fontx: {
+    fontSize: "20px",
   },
 }));
 
@@ -98,15 +105,17 @@ const CheckBookingDetails = () => {
       });
   };
   const handleClick = (id) => {
-       axios.get("http://localhost:3002/confirmvaccine", { params: { book: data.booking_id } }).then((res) => {
-      console.log(res.data);
-      
-    });   alert("Confirmed");
+    axios
+      .get("http://localhost:3002/confirmvaccine", {
+        params: { book: data.booking_id },
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+    alert("Confirmed");
     window.location.href = "/vaccine/vaccinelist";
     console.log(data.booking_id);
-
-  
-  }
+  };
   return (
     <div>
       <div>
@@ -127,7 +136,7 @@ const CheckBookingDetails = () => {
           <div className={classes.all}>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Full name</h4>
+                <h4 className={classes.fontx}>Full name</h4>
               </div>
               <div className={classes.set}>
                 {" "}
@@ -136,7 +145,7 @@ const CheckBookingDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>NIC</h4>
+                <h4 className={classes.fontx}>NIC</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.nic}</p>
@@ -144,7 +153,7 @@ const CheckBookingDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Vaccine</h4>
+                <h4 className={classes.fontx}>Vaccine</h4>
               </div>
               <div className={classes.set}>
                 <p>{vaccineData.vaccine_name}</p>
@@ -152,7 +161,7 @@ const CheckBookingDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Dose</h4>
+                <h4 className={classes.fontx}>Dose</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.dose}</p>
@@ -160,7 +169,7 @@ const CheckBookingDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>ID type</h4>
+                <h4 className={classes.fontx}>ID type</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.id_type}</p>
@@ -168,7 +177,7 @@ const CheckBookingDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Address</h4>
+                <h4 className={classes.fontx}>Address</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.address}</p>
@@ -176,34 +185,36 @@ const CheckBookingDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Booked Date</h4>
+                <h4 className={classes.fontx}>Booked Date</h4>
               </div>
               <div className={classes.set}>
-                <p>
-                  {data.date && data.date.substring(0, 10)}
-                </p>
+                <p>{data.date && data.date.substring(0, 10)}</p>
               </div>
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4>Gender</h4>
+                <h4 className={classes.fontx}>Gender</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.gender}</p>
-              </div>           
+              </div>
             </div>
             <div className={classes.vset}>
               <div className={classes.fset}>
-              <Button variant="contained" color="primary" onClick={handleClick} autoFocus>
-                         Confirm
-              </Button>
-              </div>          
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleClick}
+                  autoFocus
+                >
+                  Confirm
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
-    
   );
 };
 
