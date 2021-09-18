@@ -2,25 +2,30 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const DashboardCard2 = () => {
-  const [iotPlaces, setIotPlaces] = useState(0);
+  const [completedBokkings, setcompletedBokkings] = useState(0);
   useEffect(() => {
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+    console.log(data.user_name);
     axios
-      .get("http://localhost:3002/getiotcount")
+      .get("http://localhost:3002/getCompletedbookings", {
+        params: { id: data.user_id },
+      })
       .then((res) => {
         console.log(res.data);
-        setIotPlaces(res.data[0].iotCount);
+        setcompletedBokkings(res.data[0].completed_bookings);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
   return (
-    <div class="card">
+    <div class="cardww">
       <b>
-        <p class="dash">Public IOT Places</p>
+        <p class="dash">Completed Bookings Today</p>
       </b>
       <b>
-        <p class="infor">{iotPlaces}</p>
+        <p class="infor">{completedBokkings}</p>
       </b>
     </div>
   );

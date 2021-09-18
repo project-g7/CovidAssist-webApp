@@ -14,6 +14,10 @@ function VaccineBookingChart() {
   const [sinopharm1, setSinopharm1] = useState("");
   const [sinopharm2, setSinopharm2] = useState("");
 
+  const [pieChart1, setPieChart1] = useState(0);
+  const [pieChart2, setPieChart2] = useState(0);
+  const [pieChart3, setPieChart3] = useState(0);
+  const [regPeople, setRegPeople] = useState("");
   useEffect(() => {
     Axios.get("http://localhost:3002/sputnikVfirstDose")
       .then((res) => {
@@ -80,6 +84,48 @@ function VaccineBookingChart() {
       });
   }, []);
 
+  useEffect(() => {
+    Axios.get("http://localhost:3002/PieChart1")
+      .then((res) => {
+        console.log(res.data[0].piechart1);
+        setPieChart1(res.data[0].piechart1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3002/PieChart2")
+      .then((res) => {
+        console.log(res.data[0].pieChart2);
+        setPieChart2(res.data[0].piechart2);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    Axios.get("http://localhost:3002/PieChart3")
+      .then((res) => {
+        console.log(res.data[0].piechart3);
+        setPieChart3(res.data[0].piechart3);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3002/VaccineregPeople")
+      .then((res) => {
+        console.log(res.data[0].reg);
+        setRegPeople(res.data[0].reg);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <div className="App">
       <div className="VaccinatedBody">
@@ -99,7 +145,7 @@ function VaccineBookingChart() {
         </div> */}
           <Bar
             data={{
-              labels: ["Oxford-AstraZeneca", "Sinopharm", "Sputnic V"],
+              labels: ["Oxford-AstraZeneca", "Sinopharm", "Pfizer"],
               datasets: [
                 {
                   label: "# 1st Dose",
@@ -214,12 +260,12 @@ function VaccineBookingChart() {
                   labels: [
                     "18-29 Age Group ",
                     "30-59 Age Group ",
-                    "Above 50 Age",
+                    "Above 60 Age",
                   ],
                   datasets: [
                     {
                       label: ["Covisheild"],
-                      data: [25, 55, 15], //calculate the presantage value
+                      data: [pieChart1, pieChart2, pieChart3], //calculate the presantage value
                       backgroundColor: [
                         "rgba(255, 99, 132)",
                         "rgba(54, 162, 235)",

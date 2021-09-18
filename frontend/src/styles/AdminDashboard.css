@@ -1,7 +1,7 @@
 .a-navbar-title {
   color: white;
   /* margin-left: 10%; */
-  margin-top: 20px;
+  margin-top: 15px;
   font-size: 25px;
 }
 
@@ -13,7 +13,7 @@
 
 .a-title {
   margin-left: -40px;
-  margin-top: 20px;
+  margin-top: 15px;
   /* display: inline-block; */
   color: white;
   font-size: 25px;
@@ -61,10 +61,12 @@
 } */
 
 .dash {
-  font-size: 18px; /*modifed*/
+  font-size: 20px; /*modifed*/
   margin-left: 8%;
   padding-top: 8px; /*modifed*/
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; /*modifed*/
+  font-weight: bold;
+  color: black;
 }
 
 .dash1 {
@@ -91,12 +93,57 @@
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
 }
-
+.cardw:hover {
+  -ms-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.cardww:hover {
+  -ms-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.cardw {
+  /* font-size: 18px; */
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  border-bottom: #1113b8;
+  /* border-width: 50px; */
+  border-bottom-style: solid;
+  border-width: 10px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  /* color: #44361b; */
+  width: 240px;
+  height: 160px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px 0 rgba(65, 57, 57, 0.993);
+  margin-left: 6px;
+}
+.cardww {
+  /* font-size: 18px; */
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  border-bottom: rgb(159, 49, 192);
+  /* border-width: 50px; */
+  border-bottom-style: solid;
+  border-width: 10px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  /* color: #44361b; */
+  width: 240px;
+  height: 160px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px 0 rgba(65, 57, 57, 0.993);
+  margin-left: 6px;
+}
 .infor {
   margin-left: 15px;
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 20px;
-  color: black;
+  color: red;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
@@ -188,56 +235,51 @@
   visibility: visible;
 }
 
-.profile-wrapper{
+.profile-wrapper {
   overflow: hidden;
-  min-width:150px;
+  min-width: 150px;
   max-width: 250px;
   text-align: right;
-  float:right;
-  margin-right: 10px;  
+  float: right;
+  margin-right: 10px;
 }
 
 .profile-wrapper .dropbtn {
   border: none;
   outline: none;
-  color:#007042;
+  color: #007042;
   background-color: inherit;
   font-family: inherit;
   margin-right: 0;
   display: inline-block;
-  
-
 }
-.profile-wrapper :hover
-{
-  color:#067D68;
-
+.profile-wrapper :hover {
+  color: #067d68;
 }
 
-.user-icon{
+.user-icon {
   overflow: hidden;
-  min-width:150px;
+  min-width: 150px;
   max-width: 250px;
   text-align: right;
-  float:right;
+  float: right;
   margin-right: 10px;
 }
-.drop-icon{
+.drop-icon {
   font-size: 2rem;
   color: #ffffff;
 }
 
-
-.profile-text{
+.profile-text {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   padding: 8px 10px 8px 16px;
   list-style: none;
   height: 30px;
 }
 
-.profile-text:hover{
+.profile-text:hover {
   text-decoration: none;
   color: #ffffff;
   background-color: rgb(10, 111, 243);
@@ -252,7 +294,7 @@
 }
 
 .menu {
-  display:none;
+  display: none;
   position: absolute;
   background-color: #ffffff;
   /* opacity: 0.9; */
@@ -272,8 +314,7 @@
   background-color: #001572;
 }
 
-.user-icon:hover .menu
-{
+.user-icon:hover .menu {
   display: block;
 }
 
@@ -293,11 +334,11 @@
   width: 700px;
   height: 550px;
   margin-bottom: 50px;
-  margin-left: 230px;
+  margin-left: 280px;
   border-radius: 10px;
   /* padding-left: 50px; */
 }
-.pie-chart-body{
+.pie-chart-body {
   width: "80%";
   margin-top: 40px;
   font-size: medium;
@@ -305,18 +346,32 @@
     "Lucida Sans", Arial, sans-serif;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 400px;
-  height: 500px;
+  height: 550px;
   margin-bottom: 50px;
   margin-left: 30px;
   border-radius: 10px;
 }
-.chart-body{
+.pie-chart-body2 {
+  width: "100%";
+  margin-top: 40px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 400px;
+  height: 550px;
+  margin-bottom: 50px;
+  margin-left: 50px;
+  /* margin-right: 100px; */
+  border-radius: 10px;
+}
+.chart-body {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.heading-chart{
+.heading-chart {
   background-color: #c1d7e0;
   color: rgb(15, 25, 119);
   display: flex;
@@ -324,7 +379,7 @@
   border-radius: 10px 10px 0px 0px;
 }
 
-.heading-piechart{
+.heading-piechart {
   background-color: #c1d7e0;
   color: rgb(15, 25, 119);
   display: flex;
@@ -333,7 +388,7 @@
   margin-bottom: 20px;
 }
 
-.input-file{
+.input-file {
   width: 65%;
   display: flex;
   justify-content: space-around;

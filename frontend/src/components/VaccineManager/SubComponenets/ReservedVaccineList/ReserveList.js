@@ -5,7 +5,7 @@ import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import * as BiIcons from "react-icons/bi";
-import '../../../../styles/vaccinated.css';
+import "../../../../styles/vaccinated.css";
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
@@ -16,18 +16,18 @@ export class ReserveList extends Component {
     // console.log("Confirm");
     //  axios.get("http://localhost:3002/confirmvaccine", { params: { book: row.booking_id } }).then((res) => {
     //   console.log(res.data);
-      
+
     // });
-  
+
     //  console.log(cell);
     return (
       <Link to={"/vaccine/CheckBookingDetails?id=" + row.booking_id}>
-          View Details  
+        View Details
       </Link>
     );
   };
   state = {
-      checked: 0,
+    checked: 0,
     centers: [],
     book: [],
     columns: [
@@ -36,7 +36,7 @@ export class ReserveList extends Component {
         text: "NIC",
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-          justifyContent:"center"
+          justifyContent: "center",
         },
       },
       {
@@ -45,10 +45,10 @@ export class ReserveList extends Component {
         filter: textFilter(),
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-          display:"flex",
-          justifyContent:"space-around",
+          display: "flex",
+          justifyContent: "space-around",
           alignItems: "center",
-        }
+        },
       },
       {
         dataField: "address",
@@ -56,14 +56,14 @@ export class ReserveList extends Component {
         sort: true,
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-        }
+        },
       },
       {
         dataField: "vaccine_name",
         text: "Vaccine",
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-        }
+        },
       },
       {
         dataField: "link",
@@ -71,7 +71,7 @@ export class ReserveList extends Component {
         formatter: this.linkFormatter,
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-        }
+        },
       },
     ],
   };
@@ -81,18 +81,26 @@ export class ReserveList extends Component {
     data = JSON.parse(data);
     console.log(data.user_name);
 
-    axios.get("http://localhost:3002/reservedList", { params: { id: data.user_id } }).then((res) => {
-      console.log(res.data);
-      this.setState({
-        centers: res.data,
+    axios
+      .get("http://localhost:3002/reservedList", {
+        params: { id: data.user_id },
+      })
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          centers: res.data,
+        });
       });
-    });
-    axios.get("http://localhost:3002/getvaccinecenter", { params: { id: data.user_id } }).then((res) => {
-      console.log(res.data);
-      this.setState({
-        name: res.data[0].name,
-      }); 
-    });
+    axios
+      .get("http://localhost:3002/getvaccinecenter", {
+        params: { id: data.user_id },
+      })
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          name: res.data[0].name,
+        });
+      });
   }
 
   render() {
@@ -138,7 +146,7 @@ export class ReserveList extends Component {
         console.log(e);
         // axios.get("http://localhost:3002/confirmvaccine", { params: { book: row.booking_id } }).then((res) => {
         //     console.log(res.data);
-            
+
         //   });
         // console.log(e);
       },
@@ -151,10 +159,15 @@ export class ReserveList extends Component {
     //   onRowClick: {selectRow}
     // };
     return (
-      <div>
+      <div className="AddBody-req">
+        <div className="heding">
+          <h3>Reserved List</h3>
+        </div>
         <div className="container">
-          <div className="container" style={{ marginTop: "30px" }}>
-          <div className="tabletitle"><h4>{this.state.name}</h4></div> 
+          <div className="container" style={{ marginTop: "10px" }}>
+            <div className="tabletitle">
+              <h4 className="titlename"> Center Name : {this.state.name}</h4>
+            </div>
             <BootstrapTable
               bootstrap4
               hover
@@ -172,4 +185,4 @@ export class ReserveList extends Component {
     );
   }
 }
-export default  ReserveList
+export default ReserveList;

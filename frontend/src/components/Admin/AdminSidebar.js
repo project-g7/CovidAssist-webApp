@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
+import * as FiIcons from "react-icons/fi";
 import { SidebarData } from "./SidebarData";
 import SubMenu from "./SubMenu";
 import { IconContext } from "react-icons/lib";
@@ -82,10 +83,13 @@ const Sidebar = () => {
 
               <div className="menu">
                 <Link to="/admin/profile" className="profile-text">
-                  My Profile
+               
+                 <FaIcons.FaUserCircle style={{color:'balck'}} />   My Profile
                   <br />
                 </Link>
                 <Link to="/" className="profile-text">
+                <FiIcons.FiLogOut style={{color:'balck'}} /> 
+
                   Log Out
                 </Link>
               </div>

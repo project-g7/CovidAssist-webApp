@@ -96,8 +96,8 @@ export default function NavTabs() {
           onChange={handleChange}
           indicatorColor="primary"
         >
-          <LinkTab label="Verified Administrators"  {...a11yProps(0)} />
-          <LinkTab label="Unverified Administrators" {...a11yProps(1)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Verified Administrators"  {...a11yProps(0)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Unverified Administrators" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >

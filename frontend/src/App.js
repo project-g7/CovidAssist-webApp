@@ -15,9 +15,22 @@ import { VaccineBooking } from "./components/Admin/pages/Reports/VaccineBooking"
 import VaccinationAreas from "./components/Admin/pages/Reports/VaccinationAreas";
 import HealthMeasures from "./components/Admin/pages/Reports/HealthMeasures";
 import VaccinatedDetails from "./components/VaccineManager/Reports/VaccinatedDetails";
-import ContactTracingDashboard from "./components/ContactTracingManager/SubComponents/Dashboard"
+import ReservedVaccineList from "./components/VaccineManager/pages/ReservedVaccineList";
+import DisplayVerifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayVerifiedAdministrators"
+import DisplayUnverifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayUnverifiedAdministrator"
+
+import Upcomingbookings from "./components/VaccineManager/pages/Upcomingbookings"; 
+import RegisterDetails from "./components/VaccineManager/pages/RegisterDetails";
+import UpcomingRegisterDetails from "./components/VaccineManager/pages/UpcomingRegisterDetails";
+import CheckBookingDetails from "./components/VaccineManager/pages/CheckBookingDetails";
+// import WelcomeVaccine from "./components/Vaccine/WelcomeVaccine";
+
 import DisplayMobileUser from "./components/ContactTracingManager/SubComponents/DisplayMobileUser";
 import ViewExposure from "./components/ContactTracingManager/SubComponents/ViewExposure";
+import Profile from "./components/Admin/pages/Profile";
+import vaccineProfile from "./components/VaccineManager/pages/Profile";
+import ctProfile from "./components/ContactTracingManager/pages/Profile";
+import Dashboard from "./components/ContactTracingManager/SubComponents/Dashboard";
 function App() {
   return (
     <Router>
@@ -60,10 +73,61 @@ function App() {
           path="/admin/vaccinemanage/center"
           component={DisplayCenter}
         ></Route>
-        <Route exact path="/contactTracing" component={ContactTracingDashboard}></Route>
+        <Route exact path="/contactTracing" component={Dashboard}></Route>
         <Route exact path="/contactTracing/mobileUser" component={DisplayMobileUser}></Route>
         <Route exact path="/contactTracing/viewExposure/mobileUser" component={DisplayMobileUser}></Route>
         <Route exact path="/contactTracing/viewExposure" component={ViewExposure}></Route>
+         <Route
+          exact
+          path="/vaccine/vaccinelist"
+          component={ReservedVaccineList}
+        ></Route>
+        <Route
+          exact
+          path="/admin/profile"
+          component={Profile}
+        ></Route>
+        <Route
+          exact
+          path="/vaccine/profile"
+          component={vaccineProfile}
+        ></Route>
+        <Route
+          exact
+          path="/ct/profile"   
+          component={ctProfile}
+        ></Route>
+        <Route 
+          exact
+          path='/admin/requests/verifiedAdministrators'
+          component={DisplayVerifiedAdministrators}
+        ></Route>
+        <Route 
+          exact
+          path='/admin/requests/unverifiedAdministrators'
+          component={DisplayUnverifiedAdministrators}
+        ></Route>
+        <Route
+          exact
+          path="/vaccine/upcoming"   
+          component={Upcomingbookings}
+        ></Route>
+          <Route
+          exact
+          path="/vaccine/RegisterDetails"   
+          component={RegisterDetails}
+        ></Route>
+        <Route
+          exact
+          path="/vaccine/UpcomingRegisterDetails"   
+          component={UpcomingRegisterDetails}
+        ></Route>
+          <Route
+          exact
+          path="/vaccine/CheckBookingDetails"   
+          component={CheckBookingDetails}
+        ></Route>
+        
       </Switch>
     </Router>
   );

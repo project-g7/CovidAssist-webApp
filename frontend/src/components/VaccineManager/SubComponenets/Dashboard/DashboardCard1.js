@@ -2,25 +2,30 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const DashboardCard1 = () => {
-  const [centers, setCenters] = useState(0);
+  const [bookings, setBookings] = useState(0);
   useEffect(() => {
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+    console.log(data.user_name);
     axios
-      .get("http://localhost:3002/getcentercount")
+      .get("http://localhost:3002/bookingcount", {
+        params: { id: data.user_id },
+      })
       .then((res) => {
         console.log(res.data);
-        setCenters(res.data[0].centerCount);
+        setBookings(res.data[0].total_bookings);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
   return (
-    <div class="card">
+    <div class="cardww">
       <b>
-        <p class="dash">Total Vaccine Centers</p>
+        <p class="dash">Total Bookings Today</p>
       </b>
       <b>
-        <p class="infor">{centers}</p>
+        <p class="infor">{bookings}</p>
       </b>
     </div>
   );

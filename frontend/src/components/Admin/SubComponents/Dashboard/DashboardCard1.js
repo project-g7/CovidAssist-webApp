@@ -15,7 +15,7 @@ const DashboardCard1 = () => {
       });
   }, []);
   return (
-    <div class="card">
+    <div class="cardw">
       <b>
         <p class="dash">Total Vaccine Centers</p>
       </b>

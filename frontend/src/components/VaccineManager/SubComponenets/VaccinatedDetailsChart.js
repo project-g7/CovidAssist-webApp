@@ -24,6 +24,11 @@ const VaccinatedDetailsChart = () => {
   const [date3, setDate3] = useState("");
   const [date4, setDate4] = useState("");
 
+  const [pieChart1, setPieChart1] = useState(0);
+  const [pieChart2, setPieChart2] = useState(0);
+  const [pieChart3, setPieChart3] = useState(0);
+  const [people, setPeople] = useState("");
+
   useEffect(() => {
     getFirstDoseCount1();
     getFirstDoseCount2();
@@ -35,6 +40,10 @@ const VaccinatedDetailsChart = () => {
     getSecondDoseCount4();
     getVaccineCenterDistrict();
     getVaccineName();
+    getVaccinatedPieChart1();
+    getVaccinatedPieChart2();
+    getVaccinatedPieChart3();
+    getVaccinatedPeople();
   }, []);
 
   const getFirstDoseCount1 = () => {
@@ -222,6 +231,74 @@ const VaccinatedDetailsChart = () => {
         console.log(err);
       });
   };
+
+  const getVaccinatedPieChart1 = () => {
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+
+    axios
+      .get("http://localhost:3002/vaccinatedPieChart1", {
+        params: { id: data.user_id },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setPieChart1(res.data[0].AgeCount1);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getVaccinatedPieChart2 = () => {
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+
+    axios
+      .get("http://localhost:3002/vaccinatedPieChart2", {
+        params: { id: data.user_id },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setPieChart2(res.data[0].AgeCount2);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getVaccinatedPieChart3 = () => {
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+
+    axios
+      .get("http://localhost:3002/vaccinatedPieChart3", {
+        params: { id: data.user_id },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setPieChart3(res.data[0].AgeCount3);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getVaccinatedPeople = () => {
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+
+    axios
+      .get("http://localhost:3002/vaccinatedPeople", {
+        params: { id: data.user_id },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setPeople(res.data[0].AgeCountPeople);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="App">
       <div className="Title1">
@@ -386,12 +463,16 @@ const VaccinatedDetailsChart = () => {
                   labels: [
                     "18-29 Age Group ",
                     "30-59 Age Group ",
-                    "Above 50 Age",
+                    "Above 60 Age",
                   ],
                   datasets: [
                     {
                       label: ["Covisheild"],
-                      data: [25, 55, 15], //calculate the presantage value
+                      data: [
+                        (pieChart1 / people) * 100,
+                        (pieChart2 / people) * 100,
+                        (pieChart3 / people) * 100,
+                      ], //calculate the presantage value
                       backgroundColor: [
                         "rgba(255, 99, 132)",
                         // "rgba(54, 162, 235)",

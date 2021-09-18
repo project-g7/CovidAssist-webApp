@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { SidebarData } from './SidebarData';
+import * as FiIcons from "react-icons/fi";
 import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
 import '../../styles/ContactDashboard.css'
@@ -71,10 +72,12 @@ const Sidebar = () => {
 
               <div className="menu">
                 <Link to="/ct/profile" className="profile-text">
+                <FaIcons.FaUserCircle style={{color:'balck'}} />
                   My Profile
                   <br />
                 </Link>
                 <Link to="/" className="profile-text">
+                <FiIcons.FiLogOut style={{color:'balck'}} /> 
                   Log Out
                 </Link>
               </div>
