@@ -20,15 +20,15 @@ class FileReader extends React.Component {
       centers: [],
       columns: [
         {
-          dataField: "time",
-          text: "Time",
+          dataField: "Date",
+          text: "Date",
           headerStyle: {
             backgroundColor: "rgb(96, 79, 255)",
             justifyContent: "center",
           },
         },
         {
-          dataField: "Temperature",
+          dataField: "Temprature",
           text: "Temperature",
           headerStyle: {
             backgroundColor: "rgb(96, 79, 255)",
@@ -132,7 +132,7 @@ class FileReader extends React.Component {
         </div>
         <div>
           <h5 style={{ marginTop: "30px", marginLeft: "30px" }}>
-            Choose and upload yous files here
+            Choose and upload your files here
           </h5>
           <div className="input-file">
             <input

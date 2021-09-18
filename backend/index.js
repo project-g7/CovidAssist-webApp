@@ -2290,8 +2290,22 @@ app.get("/upcommingbookings", (req, res) => {
               console.log(err);
               res.send(err);
             } else {
-              res.send(result);
               console.log(result);
+              let arr = [];
+              for(let i=0;i<result.length;i++){
+                arr.push({
+                  fullname : result[i].fullname,
+                  vaccine_name : result[i].vaccine_name,
+                  date : result[i].date.toISOString().substr(0,10),
+                  nic : result[i].nic,
+                  center_id : result[i].center_id,
+                  address : result[i].address,
+                  booking_id : result[i].booking_id
+                })
+
+              }
+              res.send(arr);
+              console.log(arr);
               // console.log(result);
             }
           }
