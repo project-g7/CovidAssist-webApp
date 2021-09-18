@@ -15,7 +15,9 @@ import { VaccineBooking } from "./components/Admin/pages/Reports/VaccineBooking"
 import VaccinationAreas from "./components/Admin/pages/Reports/VaccinationAreas";
 import HealthMeasures from "./components/Admin/pages/Reports/HealthMeasures";
 import VaccinatedDetails from "./components/VaccineManager/Reports/VaccinatedDetails";
-import ContactTable from "./components/ContactTracingManager/SubComponenets/ContactTable";
+import ContactTracingDashboard from "./components/ContactTracingManager/SubComponents/Dashboard"
+import DisplayMobileUser from "./components/ContactTracingManager/SubComponents/DisplayMobileUser";
+import ViewExposure from "./components/ContactTracingManager/SubComponents/ViewExposure";
 function App() {
   return (
     <Router>
@@ -26,7 +28,6 @@ function App() {
         <Route exact path="/Welcome" component={Welcome}></Route>
         <Route exact path="/admin" component={WelcomeAdmin}></Route>
         <Route exact path="/vaccine" component={WelcomeVaccine}></Route>
-        <Route exact path="/ct" component={WelcomeContact}></Route>
         <Route
           exact
           path="/admin/vaccinemanage"
@@ -59,7 +60,10 @@ function App() {
           path="/admin/vaccinemanage/center"
           component={DisplayCenter}
         ></Route>
-        <Route exact path="/contactTracing" component={ContactTable}></Route>
+        <Route exact path="/contactTracing" component={ContactTracingDashboard}></Route>
+        <Route exact path="/contactTracing/mobileUser" component={DisplayMobileUser}></Route>
+        <Route exact path="/contactTracing/viewExposure/mobileUser" component={DisplayMobileUser}></Route>
+        <Route exact path="/contactTracing/viewExposure" component={ViewExposure}></Route>
       </Switch>
     </Router>
   );

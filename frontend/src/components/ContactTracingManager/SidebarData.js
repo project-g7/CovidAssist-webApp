@@ -6,8 +6,28 @@ import * as RiIcons from 'react-icons/ri';
 
 export const SidebarData = [
   {
+    title: "Dashboard",
+    path: "/contactTracing",
+    icon: <RiIcons.RiDashboardLine />,
+    // iconClosed: <RiIcons.RiArrowDownSFill />,
+    // iconOpened: <RiIcons.RiArrowUpSFill />,
+
+    // subNav: [
+    //   {
+    //     title: 'Users',
+    //     path: '/overview/users',
+    //     icon: <IoIcons.IoIosPaper />
+    //   },
+    //   {
+    //     title: 'Revenue',
+    //     path: '/overview/revenue',
+    //     icon: <IoIcons.IoIosPaper />
+    //   }
+    // ]
+  },
+  {
     title: 'View Exposures',
-    path: '/ct',
+    path: '/contactTracing/viewExposure',
     icon: <RiIcons.RiUserSearchFill/>,
     // iconClosed: <RiIcons.RiArrowDownSFill />,
     // iconOpened: <RiIcons.RiArrowUpSFill />,
@@ -27,7 +47,7 @@ export const SidebarData = [
   },
   {
     title: 'Reports',
-    path: '/ct/reports',
+    path: '/contactTracing/reports',
     icon: <IoIcons.IoIosPaper/>
   },
   

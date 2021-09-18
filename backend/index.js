@@ -139,6 +139,47 @@ app.get("/unverifiedAdministrators", (req, res) => {
     }
   );
 });
+app.get("/MobileUserDetails", (req, res) => {
+  const id = req.query.id;
+  console.log(id);
+  db.query(
+    "SELECT * FROM covidAssist.mobile_user WHERE mobile_user_id = ?",
+    [id],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.get("/mobileUsers", (req, res) => {
+  db.query("SELECT * FROM covidAssist.mobile_user", (err, result) => {
+    if (err) {
+      console.log("Error ---1");
+      res.send(err);
+    } else {
+      res.send(result);
+      console.log("Success");
+      // console.log(result);
+    }
+  });
+});
+app.get("/exposureUsers", (req, res) => {
+  db.query("SELECT * FROM covidAssist.mobile_user WHERE contact_tracing_status = 1", (err, result) => {
+    if (err) {
+      console.log("Error ---1");
+      res.send(err);
+    } else {
+      res.send(result);
+      console.log("Success");
+      // console.log(result);
+    }
+  });
+});
 
 app.get("/vaccines", (req, res) => {
   db.query("SELECT * FROM covidAssist.vaccine", (err, result) => {
@@ -1677,7 +1718,6 @@ app.get("/BookedVaccine", (req, res) => {
 });
 
 app.post("/addTemperatureReport", (req, res) => {
-
   console.log(req.body);
   // console.log(req);
   // console.log("sssss");
@@ -1699,17 +1739,65 @@ app.post("/addTemperatureReport", (req, res) => {
   }
   res.send("Success");
 });
+app.post("/fetchUsers", (req, res) => {
+  console.log(req.body);
+  db.query(
+    "SELECT * FROM covidAssist.mobile_user where nic in (?)",
+    [req.body],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("result");
+        res.send(result);
+      }
+    }
+  );
+});
+app.post("/confirm", (req, res) => {
+  console.log(req.body);
+  db.query(
+    "SELECT * FROM covidAssist.mobile_user_rpk where others_rpk in (?)",
+    [req.body],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+        const data1 = [];
+        {
+          result.map((item) => {
+            data1.push(item.mobile_user_id);
+          });
+        }
+        console.log(data1);
+        db.query(
+          "UPDATE mobile_user SET contact_tracing_status = 1 WHERE mobile_user_id IN (?)",
+          [data1],
+          (error, result) => {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log(result);
+              res.send(result);
+            }
+          }
+        );
+      }
+    }
+  );
+});
 
-app.get("/getVaccines",(req,res)=>{
-  db.query("SELECT vaccine_name FROM vaccine",(error,result)=>{
-    if(error){
+app.get("/getVaccines", (req, res) => {
+  db.query("SELECT vaccine_name FROM vaccine", (error, result) => {
+    if (error) {
       console.log(error);
-    }else{
+    } else {
       console.log(result);
       res.send(result);
     }
-  })
-})
+  });
+});
 
 app.listen(3002, () => {
   console.log("your server is running port 3002");
