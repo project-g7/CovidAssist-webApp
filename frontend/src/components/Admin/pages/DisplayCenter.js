@@ -72,6 +72,7 @@ const DisplayCenter = () => {
       .then((res) => {
         console.log(res.data[0]);
         setData(res.data[0]);
+        console.log(data.name);
       })
       .catch((err) => {
         console.log(err);

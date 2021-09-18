@@ -1,20 +1,16 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
 import Login from "./components/Login";
 import Welcome from "./components/Welcome";
 import WelcomeAdmin from "./components/Admin/WelcomeAdmin";
 import AdminVaccineManage from "./components/Admin/pages/VaccineManage";
 import DisplayCenter from "./components/Admin/pages/DisplayCenter";
 import Requests from "./components/Admin/pages/Requests";
-import Profile from "./components/Admin/pages/Profile";
-import vaccineProfile from "./components/VaccineManager/pages/Profile";
-import ctProfile from "./components/ContactTracingManager/pages/Profile";
 import Iot from "./components/Admin/pages/Iot";
 import WelcomeVaccine from "./components/VaccineManager/WelcomeVaccine";
 import WelcomeContact from "./components/ContactTracingManager/WelcomeContactTracing";
 import ForgotPassword from "./components/ForgotPassword";
 import Register from "./components/Register";
-import { BrowserRouter as Router, Link, Route, Switch,Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { VaccineBooking } from "./components/Admin/pages/Reports/VaccineBooking";
 import VaccinationAreas from "./components/Admin/pages/Reports/VaccinationAreas";
 import HealthMeasures from "./components/Admin/pages/Reports/HealthMeasures";
@@ -29,8 +25,13 @@ import UpcomingRegisterDetails from "./components/VaccineManager/pages/UpcomingR
 import CheckBookingDetails from "./components/VaccineManager/pages/CheckBookingDetails";
 // import WelcomeVaccine from "./components/Vaccine/WelcomeVaccine";
 
+import DisplayMobileUser from "./components/ContactTracingManager/SubComponents/DisplayMobileUser";
+import ViewExposure from "./components/ContactTracingManager/SubComponents/ViewExposure";
+import Profile from "./components/Admin/pages/Profile";
+import vaccineProfile from "./components/VaccineManager/pages/Profile";
+import ctProfile from "./components/ContactTracingManager/pages/Profile";
+import Dashboard from "./components/ContactTracingManager/SubComponents/Dashboard";
 function App() {
-  const [loggedIn,setLoggedIn] = useState(true);
   return (
     <Router>
       <Switch>
@@ -40,7 +41,6 @@ function App() {
         <Route exact path="/Welcome" component={Welcome}></Route>
         <Route exact path="/admin" component={WelcomeAdmin}></Route>
         <Route exact path="/vaccine" component={WelcomeVaccine}></Route>
-        <Route exact path="/ct" component={WelcomeContact}></Route>
         <Route
           exact
           path="/admin/vaccinemanage"
@@ -73,6 +73,10 @@ function App() {
           path="/admin/vaccinemanage/center"
           component={DisplayCenter}
         ></Route>
+        <Route exact path="/contactTracing" component={Dashboard}></Route>
+        <Route exact path="/contactTracing/mobileUser" component={DisplayMobileUser}></Route>
+        <Route exact path="/contactTracing/viewExposure/mobileUser" component={DisplayMobileUser}></Route>
+        <Route exact path="/contactTracing/viewExposure" component={ViewExposure}></Route>
          <Route
           exact
           path="/vaccine/vaccinelist"
