@@ -6,8 +6,10 @@ import { useLocation } from "react-router-dom";
 import * as IoIcons from "react-icons/io5";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import axios from "axios";
+// import "../../../styles/VaccinationAreas.css";
 
 const useStyles = makeStyles((theme) => ({
+
   tset: {
     display: "flex",
     width: "50%",
@@ -96,7 +98,7 @@ const UpcomingRegisterDetails = () => {
       </div>
       <div className="container tab-screen">
         <div className="AddBody-center">
-          <div className="heding-center">
+          <div className="heading-center">
             <div className={classes.icon}>
               <Link to="/vaccine/upcoming">
                 <IoIcons.IoArrowBack />

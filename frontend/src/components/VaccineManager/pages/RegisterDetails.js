@@ -96,7 +96,7 @@ const RegisterDetails = () => {
       </div>
       <div className="container tab-screen">
         <div className="AddBody-center">
-          <div className="heding-center">
+          <div className="heading-center">
             <div className={classes.icon}>
               <Link to="/vaccine/vaccinelist">
                 <IoIcons.IoArrowBack />

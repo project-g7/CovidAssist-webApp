@@ -121,7 +121,7 @@ const CheckBookingDetails = () => {
       </div>
       <div className="container tab-screen">
         <div className="AddBody-center2">
-          <div className="heding-center">
+          <div className="heading-center">
             <div className={classes.icon}>
               <Link to="/vaccine/vaccinelist">
                 <IoIcons.IoArrowBack />
