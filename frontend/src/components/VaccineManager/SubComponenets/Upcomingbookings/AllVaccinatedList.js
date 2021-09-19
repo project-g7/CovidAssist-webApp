@@ -1,83 +1,68 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import axios from "axios";
-import filterFactory, {
-  textFilter,
-  dateFilter,
-} from "react-bootstrap-table2-filter";
+import filterFactory, { textFilter,dateFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import * as BiIcons from "react-icons/bi";
-import "../../../../styles/vaccinated.css";
+import '../../../../styles/vaccinated.css';
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
-export class UpcomingBookingTable extends Component {
+export class AllVaccinatedList extends Component {
   linkFormatter = (cell, row, rowIndex) => {
     console.log(cell);
     console.log(row);
-    // console.log("Confirm");
-    //  axios.get("http://localhost:3002/confirmvaccine", { params: { book: row.booking_id } }).then((res) => {
-    //   console.log(res.data);
-
-    // });
-
     //  console.log(cell);
     return (
       <Link to={"/vaccine/UpcomingRegisterDetails?id=" + row.booking_id}>
         View Details
-      </Link>
+      </Link> 
     );
   };
   state = {
-    checked: 0,
     centers: [],
-    book: [],
+    name: [],
     columns: [
       {
         dataField: "nic",
         text: "NIC",
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-          justifyContent: "center",
+          justifyContent:"center"
         },
       },
       {
         dataField: "fullname",
         text: "Name",
-        // filter: textFilter(),
+        filter: textFilter(),
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-          display: "flex",
-          justifyContent: "space-around",
+          display:"flex",
+          justifyContent:"space-around",
           alignItems: "center",
-        },
+        }
       },
       {
         dataField: "address",
         text: "Address",
-        headerStyle: {
-          backgroundColor: "rgb(96, 79, 255)",
-        },
-      },
-      {
-        dataField: "date",
-        text: "Date",
         sort: true,
-        filter: dateFilter(),
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-        },
+        }
       },
       {
         dataField: "vaccine_name",
         text: "Vaccine",
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-        },
+        }
+      },
+      {
+        dataField: "date",
+        text: "Date",
+        headerStyle: {
+          backgroundColor: "rgb(96, 79, 255)",
+        }
       },
       {
         dataField: "link",
@@ -85,7 +70,7 @@ export class UpcomingBookingTable extends Component {
         formatter: this.linkFormatter,
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-        },
+        }
       },
     ],
   };
@@ -95,26 +80,19 @@ export class UpcomingBookingTable extends Component {
     data = JSON.parse(data);
     console.log(data.user_name);
 
-    axios
-      .get("http://localhost:3002/upcommingbookings", {
-        params: { id: data.user_id },
-      })
-      .then((res) => {
-        console.log(res.data);
-        this.setState({
-          centers: res.data,
-        });
-      });
-    axios
-      .get("http://localhost:3002/getvaccinecenter", {
-        params: { id: data.user_id },
-      })
-      .then((res) => {
-        console.log(res.data);
-        this.setState({
-          name: res.data[0].name,
-        });
-      });
+    axios.get("http://localhost:3002/allvaccinatedList", { params: { id: data.user_id } }).then((res) => {
+      console.log(res.data);
+      this.setState({
+        centers: res.data,
+       
+      }); 
+    });
+    axios.get("http://localhost:3002/getvaccinecenter", { params: { id: data.user_id } }).then((res) => {
+      console.log(res.data);
+      this.setState({
+        name: res.data[0].name,
+      }); 
+    });
   }
 
   render() {
@@ -156,6 +134,8 @@ export class UpcomingBookingTable extends Component {
     const tableRowEvents = {
       onClick: (e, row, rowIndex) => {
         console.log(`clicked on row with index: ${rowIndex}`);
+        console.log("nshhshhs");
+        // console.log(e);
       },
       onMouseEnter: (e, row, rowIndex) => {
         // console.log(`enter on row with index: ${rowIndex}`);
@@ -166,20 +146,18 @@ export class UpcomingBookingTable extends Component {
     //   onRowClick: {selectRow}
     // };
     return (
+    
       <div className="AddBody-req">
       <div className="heding">
-          <h3>Upcoming Bookings List</h3>
-        </div>  
-        <div className="container">
-
+          <h3>Vaccinated List</h3>
+        </div>   
+        <div className="container"> 
           <div className="container" style={{ marginTop: "10px" }}>
-            <div className="tabletitle">
-              <h4 className="titlename">Center Name : {this.state.name}</h4>
-            </div>
-
+         <div className="tabletitle"><h4>{this.state.name}</h4></div> 
             <BootstrapTable
               bootstrap4
               hover
+              // caption={this.state.name}
               keyField="id"
               data={this.state.centers}
               columns={this.state.columns}
@@ -194,4 +172,5 @@ export class UpcomingBookingTable extends Component {
     );
   }
 }
-export default UpcomingBookingTable;
+
+export default AllVaccinatedList

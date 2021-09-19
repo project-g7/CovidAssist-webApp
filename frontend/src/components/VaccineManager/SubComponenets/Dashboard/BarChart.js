@@ -265,7 +265,7 @@ class BarChart extends Component {
     return (
       <div className="Add-chart-body">
         <div className="heading-chart">
-          <h3>Vaccine Centers</h3>
+          <h3>Upcoming Bookings</h3>
         </div>
         <div className="chart-body">
           <svg width={this.state.svgWidth} height={this.state.svgHeight}>
