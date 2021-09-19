@@ -91,7 +91,7 @@ const DisplayMobileUser = () => {
       </div>
       <div className="container tab-screen">
         <div className="AddBody-center" style={{ height: "540px" }}>
-          <div className="heding-center">
+          <div className="heading-center">
             <div className={classes.icon}>
               {ve == 0 ? (
                 <Link to="/contactTracing">
