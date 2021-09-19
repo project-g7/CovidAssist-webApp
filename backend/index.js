@@ -1771,7 +1771,7 @@ app.get("/vaccineCenterManagerDetails", (req, res) => {
   const id = req.query.id;
   console.log(id);
   db.query(
-    "Select user_id from vaccine_manager WHERE center_id = ?",
+    "Select user_id from vaccine_manager WHERE status=1 AND center_id = ?",
     [id],
     (error, result) => {
       if (error) {
@@ -1953,7 +1953,7 @@ app.get("/test", (req, res) => {
 app.get("/reservedList", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -1986,7 +1986,7 @@ app.get("/reservedList", (req, res) => {
 app.get("/vaccinatedList", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -2366,7 +2366,7 @@ app.get("/getcenterdistrict", (req, res) => {
 app.get("/upcommingbookings", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -2411,7 +2411,7 @@ app.get("/upcommingbookings", (req, res) => {
 app.get("/getvaccinecenter", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -2476,7 +2476,7 @@ app.get("/BookedVaccine", (req, res) => {
 app.get("/bookingcount", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -2506,7 +2506,7 @@ app.get("/bookingcount", (req, res) => {
 app.get("/getCompletedbookings", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -2536,7 +2536,7 @@ app.get("/getCompletedbookings", (req, res) => {
 app.get("/getcancelcount", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -2567,7 +2567,7 @@ app.get("/getcancelcount", (req, res) => {
 app.get("/getVaccine", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -2597,7 +2597,7 @@ app.get("/getVaccine", (req, res) => {
 app.get("/monthlybookings", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -2628,7 +2628,7 @@ app.get("/monthlybookings", (req, res) => {
 app.get("/monthlycompletedbookings", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -2658,7 +2658,7 @@ app.get("/monthlycompletedbookings", (req, res) => {
 app.get("/getupcomingbookingsdate", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -2770,7 +2770,7 @@ app.get("/getVaccines", (req, res) => {
 app.get("/allvaccinatedList", (req, res) => {
   const userId = req.query.id;
   db.query(
-    "Select center_id from vaccine_manager WHERE user_id = ?",
+    "Select center_id from vaccine_manager WHERE status=1 AND user_id = ?",
     [userId],
     (error, result) => {
       if (error) {
@@ -2788,9 +2788,21 @@ app.get("/allvaccinatedList", (req, res) => {
               console.log(err);
               res.send(err);
             } else {
-              res.send(result);
-              console.log("Successhggg");
-              // console.log(result);
+              let arr = [];
+              for(let i=0;i<result.length;i++){
+                arr.push({
+                  fullname : result[i].fullname,
+                  vaccine_name : result[i].vaccine_name,
+                  date : result[i].date.toISOString().substr(0,10),
+                  nic : result[i].nic,
+                  center_id : result[i].center_id,
+                  address : result[i].address,
+                  booking_id : result[i].booking_id
+                })
+
+              }
+              res.send(arr);
+              console.log(arr);
             }
           }
         );
