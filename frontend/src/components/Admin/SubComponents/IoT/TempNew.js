@@ -20,15 +20,15 @@ class FileReader extends React.Component {
       centers: [],
       columns: [
         {
-          dataField: "time",
-          text: "Time",
+          dataField: "Date",
+          text: "Date",
           headerStyle: {
             backgroundColor: "rgb(96, 79, 255)",
             justifyContent: "center",
           },
         },
         {
-          dataField: "Temperature",
+          dataField: "Temprature",
           text: "Temperature",
           headerStyle: {
             backgroundColor: "rgb(96, 79, 255)",
@@ -127,12 +127,12 @@ class FileReader extends React.Component {
     };
     return (
       <div className="AddBodyTemp">
-        <div className="heding">
+        <div className="heading">
           <h3>Upload Temperature Reports</h3>
         </div>
         <div>
           <h5 style={{ marginTop: "30px", marginLeft: "30px" }}>
-            Choose and upload yous files here
+            Choose and upload your files here
           </h5>
           <div className="input-file">
             <input

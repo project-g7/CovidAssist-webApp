@@ -95,8 +95,8 @@ export default function NavTabs() {
           onChange={handleChange}
           indicatorColor="primary"
         >
-          <LinkTab label="My Profile"  {...a11yProps(0)} />
-          <LinkTab label="Edit Profile" {...a11yProps(1)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="My Profile"  {...a11yProps(0)} />
+          <LinkTab style={{ textDecoration: 'none' }} label="Edit Profile" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >

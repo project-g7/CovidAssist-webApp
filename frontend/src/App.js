@@ -16,10 +16,10 @@ import VaccinationAreas from "./components/Admin/pages/Reports/VaccinationAreas"
 import HealthMeasures from "./components/Admin/pages/Reports/HealthMeasures";
 import VaccinatedDetails from "./components/VaccineManager/Reports/VaccinatedDetails";
 import ReservedVaccineList from "./components/VaccineManager/pages/ReservedVaccineList";
-import DisplayVerifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayVerifiedAdministrators"
-import DisplayUnverifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayUnverifiedAdministrator"
+import DisplayVerifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayVerifiedAdministrators";
+import DisplayUnverifiedAdministrators from "./components/Admin/SubComponents/Requests/DisplayUnverifiedAdministrator";
 
-import Upcomingbookings from "./components/VaccineManager/pages/Upcomingbookings"; 
+import Upcomingbookings from "./components/VaccineManager/pages/Upcomingbookings";
 import RegisterDetails from "./components/VaccineManager/pages/RegisterDetails";
 import UpcomingRegisterDetails from "./components/VaccineManager/pages/UpcomingRegisterDetails";
 import CheckBookingDetails from "./components/VaccineManager/pages/CheckBookingDetails";
@@ -31,7 +31,27 @@ import Profile from "./components/Admin/pages/Profile";
 import vaccineProfile from "./components/VaccineManager/pages/Profile";
 import ctProfile from "./components/ContactTracingManager/pages/Profile";
 import Dashboard from "./components/ContactTracingManager/SubComponents/Dashboard";
+import { ProtectedRouteAdmin } from "./ProtectedRouteAdmin.js";
+import { ProtectedRouteContact } from "./ProtectedRouteContact.js";
+import { ProtectedRouteVaccine } from "./ProtectedRouteVaccine.js";
+// import jwt from './jsonwebtoken';
+const jwt = require("jsonwebtoken");
 function App() {
+  // const token = localStorage.getItem("token");
+  // const header = jwt.decode(token, { complete: true });
+  // // console.log(header.payload.role);
+  // if (header != null) {
+  //   if (header.payload.role == "admin") {
+  //     return (
+  //       <Router>
+  //         <Switch>
+  //           <Route exact path="/admin" component={WelcomeAdmin} />
+  //         </Switch>
+  //       </Router>
+  //     );
+  //   }
+  // }
+
   return (
     <Router>
       <Switch>
@@ -39,95 +59,94 @@ function App() {
         <Route exact path="/" component={Login}></Route>
         <Route exact path="/Register" component={Register}></Route>
         <Route exact path="/Welcome" component={Welcome}></Route>
-        <Route exact path="/admin" component={WelcomeAdmin}></Route>
-        <Route exact path="/vaccine" component={WelcomeVaccine}></Route>
-        <Route
+        <ProtectedRouteAdmin exact path="/admin" component={WelcomeAdmin}/>
+        <ProtectedRouteVaccine exact path="/vaccine" component={WelcomeVaccine}/>
+        <ProtectedRouteAdmin
           exact
           path="/admin/vaccinemanage"
           component={AdminVaccineManage}
-        ></Route>
-        <Route exact path="/admin/requests" component={Requests}></Route>
-        <Route exact path="/admin/iot" component={Iot}></Route>
-        <Route
+        ></ProtectedRouteAdmin>
+        <ProtectedRouteAdmin exact path="/admin/requests" component={Requests}></ProtectedRouteAdmin>
+        <ProtectedRouteAdmin exact path="/admin/iot" component={Iot}></ProtectedRouteAdmin>
+        <ProtectedRouteAdmin
           exact
           path="/admin/reports/vaccinebooking"
           component={VaccineBooking}
-        ></Route>
-        <Route
+        ></ProtectedRouteAdmin>
+        <ProtectedRouteAdmin
           exact
           path="/admin/reports/vaccinationAreas"
           component={VaccinationAreas}
-        ></Route>
-        <Route
+        ></ProtectedRouteAdmin>
+        <ProtectedRouteAdmin
           exact
           path="/admin/reports/HealthMeasures"
           component={HealthMeasures}
-        ></Route>
-        <Route
+        ></ProtectedRouteAdmin>
+        <ProtectedRouteVaccine
           exact
           path="/vaccine/reports/VaccinatedDetails"
           component={VaccinatedDetails}
-        ></Route>
-        <Route
+        ></ProtectedRouteVaccine>
+        <ProtectedRouteAdmin
           exact
           path="/admin/vaccinemanage/center"
           component={DisplayCenter}
-        ></Route>
-        <Route exact path="/contactTracing" component={Dashboard}></Route>
-        <Route exact path="/contactTracing/mobileUser" component={DisplayMobileUser}></Route>
-        <Route exact path="/contactTracing/viewExposure/mobileUser" component={DisplayMobileUser}></Route>
-        <Route exact path="/contactTracing/viewExposure" component={ViewExposure}></Route>
-         <Route
+        ></ProtectedRouteAdmin>
+        <ProtectedRouteContact exact path="/contactTracing" component={Dashboard}></ProtectedRouteContact>
+        <ProtectedRouteContact
+          exact
+          path="/contactTracing/mobileUser"
+          component={DisplayMobileUser}
+        ></ProtectedRouteContact>
+        <ProtectedRouteContact
+          exact
+          path="/contactTracing/viewExposure/mobileUser"
+          component={DisplayMobileUser}
+        ></ProtectedRouteContact>
+        <ProtectedRouteContact
+          exact
+          path="/contactTracing/viewExposure"
+          component={ViewExposure}
+        ></ProtectedRouteContact>
+        <ProtectedRouteVaccine
           exact
           path="/vaccine/vaccinelist"
           component={ReservedVaccineList}
-        ></Route>
-        <Route
+        ></ProtectedRouteVaccine>
+        <ProtectedRouteAdmin exact path="/admin/profile" component={Profile}></ProtectedRouteAdmin>
+        <ProtectedRouteVaccine exact path="/vaccine/profile" component={vaccineProfile}></ProtectedRouteVaccine>
+        <ProtectedRouteContact exact path="/ct/profile" component={ctProfile}></ProtectedRouteContact>
+        <ProtectedRouteAdmin
           exact
-          path="/admin/profile"
-          component={Profile}
-        ></Route>
-        <Route
-          exact
-          path="/vaccine/profile"
-          component={vaccineProfile}
-        ></Route>
-        <Route
-          exact
-          path="/ct/profile"   
-          component={ctProfile}
-        ></Route>
-        <Route 
-          exact
-          path='/admin/requests/verifiedAdministrators'
+          path="/admin/requests/verifiedAdministrators"
           component={DisplayVerifiedAdministrators}
-        ></Route>
-        <Route 
+        ></ProtectedRouteAdmin>
+        <ProtectedRouteAdmin
           exact
-          path='/admin/requests/unverifiedAdministrators'
+          path="/admin/requests/unverifiedAdministrators"
           component={DisplayUnverifiedAdministrators}
-        ></Route>
-        <Route
+        ></ProtectedRouteAdmin>
+        <ProtectedRouteVaccine
           exact
-          path="/vaccine/upcoming"   
+          path="/vaccine/upcoming"
           component={Upcomingbookings}
-        ></Route>
-          <Route
+        ></ProtectedRouteVaccine>
+        <ProtectedRouteVaccine
           exact
-          path="/vaccine/RegisterDetails"   
+          path="/vaccine/RegisterDetails"
           component={RegisterDetails}
-        ></Route>
-        <Route
+        ></ProtectedRouteVaccine>
+        <ProtectedRouteVaccine
           exact
-          path="/vaccine/UpcomingRegisterDetails"   
+          path="/vaccine/UpcomingRegisterDetails"
           component={UpcomingRegisterDetails}
-        ></Route>
-          <Route
+        ></ProtectedRouteVaccine>
+        <ProtectedRouteVaccine
           exact
-          path="/vaccine/CheckBookingDetails"   
+          path="/vaccine/CheckBookingDetails"
           component={CheckBookingDetails}
-        ></Route>
-        
+        ></ProtectedRouteVaccine>
       </Switch>
     </Router>
   );

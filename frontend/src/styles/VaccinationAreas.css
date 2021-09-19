@@ -99,16 +99,29 @@
   margin-bottom: 50px;
   /* padding-left: 50px; */
 }
-.heding {
+.heading {
   background-color: #c1d7e0;
   color: rgb(15, 25, 119);
   display: flex;
   justify-content: center;
 }
-.heding-center {
+.heading-center {
   background-color: #c1d7e0;
   color: rgb(15, 25, 119);
   display: flex;
+}
+
+.subhead{
+  /* background-color: #c1d7e0; */
+  /* color: rgb(15, 25, 119); */
+  display: flex;
+  margin-top: 10px;
+  margin-left: 30px;
+  /* justify-content: center; */
+}
+
+.table{
+  margin-top: 30px;
 }
 
 .addform{

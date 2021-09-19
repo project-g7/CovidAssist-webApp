@@ -137,7 +137,11 @@ export class exposureTable extends Component {
         <div></div>
         <div >
         <div style={{ paddingTop: "120px",paddingLeft: "320px" }}>
-        <div className="container" >
+        <div className="AddBodyTemp">
+         <div className="heading">
+          <h3>View Exposures</h3>
+        </div>
+        <div className="table" >
           <div className="container" >
             <BootstrapTable
               bootstrap4
@@ -151,6 +155,7 @@ export class exposureTable extends Component {
               rowEvents={tableRowEvents}
             />
           </div>
+        </div>
         </div>
       </div>
         </div>

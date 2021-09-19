@@ -167,7 +167,7 @@ const AddVaccine = () => {
 
   return (
     <div className="AddBody">
-      <div className="heding">
+      <div className="heading">
         <h3>Vaccines</h3>
       </div>
       <div className="table_container">
