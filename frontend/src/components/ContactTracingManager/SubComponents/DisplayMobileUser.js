@@ -10,13 +10,15 @@ import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   tset: {
+    fontSize: "20px",
     display: "flex",
     width: "50%",
     backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
-    color: "rgb(96, 79, 255)",
+    color: "blue",
     margin: "5px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   set: {
     display: "flex",
@@ -26,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: "15px",
     margin: "5px",
+    color: "black",
+    fontWeight: "bold",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   vset: {
     display: "flex",
@@ -62,18 +67,17 @@ const DisplayMobileUser = () => {
       .then((res) => {
         // console.log(res.data[0]);
         setData(res.data[0]);
-        
       })
       .catch((err) => {
         console.log(err);
       });
-      console.log(data.tracing_key);
-      console.log("nuvin");
+    console.log(data.tracing_key);
+    console.log("nuvin");
   };
   const confirm = () => {
     console.log(data.tracing_key);
     axios
-      .post("http://localhost:3002/confirm",[data.tracing_key])
+      .post("http://localhost:3002/confirm", [data.tracing_key])
       .then((res) => {
         console.log(res.data);
         console.log("Successs fetch");
@@ -89,15 +93,18 @@ const DisplayMobileUser = () => {
         <div className="AddBody-center" style={{ height: "540px" }}>
           <div className="heding-center">
             <div className={classes.icon}>
-              {ve==0?<Link to="/contactTracing">
-                <IoIcons.IoArrowBack />
-              </Link>:<Link to="/contactTracing/viewExposure">
-                <IoIcons.IoArrowBack />
-              </Link>}
-              
+              {ve == 0 ? (
+                <Link to="/contactTracing">
+                  <IoIcons.IoArrowBack />
+                </Link>
+              ) : (
+                <Link to="/contactTracing/viewExposure">
+                  <IoIcons.IoArrowBack />
+                </Link>
+              )}
             </div>
             <div className={classes.heading}>
-              <h3>User</h3>
+              <h3> Mobile User Details</h3>
             </div>
           </div>
           <div className={classes.all}>
@@ -149,14 +156,16 @@ const DisplayMobileUser = () => {
                 <p>{data.email}</p>
               </div>
             </div>
-          {ve==0 && (<Button
-              variant="contained"
-              color="primary"
-              component="span"
-              onClick={() => confirm()}
-            >
-              Confirm as a covid patient
-            </Button>)}
+            {ve == 0 && (
+              <Button
+                variant="contained"
+                color="primary"
+                component="span"
+                onClick={() => confirm()}
+              >
+                Confirm as a covid patient
+              </Button>
+            )}
           </div>
         </div>
       </div>

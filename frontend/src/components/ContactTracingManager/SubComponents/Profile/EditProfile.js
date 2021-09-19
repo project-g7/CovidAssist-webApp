@@ -7,13 +7,15 @@ import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   tset: {
+    fontSize: 15,
     display: "flex",
     width: "50%",
     backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
-    color: "rgb(96, 79, 255)",
+    color: "blue",
     margin: "5px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   set: {
     display: "flex",
@@ -23,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "25px",
     alignItems: "center",
     margin: "5px",
+    fontWeight: "bold",
+    color: "black",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   vset: {
     display: "flex",
@@ -79,7 +84,6 @@ const EditProfile = () => {
       .catch((err) => {
         console.log(err);
       });
-      
   };
 
   const saveData = () => {
@@ -96,13 +100,11 @@ const EditProfile = () => {
       .post("http://localhost:3002/editprofile", formData)
       .then((res) => {
         console.log(res.data);
-        
       })
       .catch((err) => {
         console.log(err);
       });
-      getSessionData();
-
+    getSessionData();
   };
   useEffect(() => {
     getSessionData();
