@@ -27,7 +27,7 @@ export const SidebarData = [
     // ]
   },
   {
-    title: "Reserved Vaccine List",
+    title: "Today Booking List",
     path: "/vaccine/vaccinelist",
     icon: <BiIcons.BiFirstAid />,
   },
@@ -48,7 +48,7 @@ export const SidebarData = [
     ],
   },
   {
-    title: "Upcoming Bookings",
+    title: "All Bookings",
     path: "/vaccine/upcoming",
     icon: <FaIcons.FaRegListAlt />,
   },
