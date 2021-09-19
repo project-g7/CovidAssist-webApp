@@ -5,9 +5,11 @@ const cors = require("cors");
 const crypto = require("crypto");
 const { request } = require("http");
 const nodemailer = require("nodemailer");
-
+const jwt=require('jsonwebtoken');
+const JWT_SECRET="some super secret..."
 app.use(cors());
 app.use(express.json());
+app.set('view engine','ejs');
 
 const db = mysql.createConnection({
   host: "covid-assist-db.cdbjavxo0vob.us-east-2.rds.amazonaws.com",
@@ -2601,7 +2603,78 @@ app.get("/getVaccines", (req, res) => {
     }
   });
 });
+app.get("/allvaccinatedList", (req, res) => {
+  const userId = req.query.id;
+  db.query(
+    "Select center_id from vaccine_manager WHERE user_id = ?",
+    [userId],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result[0].center_id);
+        const vid = result[0].center_id;
 
-app.listen(3002, () => {
+        db.query(
+          "SELECT CONCAT(first_name,' ',last_name) AS fullname,vaccine_name,nic,center_id,address,booking_id,date FROM covidAssist.booking INNER JOIN covidAssist.mobile_user ON booking.mobile_user_id=mobile_user.mobile_user_id INNER JOIN vaccine ON booking.vaccine_id=vaccine.vaccine_id WHERE booking.status=1 AND is_cancel=0 AND center_id=?;",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error center1");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log("Successhggg");
+              // console.log(result);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+app.get("/reset-password/:id/:token/:password2", (req, res) => {
+  const{id,token,password2}=req.params;
+  const hashnew = crypto.createHash("md5").update(password2).digest("hex");
+  //  const secret=JWT_SECRET+password;
+   db.query(
+    "SELECT password FROM mobile_user WHERE mobile_user_id=?",
+    [id],
+    (error, result, feilds) => {
+      console.log(result);
+      if (result.length < 0) {
+        res.send("wrong");
+      } else {
+       
+        let password=result[0].password;
+        const secret=JWT_SECRET+password;
+        try{
+          const payload=jwt.verify(token,secret)
+          console.log("Got");
+          console.log(hashnew);
+          console.log(id);
+          db.query("UPDATE mobile_user SET password=? WHERE mobile_user_id=?",      
+          [hashnew,id],
+           (error, result) => {
+            if (error) {
+              res.send(error);
+            } else {
+              console.log(result);
+              res.send('Sucsessfully Changed');
+            }
+          });
+             }
+             catch(error){
+            console.log(error.message);
+            res.send(error.message);
+    }
+        
+       }
+    }
+  );
+ 
+ });
+app.listen(3000, () => {
   console.log("your server is running port 3002");
 });

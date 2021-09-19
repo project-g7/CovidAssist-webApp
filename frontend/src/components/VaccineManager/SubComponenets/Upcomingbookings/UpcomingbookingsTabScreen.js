@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Upcomingbookings from './UpcomingBookingTable';
+import AllVaccinatedList from './AllVaccinatedList';
 
 
 // import AddVaccineForm from './AddVaccineForm'
@@ -97,12 +98,16 @@ export default function NavTabs() {
           indicatorColor="primary"
         >
           <LinkTab style={{ textDecoration: 'none' }} label="Upcoming Bookings"  {...a11yProps(0)} />
-        
+          <LinkTab style={{ textDecoration: 'none' }} label="Completed Bookings"  {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >
         
         <Upcomingbookings/>
+      </TabPanel>
+      <TabPanel value={value} index={1} >
+        
+        <AllVaccinatedList/>
       </TabPanel>
     </div>
   );
