@@ -2839,6 +2839,6 @@ app.get("/reset-password/:id/:token/:password2", (req, res) => {
   );
  
  });
-app.listen(3000, () => {
+app.listen(3002, () => {
   console.log("your server is running port 3002");
 });
