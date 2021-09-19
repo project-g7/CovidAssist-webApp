@@ -39,7 +39,7 @@ function Map() {
     <GoogleMap
       defaultZoom={10}
       defaultCenter={{ lat: 5.95492, lng: 80.554955 }}
-      defaultOptions={{ styles: mapstyles }}
+      // defaultOptions={{ styles: mapstyles }}
     >
       {mapset.map((centers) => (
         <Marker

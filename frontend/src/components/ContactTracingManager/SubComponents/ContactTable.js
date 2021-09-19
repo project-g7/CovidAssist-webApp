@@ -1,49 +1,50 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import axios from "axios";
-import filterFactory, {
-  textFilter,
-  dateFilter,
-} from "react-bootstrap-table2-filter";
+import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import "../../../../styles/vaccinated.css";
+import FileReader from "./FileReader";
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
-export class VaccinatedList extends Component {
+export class ContactTable extends Component {
   linkFormatter = (cell, row, rowIndex) => {
     console.log(cell);
     console.log(row);
     //  console.log(cell);
     return (
-      <Link to={"/vaccine/RegisterDetails?id=" + row.booking_id}>
-        View Details
+      <Link to={"/contactTracing/mobileUser?id=" + row.mobile_user_id+"&ve=0"}>
+        View Users
       </Link>
     );
   };
   state = {
-    centers: [],
-    name: [],
+    users: [],
     columns: [
       {
         dataField: "nic",
         text: "NIC",
-        headerStyle: {
-          backgroundColor: "rgb(96, 79, 255)",
-          justifyContent: "center",
-        },
-      },
-      {
-        dataField: "fullname",
-        text: "Name",
         filter: textFilter(),
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-          display: "flex",
-          justifyContent: "space-around",
+          justifyContent:"space-around",
+          display:"flex",
           alignItems: "center",
+          // width: "300px",
+          margin: "0px",
+          padding: "0px"
         },
+      },
+      {
+        dataField: "first_name",
+        text: "Name",
+        
+        headerStyle: {
+          backgroundColor: "rgb(96, 79, 255)",
+          justifyContent:"center"
+         
+        }
       },
       {
         dataField: "address",
@@ -51,14 +52,7 @@ export class VaccinatedList extends Component {
         sort: true,
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-        },
-      },
-      {
-        dataField: "vaccine_name",
-        text: "Vaccine",
-        headerStyle: {
-          backgroundColor: "rgb(96, 79, 255)",
-        },
+        }
       },
       {
         dataField: "link",
@@ -66,49 +60,32 @@ export class VaccinatedList extends Component {
         formatter: this.linkFormatter,
         headerStyle: {
           backgroundColor: "rgb(96, 79, 255)",
-        },
+        }
       },
     ],
   };
 
   componentDidMount() {
-    let data = sessionStorage.getItem("sessionStorageData");
-    data = JSON.parse(data);
-    console.log(data.user_name);
-
-    axios
-      .get("http://localhost:3002/vaccinatedList", {
-        params: { id: data.user_id },
-      })
-      .then((res) => {
-        console.log(res.data);
-        this.setState({
-          centers: res.data,
-        });
+    axios.get("http://localhost:3002/mobileUsers").then((res) => {
+      console.log(res.data);
+      this.setState({
+        users: res.data,
       });
-    axios
-      .get("http://localhost:3002/getvaccinecenter", {
-        params: { id: data.user_id },
-      })
-      .then((res) => {
-        console.log(res.data);
-        this.setState({
-          name: res.data[0].name,
-        });
-      });
+    });
   }
 
   render() {
-    const linkFormatter = (cell, row, rowIndex) => {
-      return (
-        <a href={cell} target="_blank">
-          See mail
-        </a>
-      );
-    };
-    const selectRow = () => {
-      console.log("row selected");
-    };
+    // const linkFormatter = (cell, row, rowIndex) => {
+    //   return (
+    //     <a href={cell} target="_blank">
+    //       See mail
+    //     </a>
+    //   );
+    // };
+    // const selectRow = () => {
+    //   console.log("row selected");
+    // };
+
     const options = {
       page: 0,
       sizePerPageList: [
@@ -122,7 +99,7 @@ export class VaccinatedList extends Component {
         },
         {
           text: "All",
-          value: this.state.centers.length,
+          value: this.state.users.length,
         },
       ],
       sizePerPage: 8,
@@ -134,10 +111,12 @@ export class VaccinatedList extends Component {
       lastPage: "Last",
       paginationPosition: "top",
     };
+
+    
     const tableRowEvents = {
       onClick: (e, row, rowIndex) => {
         console.log(`clicked on row with index: ${rowIndex}`);
-        console.log("nshhshhs");
+        console.log(row);
         // console.log(e);
       },
       onMouseEnter: (e, row, rowIndex) => {
@@ -149,21 +128,14 @@ export class VaccinatedList extends Component {
     //   onRowClick: {selectRow}
     // };
     return (
-      <div className="AddBody-req">
-        <div className="heading">
-          <h3>Vaccinated List</h3>
-        </div>
-        <div className="container">
-          <div className="container" style={{ marginTop: "10px" }}>
-            <div className="tabletitle">
-              <h4 className="titlename">Center Name : {this.state.name}</h4>
-            </div>
+      <div>
+        <div className="container" >
+          <div className="container" >
             <BootstrapTable
               bootstrap4
               hover
-              // caption={this.state.name}
               keyField="id"
-              data={this.state.centers}
+              data={this.state.users}
               columns={this.state.columns}
               filter={filterFactory()}
               pagination={paginationFactory(options)}
@@ -173,8 +145,9 @@ export class VaccinatedList extends Component {
           </div>
         </div>
       </div>
+    //   <div></div>
     );
   }
 }
 
-export default VaccinatedList;
+export default ContactTable;

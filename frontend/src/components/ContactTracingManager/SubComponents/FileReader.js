@@ -7,51 +7,47 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-
+import ContactTable from './ContactTable';
 class FileReader extends React.Component {
   constructor() {
     super();
     this.state = {
+      flag:false,
       csvfile: undefined,
+      users: [],
       data: [],
-    };
-
-    this.state = {
-      centers: [],
       columns: [
         {
-          dataField: "Date",
-          text: "Date",
+          dataField: "nic",
+          text: "NIC",
+          filter: textFilter(),
           headerStyle: {
             backgroundColor: "rgb(96, 79, 255)",
-            justifyContent: "center",
-          },
-        },
-        {
-          dataField: "Temprature",
-          text: "Temperature",
-          headerStyle: {
-            backgroundColor: "rgb(96, 79, 255)",
-            display: "flex",
-            justifyContent: "space-around",
+            justifyContent:"space-around",
+            display:"flex",
             alignItems: "center",
+            // width: "300px",
+            margin: "0px",
+            padding: "0px"
           },
         },
         {
-          dataField: "place_id",
-          text: "Place_id",
-          sort: true,
+          dataField: "first_name",
+          text: "Name",
+          
           headerStyle: {
             backgroundColor: "rgb(96, 79, 255)",
-          },
+            justifyContent:"center"
+           
+          }
         },
         {
-          dataField: "id",
-          text: "ID",
+          dataField: "address",
+          text: "Address",
           sort: true,
           headerStyle: {
             backgroundColor: "rgb(96, 79, 255)",
-          },
+          }
         },
       ],
     };
@@ -60,11 +56,17 @@ class FileReader extends React.Component {
   }
 
   handleChange = (event) => {
+
     this.setState({
       csvfile: event.target.files[0],
     });
   };
-
+flagZero = ()=>{
+  console.log(this.state.users);
+  this.setState({
+    flag:false,
+  });
+}
   importCSV = () => {
     const { csvfile } = this.state;
     Papa.parse(csvfile, {
@@ -72,30 +74,40 @@ class FileReader extends React.Component {
       header: true,
     });
   };
-
-  saveData = () => {
-    // for (let i = 0; i < this.state.data.length; i++) {
-    let formdata = new FormData();
-    formdata.append("data", JSON.stringify(this.state.data));
-    console.log("Save data");
+  confirm=()=>{
+    const data1 = [];
+    {this.state.users.map(item => {
+      data1.push(item.tracing_key)
+    })}
     axios
-      .post("http://localhost:3002/addTemperatureReport", this.state.data)
+    .post("http://localhost:3002/confirm", data1)
+    .then((res) => {
+      console.log(res.data);
+      console.log("Successs fetch");
+    })
+    this.setState({
+      flag:false,
+    });
+
+  }
+  updateData(result) {
+    const data1 = [];
+    {result.data.map(item => {
+      data1.push(item.nic)
+    })}
+    axios
+      .post("http://localhost:3002/fetchusers", data1)
       .then((res) => {
         console.log(res.data);
-        console.log("Successs temp");
+        console.log("Successs fetch");
+        this.setState({
+          users: res.data,
+          flag: true,
+        });
       })
       .catch((err) => {
         console.log(err);
       });
-    // }
-  };
-
-  updateData(result) {
-    var data = result.data;
-    console.log(data);
-    this.setState({
-      data: data,
-    });
   }
 
   render() {
@@ -126,13 +138,15 @@ class FileReader extends React.Component {
       paginationPosition: "top",
     };
     return (
-      <div className="AddBodyTemp">
+      <div style={{ paddingTop: "120px",paddingLeft: "350px" }}>
+
+      <div className="AddBodyTemp" >
         <div className="heading">
-          <h3>Upload Temperature Reports</h3>
+          <h3>Upload Covid Patient Reports</h3>
         </div>
         <div>
-          <h5 style={{ marginTop: "30px", marginLeft: "30px" }}>
-            Choose and upload your files here
+          <h5 className="subhead">
+            Choose and upload yous files here
           </h5>
           <div className="input-file">
             <input
@@ -156,33 +170,49 @@ class FileReader extends React.Component {
             >
               Upload File
             </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              component="span"
-              // startIcon={<CloudUploadIcon />}
-              onClick={this.saveData}
-            >
-              Save Data
-            </Button>
           </div>
         </div>
         <div className="container" style={{ marginTop: "30px" }}>
-          {this.state.data && (
+    
+            {this.state.flag &&(<div>
             <BootstrapTable
               bootstrap4
               hover
               keyField="id"
-              data={this.state.data}
+              data={this.state.users}
               columns={this.state.columns}
               filter={filterFactory()}
               pagination={paginationFactory(options)}
               //   rowStyle={{ backgroundColor: "blue" }}
               //   rowEvents={tableRowEvents}
             />
-          )}
+            <Button
+              variant="contained"
+              color="primary"
+              component="span"
+              onClick={this.confirm}
+            >
+              Confirm as covid patients
+            </Button>
+            <Button
+              style={{ marginLeft: "30px" }}
+              variant="contained"
+              color="primary"
+              component="span"
+               onClick={this.flagZero}
+            >
+              Back
+            </Button>
+            </div>)}
+          {!this.state.flag &&(<ContactTable/>)}
+            
+          
         </div>
+      
       </div>
+      
+      </div>
+
     );
   }
 }

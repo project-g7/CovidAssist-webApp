@@ -1,14 +1,18 @@
 .tabletitle {
-    display: flex;
-    justify-content: center;
-  }
-  .R-btn {
-    background-color: #4049a0;
-    border: none;
-    font-size: 20px;
-    height: 35px;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-    width: 20%;
-  }
+  display: flex;
+  justify-content: center;
+}
+.R-btn {
+  background-color: #4049a0;
+  border: none;
+  font-size: 20px;
+  height: 35px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  width: 20%;
+}
+.titlename {
+  color: black;
+  font-weight: bold;
+}

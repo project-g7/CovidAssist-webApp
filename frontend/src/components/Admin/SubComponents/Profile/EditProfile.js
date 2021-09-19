@@ -114,7 +114,7 @@ const EditProfile = () => {
   return (
     <div>
       <div className="AddBody-profile">
-        <div className="heding">
+        <div className="heading">
           <div className={classes.heading}>
             <h3>Edit Profile</h3>
           </div>

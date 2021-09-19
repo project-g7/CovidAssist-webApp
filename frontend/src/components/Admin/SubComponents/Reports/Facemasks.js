@@ -85,7 +85,7 @@ function Map() {
             </h6>
 
             <h6>
-              <b>Total No.of.People : </b>
+              <b>Total No.of.Entrance People : </b>
               {Number(selecteFacemMask.facemask)}
             </h6>
 

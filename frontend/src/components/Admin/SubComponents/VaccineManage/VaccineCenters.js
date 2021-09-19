@@ -18,7 +18,7 @@ const VaccineCenters = () => {
 
   return (
     <div className="AddBody">
-      <div className="heding">
+      <div className="heading">
         <h3>Vaccine Centers</h3>
       </div>
       <CenterTable/>

@@ -91,7 +91,7 @@ componentDidMount() {
 
     return (
       <div className="AddBody">
-        <div className="heding">
+        <div className="heading">
           <h3>IoT Locations</h3>
         </div>
         <div className="container">

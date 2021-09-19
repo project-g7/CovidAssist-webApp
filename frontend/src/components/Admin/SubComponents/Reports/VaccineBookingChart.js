@@ -342,14 +342,14 @@ function VaccineBookingChart() {
         <div className="BookCard1">
           <div className="BookCard2">
             <div className="BookCardBoady1">
-              <h5>Total No.of Booked Vaccines </h5>
-              <h2>{bookings}</h2>
+              <h5>Total Numbers of Upcoming Bookings </h5>
+              <h2 className="fontcolr">{bookings}</h2>
             </div>
           </div>
           <div className="BookCard3">
             <div className="BookCardBoady1">
-              <h5>Today Details</h5>
-              <h5>{vaccineName} </h5>
+              <h5>Today's Bookig Details</h5>
+              <h5 className="fontcolr">{vaccineName} </h5>
               <h5>1st Dose : {dose1}</h5>
               <h5>2nd Dose :{dose2}</h5>
             </div>

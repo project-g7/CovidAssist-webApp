@@ -72,6 +72,7 @@ const DisplayCenter = () => {
       .then((res) => {
         console.log(res.data[0]);
         setData(res.data[0]);
+        console.log(data.name);
       })
       .catch((err) => {
         console.log(err);
@@ -112,7 +113,7 @@ const DisplayCenter = () => {
       </div>
       <div className="container tab-screen">
         <div className="AddBody-center">
-          <div className="heding-center">
+          <div className="heading-center">
             <div className={classes.icon}>
               <Link to="/admin/vaccinemanage">
                 <IoIcons.IoArrowBack />

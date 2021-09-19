@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../VaccineSidebar";
+import Sidebar from "../ContactTracingSidebar";
 import { InputLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useLocation } from "react-router-dom";
 import * as IoIcons from "react-icons/io5";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,9 +15,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
-    color: "blue",
+    color: "rgb(96, 79, 255)",
     margin: "5px",
-    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   set: {
     display: "flex",
@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: "15px",
     margin: "5px",
-    fontWeight: "bold",
-    color: "black",
-    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   vset: {
     display: "flex",
@@ -45,49 +42,43 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
-  fontxx: {
-    fontSize: "20px",
-  },
 }));
 
-const RegisterDetails = () => {
+const DisplayMobileUser = () => {
   const classes = useStyles();
-
+  const [ve, setVe] = useState(0);
   const [data, setData] = useState([]);
-  const [vaccineData, setVaccineData] = useState([]);
   const search = useLocation().search;
   useEffect(() => {
     const id = new URLSearchParams(search).get("id");
+    const ve = new URLSearchParams(search).get("ve");
     console.log(id);
-
-    fetchCenterData(id);
-    fetchVaccineData(id);
+    fetchUserData(id);
+    setVe(ve);
   }, []);
-
-  const fetchCenterData = (id) => {
+  const fetchUserData = (id) => {
     axios
-      .get("http://localhost:3002/RegisterDetails", { params: { id: id } })
+      .get("http://localhost:3002/MobileUserDetails", { params: { id: id } })
       .then((res) => {
-        console.log(res.data[0]);
+        // console.log(res.data[0]);
         setData(res.data[0]);
+        
       })
       .catch((err) => {
         console.log(err);
       });
+      console.log(data.tracing_key);
+      console.log("nuvin");
   };
-  const fetchVaccineData = (id) => {
+  const confirm = () => {
+    console.log(data.tracing_key);
     axios
-      .get("http://localhost:3002/BookedVaccine", {
-        params: { id: id },
-      })
+      .post("http://localhost:3002/confirm",[data.tracing_key])
       .then((res) => {
-        console.log(res.data[0][0]);
-        // console.log(JSON.parse(res.data));
-        setVaccineData(res.data[0]);
-      })
-      .catch((err) => {
-        console.log(err);
+        console.log(res.data);
+        console.log("Successs fetch");
       });
+    window.location.href = "/contactTracing";
   };
   return (
     <div>
@@ -95,62 +86,48 @@ const RegisterDetails = () => {
         <Sidebar />
       </div>
       <div className="container tab-screen">
-        <div className="AddBody-center">
+        <div className="AddBody-center" style={{ height: "540px" }}>
           <div className="heding-center">
             <div className={classes.icon}>
-              <Link to="/vaccine/vaccinelist">
+              {ve==0?<Link to="/contactTracing">
                 <IoIcons.IoArrowBack />
-              </Link>
+              </Link>:<Link to="/contactTracing/viewExposure">
+                <IoIcons.IoArrowBack />
+              </Link>}
+              
             </div>
             <div className={classes.heading}>
-              <h3>Register Details</h3>
+              <h3>User</h3>
             </div>
           </div>
           <div className={classes.all}>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4 className={classes.fontxx}>Full name</h4>
+                <h4>User Id</h4>
               </div>
               <div className={classes.set}>
-                {" "}
-                <p>{data.fullname}</p>
+                <p>{data.mobile_user_id}</p>
               </div>
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4 className={classes.fontxx}>NIC</h4>
+                <h4>First Name</h4>
               </div>
               <div className={classes.set}>
-                <p>{data.nic}</p>
+                <p>{data.first_name}</p>
               </div>
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4 className={classes.fontxx}>Vaccine</h4>
+                <h4>Last Name</h4>
               </div>
               <div className={classes.set}>
-                <p>{vaccineData.vaccine_name}</p>
+                <p>{data.last_name}</p>
               </div>
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4 className={classes.fontxx}>Dose</h4>
-              </div>
-              <div className={classes.set}>
-                <p>{data.dose}</p>
-              </div>
-            </div>
-            <div className={classes.vset}>
-              <div className={classes.tset}>
-                <h4 className={classes.fontxx}>ID type</h4>
-              </div>
-              <div className={classes.set}>
-                <p>{data.id_type}</p>
-              </div>
-            </div>
-            <div className={classes.vset}>
-              <div className={classes.tset}>
-                <h4 className={classes.fontxx}>Address</h4>
+                <h4>Address</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.address}</p>
@@ -158,22 +135,28 @@ const RegisterDetails = () => {
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-                <h4 className={classes.fontxx}>Booked Date</h4>
+                <h4>Contact Number</h4>
               </div>
               <div className={classes.set}>
-                <p>{data.date && data.date.substring(0, 10)}</p>
+                <p>{data.contact_number}</p>
               </div>
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-
-                <h4 className={classes.fontxx}>Time</h4>
-
+                <h4>Email</h4>
               </div>
               <div className={classes.set}>
-                <p>{data.time}</p>
+                <p>{data.email}</p>
               </div>
             </div>
+          {ve==0 && (<Button
+              variant="contained"
+              color="primary"
+              component="span"
+              onClick={() => confirm()}
+            >
+              Confirm as a covid patient
+            </Button>)}
           </div>
         </div>
       </div>
@@ -181,4 +164,4 @@ const RegisterDetails = () => {
   );
 };
 
-export default RegisterDetails;
+export default DisplayMobileUser;
