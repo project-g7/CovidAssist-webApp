@@ -5,14 +5,16 @@ const cors = require("cors");
 const crypto = require("crypto");
 const { request } = require("http");
 const nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
   host: "covid-assist-db.cdbjavxo0vob.us-east-2.rds.amazonaws.com",
-  user: "admin",
-  password: "admin1234",
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
   database: "covidAssist",
 });
 
@@ -96,16 +98,67 @@ app.post("/login", (req, res) => {
         res.send({ err: err });
       }
       if (result.length > 0) {
-        res.send(result);
+        // res.send(result);
         console.log(result);
         console.log(user_name + " " + password);
+        // console.log(process.env.jwtSecret);
+        const id = result[0].user_id;
+        const role = result[0].user_role;
+        const payload = {
+          id,
+          role,
+          }
+        const token = jwt.sign(payload , process.env.jwtSecret,{
+          expiresIn: 1800,
+        })
+
+        res.json({auth:true, token: token, result: result});
+
       } else {
-        res.send({ message: "Wrong username / password combination" });
+        res.json({auth:false , message: "Wrong username / password combination" });
         console.log("Wrong username and password combination");
       }
     }
   );
 });
+
+const verifyJWT = (req,res,next) => {
+  const token = req.headers["x-access-token"];
+  if(!token){
+    res.send("Need a token");
+  }else{
+    jwt.verify(token,"jwtSecret", (err,decoded) => {
+      if(err){
+        res.json({auth:false, message:"Failed to authenticate"});
+      }else{
+        req.userId = decoded.id;
+        next();
+      }
+    })
+  }
+}
+
+
+
+app.get('/isUserAuth', verifyJWT, (req,res)=>{
+  res.send("authenticated");
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // approve request
 

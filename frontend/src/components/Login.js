@@ -25,19 +25,21 @@ const Login = () => {
         setLoginError("");
         console.log("===============");
         console.log(res.data);
-        setLogged("You have logged in as " + res.data[0].first_name);
-        let userRole = res.data[0].user_role;
+        localStorage.setItem("token",res.data.token);
+        setLogged("You have logged in as " + res.data.result[0].first_name);
+        let userRole = res.data.result[0].user_role;
         let obj = {
-          user_id: res.data[0].user_id,
-          user_name: res.data[0].user_name,
+          user_id: res.data.result[0].user_id,
+          user_name: res.data.result[0].user_name,
         };
         sessionStorage.setItem("sessionStorageData", JSON.stringify(obj));
         if (userRole == "admin") {
+          console.log("1");
           window.location.href = "/admin";
         } else if (userRole == "Vaccine Manager") {
           window.location.href = "/vaccine";
         } else if (userRole == "Contact Tracing Manager") {
-          window.location.href = "/ct";
+          window.location.href = "/contactTracing";
         }
       }
     });
@@ -51,6 +53,9 @@ const Login = () => {
       user_name: "",
     };
     sessionStorage.setItem("sessionStorageData", JSON.stringify(obj));
+    localStorage.setItem("token","");
+
+
   }, []);
 
 

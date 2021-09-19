@@ -35,11 +35,10 @@ function VerifiedAdministrators(){
     // }
     return(
         <div className="AddBody-req">
-            <div>
-                <div className="heding">
+                <div className="heading">
                     <h3>Verified Administrators</h3>
                 </div>
-            </div>
+            
             <VerifiedAdministratorTable />
         </div>
         // <div>

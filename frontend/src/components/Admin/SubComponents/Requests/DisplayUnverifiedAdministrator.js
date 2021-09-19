@@ -245,7 +245,7 @@ const DisplayUnverifiedAdministrators = () => {
               </Link>
             </div>
             <div>
-              <div className="heding">
+              <div className={classes.heading}>
                 <h3>Unverified Administrator</h3>
               </div>
             </div>

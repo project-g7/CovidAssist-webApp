@@ -127,7 +127,7 @@ class FileReader extends React.Component {
     };
     return (
       <div className="AddBodyTemp">
-        <div className="heding">
+        <div className="heading">
           <h3>Upload Temperature Reports</h3>
         </div>
         <div>

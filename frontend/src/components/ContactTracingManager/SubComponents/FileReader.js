@@ -138,14 +138,14 @@ flagZero = ()=>{
       paginationPosition: "top",
     };
     return (
-      <div style={{ paddingTop: "100px",paddingLeft: "350px" }}>
+      <div style={{ paddingTop: "120px",paddingLeft: "350px" }}>
 
       <div className="AddBodyTemp" >
         <div className="heading">
           <h3>Upload Covid Patient Reports</h3>
         </div>
         <div>
-          <h5 >
+          <h5 className="subhead">
             Choose and upload yous files here
           </h5>
           <div className="input-file">
