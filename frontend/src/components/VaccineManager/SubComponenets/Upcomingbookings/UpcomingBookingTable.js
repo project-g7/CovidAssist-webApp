@@ -167,7 +167,7 @@ export class UpcomingBookingTable extends Component {
     // };
     return (
       <div className="AddBody-req">
-      <div className="heding">
+      <div className="heading">
           <h3>Upcoming Bookings List</h3>
         </div>  
         <div className="container">
