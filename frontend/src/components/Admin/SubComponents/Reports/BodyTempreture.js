@@ -72,7 +72,7 @@ function Map() {
           <div>
             <b>
               <h5>
-                <b>Tempreture Details</b>
+                <b>Temperature Details</b>
               </h5>
             </b>
 
@@ -82,7 +82,7 @@ function Map() {
             </h6>
 
             <h6>
-              <b>Total No.of.People :</b> {Number(tempreture.count)}
+              <b>Total No.of. Entrance People:</b> {Number(tempreture.count)}
             </h6>
 
             <h6>

@@ -1180,7 +1180,7 @@ app.get("/firstDoseCount", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1208,7 +1208,7 @@ app.get("/secondDoseCount", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1236,7 +1236,7 @@ app.get("/firstsecondDoseCount", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1264,7 +1264,7 @@ app.get("/registerCount", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1293,7 +1293,7 @@ app.get("/firstDoseCount1", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1322,7 +1322,7 @@ app.get("/firstDoseCount2", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1350,7 +1350,7 @@ app.get("/firstDoseCount3", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1379,7 +1379,7 @@ app.get("/firstDoseCount4", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1408,7 +1408,7 @@ app.get("/secondDoseCount1", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1437,7 +1437,7 @@ app.get("/secondDoseCount2", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1465,7 +1465,7 @@ app.get("/secondDoseCount3", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1493,7 +1493,7 @@ app.get("/secondDoseCount4", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1524,7 +1524,7 @@ app.get("/vaccineCenterDistrict", (req, res) => {
   console.log(userid);
   console.log("hhhhhhhhhhhhhhhhhhhhh");
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1553,7 +1553,7 @@ app.get("/vaccineName", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1594,7 +1594,7 @@ app.get("/vaccinatedPieChart1", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1623,7 +1623,7 @@ app.get("/vaccinatedPieChart2", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1652,7 +1652,7 @@ app.get("/vaccinatedPieChart3", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -1681,7 +1681,7 @@ app.get("/vaccinatedPeople", (req, res) => {
   const userid = req.query.id;
   console.log(userid);
   db.query(
-    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=?",
+    "SELECT center_id FROM covidAssist.vaccine_manager WHERE user_id=? AND status=1",
     [userid],
     (error, result) => {
       if (error) {
@@ -2017,7 +2017,7 @@ app.get("/confirmvaccine", (req, res) => {
   const dose = req.query.dose;
   console.log(dose);
   console.log("no");
-  if(dose==1){
+  if (dose == 1) {
     db.query(
       "UPDATE booking SET status=1,dose_1=1 WHERE booking_id=?",
       [id],
@@ -2125,8 +2125,7 @@ app.get("/confirmvaccine", (req, res) => {
         }
       }
     );
-  }
- else if(dose==2){
+  } else if (dose == 2) {
     db.query(
       "UPDATE booking SET status=1,dose_2=1 WHERE booking_id=?",
       [id],
@@ -2234,8 +2233,7 @@ app.get("/confirmvaccine", (req, res) => {
         }
       }
     );
-  }
-  else if(dose==3){
+  } else if (dose == 3) {
     db.query(
       "UPDATE booking SET status=1,dose_3=1 WHERE booking_id=?",
       [id],
@@ -2344,7 +2342,6 @@ app.get("/confirmvaccine", (req, res) => {
       }
     );
   }
-  
 });
 
 app.get("/getcenterdistrict", (req, res) => {
@@ -2545,25 +2542,24 @@ app.get("/getcancelcount", (req, res) => {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
 
-  db.query(
-    "SELECT count(booking_id) as canceled_bookings FROM covidAssist.booking WHERE is_cancel=0 AND status=0 AND date=curdate() AND center_id=?",
-    [vid],
-    (err, result) => {
-      if (err) {
-        console.log("Error count");
-        console.log(err);
-        res.send(err);
-      } else {
-        res.send(result);
-        console.log("count successful");
-        console.log(result);
-       }
-     }
-   );
-  }
- }
-);
-
+        db.query(
+          "SELECT count(booking_id) as canceled_bookings FROM covidAssist.booking WHERE is_cancel=0 AND status=0 AND date=curdate() AND center_id=?",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error count");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log("count successful");
+              console.log(result);
+            }
+          }
+        );
+      }
+    }
+  );
 });
 app.get("/getVaccine", (req, res) => {
   const userId = req.query.id;
