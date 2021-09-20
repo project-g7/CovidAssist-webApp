@@ -31,7 +31,8 @@ import Profile from "./components/Admin/pages/Profile";
 import vaccineProfile from "./components/VaccineManager/pages/Profile";
 import ctProfile from "./components/ContactTracingManager/pages/Profile";
 import Dashboard from "./components/ContactTracingManager/SubComponents/Dashboard";
-import contacttracingReport from "./components/ContactTracingManager/Reports/contacttracingReport";
+import ContactTracingReport from "./components/ContactTracingManager/Reports/ContactTracingReport";
+// import contacttracingReport from "./components/ContactTracingManager/Reports/contacttracingReport";
 import { ProtectedRouteAdmin } from "./ProtectedRouteAdmin.js";
 import { ProtectedRouteContact } from "./ProtectedRouteContact.js";
 import { ProtectedRouteVaccine } from "./ProtectedRouteVaccine.js";
@@ -178,8 +179,8 @@ function App() {
         ></ProtectedRouteVaccine>
         <ProtectedRouteContact
           exact
-          path="/contactTracing/reports/contacttracingreport"
-          component={contacttracingReport}
+          path="/contactTracing/reports"
+          component={ContactTracingReport}
         ></ProtectedRouteContact>
       </Switch>
     </Router>

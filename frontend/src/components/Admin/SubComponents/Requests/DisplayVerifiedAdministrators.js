@@ -133,7 +133,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                             <IoIcons.IoArrowBack />
                             </Link>
                         </div>
-                        <div className="heding">
+                        <div className={classes.heading}>
                             <h3>Verified Administrator</h3>
                         </div>
                     </div>
