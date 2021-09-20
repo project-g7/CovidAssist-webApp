@@ -6,6 +6,14 @@ import { useLocation } from "react-router-dom";
 import * as IoIcons from "react-icons/io5";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import axios from "axios";
+// import  Dialog from "@material-ui/core";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Button from "@material-ui/core/Button";
+import { Dialog } from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
     tset: {
         display: "flex",
@@ -39,18 +47,61 @@ const useStyles = makeStyles((theme) => ({
         width:"90%",
         display:'flex',
         justifyContent: "center",
-    },
+    },buttonStyle:{
+        marginRight: " 50px",
+        marginTop: "15px",
+        marginBottom: "15px",
+    }
 }));
 
 const DisplayUnverifiedAdministrators = ()=>{
     const classes = useStyles();
     const [data,setData] = useState([]);
     const [centerData,setCenterData] = useState([]);
+    const [assignedCenter, setAssignedCenter] = useState("");
+    const [assignedCenterId, setAssignedCenterId] = useState("");
     const search = useLocation().search;
+    const [open, setOpen] = React.useState(false);
+    const [openSuccess, setOpenSuccess] = React.useState(false);
+    const [user_id,setUserId] = useState("");
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleCloseSuccess = () => {
+        setOpenSuccess(false);
+    };
+    const handleOpenSuccess = () => {
+        setOpenSuccess(true);
+    };
+    const handleSubmitData=()=>{
+        let formData={
+            id : user_id,
+            center_id : assignedCenterId,
+        }
+        setOpen(false);
+
+        axios.post("http://localhost:3002/removeVaccineManager",formData).then((res)=>{
+            console.log(res.data);
+            if(res.data == "Success"){
+                console.log("data passed");
+                handleOpenSuccess(true);
+            }
+            }).catch((err)=>{
+                console.log(err);
+                console.log("error in")
+            });
+    }
+    
     useEffect(() => {
         const id = new URLSearchParams(search).get("id")
+        setUserId(id);
         fetchVerifiedAdminData(id);
         fetchVerifiedAdminVaccineCenter(id);
+        console.log(centerData.center_id);
     },[]);
 
     const fetchVerifiedAdminData = (id)=>{
@@ -63,11 +114,13 @@ const DisplayUnverifiedAdministrators = ()=>{
     };
     const fetchVerifiedAdminVaccineCenter = (id)=>{
         axios.get("http://localhost:3002/adminVaccineCenter", {params:{ id :id}}).then((res)=>{
-            // console.log(res.data[0]);
             setCenterData(res.data[0]);
+            setAssignedCenter(res.data[0].assigned_center);
+            setAssignedCenterId(res.data[0].center_id);
         }).catch((err)=>{
             console.log(err);
         });
+        
     };
     return(
         <div>
@@ -150,19 +203,65 @@ const DisplayUnverifiedAdministrators = ()=>{
                                 <p>{data.user_role}</p>
                             </div>
                         </div>
-                        <div className={classes.vset}>
+                        <div className={classes.vset} style={{display: data.user_role == 'Vaccine Manager' ? '' : 'none' }}>
                             <div className={classes.tset}>
                                 <h4>Assigned Center</h4>
                             </div>
                             <div className={classes.set}>
-                                <p>{centerData.assigned_center}</p>
+                                <p>{assignedCenter}</p>
                             </div>
                         </div>
                     </div>
-                        
+                    <div className= {classes.vset} style={{display: data.user_role == 'Vaccine Manager' ? '' : 'none' }}>
+                    <Button className = {classes.buttonStyle} variant="outlined" color="primary" onClick={handleClickOpen} >
+                            Remove from vaccine center
+                        </Button>
+                    </div>    
 
                 </div>
             </div>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                >
+                <DialogTitle id="alert-dialog-title">
+                    {"Remove from vaccine center"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary" >
+                        Cancel
+                    </Button>
+                    <Button onClick={handleSubmitData} color="primary" autoFocus>
+                        Ok
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog 
+                open={openSuccess}
+                onClose={handleCloseSuccess}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Successfull!"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        "Successfully removed vaccine center"
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseSuccess} color="primary" autoFocus> Ok</Button>
+                </DialogActions>
+            </Dialog>
+            
         </div>
         
     );
