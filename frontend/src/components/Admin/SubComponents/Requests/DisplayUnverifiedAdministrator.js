@@ -244,11 +244,11 @@ const DisplayUnverifiedAdministrators = () => {
                 <IoIcons.IoArrowBack />
               </Link>
             </div>
-            <div>
+          
               <div className={classes.heading}>
                 <h3>Unverified Administrator</h3>
               </div>
-            </div>
+            
           </div>
           <div className={classes.all}>
             <div className={classes.vset}>

@@ -2083,6 +2083,7 @@ app.get("/confirmvaccine", (req, res) => {
                 let newDate = date.toISOString().substring(0, 10);
                 console.log(date.toISOString().substring(0, 10));
                 if (dose == 1) {
+                  console.log("Inside ##");
                   const spawn = require("child_process").spawn;
                   const pythonProcess = spawn("python", [
                     "certi.py",
@@ -2299,6 +2300,7 @@ app.get("/confirmvaccine", (req, res) => {
                 let newDate = date.toISOString().substring(0, 10);
                 console.log(date.toISOString().substring(0, 10));
                 if (dose == 1) {
+                  console.log("Insidde python dose 1");
                   const spawn = require("child_process").spawn;
                   const pythonProcess = spawn("python", [
                     "certi.py",
@@ -2310,6 +2312,8 @@ app.get("/confirmvaccine", (req, res) => {
                     newDate,
                   ]);
                 } else if (dose == 2) {
+                  console.log("Insidde python dose 2");
+
                   db.query(
                     "SELECT * FROM booking WHERE mobile_user_id = ? AND status = ? AND dose = ?",
                     [userId, 1, 1],
@@ -2421,7 +2425,8 @@ app.get("/upcommingbookings", (req, res) => {
                 arr.push({
                   fullname : result[i].fullname,
                   vaccine_name : result[i].vaccine_name,
-                  date : result[i].date.toISOString().substr(0,10),
+                  // date : result[i].date.toISOString().substr(0,10),
+                  date : new Date(new Date(result[i].date.toISOString().substring(0, 10)).setDate(new Date(result[i].date.toISOString().substring(0, 10)).getDate() + 1)).toISOString().substring(0, 10),
                   nic : result[i].nic,
                   center_id : result[i].center_id,
                   address : result[i].address,
@@ -2722,9 +2727,9 @@ app.post("/addTemperatureReport", (req, res) => {
   // console.log(req);
   // console.log("sssss");
   for (let i = 0; i < req.body.length - 1; i++) {
-    const time = req.body[i].time;
-    const placeId = req.body[i].place_id;
-    const temperature = req.body[i].Temperature;
+    const time = req.body[i].Date;
+    const placeId = req.body[i].Id;
+    const temperature = req.body[i].Temprature;
     db.query(
       "INSERT INTO temperature(place_id,temperature_value,date_time,status) VALUES(?,?,?,?)",
       [placeId, temperature, time, 1],
@@ -2824,7 +2829,8 @@ app.get("/allvaccinatedList", (req, res) => {
                 arr.push({
                   fullname : result[i].fullname,
                   vaccine_name : result[i].vaccine_name,
-                  date : result[i].date.toISOString().substr(0,10),
+                  // date : result[i].date.toISOString().substr(0,10),
+                  date : new Date(new Date(result[i].date.toISOString().substring(0, 10)).setDate(new Date(result[i].date.toISOString().substring(0, 10)).getDate() + 1)).toISOString().substring(0, 10),
                   nic : result[i].nic,
                   center_id : result[i].center_id,
                   address : result[i].address,
