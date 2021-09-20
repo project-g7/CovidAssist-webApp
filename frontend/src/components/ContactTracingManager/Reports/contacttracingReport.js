@@ -1,19 +1,22 @@
-import React from "react";
+import React from 'react'
 import Sidebar from "../ContactTracingSidebar";
+// import ContactTable from './ContactTable';
+// import FileReader from "./FileReader";
 
-import ContactTracingChart from "../SubComponents/ContactTracingChart";
 
-const contacttracingReport = () => {
-  return (
-    <div>
-      <div>
-        <Sidebar />
-      </div>
-      <div>
-        <ContactTracingChart />
-      </div>
-    </div>
-  );
-};
+const Dashboard = () => {
+    return (
+        <div>
+            <div>
+                <Sidebar/>
+            </div>
+            <div></div>
+            <div >
+                {/* <FileReader/> */}
+            </div>
+        </div>
+    )
+}
 
-export default contacttracingReport;
+
+export default Dashboard;
