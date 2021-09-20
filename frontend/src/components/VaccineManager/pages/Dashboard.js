@@ -37,7 +37,8 @@ const Dashboard = () => {
         let arr = [];
         for(let i=0;i<res.data.length;i++){
           arr.push({
-            activity: res.data[i].activity.substr(0,10),
+            // activity: res.data[i].activity.substr(0,10),
+            activity: new Date(new Date(res.data[i].activity.substring(0, 10)).setDate(new Date(res.data[i].activity.substring(0, 10)).getDate() + 1)).toISOString().substring(0, 10),
             value: res.data[i].value,
             color: "#2A78E4"
           })

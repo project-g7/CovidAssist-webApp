@@ -186,7 +186,8 @@ const CheckBookingDetails = () => {
                 <h4 className={classes.fontx}>Booked Date</h4>
               </div>
               <div className={classes.set}>
-                <p>{data.date && data.date.substring(0, 10)}</p>
+                {/* <p>{data.date && data.date.substring(0, 10)}</p> */}
+                <p>{data.date && new Date(new Date(data.date.substring(0, 10)).setDate(new Date(data.date.substring(0, 10)).getDate() + 1)).toISOString().substring(0, 10)}</p>
               </div>
             </div>
             <div className={classes.vset}>

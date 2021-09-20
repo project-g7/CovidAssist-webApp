@@ -19,6 +19,14 @@ class FileReader extends React.Component {
     this.state = {
       centers: [],
       columns: [
+         {
+          dataField: "Id",
+          text: "Place ID",
+          sort: true,
+          headerStyle: {
+            backgroundColor: "rgb(96, 79, 255)",
+          },
+        },
         {
           dataField: "Date",
           text: "Date",
@@ -35,22 +43,6 @@ class FileReader extends React.Component {
             display: "flex",
             justifyContent: "space-around",
             alignItems: "center",
-          },
-        },
-        {
-          dataField: "place_id",
-          text: "Place_id",
-          sort: true,
-          headerStyle: {
-            backgroundColor: "rgb(96, 79, 255)",
-          },
-        },
-        {
-          dataField: "id",
-          text: "ID",
-          sort: true,
-          headerStyle: {
-            backgroundColor: "rgb(96, 79, 255)",
           },
         },
       ],
