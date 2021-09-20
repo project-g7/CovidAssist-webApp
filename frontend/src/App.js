@@ -31,6 +31,7 @@ import Profile from "./components/Admin/pages/Profile";
 import vaccineProfile from "./components/VaccineManager/pages/Profile";
 import ctProfile from "./components/ContactTracingManager/pages/Profile";
 import Dashboard from "./components/ContactTracingManager/SubComponents/Dashboard";
+import contacttracingReport from "./components/ContactTracingManager/Reports/contacttracingReport";
 import { ProtectedRouteAdmin } from "./ProtectedRouteAdmin.js";
 import { ProtectedRouteContact } from "./ProtectedRouteContact.js";
 import { ProtectedRouteVaccine } from "./ProtectedRouteVaccine.js";
@@ -59,15 +60,27 @@ function App() {
         <Route exact path="/" component={Login}></Route>
         <Route exact path="/Register" component={Register}></Route>
         <Route exact path="/Welcome" component={Welcome}></Route>
-        <ProtectedRouteAdmin exact path="/admin" component={WelcomeAdmin}/>
-        <ProtectedRouteVaccine exact path="/vaccine" component={WelcomeVaccine}/>
+        <ProtectedRouteAdmin exact path="/admin" component={WelcomeAdmin} />
+        <ProtectedRouteVaccine
+          exact
+          path="/vaccine"
+          component={WelcomeVaccine}
+        />
         <ProtectedRouteAdmin
           exact
           path="/admin/vaccinemanage"
           component={AdminVaccineManage}
         ></ProtectedRouteAdmin>
-        <ProtectedRouteAdmin exact path="/admin/requests" component={Requests}></ProtectedRouteAdmin>
-        <ProtectedRouteAdmin exact path="/admin/iot" component={Iot}></ProtectedRouteAdmin>
+        <ProtectedRouteAdmin
+          exact
+          path="/admin/requests"
+          component={Requests}
+        ></ProtectedRouteAdmin>
+        <ProtectedRouteAdmin
+          exact
+          path="/admin/iot"
+          component={Iot}
+        ></ProtectedRouteAdmin>
         <ProtectedRouteAdmin
           exact
           path="/admin/reports/vaccinebooking"
@@ -93,7 +106,11 @@ function App() {
           path="/admin/vaccinemanage/center"
           component={DisplayCenter}
         ></ProtectedRouteAdmin>
-        <ProtectedRouteContact exact path="/contactTracing" component={Dashboard}></ProtectedRouteContact>
+        <ProtectedRouteContact
+          exact
+          path="/contactTracing"
+          component={Dashboard}
+        ></ProtectedRouteContact>
         <ProtectedRouteContact
           exact
           path="/contactTracing/mobileUser"
@@ -114,9 +131,21 @@ function App() {
           path="/vaccine/vaccinelist"
           component={ReservedVaccineList}
         ></ProtectedRouteVaccine>
-        <ProtectedRouteAdmin exact path="/admin/profile" component={Profile}></ProtectedRouteAdmin>
-        <ProtectedRouteVaccine exact path="/vaccine/profile" component={vaccineProfile}></ProtectedRouteVaccine>
-        <ProtectedRouteContact exact path="/ct/profile" component={ctProfile}></ProtectedRouteContact>
+        <ProtectedRouteAdmin
+          exact
+          path="/admin/profile"
+          component={Profile}
+        ></ProtectedRouteAdmin>
+        <ProtectedRouteVaccine
+          exact
+          path="/vaccine/profile"
+          component={vaccineProfile}
+        ></ProtectedRouteVaccine>
+        <ProtectedRouteContact
+          exact
+          path="/ct/profile"
+          component={ctProfile}
+        ></ProtectedRouteContact>
         <ProtectedRouteAdmin
           exact
           path="/admin/requests/verifiedAdministrators"
@@ -147,6 +176,11 @@ function App() {
           path="/vaccine/CheckBookingDetails"
           component={CheckBookingDetails}
         ></ProtectedRouteVaccine>
+        <ProtectedRouteContact
+          exact
+          path="/contactTracing/reports/contacttracingreport"
+          component={contacttracingReport}
+        ></ProtectedRouteContact>
       </Switch>
     </Router>
   );
