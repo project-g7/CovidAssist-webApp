@@ -316,7 +316,7 @@ app.post("/assignAdmins", (req, res) => {
         res.send(err);
       } else {
         db.query(
-          "insert into covidAssist.vaccine_manager(user_id, center_id) values (?, ?)",
+          "insert into covidAssist.vaccine_manager(user_id, center_id,status) values (?, ?, 1)",
           [id, place],
           (err, result) => {
             if (err) {
@@ -488,11 +488,42 @@ app.post("/rejectAdmins", (req, res) => {
   );
 });
 
+// remove vaccine manager 
+app.post("/removeVaccineManager", (req, res) => {
+  const id = req.body.id;
+  const center = req.body.center_id;
+  db.query(
+    "update covidAssist.web_user set status = 0 where user_id = ?",[id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        db.query(
+          "UPDATE covidAssist.vaccine_manager SET status = 0 WHERE user_id = ? AND center_id = ? AND status = 1;",[id,center],
+          (err, result) => {
+            if (err) {
+              console.log("Error center id");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send("Success");
+
+              
+            }
+          }
+        );
+        
+      }
+    }
+  );
+});
+
 // get vaccine center list
 
 app.get("/getVaccineCenterList", (req, res) => {
   db.query(
-    "SELECT vaccine_center.center_id, concat(vaccine_center.name,' ', vaccine_center.district) as center_name FROM covidAssist.vaccine_center  left join covidAssist.vaccine_manager on vaccine_center.center_id = vaccine_manager.center_id where vaccine_manager.user_id is null;",
+    "SELECT vaccine_center.center_id, concat(vaccine_center.name,' ', vaccine_center.district) as center_name FROM covidAssist.vaccine_center  left join covidAssist.vaccine_manager on vaccine_center.center_id = vaccine_manager.center_id where vaccine_manager.user_id is null or vaccine_manager.status =0;",
     (err, result) => {
       if (err) {
         // console.log("Error center");
