@@ -131,6 +131,9 @@ export class ContactTable extends Component {
       <div>
         <div className="container" >
           <div className="container" >
+          <div className="tabletitle">
+              <h4 className="titlename">All Mobile Users</h4>
+            </div>
             <BootstrapTable
               bootstrap4
               hover

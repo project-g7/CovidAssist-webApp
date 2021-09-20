@@ -10,8 +10,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgb(236, 236, 236);",
     alignItems: "center",
     padding: "15px",
-    color: "rgb(96, 79, 255)",
+    color: "blue",
     margin: "5px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
   },
   set: {
     display: "flex",
@@ -21,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: "15px",
     margin: "5px",
+    fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
+    fontWeight: "bold",
+    color: "black",
   },
   vset: {
     display: "flex",
@@ -57,7 +61,6 @@ const MyProfile = () => {
       .catch((err) => {
         console.log(err);
       });
-
   };
   useEffect(() => {
     getSessionData();

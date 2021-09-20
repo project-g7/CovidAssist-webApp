@@ -153,7 +153,8 @@ export class AllVaccinatedList extends Component {
         </div>   
         <div className="container"> 
           <div className="container" style={{ marginTop: "10px" }}>
-         <div className="tabletitle"><h4>{this.state.name}</h4></div> 
+         <div className="tabletitle"> <h4 className="titlename">Center Name : {this.state.name}</h4>
+            </div>
             <BootstrapTable
               bootstrap4
               hover
