@@ -2052,6 +2052,7 @@ app.get("/confirmvaccine", (req, res) => {
                 let newDate = date.toISOString().substring(0, 10);
                 console.log(date.toISOString().substring(0, 10));
                 if (dose == 1) {
+                  console.log("Inside ##");
                   const spawn = require("child_process").spawn;
                   const pythonProcess = spawn("python", [
                     "certi.py",
@@ -2268,6 +2269,7 @@ app.get("/confirmvaccine", (req, res) => {
                 let newDate = date.toISOString().substring(0, 10);
                 console.log(date.toISOString().substring(0, 10));
                 if (dose == 1) {
+                  console.log("Insidde python dose 1");
                   const spawn = require("child_process").spawn;
                   const pythonProcess = spawn("python", [
                     "certi.py",
@@ -2279,6 +2281,8 @@ app.get("/confirmvaccine", (req, res) => {
                     newDate,
                   ]);
                 } else if (dose == 2) {
+                  console.log("Insidde python dose 2");
+
                   db.query(
                     "SELECT * FROM booking WHERE mobile_user_id = ? AND status = ? AND dose = ?",
                     [userId, 1, 1],

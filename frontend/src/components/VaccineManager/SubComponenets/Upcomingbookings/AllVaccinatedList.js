@@ -148,7 +148,7 @@ export class AllVaccinatedList extends Component {
     return (
     
       <div className="AddBody-req">
-      <div className="heding">
+      <div className="heading">
           <h3>Vaccinated List</h3>
         </div>   
         <div className="container"> 
