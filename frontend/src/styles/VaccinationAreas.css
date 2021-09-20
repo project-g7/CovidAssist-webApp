@@ -41,8 +41,9 @@
     "Lucida Sans", Arial, sans-serif;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 1108px;
-  height: 750px;
+  /* height: 750px; */
   margin-left: -26px;
+  padding-bottom: 20px;
   /* padding-left: 50px; */
 }
 .AddBody-profile {
@@ -58,16 +59,31 @@
   /* padding-left: 50px; */
 }
 .AddBody-center {
-  width: "120%";
+  /* width: "100%"; */
   margin-top: 120px;
   font-size: medium;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 1108px;
-  height: 650px;
+  /* height: 750px; */
   margin-left: 230px;
   margin-bottom: 50px;
+  /* padding-left: 50px; */
+}
+.AddBody-req {
+  /* width: "100%"; */
+  margin-top: -18px;
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 1108px;
+  /* height: 750px; */
+  margin-left: -25px;
+  margin-bottom: 50px;
+  /* padding-top: 10p; */
+  padding-bottom: 20px;
   /* padding-left: 50px; */
 }
 .AddBody-center2 {
@@ -83,16 +99,29 @@
   margin-bottom: 50px;
   /* padding-left: 50px; */
 }
-.heding {
+.heading {
   background-color: #c1d7e0;
   color: rgb(15, 25, 119);
   display: flex;
   justify-content: center;
 }
-.heding-center {
+.heading-center {
   background-color: #c1d7e0;
   color: rgb(15, 25, 119);
   display: flex;
+}
+
+.subhead{
+  /* background-color: #c1d7e0; */
+  /* color: rgb(15, 25, 119); */
+  display: flex;
+  margin-top: 10px;
+  margin-left: 30px;
+  /* justify-content: center; */
+}
+
+.table{
+  margin-top: 30px;
 }
 
 .addform{

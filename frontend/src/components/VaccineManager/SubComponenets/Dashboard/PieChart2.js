@@ -1,35 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React,{useState,useEffect} from "react";
 import { Doughnut } from "react-chartjs-2";
 import Axios from "axios";
 
-const PieChart = () => {
-  const [dose1, setDose1] = useState("");
+const PieChart2 = () => {
+     const [dose1, setDose1] = useState("");
   const [dose2, setDose2] = useState("");
   const [dose1dose2, setDose1Dose2] = useState("");
-  const [users, setUsers] = useState("");
+const [users, setUsers] = useState("");
   useEffect(() => {
-    Axios.get("http://localhost:3002/vaccineFirstDose")
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+    console.log(data.user_name);
+    Axios.get("http://localhost:3002/monthlybookings",{ params: { id: data.user_id } })
       .then((res) => {
-        console.log(res.data[0].countF);
-        setDose1(res.data[0].countF);
+       
+        setDose1(res.data[0].total_bookings);
       })
       .catch((error) => {
         console.log(error);
       });
 
-    Axios.get("http://localhost:3002/vaccineFirstSecondDose")
+      Axios.get("http://localhost:3002/monthlycompletedbookings",{ params: { id: data.user_id } })
       .then((res) => {
-        console.log(res.data[0].countFS);
-        setDose1Dose2(res.data[0].countFS);
+        
+        setDose1Dose2(res.data[0].completed_bookings);
       })
       .catch((error) => {
         console.log(error);
       });
 
-    Axios.get("http://localhost:3002/getuserscount")
+      Axios
+      .get("http://localhost:3002/getuserscount")
       .then((res) => {
         console.log(res.data);
-        setUsers(res.data[0].userCount);
+        setUsers(res.data[0].userCount)
+
       })
       .catch((err) => {
         console.log(err);
@@ -37,14 +42,14 @@ const PieChart = () => {
   }, []);
 
   const data = {
-    labels: ["1st Dose vaccinated", "2nd Dose Vaccinated", "Not Vaccinated"],
+    labels: ["Total Bookings", "Completed Bookings", "Not Vaccinated"],
     datasets: [
       {
         label: "# of Votes",
-        data: [dose1, dose1dose2, users - (dose1 + dose1dose2)],
+        data: [dose1, dose1dose2,(dose1 -dose1dose2)],
         backgroundColor: [
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
+          "rgba(255,255,0, 0.2)",
+          "rgba(112,128,144, 0.2)",
           "rgba(255, 99, 132, 0.2)",
         ],
         borderColor: [
@@ -60,7 +65,7 @@ const PieChart = () => {
     <div>
       <div className="pie-chart-body">
         <div className="heading-piechart">
-          <h3>Total Mobile Users</h3>
+          <h3>Today Bookings</h3>
         </div>
         <Doughnut data={data} />
       </div>
@@ -68,4 +73,4 @@ const PieChart = () => {
   );
 };
 
-export default PieChart;
+export default PieChart2;

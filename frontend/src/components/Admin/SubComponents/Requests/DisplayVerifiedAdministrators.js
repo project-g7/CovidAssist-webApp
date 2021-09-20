@@ -263,8 +263,7 @@ const DisplayUnverifiedAdministrators = ()=>{
             </Dialog>
             
         </div>
-        
-    );
+  );
 };
 
-export default DisplayUnverifiedAdministrators
+export default DisplayUnverifiedAdministrators;

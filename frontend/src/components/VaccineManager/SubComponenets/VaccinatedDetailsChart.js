@@ -468,11 +468,7 @@ const VaccinatedDetailsChart = () => {
                   datasets: [
                     {
                       label: ["Covisheild"],
-                      data: [
-                        (pieChart1 / people) * 100,
-                        (pieChart2 / people) * 100,
-                        (pieChart3 / people) * 100,
-                      ], //calculate the presantage value
+                      data: [pieChart1, pieChart2, pieChart3], //calculate the presantage value
                       backgroundColor: [
                         "rgba(255, 99, 132)",
                         // "rgba(54, 162, 235)",

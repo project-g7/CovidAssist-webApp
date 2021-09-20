@@ -26,9 +26,9 @@ function UnverifiedAdministrators(){
     //     });
     // }, [])
     return(
-        <div>
+        <div className="AddBody-req">
             <div>
-                <div className="heding">
+                <div className="heading">
                     <h3>Unverified Administrators</h3>
                 </div>
             </div>

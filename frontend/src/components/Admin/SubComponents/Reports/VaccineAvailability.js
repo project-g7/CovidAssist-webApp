@@ -145,7 +145,7 @@ function VaccineBookingChart() {
         </div> */}
           <Bar
             data={{
-              labels: ["Oxford-AstraZeneca", "Sinopharm", "Sputnic V"],
+              labels: ["Oxford-AstraZeneca", "Sinopharm", "Pfizer"],
               datasets: [
                 {
                   label: "# 1st Dose",
@@ -265,11 +265,7 @@ function VaccineBookingChart() {
                   datasets: [
                     {
                       label: ["Covisheild"],
-                      data: [
-                        (pieChart1 / regPeople) * 100,
-                        (pieChart2 / regPeople) * 100,
-                        (pieChart2 / regPeople) * 100,
-                      ], //calculate the presantage value
+                      data: [pieChart1, pieChart2, pieChart3], //calculate the presantage value
                       backgroundColor: [
                         "rgba(255, 99, 132)",
                         "rgba(54, 162, 235)",

@@ -39,7 +39,7 @@ function Map() {
     <GoogleMap
       defaultZoom={10}
       defaultCenter={{ lat: 5.95492, lng: 80.554955 }}
-      defaultOptions={{ styles: mapstyles }}
+      // defaultOptions={{ styles: mapstyles }}
     >
       {mapset.map((centers) => (
         <Marker
@@ -107,17 +107,17 @@ function Map() {
 
             <h6>
               <b>Total Bookings : </b>
-              {booking.total}
+              {Number(booking.total)}
             </h6>
 
             <h6>
               <b>Total Vaccinations : </b>
-              {booking.TotalBooking = Number(booking.TotalBooking) || 0  }
+              {(booking.TotalBooking = Number(booking.TotalBooking) || 0)}
             </h6>
 
             <h6>
-              <b>Pending Vaccinations :</b>
-              {booking.total - Number(booking.TotalBooking)}
+              <b>Pending Vaccinations : </b>
+              {Number(booking.total) - Number(booking.TotalBooking)}
             </h6>
           </div>
         </InfoWindow>

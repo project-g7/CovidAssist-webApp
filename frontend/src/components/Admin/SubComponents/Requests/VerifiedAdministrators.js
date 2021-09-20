@@ -34,12 +34,11 @@ function VerifiedAdministrators(){
     //     this.router.transitionTo('index');
     // }
     return(
-        <div>
-            <div>
-                <div className="heding">
+        <div className="AddBody-req">
+                <div className="heading">
                     <h3>Verified Administrators</h3>
                 </div>
-            </div>
+            
             <VerifiedAdministratorTable />
         </div>
         // <div>

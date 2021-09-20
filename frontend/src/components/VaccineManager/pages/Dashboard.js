@@ -4,9 +4,10 @@ import DashboardCard1 from "../SubComponenets/Dashboard/DashboardCard1";
 import DashboardCard2 from "../SubComponenets/Dashboard/DashboardCard2";
 import DashboardCard3 from "../SubComponenets/Dashboard/DashboardCard3";
 import DashboardCard4 from "../SubComponenets/Dashboard/DashboardCard4";
-// import LineGraph from "../SubComponents/Dashboard/LineGraph";
+import LineGraph from "../SubComponenets/Dashboard/LineGraph";
 import BarChart from "../SubComponenets/Dashboard/BarChart";
 import PieChart from "../SubComponenets/Dashboard/PieChart";
+import PieChart2 from "../SubComponenets/Dashboard/PieChart2";
 import axios from "axios";
 
 const Dashboard = () => {
@@ -24,8 +25,11 @@ const Dashboard = () => {
   }, []);
 
   const getCenterData = () => {
+    let data = sessionStorage.getItem("sessionStorageData");
+    data = JSON.parse(data);
+    console.log(data.user_name);
     axios
-      .get("http://localhost:3002/getcenterdistrict")
+      .get("http://localhost:3002/getupcomingbookingsdate",{ params: { id: data.user_id } })
       .then((res) => {
         console.log(res.data);
         // setData(res.data);
@@ -33,7 +37,7 @@ const Dashboard = () => {
         let arr = [];
         for(let i=0;i<res.data.length;i++){
           arr.push({
-            activity: res.data[i].activity,
+            activity: res.data[i].activity.substr(0,10),
             value: res.data[i].value,
             color: "#2A78E4"
           })
@@ -61,15 +65,16 @@ const Dashboard = () => {
   return (
     <div className="container">
       <div className="row d-body">
-        <DashboardCard4 />
         <DashboardCard1 />
         <DashboardCard2 />
         <DashboardCard3 />
+        <DashboardCard4 />
       </div>
       <div className="container tab-screen">
         {/* <LineGraph /> */}
         {visible && <BarChart data={data}/>}
         {/* <BarChart data={data} /> */}
+        {/* <PieChart/> */}
         <PieChart/>
       </div>
     </div>

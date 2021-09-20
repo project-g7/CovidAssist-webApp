@@ -183,7 +183,7 @@ const AddVaccineForm = () => {
   };
   return (
     <div className="AddBody">
-      <div className="heding">
+      <div className="heading">
         <h3>Add IoT Location</h3>
       </div>
       <div className="addform">
