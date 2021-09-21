@@ -68,7 +68,7 @@ const MyProfile = () => {
   return (
     <div>
       <div className="AddBody-profile">
-        <div className="heding">
+        <div className="heading">
           <div className={classes.heading}>
             <h3>My Profile</h3>
           </div>
