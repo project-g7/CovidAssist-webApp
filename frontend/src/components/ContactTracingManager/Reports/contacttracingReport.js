@@ -2,6 +2,7 @@ import React from 'react'
 import Sidebar from "../ContactTracingSidebar";
 // import ContactTable from './ContactTable';
 // import FileReader from "./FileReader";
+import ContactTracingChart from "../SubComponents/ContactTracingChart";
 
 
 const Dashboard = () => {
@@ -13,6 +14,8 @@ const Dashboard = () => {
             <div></div>
             <div >
                 {/* <FileReader/> */}
+                <ContactTracingChart />
+
             </div>
         </div>
     )

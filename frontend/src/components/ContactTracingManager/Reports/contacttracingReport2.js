@@ -10,7 +10,7 @@ const contacttracingReport = () => {
         <Sidebar />
       </div>
       <div>
-        <ContactTracingChart />
+        {/* <ContactTracingChart /> */}
       </div>
     </div>
   );
