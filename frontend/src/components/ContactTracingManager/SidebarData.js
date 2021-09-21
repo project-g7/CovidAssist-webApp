@@ -47,7 +47,7 @@ export const SidebarData = [
   },
   {
     title: "Reports",
-    path: "/contactTracing/reports/contacttracingreport",
+    path: "/contactTracing/reports",
     icon: <IoIcons.IoIosPaper />,
   },
 ];
