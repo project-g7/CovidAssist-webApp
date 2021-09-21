@@ -95,6 +95,7 @@
   cursor: pointer;
   width: 100%;
   color: #4049a0;
+  font-size: 18px;
 }
 .form {
   width: 100%;
@@ -118,6 +119,7 @@
   cursor: pointer;
   color: #4049a0;
   margin-top: 10px;
+  font-size: 18px;
 }
 .btn1 {
   background-color: #4049a0;
@@ -137,4 +139,17 @@
 .logo2{
   width: 290px;
   height: 290px;
+}
+.input {
+  opacity: 1;
+  width: 300px;
+  /* padding: 0 20px; */
+}
+
+input,
+.input::-webkit-input-placeholder {
+  font-size: 17px;
+  line-height: 3;
+  color: gray;
+  
 }
