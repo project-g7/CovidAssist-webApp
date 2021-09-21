@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "rgb(236, 236, 236);",
         alignItems: "center",
         padding: "15px",
-        color:"rgb(96, 79, 255)",
+        color:"blue",
         margin: "5px",
     },
     set: {
@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         padding: "15px",
         margin: "5px",
+        fontWeight: "bold",
+        color: "black",
+        fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
     },
     vset: {
         display: "flex",
@@ -51,7 +54,17 @@ const useStyles = makeStyles((theme) => ({
         marginRight: " 50px",
         marginTop: "15px",
         marginBottom: "15px",
-    }
+    },fontsist: {
+        fontSize: "20px",
+    },
+    btn: {
+        // margin: theme.spacing(1),
+        // margin: "30px 0px",
+        marginLeft:"700px",
+        width: '40%',
+        display: "flex",
+        justifyContent:"space-around"
+    },
 }));
 
 const DisplayUnverifiedAdministrators = ()=>{
@@ -140,7 +153,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                     <div className={classes.all}>
                         <div className={classes.vset}>
                             <div className={classes.tset}>
-                                <h4>User Id</h4>
+                                <h4 className={classes.fontsist}>User Id</h4>
                             </div>
                             <div className={classes.set}>
                                 {" "}
@@ -149,7 +162,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                         </div>
                         <div className={classes.vset}>
                             <div className={classes.tset}>
-                                <h4>User Name</h4>
+                                <h4  className={classes.fontsist}>User Name</h4>
                                 </div>
                                 <div className={classes.set}>
                                     <p>{data.user_name}</p>
@@ -157,7 +170,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                         </div>
                         <div className={classes.vset}>
                             <div className={classes.tset}>
-                                <h4>First Name</h4>
+                                <h4  className={classes.fontsist}>First Name</h4>
                                 </div>
                                 <div className={classes.set}>
                                     <p>{data.first_name}</p>
@@ -165,7 +178,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                         </div>
                         <div className={classes.vset}>
                             <div className={classes.tset}>
-                                <h4>Last Name</h4>
+                                <h4  className={classes.fontsist}>Last Name</h4>
                                 </div>
                                 <div className={classes.set}>
                                     <p>{data.last_name}</p>
@@ -173,7 +186,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                         </div>
                         <div className={classes.vset}>
                             <div className={classes.tset}>
-                                <h4>Address</h4>
+                                <h4  className={classes.fontsist}>Address</h4>
                             </div>
                             <div className={classes.set}>
                                 <p>{data.address}</p>
@@ -181,7 +194,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                         </div>
                         <div className={classes.vset}>
                             <div className={classes.tset}>
-                                <h4>Contact Number</h4>
+                                <h4  className={classes.fontsist}>Contact Number</h4>
                             </div>
                             <div className={classes.set}>
                                 <p>{data.contact_number}</p>
@@ -189,7 +202,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                         </div>
                         <div className={classes.vset}>
                             <div className={classes.tset}>
-                                <h4>Email</h4>
+                                <h4  className={classes.fontsist}>Email</h4>
                             </div>
                             <div className={classes.set}>
                                 <p>{data.email}</p>
@@ -197,7 +210,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                         </div>
                         <div className={classes.vset}>
                             <div className={classes.tset}>
-                                <h4>User Role</h4>
+                                <h4  className={classes.fontsist}>User Role</h4>
                             </div>
                             <div className={classes.set}>
                                 <p>{data.user_role}</p>
@@ -205,14 +218,14 @@ const DisplayUnverifiedAdministrators = ()=>{
                         </div>
                         <div className={classes.vset} style={{display: data.user_role == 'Vaccine Manager' ? '' : 'none' }}>
                             <div className={classes.tset}>
-                                <h4>Assigned Center</h4>
+                                <h4  className={classes.fontsist}>Assigned Center</h4>
                             </div>
                             <div className={classes.set}>
                                 <p>{assignedCenter}</p>
                             </div>
                         </div>
                     </div>
-                    <div className= {classes.vset} style={{display: data.user_role == 'Vaccine Manager' ? '' : 'none' }}>
+                    <div className= {classes.btn} style={{display: data.user_role == 'Vaccine Manager' ? '' : 'none' }}>
                     <Button className = {classes.buttonStyle} variant="outlined" color="primary" onClick={handleClickOpen} >
                             Remove from vaccine center
                         </Button>
