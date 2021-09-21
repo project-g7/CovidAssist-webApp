@@ -189,9 +189,10 @@ app.get("/MobileUserDetails", (req, res) => {
         console.log(result);
         res.send(result);
       }
-    })
-  });
-  
+    }
+  );
+});
+
 app.get("/iotCenters", (req, res) => {
   const id = req.query.id;
   db.query(
@@ -222,16 +223,19 @@ app.get("/mobileUsers", (req, res) => {
   });
 });
 app.get("/exposureUsers", (req, res) => {
-  db.query("SELECT * FROM covidAssist.mobile_user WHERE contact_tracing_status = 1", (err, result) => {
-    if (err) {
-      console.log("Error ---1");
-      res.send(err);
-    } else {
-      res.send(result);
-      console.log("Success");
-      // console.log(result);
+  db.query(
+    "SELECT * FROM covidAssist.mobile_user WHERE contact_tracing_status = 1",
+    (err, result) => {
+      if (err) {
+        console.log("Error ---1");
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Success");
+        // console.log(result);
+      }
     }
-  });
+  );
 });
 
 app.get("/vaccines", (req, res) => {
@@ -1964,7 +1968,7 @@ app.get("/confirmvaccine", (req, res) => {
   const dose = req.query.dose;
   console.log(dose);
   console.log("no");
-  if(dose==1){
+  if (dose == 1) {
     db.query(
       "UPDATE booking SET status=1,dose_1=1 WHERE booking_id=?",
       [id],
@@ -2072,8 +2076,7 @@ app.get("/confirmvaccine", (req, res) => {
         }
       }
     );
-  }
- else if(dose==2){
+  } else if (dose == 2) {
     db.query(
       "UPDATE booking SET status=1,dose_2=1 WHERE booking_id=?",
       [id],
@@ -2181,8 +2184,7 @@ app.get("/confirmvaccine", (req, res) => {
         }
       }
     );
-  }
-  else if(dose==3){
+  } else if (dose == 3) {
     db.query(
       "UPDATE booking SET status=1,dose_3=1 WHERE booking_id=?",
       [id],
@@ -2291,7 +2293,6 @@ app.get("/confirmvaccine", (req, res) => {
       }
     );
   }
-  
 });
 
 app.get("/getcenterdistrict", (req, res) => {
@@ -2478,25 +2479,24 @@ app.get("/getcancelcount", (req, res) => {
         console.log(result[0].center_id);
         const vid = result[0].center_id;
 
-  db.query(
-    "SELECT count(booking_id) as canceled_bookings FROM covidAssist.booking WHERE is_cancel=0 AND status=0 AND date=curdate() AND center_id=?",
-    [vid],
-    (err, result) => {
-      if (err) {
-        console.log("Error count");
-        console.log(err);
-        res.send(err);
-      } else {
-        res.send(result);
-        console.log("count successful");
-        console.log(result);
-       }
-     }
-   );
-  }
- }
-);
-
+        db.query(
+          "SELECT count(booking_id) as canceled_bookings FROM covidAssist.booking WHERE is_cancel=0 AND status=0 AND date=curdate() AND center_id=?",
+          [vid],
+          (err, result) => {
+            if (err) {
+              console.log("Error count");
+              console.log(err);
+              res.send(err);
+            } else {
+              res.send(result);
+              console.log("count successful");
+              console.log(result);
+            }
+          }
+        );
+      }
+    }
+  );
 });
 app.get("/getVaccine", (req, res) => {
   const userId = req.query.id;
@@ -2704,4 +2704,53 @@ app.get("/getVaccines", (req, res) => {
 
 app.listen(3002, () => {
   console.log("your server is running port 3002");
+});
+
+app.post("/forgotPassword", (req, res) => {
+  const UserName = req.body.UserName;
+  db.query(
+    "SELECT email,user_name from web_user WHERE user_name = ?",
+    [UserName],
+    (err, result) => {
+      if (err) {
+        // console.log("Error in web user update query");
+        console.log(err);
+        res.send(err);
+      } else {
+        
+        if (result.length > 0) {
+          console.log(result[0].email);
+        console.log("updated");
+        let mailTransporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: "g7titans@gmail.com",
+            pass: "titans@123",
+          },
+        });
+        // let string = `click this link to create a new password http://localhost:3000/createNewPassword?user=`+result[0].user_name;
+        let mailDetails = {
+          from: '"CovidAssist Admin" <g7titans@gmail.com>',
+          to: result[0].email,
+          // to:"nuvinsamadhi1996@yahoo.com",
+          subject: "Create new password",
+          text: `click this link to create a new password http://localhost:3000/createNewPassword?user=`+result[0].user_name,
+        };
+
+        mailTransporter.sendMail(mailDetails, function (err, data) {
+          if (err) {
+            console.log("Error Occurs");
+            console.log(err);
+          } else {
+            console.log("Email sent successfully");
+          }
+        });
+        res.send("Success");
+        }else{
+          console.log(result);
+          res.send({ message: "email not found" });
+        }
+      }
+    }
+  );
 });

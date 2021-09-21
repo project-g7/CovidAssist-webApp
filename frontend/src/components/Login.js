@@ -37,7 +37,7 @@ const Login = () => {
         } else if (userRole == "Vaccine Manager") {
           window.location.href = "/vaccine";
         } else if (userRole == "Contact Tracing Manager") {
-          window.location.href = "/ct";
+          window.location.href = "/contactTracing";
         }
       }
     });

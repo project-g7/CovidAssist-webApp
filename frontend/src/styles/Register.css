@@ -79,13 +79,11 @@
   align-items: center;
 }
 .R-input-div1 {
-  margin-top: 20px;
   display: flex;
   width: 100%;
   flex-direction: row;
 }
 .R-input-div2 {
-  margin-top: 20px;
   display: flex;
   justify-content: right;
   width: 100%;
