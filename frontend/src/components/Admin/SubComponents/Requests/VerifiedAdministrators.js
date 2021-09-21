@@ -36,7 +36,7 @@ function VerifiedAdministrators(){
     return(
         <div className="AddBody-req">
                 <div className="heading">
-                    <h3>Verified Administrators</h3>
+                    <h3>Verified Users</h3>
                 </div>
             
             <VerifiedAdministratorTable />

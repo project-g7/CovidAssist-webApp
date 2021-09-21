@@ -147,7 +147,7 @@ const DisplayUnverifiedAdministrators = ()=>{
                             </Link>
                         </div>
                         <div className={classes.heading}>
-                            <h3>Verified Administrator</h3>
+                            <h3>Verified Users</h3>
                         </div>
                     </div>
                     <div className={classes.all}>

@@ -18,8 +18,8 @@ const DashboardCard2 = () => {
     <div class="cardw">
       <b>
         <p class="dash">
-          Public IOT <br />
-          Places
+          Public  Places <br />
+          With IoT Devices
         </p>
       </b>
       <b>

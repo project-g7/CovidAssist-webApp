@@ -29,7 +29,7 @@ function UnverifiedAdministrators(){
         <div className="AddBody-req">
             <div>
                 <div className="heading">
-                    <h3>Unverified Administrators</h3>
+                    <h3>Unverified Users</h3>
                 </div>
             </div>
             <UnverifiedAdministratorTable />
