@@ -534,7 +534,7 @@ const Register = () => {
               <div className="R-right">
                 <div className="R-input-div2">
                   <div className="R-divInputRadio">
-                    <div>
+                    
                       <FormControl
                         component="fieldset"
                         // style={{ marginTop: "20px" }}
@@ -563,7 +563,7 @@ const Register = () => {
                           />
                         </RadioGroup>
                       </FormControl>
-                    </div>
+                    
                   </div>
                 </div>
                 {formik.touched.Gender && formik.errors.Gender ? (
@@ -578,7 +578,7 @@ const Register = () => {
                     {formik.errors.Gender}
                   </div>
                 ) : null}
-                <div className="R-input-div2">
+                <div className="R-input-div-email">
                   <div className="i">
                     <MdEmail className="icon" color="#4049A0"></MdEmail>
                   </div>

@@ -2,18 +2,23 @@ import React from "react";
 import Papa from "papaparse";
 import BootstrapTable from "react-bootstrap-table-next";
 import axios from "axios";
+import { Dialog, InputLabel } from "@material-ui/core";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 class FileReader extends React.Component {
   constructor() {
     super();
     this.state = {
       csvfile: undefined,
       data: [],
+      open : false,
     };
 
     this.state = {
@@ -45,10 +50,24 @@ class FileReader extends React.Component {
             alignItems: "center",
           },
         },
+        {
+          dataField: "Status",
+          text: "Status",
+          headerStyle: {
+            backgroundColor: "rgb(96, 79, 255)",
+            justifyContent: "center",
+          },
+        },
       ],
     };
 
     this.updateData = this.updateData.bind(this);
+  }
+
+  handleCloseSuccess = () => {
+    this.setState({
+            open:false,
+          })
   }
 
   handleChange = (event) => {
@@ -74,6 +93,11 @@ class FileReader extends React.Component {
       .post("http://localhost:3002/addTemperatureReport", this.state.data)
       .then((res) => {
         console.log(res.data);
+        if(res.data == "Success"){
+          this.setState({
+            open:true,
+          })
+        }
         console.log("Successs temp");
       })
       .catch((err) => {
@@ -174,6 +198,26 @@ class FileReader extends React.Component {
             />
           )}
         </div>
+
+        <Dialog
+        open={this.state.open}
+        onClose={this.handleCloseSuccess}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Successful!"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Report Uploaded Successfully
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleCloseSuccess} color="primary" autoFocus>
+            {" "}
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
       </div>
     );
   }

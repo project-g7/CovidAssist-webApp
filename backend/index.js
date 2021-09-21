@@ -359,7 +359,7 @@ app.post("/assignAdmins", (req, res) => {
                   }
                 }
               );
-
+                res.send("Success");
               // console.log("updated");
             }
           }
@@ -2061,6 +2061,7 @@ app.get("/confirmvaccine", (req, res) => {
           console.log(err);
           res.send(err);
         } else {
+          res.send("Success");
           db.query(
             "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
             [id],
@@ -2170,6 +2171,7 @@ app.get("/confirmvaccine", (req, res) => {
           console.log(err);
           res.send(err);
         } else {
+          res.send("Success");
           db.query(
             "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
             [id],
@@ -2278,6 +2280,7 @@ app.get("/confirmvaccine", (req, res) => {
           console.log(err);
           res.send(err);
         } else {
+          res.send("Success");
           db.query(
             "SELECT booking.mobile_user_id, booking.center_id, booking.vaccine_id,booking.dose, booking.date, mobile_user.first_name, mobile_user.last_name, mobile_user.address, mobile_user.nic, vaccine_center.name , vaccine.vaccine_name FROM booking INNER JOIN mobile_user ON booking.mobile_user_id = mobile_user.mobile_user_id INNER JOIN vaccine_center ON booking.center_id = vaccine_center.center_id INNER JOIN vaccine ON booking.vaccine_id = vaccine.vaccine_id  WHERE booking_id=?",
             [id],
@@ -2730,9 +2733,10 @@ app.post("/addTemperatureReport", (req, res) => {
     const time = req.body[i].Date;
     const placeId = req.body[i].Id;
     const temperature = req.body[i].Temprature;
+    const status = req.body[i].Status;
     db.query(
       "INSERT INTO temperature(place_id,temperature_value,date_time,status) VALUES(?,?,?,?)",
-      [placeId, temperature, time, 1],
+      [placeId, temperature, time, status],
       (error, result) => {
         if (error) {
           console.log(error);
