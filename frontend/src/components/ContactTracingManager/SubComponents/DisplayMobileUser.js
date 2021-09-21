@@ -46,7 +46,12 @@ const useStyles = makeStyles((theme) => ({
     width: "90%",
     display: "flex",
     justifyContent: "center",
-  },
+  },btn: {
+    marginLeft:"700px",
+    width: '40%',
+    display: "flex",
+    justifyContent:"space-around"
+},
 }));
 
 const DisplayMobileUser = () => {
@@ -157,14 +162,16 @@ const DisplayMobileUser = () => {
               </div>
             </div>
             {ve == 0 && (
+              <div className={classes.btn}>
               <Button
-                variant="contained"
+                variant="outlined"
                 color="primary"
                 component="span"
                 onClick={() => confirm()}
               >
                 Confirm as a covid patient
               </Button>
+              </div>
             )}
           </div>
         </div>
