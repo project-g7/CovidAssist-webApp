@@ -260,6 +260,7 @@ function VaccineBookingChart() {
             updateDistrict={handleDistrict}
             updateVaccineCenter={handleVaccineCenter}
           />
+
         </div> 
         <div className='header1'>
       <h4 className='title'>Available and Booked Vaccines Count</h4>  </div>

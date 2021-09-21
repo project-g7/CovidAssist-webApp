@@ -1,12 +1,12 @@
-import React from 'react';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
-import * as IoIcons from 'react-icons/io';
-import * as RiIcons from 'react-icons/ri';
+import React from "react";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+import * as IoIcons from "react-icons/io";
+import * as RiIcons from "react-icons/ri";
 
 export const SidebarData = [
   {
-    title: "Dashboard",
+    title: "Insert Covid Patients",
     path: "/contactTracing",
     icon: <RiIcons.RiDashboardLine />,
     // iconClosed: <RiIcons.RiArrowDownSFill />,
@@ -26,9 +26,9 @@ export const SidebarData = [
     // ]
   },
   {
-    title: 'View Exposures',
-    path: '/contactTracing/viewExposure',
-    icon: <RiIcons.RiUserSearchFill/>,
+    title: "View Exposures",
+    path: "/contactTracing/viewExposure",
+    icon: <RiIcons.RiUserSearchFill />,
     // iconClosed: <RiIcons.RiArrowDownSFill />,
     // iconOpened: <RiIcons.RiArrowUpSFill />,
 
@@ -46,9 +46,8 @@ export const SidebarData = [
     // ]
   },
   {
-    title: 'Reports',
-    path: '/contactTracing/reports',
-    icon: <IoIcons.IoIosPaper/>
+    title: "Report",
+    path: "/contactTracing/reports",
+    icon: <IoIcons.IoIosPaper />,
   },
-  
 ];
