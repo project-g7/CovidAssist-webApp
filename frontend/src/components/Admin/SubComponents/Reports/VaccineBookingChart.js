@@ -260,6 +260,7 @@ function VaccineBookingChart() {
             updateVaccineCenter={handleVaccineCenter}
           />
         </div>
+
         <div className="MainChart">
           <Bar
             // width={"50px"}

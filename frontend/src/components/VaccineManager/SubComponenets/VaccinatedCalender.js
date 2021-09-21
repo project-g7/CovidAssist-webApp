@@ -104,7 +104,7 @@ const VaccinatedCalender = () => {
 
         <div class="columns1">
           <div class="cards1">
-            <h5 class="font1">2d Dose Vaccinated People</h5>
+            <h5 class="font1">2nd Dose Vaccinated People</h5>
             <h4 class="font2">{secondDoseCount}</h4>
           </div>
         </div>
