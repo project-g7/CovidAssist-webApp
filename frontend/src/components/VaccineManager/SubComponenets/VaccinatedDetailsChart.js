@@ -341,7 +341,8 @@ const VaccinatedDetailsChart = () => {
             </div>
           </div>
         </div>
-
+        <div className='header1'>
+      <h4 className='title'>Vaccinated Count in Last Four Days</h4>  </div>
         <div className="VaccineChart">
           {/* <div>
           <h3>Pie Chart</h3>
