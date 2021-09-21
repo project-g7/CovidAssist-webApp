@@ -477,7 +477,7 @@ const AddVaccineForm = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Successfull!"}
+          {"Successful!"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

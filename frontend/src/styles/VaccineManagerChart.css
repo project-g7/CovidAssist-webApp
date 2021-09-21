@@ -36,6 +36,27 @@
   width: 600px;
   height: 450px;
 }
+.VaccineChartv {
+  /* margin-top: 50px; */
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 0;
+  /* margin-left: 70px; */
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 600px;
+  /* height: 450px; */
+}
+
+.vm-charts{
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+}
 .fonts {
   margin-top: 10px;
   color: #dd0925;

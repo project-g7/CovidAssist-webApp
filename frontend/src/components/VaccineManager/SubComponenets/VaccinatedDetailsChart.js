@@ -303,7 +303,7 @@ const VaccinatedDetailsChart = () => {
     <div className="App">
       <div className="Title1">
         <div className="HeadLine">
-          <h3>Vaccinated Details in District </h3>
+          <h3>Vaccinated Details in the Center </h3>
 
           <div className="subtitle">
             <h3>Vaccinated Details in District</h3>
@@ -380,32 +380,32 @@ const VaccinatedDetailsChart = () => {
                   ],
                   barThickness: 60,
                 },
-                {
-                  label: "# 2n Dose",
-                  data: [secondDoseCount1, secondDoseCount2, secondDoseCount3],
-                  backgroundColor: [
-                    // "rgba(255, 99, 132)",
-                    // "rgba(54, 162, 235)",
-                    "rgba(75, 192, 192)",
-                    "rgba(255, 159, 64)",
-                    //"rgba(255, 206, 86)",
-                    "rgba(153, 102, 252)",
-                    // "rgba(255, 159, 64)",
-                    // "rgba(205, 199, 24)",
-                  ],
-                  borderColor: [
-                    // "rgba(255, 99, 132, 1)",
-                    // "rgba(54, 162, 235, 1)",
-                    "rgba(75, 192, 192, 1)",
-                    "rgba(255, 159, 64, 1)",
-                    // "rgba(255, 206, 86, 1)",
+                // {
+                //   label: "# 2n Dose",
+                //   data: [secondDoseCount1, secondDoseCount2, secondDoseCount3],
+                //   backgroundColor: [
+                //     // "rgba(255, 99, 132)",
+                //     // "rgba(54, 162, 235)",
+                //     "rgba(75, 192, 192)",
+                //     "rgba(255, 159, 64)",
+                //     //"rgba(255, 206, 86)",
+                //     "rgba(153, 102, 252)",
+                //     // "rgba(255, 159, 64)",
+                //     // "rgba(205, 199, 24)",
+                //   ],
+                //   borderColor: [
+                //     // "rgba(255, 99, 132, 1)",
+                //     // "rgba(54, 162, 235, 1)",
+                //     "rgba(75, 192, 192, 1)",
+                //     "rgba(255, 159, 64, 1)",
+                //     // "rgba(255, 206, 86, 1)",
 
-                    "rgba(153, 102, 255, 1)",
-                    // "rgba(255, 159, 64, 1)",
-                    // "rgba(205, 199, 24,1)",
-                  ],
-                  barThickness: 60,
-                },
+                //     "rgba(153, 102, 255, 1)",
+                //     // "rgba(255, 159, 64, 1)",
+                //     // "rgba(205, 199, 24,1)",
+                //   ],
+                //   barThickness: 60,
+                // },
               ],
             }}
             options={{
