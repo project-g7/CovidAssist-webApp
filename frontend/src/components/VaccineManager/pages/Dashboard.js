@@ -11,14 +11,11 @@ import PieChart2 from "../SubComponenets/Dashboard/PieChart2";
 import axios from "axios";
 
 const Dashboard = () => {
-
-  const [data,setData] = useState([]);
-  const [visible,setVisible] = useState(false);
+  const [data, setData] = useState([]);
+  const [visible, setVisible] = useState(false);
   // var [count,setCount] = useState(0);
 
-
   useEffect(() => {
-
     // getCenterData();
     // fetchData();
     getCenterData();
@@ -29,19 +26,27 @@ const Dashboard = () => {
     data = JSON.parse(data);
     console.log(data.user_name);
     axios
-      .get("http://localhost:3002/getupcomingbookingsdate",{ params: { id: data.user_id } })
+      .get("http://localhost:3002/getupcomingbookingsdate", {
+        params: { id: data.user_id },
+      })
       .then((res) => {
         console.log(res.data);
         // setData(res.data);
         // setCenters(res.data[0].centerCount);
         let arr = [];
-        for(let i=0;i<res.data.length;i++){
+        for (let i = 0; i < res.data.length; i++) {
           arr.push({
             // activity: res.data[i].activity.substr(0,10),
-            activity: new Date(new Date(res.data[i].activity.substring(0, 10)).setDate(new Date(res.data[i].activity.substring(0, 10)).getDate() + 1)).toISOString().substring(0, 10),
+            activity: new Date(
+              new Date(res.data[i].activity.substring(0, 10)).setDate(
+                new Date(res.data[i].activity.substring(0, 10)).getDate() + 1
+              )
+            )
+              .toISOString()
+              .substring(0, 10),
             value: res.data[i].value,
-            color: "#2A78E4"
-          })
+            color: "#2A78E4",
+          });
         }
         console.log(arr);
         setData(arr);
@@ -52,8 +57,7 @@ const Dashboard = () => {
       });
   };
 
-
-    const fetchData = async () => {
+  const fetchData = async () => {
     const response = await fetch(`http://localhost:3002/getcenterdistrict`, {
       method: "GET",
     });
@@ -61,7 +65,6 @@ const Dashboard = () => {
     console.log(results);
     setData(results);
   };
-
 
   return (
     <div className="container">
@@ -73,13 +76,12 @@ const Dashboard = () => {
       </div>
       <div className="container tab-screen">
         {/* <LineGraph /> */}
-        {visible && <BarChart data={data}/>}
+        {visible && <BarChart data={data} />}
         {/* <BarChart data={data} /> */}
         {/* <PieChart/> */}
-        <PieChart/>
+        <PieChart />
       </div>
     </div>
-    
   );
 };
 

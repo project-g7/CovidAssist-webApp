@@ -6,13 +6,13 @@ const crypto = require("crypto");
 const { request } = require("http");
 const nodemailer = require("nodemailer");
 
-const jwt=require('jsonwebtoken');
-const JWT_SECRET="some super secret..."
-require('dotenv').config();
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = "some super secret...";
+require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
-app.set('view engine','ejs');
+app.set("view engine", "ejs");
 
 const db = mysql.createConnection({
   host: "covid-assist-db.cdbjavxo0vob.us-east-2.rds.amazonaws.com",
@@ -110,58 +110,42 @@ app.post("/login", (req, res) => {
         const payload = {
           id,
           role,
-          }
-        const token = jwt.sign(payload , process.env.jwtSecret,{
+        };
+        const token = jwt.sign(payload, process.env.jwtSecret, {
           expiresIn: 1800,
-        })
+        });
 
-        res.json({auth:true, token: token, result: result});
-
+        res.json({ auth: true, token: token, result: result });
       } else {
-        res.json({auth:false , message: "Wrong username / password combination" });
+        res.json({
+          auth: false,
+          message: "Wrong username / password combination",
+        });
         console.log("Wrong username and password combination");
       }
     }
   );
 });
 
-const verifyJWT = (req,res,next) => {
+const verifyJWT = (req, res, next) => {
   const token = req.headers["x-access-token"];
-  if(!token){
+  if (!token) {
     res.send("Need a token");
-  }else{
-    jwt.verify(token,"jwtSecret", (err,decoded) => {
-      if(err){
-        res.json({auth:false, message:"Failed to authenticate"});
-      }else{
+  } else {
+    jwt.verify(token, "jwtSecret", (err, decoded) => {
+      if (err) {
+        res.json({ auth: false, message: "Failed to authenticate" });
+      } else {
         req.userId = decoded.id;
         next();
       }
-    })
+    });
   }
-}
+};
 
-
-
-app.get('/isUserAuth', verifyJWT, (req,res)=>{
+app.get("/isUserAuth", verifyJWT, (req, res) => {
   res.send("authenticated");
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
 
 // approve request
 
@@ -245,9 +229,10 @@ app.get("/MobileUserDetails", (req, res) => {
         console.log(result);
         res.send(result);
       }
-    })
-  });
-  
+    }
+  );
+});
+
 app.get("/iotCenters", (req, res) => {
   const id = req.query.id;
   db.query(
@@ -278,16 +263,19 @@ app.get("/mobileUsers", (req, res) => {
   });
 });
 app.get("/exposureUsers", (req, res) => {
-  db.query("SELECT * FROM covidAssist.mobile_user WHERE contact_tracing_status = 1", (err, result) => {
-    if (err) {
-      console.log("Error ---1");
-      res.send(err);
-    } else {
-      res.send(result);
-      console.log("Success");
-      // console.log(result);
+  db.query(
+    "SELECT * FROM covidAssist.mobile_user WHERE contact_tracing_status = 1",
+    (err, result) => {
+      if (err) {
+        console.log("Error ---1");
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log("Success");
+        // console.log(result);
+      }
     }
-  });
+  );
 });
 
 app.get("/vaccines", (req, res) => {
@@ -488,19 +476,21 @@ app.post("/rejectAdmins", (req, res) => {
   );
 });
 
-// remove vaccine manager 
+// remove vaccine manager
 app.post("/removeVaccineManager", (req, res) => {
   const id = req.body.id;
   const center = req.body.center_id;
   db.query(
-    "update covidAssist.web_user set status = 0 where user_id = ?",[id],
+    "update covidAssist.web_user set status = 0 where user_id = ?",
+    [id],
     (err, result) => {
       if (err) {
         console.log(err);
         res.send(err);
       } else {
         db.query(
-          "UPDATE covidAssist.vaccine_manager SET status = 0 WHERE user_id = ? AND center_id = ? AND status = 1;",[id,center],
+          "UPDATE covidAssist.vaccine_manager SET status = 0 WHERE user_id = ? AND center_id = ? AND status = 1;",
+          [id, center],
           (err, result) => {
             if (err) {
               console.log("Error center id");
@@ -508,12 +498,9 @@ app.post("/removeVaccineManager", (req, res) => {
               res.send(err);
             } else {
               res.send("Success");
-
-              
             }
           }
         );
-        
       }
     }
   );
@@ -1183,7 +1170,7 @@ app.get("/notfacemasks", (req, res) => {
 });
 app.get("/bodytempreture", (req, res) => {
   db.query(
-    "SELECT temperature.temperature_id,temperature.place_id,temperature.temperature_value,temperature.status,iot_device.district,iot_device.place,iot_device.longitude,iot_device.latitude, count(temperature.temperature_id) AS temperature FROM covidAssist.temperature INNER JOIN covidAssist.iot_device ON temperature.place_id=iot_device.place_id GROUP BY temperature.place_id",
+    "SELECT temperature.temperature_id,temperature.place_id,temperature.temperature_value,temperature.status,iot_device.district,iot_device.place,iot_device.longitude,iot_device.latitude, count(temperature.temperature_id) AS temperature FROM covidAssist.temperature INNER JOIN covidAssist.iot_device ON temperature.place_id=iot_device.place_id  GROUP BY temperature.place_id",
     (error, result) => {
       if (error) {
         console.log("Error bodytemparature");
@@ -1197,7 +1184,7 @@ app.get("/bodytempreture", (req, res) => {
 });
 app.get("/bodytempreturecount", (req, res) => {
   db.query(
-    "SELECT COUNT(facemask_id) AS count ,place_id FROM covidAssist.facemask group by place_id",
+    "SELECT COUNT(temperature_id) AS count ,place_id FROM covidAssist.temperature WHERE temperature.status=1 group by place_id",
     (error, result) => {
       if (error) {
         console.log("Error facemask count");
@@ -2421,18 +2408,27 @@ app.get("/upcommingbookings", (req, res) => {
             } else {
               console.log(result);
               let arr = [];
-              for(let i=0;i<result.length;i++){
+              for (let i = 0; i < result.length; i++) {
                 arr.push({
-                  fullname : result[i].fullname,
-                  vaccine_name : result[i].vaccine_name,
+                  fullname: result[i].fullname,
+                  vaccine_name: result[i].vaccine_name,
                   // date : result[i].date.toISOString().substr(0,10),
-                  date : new Date(new Date(result[i].date.toISOString().substring(0, 10)).setDate(new Date(result[i].date.toISOString().substring(0, 10)).getDate() + 1)).toISOString().substring(0, 10),
-                  nic : result[i].nic,
-                  center_id : result[i].center_id,
-                  address : result[i].address,
-                  booking_id : result[i].booking_id
-                })
-
+                  date: new Date(
+                    new Date(
+                      result[i].date.toISOString().substring(0, 10)
+                    ).setDate(
+                      new Date(
+                        result[i].date.toISOString().substring(0, 10)
+                      ).getDate() + 1
+                    )
+                  )
+                    .toISOString()
+                    .substring(0, 10),
+                  nic: result[i].nic,
+                  center_id: result[i].center_id,
+                  address: result[i].address,
+                  booking_id: result[i].booking_id,
+                });
               }
               res.send(arr);
               console.log(arr);
@@ -2825,18 +2821,27 @@ app.get("/allvaccinatedList", (req, res) => {
               res.send(err);
             } else {
               let arr = [];
-              for(let i=0;i<result.length;i++){
+              for (let i = 0; i < result.length; i++) {
                 arr.push({
-                  fullname : result[i].fullname,
-                  vaccine_name : result[i].vaccine_name,
+                  fullname: result[i].fullname,
+                  vaccine_name: result[i].vaccine_name,
                   // date : result[i].date.toISOString().substr(0,10),
-                  date : new Date(new Date(result[i].date.toISOString().substring(0, 10)).setDate(new Date(result[i].date.toISOString().substring(0, 10)).getDate() + 1)).toISOString().substring(0, 10),
-                  nic : result[i].nic,
-                  center_id : result[i].center_id,
-                  address : result[i].address,
-                  booking_id : result[i].booking_id
-                })
-
+                  date: new Date(
+                    new Date(
+                      result[i].date.toISOString().substring(0, 10)
+                    ).setDate(
+                      new Date(
+                        result[i].date.toISOString().substring(0, 10)
+                      ).getDate() + 1
+                    )
+                  )
+                    .toISOString()
+                    .substring(0, 10),
+                  nic: result[i].nic,
+                  center_id: result[i].center_id,
+                  address: result[i].address,
+                  booking_id: result[i].booking_id,
+                });
               }
               res.send(arr);
               console.log(arr);
@@ -2848,10 +2853,10 @@ app.get("/allvaccinatedList", (req, res) => {
   );
 });
 app.get("/reset-password/:id/:token/:password2", (req, res) => {
-  const{id,token,password2}=req.params;
+  const { id, token, password2 } = req.params;
   const hashnew = crypto.createHash("md5").update(password2).digest("hex");
   //  const secret=JWT_SECRET+password;
-   db.query(
+  db.query(
     "SELECT password FROM mobile_user WHERE mobile_user_id=?",
     [id],
     (error, result, feilds) => {
@@ -2859,33 +2864,133 @@ app.get("/reset-password/:id/:token/:password2", (req, res) => {
       if (result.length < 0) {
         res.send("wrong");
       } else {
-       
-        let password=result[0].password;
-        const secret=JWT_SECRET+password;
-        try{
-          const payload=jwt.verify(token,secret)
+        let password = result[0].password;
+        const secret = JWT_SECRET + password;
+        try {
+          const payload = jwt.verify(token, secret);
           console.log("Got");
           console.log(hashnew);
           console.log(id);
-          db.query("UPDATE mobile_user SET password=? WHERE mobile_user_id=?",      
-          [hashnew,id],
-           (error, result) => {
-            if (error) {
-              res.send(error);
-            } else {
-              console.log(result);
-              res.send('Sucsessfully Changed');
+          db.query(
+            "UPDATE mobile_user SET password=? WHERE mobile_user_id=?",
+            [hashnew, id],
+            (error, result) => {
+              if (error) {
+                res.send(error);
+              } else {
+                console.log(result);
+                res.send("Sucsessfully Changed");
+              }
             }
-          });
-             }
-             catch(error){
-            console.log(error.message);
-            res.send(error.message);
-    }
-        
-       }
+          );
+        } catch (error) {
+          console.log(error.message);
+          res.send(error.message);
+        }
+      }
     }
   );
+});
+//contact tracing dasboard-report
+app.get("/FirstContact", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS countF FROM covidAssist.mobile_user WHERE contact_tracing_status=0 ",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+
+});
+app.get("/SecondContact", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS countS FROM covidAssist.mobile_user WHERE contact_tracing_status=1 ",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/mobileregPeople", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS countFS FROM covidAssist.mobile_user  ",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/PieChartAge1", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS piechart1 From covidAssist.mobile_user WHERE  (mobile_user.age BETWEEN 18 AND 29) AND contact_tracing_status=1 ",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/PieChartAge2", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS piechart2 From covidAssist.mobile_user WHERE (mobile_user.age BETWEEN 30 AND 59) AND contact_tracing_status=1",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+app.get("/PieChartAge3", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user_id) AS piechart3 From covidAssist.mobile_user WHERE  (mobile_user.age >=60) AND contact_tracing_status=1",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+
+app.get("/getexposeddistrict", (req, res) => {
+  db.query(
+    "SELECT COUNT(mobile_user.mobile_user_id) AS value,user_details.district AS activity From covidAssist.mobile_user INNER JOIN covidAssist.user_details ON mobile_user.nic=user_details.nic  WHERE  contact_tracing_status=1 group by user_details.district;",
+    (err, result) => {
+      if (err) {
+        console.log("Error mobile user district");
+        console.log(err);
+        res.send(err);
+      } else {
+        res.send(result);
+        console.log(" successful---------------");
+        console.log(result);
+
  
  });
 
@@ -2933,11 +3038,11 @@ app.post("/forgotPassword", (req, res) => {
           console.log(result);
           res.send({ message: "email not found" });
         }
+
       }
     }
   );
 });
-
 
 app.listen(3002, () => {
   console.log("your server is running port 3002");
