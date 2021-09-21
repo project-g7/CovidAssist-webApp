@@ -140,12 +140,12 @@ function VaccineBookingChart() {
           </div>
         </div>
         <div className="Main">
-          {/* <div>
+          {/* { <div>
           <h3>Pie Chart</h3>
-        </div> */}
+        </div> } */}
           <Bar
             data={{
-              labels: ["Oxford-AstraZeneca", "Sinopharm", "Pfizer"],
+              labels: ["AstraZeneca", "Sinopharm", "Pfizer"],
               datasets: [
                 {
                   label: "# 1st Dose",
