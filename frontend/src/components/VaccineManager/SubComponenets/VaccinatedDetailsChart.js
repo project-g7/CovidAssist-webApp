@@ -306,7 +306,7 @@ const VaccinatedDetailsChart = () => {
           <h3>Vaccinated Details in the Center </h3>
 
           <div className="subtitle">
-            <h3>Vaccinated Details in District</h3>
+            <h3>Vaccinated Details in Center</h3>
           </div>
         </div>
         <div>
@@ -341,8 +341,9 @@ const VaccinatedDetailsChart = () => {
             </div>
           </div>
         </div>
-        <div className='header1'>
-      <h4 className='title'>Vaccinated Count in Last Four Days</h4>  </div>
+        <div className="header1">
+          <h4 className="title">Vaccinated Count in Last Four Days</h4>{" "}
+        </div>
         <div className="VaccineChart">
           {/* <div>
           <h3>Pie Chart</h3>

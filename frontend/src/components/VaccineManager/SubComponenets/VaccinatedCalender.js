@@ -118,7 +118,10 @@ const VaccinatedCalender = () => {
 
         <div class="columns1">
           <div class="cards1">
-            <h5 class="font1">No.of Registered People</h5>
+            <h5 class="font1">
+              Total No.of <br />
+              Bookings
+            </h5>
             <h4 class="font2">{registerCount}</h4>
           </div>
         </div>
