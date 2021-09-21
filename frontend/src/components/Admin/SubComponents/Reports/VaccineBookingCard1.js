@@ -62,7 +62,7 @@ const VaccineBookingCard1 = () => {
 
       <div class="column">
         <div class="card">
-          <h5 class="fstyle">2d Dose Vaccinated People</h5>
+          <h5 class="fstyle">2nd Dose Vaccinated People</h5>
           <p class="fstyles">{dose2}</p>
         </div>
       </div>

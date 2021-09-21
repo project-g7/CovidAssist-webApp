@@ -246,7 +246,7 @@ const DisplayUnverifiedAdministrators = () => {
             </div>
           
               <div className={classes.heading}>
-                <h3>Unverified Administrator</h3>
+                <h3>Unverified Users</h3>
               </div>
             
           </div>

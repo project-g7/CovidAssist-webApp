@@ -60,7 +60,7 @@ const PieChart = () => {
     <div>
       <div className="pie-chart-body">
         <div className="heading-piechart">
-          <h3>Total Mobile Users</h3>
+          <h3>Vaccinated Users with Dose</h3>
         </div>
         <Doughnut data={data} />
       </div>
