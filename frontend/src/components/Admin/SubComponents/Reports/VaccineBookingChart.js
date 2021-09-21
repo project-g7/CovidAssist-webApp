@@ -236,7 +236,8 @@ function VaccineBookingChart() {
       let newDate3 = datethree.toISOString().substring(0, 10);
       console.log(newDate3);
       setDate4(newDate3);
-
+      console.log(date1);
+      console.log('nuwa');
       // console.log(resultDetails4[0].date.substring(0, 10));
       // setDate4(resultDetails4[0].date.substring(0, 10));
     } else if (resultDetails4.value == "BookingDetails4Error") {
@@ -259,10 +260,13 @@ function VaccineBookingChart() {
             updateDistrict={handleDistrict}
             updateVaccineCenter={handleVaccineCenter}
           />
-        </div>
 
+        </div> 
+        <div className='header1'>
+      <h4 className='title'>Available and Booked Vaccines Count</h4>  </div>
         <div className="MainChart">
-          <Bar
+      
+          <Bar 
             // width={"50px"}
             // height={"50px"}
             data={{
