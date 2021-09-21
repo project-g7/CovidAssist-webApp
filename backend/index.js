@@ -2888,6 +2888,57 @@ app.get("/reset-password/:id/:token/:password2", (req, res) => {
   );
  
  });
+
+app.post("/forgotPassword", (req, res) => {
+  const UserName = req.body.UserName;
+  db.query(
+    "SELECT email,user_name from web_user WHERE user_name = ?",
+    [UserName],
+    (err, result) => {
+      if (err) {
+        // console.log("Error in web user update query");
+        console.log(err);
+        res.send(err);
+      } else {
+        
+        if (result.length > 0) {
+          console.log(result[0].email);
+        console.log("updated");
+        let mailTransporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: "g7titans@gmail.com",
+            pass: "titans@123",
+          },
+        });
+        // let string = `click this link to create a new password http://localhost:3000/createNewPassword?user=`+result[0].user_name;
+        let mailDetails = {
+          from: '"CovidAssist Admin" <g7titans@gmail.com>',
+          to: result[0].email,
+          // to:"nuvinsamadhi1996@yahoo.com",
+          subject: "Create new password",
+          text: `click this link to create a new password http://localhost:3000/createNewPassword?user=`+result[0].user_name,
+        };
+
+        mailTransporter.sendMail(mailDetails, function (err, data) {
+          if (err) {
+            console.log("Error Occurs");
+            console.log(err);
+          } else {
+            console.log("Email sent successfully");
+          }
+        });
+        res.send("Success");
+        }else{
+          console.log(result);
+          res.send({ message: "email not found" });
+        }
+      }
+    }
+  );
+});
+
+
 app.listen(3002, () => {
   console.log("your server is running port 3002");
 });
