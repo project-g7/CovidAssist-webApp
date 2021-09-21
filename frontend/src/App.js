@@ -31,7 +31,7 @@ import Profile from "./components/Admin/pages/Profile";
 import vaccineProfile from "./components/VaccineManager/pages/Profile";
 import ctProfile from "./components/ContactTracingManager/pages/Profile";
 import Dashboard from "./components/ContactTracingManager/SubComponents/Dashboard";
-import ContactTracingReport from "./components/ContactTracingManager/Reports/ContactTracingReport";
+import ContactTracingReport from "./components/ContactTracingManager/Reports/ContacttracingReport";
 // import contacttracingReport from "./components/ContactTracingManager/Reports/contacttracingReport";
 import { ProtectedRouteAdmin } from "./ProtectedRouteAdmin.js";
 import { ProtectedRouteContact } from "./ProtectedRouteContact.js";
