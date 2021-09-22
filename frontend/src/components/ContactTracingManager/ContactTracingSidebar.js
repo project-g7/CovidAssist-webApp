@@ -19,7 +19,9 @@ const Nav = styled.div`
   position:fixed;
   display: flex;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
+  z-index: 20;
+
 `;
 
 const NavIcon = styled(Link)`
@@ -41,7 +43,7 @@ const SidebarNav = styled.nav`
   top: 80px;
   left: 0;
   transition: 350ms;
-  z-index: 10;
+  z-index: 20;
 `;
 
 const SidebarWrap = styled.div`

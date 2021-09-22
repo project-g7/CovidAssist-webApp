@@ -8,10 +8,17 @@
 }
 
 /* Remove extra left and right margins, due to padding */
-.rows1 {
-  margin: 0 -5px;
+.rows12 {
+  /* margin: 0 -5px; */
+  display:flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-left: 35px;
 }
+.rows1{
+  margin: 0 -5px;
 
+}
 /* Clear floats after the columns */
 .rows1:after {
   content: "";

@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../VaccineSidebar";
-import { InputLabel } from "@material-ui/core";
+import { InputLabel,Dialog } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useLocation } from "react-router-dom";
 import * as IoIcons from "react-icons/io5";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import "../../../styles/vaccinated.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -71,6 +75,17 @@ const CheckBookingDetails = () => {
   const [data, setData] = useState([]);
   const [vaccineData, setVaccineData] = useState([]);
   const search = useLocation().search;
+  const [openSuccess, setOpenSuccess] = React.useState(false);
+
+  const handleClickSuccessOpen = () => {
+    setOpenSuccess(true);
+  };
+  
+  const handleCloseSuccess = () => {
+    setOpenSuccess(false);
+    window.location.href = "/vaccine/vaccinelist";  
+
+  };
   useEffect(() => {
     const id = new URLSearchParams(search).get("id");
     console.log(id);
@@ -105,13 +120,20 @@ const CheckBookingDetails = () => {
       });
   };
   const handleClick = (id) => {
+    axios
+      .get("http://localhost:3002/confirmvaccine", {
+        params: { book: data.booking_id, dose: data.dose },
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data == "Success") {
+            handleClickSuccessOpen();
+            console.log("data passed");
+          }
+        // alert("Confirmed");
 
-       axios.get("http://localhost:3002/confirmvaccine", { params: { book: data.booking_id,dose: data.dose } }).then((res) => {
-      console.log(res.data);
-      
-    });   alert("Confirmed");
+      });
 
-    window.location.href = "/vaccine/vaccinelist";
     console.log(data.booking_id);
   };
   return (
@@ -187,18 +209,25 @@ const CheckBookingDetails = () => {
               </div>
               <div className={classes.set}>
                 {/* <p>{data.date && data.date.substring(0, 10)}</p> */}
-                <p>{data.date && new Date(new Date(data.date.substring(0, 10)).setDate(new Date(data.date.substring(0, 10)).getDate() + 1)).toISOString().substring(0, 10)}</p>
+                <p>
+                  {data.date &&
+                    new Date(
+                      new Date(data.date.substring(0, 10)).setDate(
+                        new Date(data.date.substring(0, 10)).getDate() + 1
+                      )
+                    )
+                      .toISOString()
+                      .substring(0, 10)}
+                </p>
               </div>
             </div>
             <div className={classes.vset}>
               <div className={classes.tset}>
-
                 <h4 className={classes.fontxx}>Time</h4>
               </div>
               <div className={classes.set}>
                 <p>{data.time}</p>
-              </div>           
-
+              </div>
             </div>
             <div className={classes.vset}>
               <div className={classes.fset}>
@@ -215,6 +244,26 @@ const CheckBookingDetails = () => {
           </div>
         </div>
       </div>
+      <Dialog
+        open={openSuccess}
+        onClose={handleCloseSuccess}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Successfull!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Successfully added the vaccine center.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseSuccess} color="primary" autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

@@ -47,9 +47,9 @@ const ContactTracingCard = () => {
         <DateRangePicker />
       </div> */}
       <div
-        class="rows1"
+        class="rows12"
         name="viewport"
-        content="width=device-width, initial-scale=1"
+        // content="width=device-width, initial-scale=1"
       >
         <div class="columns1">
           <div class="cards1">
@@ -65,12 +65,12 @@ const ContactTracingCard = () => {
           </div>
         </div>
 
-        <div class="columns1">
+        {/* <div class="columns1">
           <div class="cards1">
             <h5 class="font1">dddddddddd</h5>
             <h4 class="font2">123</h4>
           </div>
-        </div>
+        </div> */}
 
         <div class="columns1">
           <div class="cards1">

@@ -46,7 +46,7 @@
 
     .v-navbar-title{
         margin-top: 15px;
-        font-size: 20px;
+        font-size: 24px;
     }
     
     .v-logo{
@@ -55,7 +55,8 @@
         /* margin-top: -10px; */
     }
     .v-title{
-        font-size: 20px;
+        /* margin-left: 5px; */
+        font-size: 25px;
     }
     .v-user-icon{
         margin-left: -25%;
@@ -74,7 +75,7 @@
     }
 
     .v-nav-start{
-        width: 28%;
+        width: 32%;
     }
     
     
