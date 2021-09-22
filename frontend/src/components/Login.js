@@ -79,7 +79,7 @@ const Login = () => {
               <div style={{ fontSize: 12, color: "blue" }}>{logged}</div>
               <div className="input-div1">
                 <div className="i">
-                  <BiUserCircle className="icon" color="#4049A0"></BiUserCircle>
+                  <BiUserCircle className="icon" color="#4049A0" size={24}></BiUserCircle>
                 </div>
                 <div className="divInput">
                   <input
@@ -94,7 +94,7 @@ const Login = () => {
               </div>
               <div className="input-div2">
                 <div className="i">
-                  <RiLockPasswordFill color="#4049A0"></RiLockPasswordFill>
+                  <RiLockPasswordFill color="#4049A0" size={24}></RiLockPasswordFill>
                 </div>
                 <div className="divInput">
                   <input

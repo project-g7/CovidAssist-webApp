@@ -255,7 +255,7 @@ function VaccineBookingChart() {
 
           <div className="column1">
             <div className="MainPie">
-              <h3>Vaccinated Age Group</h3>
+              <h4>Vaccinated People Age Wise</h4>
 
               <Pie
                 data={{

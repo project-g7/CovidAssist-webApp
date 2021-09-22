@@ -60,7 +60,7 @@ export const SidebarData = [
     ],
   },
   {
-    title: "Requests",
+    title: "Users",
     path: "/admin/requests",
     icon: <FaIcons.FaUserCheck />,
   },

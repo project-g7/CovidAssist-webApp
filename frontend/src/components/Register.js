@@ -284,7 +284,7 @@ const Register = () => {
                   <div className="i">
                     <BiUserCircle
                       className="icon"
-                      color="#4049A0"
+                      color="#4049A0" size={20}
                     ></BiUserCircle>
                   </div>
                   <div className="R-divInput">
@@ -318,7 +318,7 @@ const Register = () => {
                   <div className="i">
                     <BiUserCircle
                       className="icon"
-                      color="#4049A0"
+                      color="#4049A0" size={20}
                     ></BiUserCircle>
                   </div>
                   <div className="R-divInput">
@@ -354,7 +354,7 @@ const Register = () => {
                   <div className="i">
                     <FaRegAddressCard
                       className="icon"
-                      color="#4049A0"
+                      color="#4049A0" size={20}
                     ></FaRegAddressCard>
                   </div>
                   <div className="R-divInput">
@@ -388,7 +388,7 @@ const Register = () => {
                   <div className="i">
                     <RiContactsBook2Line
                       className="icon"
-                      color="#4049A0"
+                      color="#4049A0" size={20}
                     ></RiContactsBook2Line>
                   </div>
                   <div className="R-divInput">
@@ -423,7 +423,7 @@ const Register = () => {
                   <div className="i">
                     <BiUserCircle
                       className="icon"
-                      color="#4049A0"
+                      color="#4049A0" size={20}
                     ></BiUserCircle>
                   </div>
                   <div className="R-divInput">
@@ -455,7 +455,7 @@ const Register = () => {
                 ) : null}
                 <div className="R-input-div2">
                   <div className="i">
-                    <MdDateRange className="icon" color="#4049A0"></MdDateRange>
+                    <MdDateRange className="icon" color="#4049A0" size={20}></MdDateRange>
                   </div>
                   <div className="R-divInput">
                     <TextField
@@ -491,7 +491,7 @@ const Register = () => {
                     <div className="i">
                       <BiUserCircle
                         className="icon"
-                        color="#4049A0"
+                        color="#4049A0" size={20}
                       ></BiUserCircle>
                     </div>
                     <div className="R-divInput"> 
@@ -580,7 +580,7 @@ const Register = () => {
                 ) : null}
                 <div className="R-input-div-email">
                   <div className="i">
-                    <MdEmail className="icon" color="#4049A0"></MdEmail>
+                    <MdEmail className="icon" color="#4049A0" size={20}></MdEmail>
                   </div>
                   <div className="R-divInput">
                     <TextField
@@ -614,7 +614,7 @@ const Register = () => {
                   <div className="i">
                     <BiUserCircle
                       className="icon"
-                      color="#4049A0"
+                      color="#4049A0" size={20}
                     ></BiUserCircle>
                   </div>
                   <div className="R-divInput">
@@ -649,7 +649,7 @@ const Register = () => {
                   <div className="i">
                     <RiLockPasswordFill
                       className="icon"
-                      color="#4049A0"
+                      color="#4049A0" size={20}
                     ></RiLockPasswordFill>
                   </div>
                   <div className="R-divInput">
@@ -684,7 +684,7 @@ const Register = () => {
                   <div className="i">
                     <RiLockPasswordFill
                       className="icon"
-                      color="#4049A0"
+                      color="#4049A0" size={20}
                     ></RiLockPasswordFill>
                   </div>
                   <div className="R-divInput">
