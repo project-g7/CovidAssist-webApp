@@ -3048,6 +3048,6 @@ app.post("/forgotPassword", (req, res) => {
   );
 });
 
-app.listen(3002, () => {
+app.listen(process.env.PORT || 3002, () => {
   console.log("your server is running port 3002");
 });
