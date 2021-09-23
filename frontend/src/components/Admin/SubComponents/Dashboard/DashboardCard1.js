@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import {url} from "../../../config"
 const DashboardCard1 = () => {
   const [centers, setCenters] = useState(0);
   useEffect(() => {
     axios
-      .get("http://localhost:3002/getcentercount")
+      .get(`${url.BASE_URL}/getcentercount`)
       .then((res) => {
         console.log(res.data);
         setCenters(res.data[0].centerCount);

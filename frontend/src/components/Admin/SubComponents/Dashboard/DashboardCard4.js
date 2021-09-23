@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {url} from "../../../config"
 
 const DashboardCard4 = () => {
   const [users, setUsers] = useState("");
   useEffect(() => {
     axios
-      .get("http://localhost:3002/getuserscount")
+      .get(`${url.BASE_URL}/getuserscount`)
       .then((res) => {
         console.log(res.data);
         setUsers(res.data[0].userCount);

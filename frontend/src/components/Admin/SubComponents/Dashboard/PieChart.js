@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import Axios from "axios";
+import {url} from "../../../config"
+
 
 const PieChart = () => {
   const [dose1, setDose1] = useState("");
@@ -8,7 +10,7 @@ const PieChart = () => {
   const [dose1dose2, setDose1Dose2] = useState("");
   const [users, setUsers] = useState("");
   useEffect(() => {
-    Axios.get("http://localhost:3002/vaccineFirstDose")
+    Axios.get(`${url.BASE_URL}/vaccineFirstDose`)
       .then((res) => {
         console.log(res.data[0].countF);
         setDose1(res.data[0].countF);
@@ -17,7 +19,7 @@ const PieChart = () => {
         console.log(error);
       });
 
-    Axios.get("http://localhost:3002/vaccineFirstSecondDose")
+    Axios.get(`${url.BASE_URL}/vaccineFirstSecondDose`)
       .then((res) => {
         console.log(res.data[0].countFS);
         setDose1Dose2(res.data[0].countFS);
@@ -26,7 +28,7 @@ const PieChart = () => {
         console.log(error);
       });
 
-    Axios.get("http://localhost:3002/getuserscount")
+    Axios.get(`${url.BASE_URL}/getuserscount`)
       .then((res) => {
         console.log(res.data);
         setUsers(res.data[0].userCount);

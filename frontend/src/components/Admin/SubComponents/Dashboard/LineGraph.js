@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // import { Line } from "react-chartjs-2";
 import { Bar, Pie, Doughnut, Line, Bubble, Radar } from "react-chartjs-2";
 import Axios from "axios";
+import {url} from "../../../config"
 
 const data = {
   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
@@ -30,7 +31,7 @@ export default function LineGraph() {
   const [sinopharm2, setSinopharm2] = useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/sputnikVfirstDose")
+    Axios.get(`${url.BASE_URL}/sputnikVfirstDose`)
       .then((res) => {
         console.log(res.data[0].sputnikV1);
         setSputnikVdose1(res.data[0].sputnikV1);
@@ -41,7 +42,7 @@ export default function LineGraph() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/sputnikVsecondDose")
+    Axios.get(`${url.BASE_URL}/sputnikVsecondDose`)
       .then((res) => {
         console.log(res.data[0].sputnikV2);
         setSputnikVdose2(res.data[0].sputnikV2);
@@ -52,7 +53,7 @@ export default function LineGraph() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/astraZenecaFirstDose")
+    Axios.get(`${url.BASE_URL}/astraZenecaFirstDose`)
       .then((res) => {
         console.log(res.data[0].astra1);
         setAstraZeneca1(res.data[0].astra1);
@@ -63,7 +64,7 @@ export default function LineGraph() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/astraZenecaSecondDose")
+    Axios.get(`${url.BASE_URL}/astraZenecaSecondDose`)
       .then((res) => {
         console.log(res.data[0].astra2);
         setAstraZeneca2(res.data[0].astra2);
@@ -74,7 +75,7 @@ export default function LineGraph() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/sinopharmFirstDose")
+    Axios.get(`${url.BASE_URL}/sinopharmFirstDose`)
       .then((res) => {
         console.log(res.data[0].sinopharm1);
         setSinopharm1(res.data[0].sinopharm1);
@@ -85,7 +86,7 @@ export default function LineGraph() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/sinopharmSecondDose")
+    Axios.get(`${url.BASE_URL}/sinopharmSecondDose`)
       .then((res) => {
         console.log(res.data[0].sinopharm2);
         setSinopharm2(res.data[0].sinopharm2);

@@ -8,7 +8,7 @@ import LineGraph from "../SubComponents/Dashboard/LineGraph";
 import BarChart from "../SubComponents/Dashboard/BarChart";
 import PieChart from "../SubComponents/Dashboard/PieChart";
 import axios from "axios";
-
+import {url} from "../../config"
 const Dashboard = () => {
 
   const [data,setData] = useState([]);
@@ -23,7 +23,7 @@ const Dashboard = () => {
 
   const getCenterData = () => {
     axios
-      .get("http://localhost:3002/getcenterdistrict")
+      .get(`${url.BASE_URL}/getcenterdistrict`)
       .then((res) => {
         console.log(res.data);
         // setData(res.data);
