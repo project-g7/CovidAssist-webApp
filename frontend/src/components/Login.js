@@ -7,13 +7,15 @@ import "../styles/Login.css";
 import logo from "../images/newLogo.png";
 import { BiUserCircle } from "react-icons/bi";
 import { RiLockPasswordFill } from "react-icons/ri";
+import {url} from './config'
+
 const Login = () => {
   const [UserName, setUserName] = useState("");
   const [Password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [logged, setLogged] = useState("");
   const submit = (e) => {
-    Axios.post("http://localhost:3002/login", {
+    Axios.post(`${url.BASE_URL}/login`, {
       Password: Password,
       UserName: UserName,
     }).then((res) => {
