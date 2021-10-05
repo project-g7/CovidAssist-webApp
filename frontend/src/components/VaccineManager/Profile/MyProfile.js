@@ -57,7 +57,7 @@ const MyProfile = () => {
     console.log(data.user_name);
 
     axios
-      .get("http://localhost:3002/myprofile", { params: { id: data.user_id } })
+      .get(`${url.BASE_URL}/myprofile`, { params: { id: data.user_id } })
       .then((res) => {
         console.log(res.data[0]);
         setData(res.data[0]);

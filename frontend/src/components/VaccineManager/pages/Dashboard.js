@@ -27,7 +27,7 @@ const Dashboard = () => {
     data = JSON.parse(data);
     console.log(data.user_name);
     axios
-      .get("http://localhost:3002/getupcomingbookingsdate", {
+      .get(`${url.BASE_URL}/getupcomingbookingsdate`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -59,7 +59,7 @@ const Dashboard = () => {
   };
 
   const fetchData = async () => {
-    const response = await fetch(`http://localhost:3002/getcenterdistrict`, {
+    const response = await fetch(`${url.BASE_URL}/getcenterdistrict`, {
       method: "GET",
     });
     const results = await response.json();

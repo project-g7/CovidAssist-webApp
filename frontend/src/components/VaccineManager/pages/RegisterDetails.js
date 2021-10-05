@@ -67,7 +67,7 @@ const RegisterDetails = () => {
 
   const fetchCenterData = (id) => {
     axios
-      .get("http://localhost:3002/RegisterDetails", { params: { id: id } })
+      .get(`${url.BASE_URL}/RegisterDetails`, { params: { id: id } })
       .then((res) => {
         console.log(res.data[0]);
         setData(res.data[0]);
@@ -78,7 +78,7 @@ const RegisterDetails = () => {
   };
   const fetchVaccineData = (id) => {
     axios
-      .get("http://localhost:3002/BookedVaccine", {
+      .get(`${url.BASE_URL}/BookedVaccine`, {
         params: { id: id },
       })
       .then((res) => {
