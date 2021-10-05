@@ -12,7 +12,7 @@ const [users, setUsers] = useState("");
     let data = sessionStorage.getItem("sessionStorageData");
     data = JSON.parse(data);
     console.log(data.user_name);
-    Axios.get("http://localhost:3002/monthlybookings",{ params: { id: data.user_id } })
+    Axios.get(`${url.BASE_URL}/monthlybookings`,{ params: { id: data.user_id } })
       .then((res) => {
        
         setDose1(res.data[0].total_bookings);
@@ -21,7 +21,7 @@ const [users, setUsers] = useState("");
         console.log(error);
       });
 
-      Axios.get("http://localhost:3002/monthlycompletedbookings",{ params: { id: data.user_id } })
+      Axios.get(`${url.BASE_URL}/monthlycompletedbookings`,{ params: { id: data.user_id } })
       .then((res) => {
         
         setDose1Dose2(res.data[0].completed_bookings);
@@ -31,7 +31,7 @@ const [users, setUsers] = useState("");
       });
 
       Axios
-      .get("http://localhost:3002/getuserscount")
+      .get(`${url.BASE_URL}/getuserscount`)
       .then((res) => {
         console.log(res.data);
         setUsers(res.data[0].userCount)

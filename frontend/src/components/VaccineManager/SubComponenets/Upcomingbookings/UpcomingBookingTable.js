@@ -97,7 +97,7 @@ export class UpcomingBookingTable extends Component {
     console.log(data.user_name);
 
     axios
-      .get("http://localhost:3002/upcommingbookings", {
+      .get(`${url.BASE_URL}/upcommingbookings`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -107,7 +107,7 @@ export class UpcomingBookingTable extends Component {
         });
       });
     axios
-      .get("http://localhost:3002/getvaccinecenter", {
+      .get(`${url.BASE_URL}/getvaccinecenter`, {
         params: { id: data.user_id },
       })
       .then((res) => {

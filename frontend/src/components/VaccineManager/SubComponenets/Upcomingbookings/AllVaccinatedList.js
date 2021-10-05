@@ -81,14 +81,14 @@ export class AllVaccinatedList extends Component {
     data = JSON.parse(data);
     console.log(data.user_name);
 
-    axios.get("http://localhost:3002/allvaccinatedList", { params: { id: data.user_id } }).then((res) => {
+    axios.get(`${url.BASE_URL}/allvaccinatedList`, { params: { id: data.user_id } }).then((res) => {
       console.log(res.data);
       this.setState({
         centers: res.data,
        
       }); 
     });
-    axios.get("http://localhost:3002/getvaccinecenter", { params: { id: data.user_id } }).then((res) => {
+    axios.get(`${url.BASE_URL}/getvaccinecenter`, { params: { id: data.user_id } }).then((res) => {
       console.log(res.data);
       this.setState({
         name: res.data[0].name,

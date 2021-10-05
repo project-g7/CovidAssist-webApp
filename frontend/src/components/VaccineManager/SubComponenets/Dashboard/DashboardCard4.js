@@ -9,7 +9,7 @@ const DashboardCard4 = () => {
     data = JSON.parse(data);
     console.log(data.user_name);
     axios
-      .get("http://localhost:3002/getVaccine", { params: { id: data.user_id } })
+      .get(`${url.BASE_URL}/getVaccine`, { params: { id: data.user_id } })
       .then((res) => {
         console.log(res.data);
         setvaccine_name(res.data[0].vaccine_name);

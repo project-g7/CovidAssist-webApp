@@ -9,7 +9,7 @@ const DashboardCard1 = () => {
     data = JSON.parse(data);
     console.log(data.user_name);
     axios
-      .get("http://localhost:3002/bookingcount", {
+      .get(`${url.BASE_URL}/bookingcount`, {
         params: { id: data.user_id },
       })
       .then((res) => {

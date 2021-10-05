@@ -23,7 +23,7 @@ const VaccinatedCalender = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/firstDoseCount", {
+      .get(`${url.BASE_URL}/firstDoseCount`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -40,7 +40,7 @@ const VaccinatedCalender = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/secondDoseCount", {
+      .get(`${url.BASE_URL}/secondDoseCount`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -57,7 +57,7 @@ const VaccinatedCalender = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/firstsecondDoseCount", {
+      .get(`${url.BASE_URL}/firstsecondDoseCount`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -73,7 +73,7 @@ const VaccinatedCalender = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/registerCount", {
+      .get(`${url.BASE_URL}/registerCount`, {
         params: { id: data.user_id },
       })
       .then((res) => {

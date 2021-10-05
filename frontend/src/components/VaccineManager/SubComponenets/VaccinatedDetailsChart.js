@@ -53,7 +53,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/firstDoseCount1", {
+      .get(`${url.BASE_URL}/firstDoseCount1`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -73,7 +73,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/firstDoseCount2", {
+      .get(`${url.BASE_URL}/firstDoseCount2`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -95,7 +95,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/firstDoseCount3", {
+      .get(`${url.BASE_URL}/firstDoseCount3`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -117,7 +117,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/firstDoseCount4", {
+      .get(`${url.BASE_URL}/firstDoseCount4`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -139,7 +139,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/secondDoseCount1", {
+      .get(`${url.BASE_URL}/secondDoseCount1`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -155,7 +155,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/secondDoseCount2", {
+      .get(`${url.BASE_URL}/secondDoseCount2`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -171,7 +171,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/secondDoseCount3", {
+      .get(`${url.BASE_URL}/secondDoseCount3`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -187,7 +187,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/secondDoseCount4", {
+      .get(`${url.BASE_URL}/secondDoseCount4`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -204,7 +204,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/vaccineCenterDistrict", {
+      .get(`${url.BASE_URL}/vaccineCenterDistrict`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -222,7 +222,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/vaccineName", {
+      .get(`${url.BASE_URL}/vaccineName`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -239,7 +239,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/vaccinatedPieChart1", {
+      .get(`${url.BASE_URL}/vaccinatedPieChart1`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -256,7 +256,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/vaccinatedPieChart2", {
+      .get(`${url.BASE_URL}/vaccinatedPieChart2`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -273,7 +273,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/vaccinatedPieChart3", {
+      .get(`${url.BASE_URL}/vaccinatedPieChart3`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -290,7 +290,7 @@ const VaccinatedDetailsChart = () => {
     data = JSON.parse(data);
 
     axios
-      .get("http://localhost:3002/vaccinatedPeople", {
+      .get(`${url.BASE_URL}/vaccinatedPeople`, {
         params: { id: data.user_id },
       })
       .then((res) => {

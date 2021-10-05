@@ -12,7 +12,7 @@ const PieChart = () => {
     let data = sessionStorage.getItem("sessionStorageData");
     data = JSON.parse(data);
     console.log(data.user_name);
-    Axios.get("http://localhost:3002/monthlybookings", {
+    Axios.get(`${url.BASE_URL}/monthlybookings`, {
       params: { id: data.user_id },
     })
       .then((res) => {
@@ -22,7 +22,7 @@ const PieChart = () => {
         console.log(error);
       });
 
-    Axios.get("http://localhost:3002/monthlycompletedbookings", {
+    Axios.get(`${url.BASE_URL}/monthlycompletedbookings`, {
       params: { id: data.user_id },
     })
       .then((res) => {
@@ -32,7 +32,7 @@ const PieChart = () => {
         console.log(error);
       });
 
-    Axios.get("http://localhost:3002/getuserscount")
+    Axios.get(`${url.BASE_URL}/getuserscount`)
       .then((res) => {
         console.log(res.data);
         setUsers(res.data[0].userCount);

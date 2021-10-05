@@ -83,7 +83,7 @@ export class ReserveList extends Component {
     console.log(data.user_name);
 
     axios
-      .get("http://localhost:3002/reservedList", {
+      .get(`${url.BASE_URL}/reservedList`, {
         params: { id: data.user_id },
       })
       .then((res) => {
@@ -93,7 +93,7 @@ export class ReserveList extends Component {
         });
       });
     axios
-      .get("http://localhost:3002/getvaccinecenter", {
+      .get(`${url.BASE_URL}/getvaccinecenter`, {
         params: { id: data.user_id },
       })
       .then((res) => {
