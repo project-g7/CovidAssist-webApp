@@ -9,6 +9,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import * as BiIcons from "react-icons/bi";
 import "../../../../styles/vaccinated.css";
+import {url} from "../../../config"
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import '../../../../styles/vaccinated.css';
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import {url} from "../../../config"
 
 export class AllVaccinatedList extends Component {
   linkFormatter = (cell, row, rowIndex) => {

@@ -12,6 +12,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import {url} from "../../../config"
+
 class FileReader extends React.Component {
   constructor() {
     super();
@@ -90,7 +92,7 @@ class FileReader extends React.Component {
     formdata.append("data", JSON.stringify(this.state.data));
     console.log("Save data");
     axios
-      .post("http://localhost:3002/addTemperatureReport", this.state.data)
+      .post(`${url.BASE_URL}/addTemperatureReport`, this.state.data)
       .then((res) => {
         console.log(res.data);
         if(res.data == "Success"){

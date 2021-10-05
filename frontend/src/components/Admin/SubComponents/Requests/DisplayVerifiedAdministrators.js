@@ -13,6 +13,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import { Dialog } from "@material-ui/core";
+import {url} from "../../../config"
 
 const useStyles = makeStyles((theme) => ({
     tset: {
@@ -97,7 +98,7 @@ const DisplayUnverifiedAdministrators = ()=>{
         }
         setOpen(false);
 
-        axios.post("http://localhost:3002/removeVaccineManager",formData).then((res)=>{
+        axios.post(`${url.BASE_URL}/removeVaccineManager`,formData).then((res)=>{
             console.log(res.data);
             if(res.data == "Success"){
                 console.log("data passed");
@@ -118,7 +119,7 @@ const DisplayUnverifiedAdministrators = ()=>{
     },[]);
 
     const fetchVerifiedAdminData = (id)=>{
-        axios.get("http://localhost:3002/verifiedAdminDetails", {params:{ id :id}}).then((res)=>{
+        axios.get(`${url.BASE_URL}/verifiedAdminDetails`, {params:{ id :id}}).then((res)=>{
             // console.log(res.data[0]);
             setData(res.data[0]);
         }).catch((err)=>{
@@ -126,7 +127,7 @@ const DisplayUnverifiedAdministrators = ()=>{
         });
     };
     const fetchVerifiedAdminVaccineCenter = (id)=>{
-        axios.get("http://localhost:3002/adminVaccineCenter", {params:{ id :id}}).then((res)=>{
+        axios.get(`${url.BASE_URL}/adminVaccineCenter`, {params:{ id :id}}).then((res)=>{
             setCenterData(res.data[0]);
             setAssignedCenter(res.data[0].assigned_center);
             setAssignedCenterId(res.data[0].center_id);

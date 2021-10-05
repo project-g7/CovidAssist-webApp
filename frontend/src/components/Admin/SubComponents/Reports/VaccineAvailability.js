@@ -3,6 +3,7 @@ import { Bar, Pie, Doughnut, Line, Bubble, Radar } from "react-chartjs-2";
 import "../../../../styles/VaccineBooking.css";
 import VaccineBookingCard1 from "./VaccineBookingCard1";
 import Axios from "axios";
+import {url} from "../../../config"
 
 // import VaccineBookingCard2 from "./VaccineBookingCard2";
 // import VaccineBookingCard3 from "./VaccineBookingCard3";
@@ -19,7 +20,7 @@ function VaccineBookingChart() {
   const [pieChart3, setPieChart3] = useState(0);
   const [regPeople, setRegPeople] = useState("");
   useEffect(() => {
-    Axios.get("http://localhost:3002/sputnikVfirstDose")
+    Axios.get(`${url.BASE_URL}/sputnikVfirstDose`)
       .then((res) => {
         console.log(res.data[0].sputnikV1);
         setSputnikVdose1(res.data[0].sputnikV1);
@@ -30,7 +31,7 @@ function VaccineBookingChart() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/sputnikVsecondDose")
+    Axios.get(`${url.BASE_URL}/sputnikVsecondDose`)
       .then((res) => {
         console.log(res.data[0].sputnikV2);
         setSputnikVdose2(res.data[0].sputnikV2);
@@ -41,7 +42,7 @@ function VaccineBookingChart() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/astraZenecaFirstDose")
+    Axios.get(`${url.BASE_URL}/astraZenecaFirstDose`)
       .then((res) => {
         console.log(res.data[0].astra1);
         setAstraZeneca1(res.data[0].astra1);
@@ -52,7 +53,7 @@ function VaccineBookingChart() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/astraZenecaSecondDose")
+    Axios.get(`${url.BASE_URL}/astraZenecaSecondDose`)
       .then((res) => {
         console.log(res.data[0].astra2);
         setAstraZeneca2(res.data[0].astra2);
@@ -63,7 +64,7 @@ function VaccineBookingChart() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/sinopharmFirstDose")
+    Axios.get(`${url.BASE_URL}/sinopharmFirstDose`)
       .then((res) => {
         console.log(res.data[0].sinopharm1);
         setSinopharm1(res.data[0].sinopharm1);
@@ -74,7 +75,7 @@ function VaccineBookingChart() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/sinopharmSecondDose")
+    Axios.get(`${url.BASE_URL}/sinopharmSecondDose`)
       .then((res) => {
         console.log(res.data[0].sinopharm2);
         setSinopharm2(res.data[0].sinopharm2);
@@ -85,7 +86,7 @@ function VaccineBookingChart() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/PieChart1")
+    Axios.get(`${url.BASE_URL}/PieChart1`)
       .then((res) => {
         console.log(res.data[0].piechart1);
         setPieChart1(res.data[0].piechart1);
@@ -96,7 +97,7 @@ function VaccineBookingChart() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/PieChart2")
+    Axios.get(`${url.BASE_URL}/PieChart2`)
       .then((res) => {
         console.log(res.data[0].pieChart2);
         setPieChart2(res.data[0].piechart2);
@@ -106,7 +107,7 @@ function VaccineBookingChart() {
       });
   }, []);
   useEffect(() => {
-    Axios.get("http://localhost:3002/PieChart3")
+    Axios.get(`${url.BASE_URL}/PieChart3`)
       .then((res) => {
         console.log(res.data[0].piechart3);
         setPieChart3(res.data[0].piechart3);
@@ -117,7 +118,7 @@ function VaccineBookingChart() {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/VaccineregPeople")
+    Axios.get(`${url.BASE_URL}/VaccineregPeople`)
       .then((res) => {
         console.log(res.data[0].reg);
         setRegPeople(res.data[0].reg);

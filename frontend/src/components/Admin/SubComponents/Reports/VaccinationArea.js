@@ -8,6 +8,7 @@ import {
   Marker,
   InfoWindow,
 } from "react-google-maps";
+import {url} from "../../../config"
 
 function Map() {
   const [mapset, setMap] = useState([]);
@@ -20,7 +21,7 @@ function Map() {
   }, []);
 
   const fetchData = async () => {
-    const response = await fetch(`http://localhost:3002/mapMarkerCenters`, {
+    const response = await fetch(`${url.BASE_URL}/mapMarkerCenters`, {
       method: "GET",
     });
     const result = await response.json();
@@ -28,7 +29,7 @@ function Map() {
     setMap(result);
   };
   const fetcData = async () => {
-    const response = await fetch(`http://localhost:3002/TotalVaccinated`, {
+    const response = await fetch(`${url.BASE_URL}/TotalVaccinated`, {
       method: "GET",
     });
     const results = await response.json();

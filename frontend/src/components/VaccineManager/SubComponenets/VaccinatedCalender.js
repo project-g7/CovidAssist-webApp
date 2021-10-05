@@ -5,6 +5,8 @@ import "rsuite/dist/styles/rsuite-default.css";
 import "../../../styles/VaccineMangerCard.css";
 import axios from "axios";
 import { format } from "date-fns";
+import {url} from "../../config"
+
 const VaccinatedCalender = () => {
   const [firstDoseCount, setFirstDoseCount] = useState(0);
   const [secondDoseCount, setSecondDoseCount] = useState(0);

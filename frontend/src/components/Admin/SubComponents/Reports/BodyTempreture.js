@@ -8,6 +8,8 @@ import {
   InfoWindow,
 } from "react-google-maps";
 import mapstyles from "./mapstyles";
+import {url} from "../../../config"
+
 function Map() {
   const [bodyTempreture, setBodyTempreture] = useState([]);
   const [bodyTempretureCount, setBodyTempretureCount] = useState([]);
@@ -17,7 +19,7 @@ function Map() {
     fetData();
   }, []);
   const fetchData = async () => {
-    const response = await fetch(`http://localhost:3002/bodytempreture`, {
+    const response = await fetch(`${url.BASE_URL}/bodytempreture`, {
       method: "GET",
     });
     const result = await response.json();
@@ -26,7 +28,7 @@ function Map() {
   };
 
   const fetData = async () => {
-    const response = await fetch(`http://localhost:3002/bodytempreturecount`, {
+    const response = await fetch(`${url.BASE_URL}/bodytempreturecount`, {
       method: "GET",
     });
     const results = await response.json();

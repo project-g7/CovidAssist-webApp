@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../../styles/ContactTracingReport.css";
 import "../../../styles/VaccineMangerCard.css";
 import Axios from "axios";
+import {url} from "../../config"
 
 const ContactTracingCard = () => {
   const [firstContact, setFirstContact] = useState(0);
@@ -10,7 +11,7 @@ const ContactTracingCard = () => {
   const [registerContact, setRegisterContact] = useState(0);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/FirstContact")
+    Axios.get(`${url.BASE_URL}/FirstContact`)
       .then((res) => {
         console.log(res.data[0].countF);
         setFirstContact(res.data[0].countF);
@@ -21,7 +22,7 @@ const ContactTracingCard = () => {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/SecondContact")
+    Axios.get(`${url.BASE_URL}/SecondContact`)
       .then((res) => {
         console.log(res.data[0].countS);
         setSecondContact(res.data[0].countS);
@@ -32,7 +33,7 @@ const ContactTracingCard = () => {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/mobileregPeople")
+    Axios.get(`${url.BASE_URL}/mobileregPeople`)
       .then((res) => {
         console.log(res.data[0].countFS);
         setRegisterContact(res.data[0].countFS);

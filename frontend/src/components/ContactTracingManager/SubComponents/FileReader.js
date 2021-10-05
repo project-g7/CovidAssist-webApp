@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import ContactTable from './ContactTable';
+import {url} from "../../config"
+
 class FileReader extends React.Component {
   constructor() {
     super();
@@ -80,7 +82,7 @@ flagZero = ()=>{
       data1.push(item.tracing_key)
     })}
     axios
-    .post("http://localhost:3002/confirm", data1)
+    .post(`${url.BASE_URL}/confirm`, data1)
     .then((res) => {
       console.log(res.data);
       console.log("Successs fetch");
@@ -96,7 +98,7 @@ flagZero = ()=>{
       data1.push(item.nic)
     })}
     axios
-      .post("http://localhost:3002/fetchusers", data1)
+      .post(`${url.BASE_URL}/fetchusers`, data1)
       .then((res) => {
         console.log(res.data);
         console.log("Successs fetch");

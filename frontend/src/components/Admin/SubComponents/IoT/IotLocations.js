@@ -4,6 +4,7 @@ import axios from "axios";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import {url} from "../../../config"
 
 export class IotLocations extends Component{
   
@@ -41,7 +42,7 @@ export class IotLocations extends Component{
 };
 
 componentDidMount() {
-  axios.get("http://localhost:3002/iotCenters").then((res) => {
+  axios.get(`${url.BASE_URL}/iotCenters`).then((res) => {
       // console.log(res.data);
       this.setState({
           iotCenters: res.data,

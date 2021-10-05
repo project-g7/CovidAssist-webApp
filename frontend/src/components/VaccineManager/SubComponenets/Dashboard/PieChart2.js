@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import { Doughnut } from "react-chartjs-2";
 import Axios from "axios";
+import {url} from "../../../config"
 
 const PieChart2 = () => {
      const [dose1, setDose1] = useState("");

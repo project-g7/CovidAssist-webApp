@@ -7,6 +7,7 @@ import * as IoIcons from "react-icons/io5";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import {url} from "../../config"
 
 const useStyles = makeStyles((theme) => ({
   tset: {
@@ -68,7 +69,7 @@ const DisplayMobileUser = () => {
   }, []);
   const fetchUserData = (id) => {
     axios
-      .get("http://localhost:3002/MobileUserDetails", { params: { id: id } })
+      .get(`${url.BASE_URL}/MobileUserDetails`, { params: { id: id } })
       .then((res) => {
         // console.log(res.data[0]);
         setData(res.data[0]);
@@ -82,7 +83,7 @@ const DisplayMobileUser = () => {
   const confirm = () => {
     console.log(data.tracing_key);
     axios
-      .post("http://localhost:3002/confirm", [data.tracing_key])
+      .post(`${url.BASE_URL}/confirm`, [data.tracing_key])
       .then((res) => {
         console.log(res.data);
         console.log("Successs fetch");

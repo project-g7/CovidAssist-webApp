@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {url} from "../../../config"
 
 const DashboardCard1 = () => {
   const [bookings, setBookings] = useState(0);

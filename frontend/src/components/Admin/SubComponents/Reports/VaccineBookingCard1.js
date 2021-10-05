@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import {url} from "../../../config"
 
 const VaccineBookingCard1 = () => {
   const [dose1, setDose1] = useState("");
@@ -8,7 +9,7 @@ const VaccineBookingCard1 = () => {
   const [register, setRegister] = useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/vaccineFirstDose")
+    Axios.get(`${url.BASE_URL}/vaccineFirstDose`)
       .then((res) => {
         console.log(res.data[0].countF);
         setDose1(res.data[0].countF);
@@ -18,7 +19,7 @@ const VaccineBookingCard1 = () => {
       });
   }, []);
   useEffect(() => {
-    Axios.get("http://localhost:3002/vaccineSecondDose")
+    Axios.get(`${url.BASE_URL}/vaccineSecondDose`)
       .then((res) => {
         console.log(res.data[0].countS);
         setDose2(res.data[0].countS);
@@ -28,7 +29,7 @@ const VaccineBookingCard1 = () => {
       });
   }, []);
   useEffect(() => {
-    Axios.get("http://localhost:3002/vaccineFirstSecondDose")
+    Axios.get(`${url.BASE_URL}/vaccineFirstSecondDose`)
       .then((res) => {
         console.log(res.data[0].countFS);
         setDose1Dose2(res.data[0].countFS);
@@ -38,7 +39,7 @@ const VaccineBookingCard1 = () => {
       });
   }, []);
   useEffect(() => {
-    Axios.get("http://localhost:3002/vaccineBooking")
+    Axios.get(`${url.BASE_URL}/vaccineBooking`)
       .then((res) => {
         console.log(res.data[0].booking);
         setRegister(res.data[0].booking);

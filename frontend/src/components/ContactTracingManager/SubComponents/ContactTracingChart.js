@@ -5,6 +5,7 @@ import "../../../styles/ContactTracingReport.css";
 import { Bar, Pie, Doughnut, Line, Bubble, Radar } from "react-chartjs-2";
 import Axios from "axios";
 import BarChart from "./ContactTracingBar";
+import {url} from "../../config"
 
 const ContactTracingChart = () => {
   const [pieChartAge1, setPieChartAge1] = useState(0);
@@ -14,7 +15,7 @@ const ContactTracingChart = () => {
   const [data, setData] = useState([]);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    Axios.get("http://localhost:3002/PieChartAge1")
+    Axios.get(`${url.BASE_URL}/PieChartAge1`)
       .then((res) => {
         console.log(res.data[0].piechart1);
         setPieChartAge1(res.data[0].piechart1);
@@ -25,7 +26,7 @@ const ContactTracingChart = () => {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/PieChartAge2")
+    Axios.get(`${url.BASE_URL}/PieChartAge2`)
       .then((res) => {
         console.log(res.data[0].piechart2);
         setPieChartAge2(res.data[0].piechart2);
@@ -36,7 +37,7 @@ const ContactTracingChart = () => {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/PieChartAge3")
+    Axios.get(`${url.BASE_URL}/PieChartAge3`)
       .then((res) => {
         console.log(res.data[0].piechart3);
         setPieChartAge3(res.data[0].piechart3);
@@ -46,7 +47,7 @@ const ContactTracingChart = () => {
       });
   }, []);
   useEffect(() => {
-    Axios.get("http://localhost:3002/getexposeddistrict")
+    Axios.get(`${url.BASE_URL}/getexposeddistrict`)
       .then((res) => {
         console.log(res.data);
         // setData(res.data);

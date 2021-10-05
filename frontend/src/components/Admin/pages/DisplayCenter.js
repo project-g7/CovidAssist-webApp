@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import * as IoIcons from "react-icons/io5";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import axios from "axios";
+import {url} from "../../config"
 
 const useStyles = makeStyles((theme) => ({
   tset: {
@@ -68,7 +69,7 @@ const DisplayCenter = () => {
 
   const fetchCenterData = (id) => {
     axios
-      .get("http://localhost:3002/vaccineCenterDetails", { params: { id: id } })
+      .get(`${url.BASE_URL}/vaccineCenterDetails`, { params: { id: id } })
       .then((res) => {
         console.log(res.data[0]);
         setData(res.data[0]);
@@ -80,7 +81,7 @@ const DisplayCenter = () => {
   };
   const fetchVaccineData = (id) => {
     axios
-      .get("http://localhost:3002/vaccineCenterVaccineDetails", {
+      .get(`${url.BASE_URL}/vaccineCenterVaccineDetails`, {
         params: { id: id },
       })
       .then((res) => {
@@ -94,7 +95,7 @@ const DisplayCenter = () => {
   };
   const fetchManagerData = (id) => {
     axios
-      .get("http://localhost:3002/vaccineCenterManagerDetails", {
+      .get(`${url.BASE_URL}/vaccineCenterManagerDetails`, {
         params: { id: id },
       })
       .then((res) => {

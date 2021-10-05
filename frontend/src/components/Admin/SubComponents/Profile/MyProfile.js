@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { InputLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import {url} from "../../../config"
 
 const useStyles = makeStyles((theme) => ({
   tset: {
@@ -56,7 +57,7 @@ const MyProfile = () => {
     console.log(data.user_name);
 
     axios
-      .get("http://localhost:3002/myprofile", { params: { id: data.user_id } })
+      .get(`${url.BASE_URL}/myprofile`, { params: { id: data.user_id } })
       .then((res) => {
         console.log(res.data[0]);
         setData(res.data[0]);

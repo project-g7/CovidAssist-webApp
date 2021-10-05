@@ -20,6 +20,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Axios from "axios";
 import Map from "../AddLocation";
+import {url} from "../../../config"
+
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -118,7 +120,7 @@ const AddVaccineForm = () => {
       lng: lng,
     };
     setOpen(false);
-    Axios.post("http://localhost:3002/addIoTLocation", formData)
+    Axios.post(`${url.BASE_URL}/addIoTLocation`, formData)
       .then((res) => {
         console.log(res.data);
         if(res.data == "Success"){

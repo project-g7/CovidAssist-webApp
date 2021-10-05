@@ -6,6 +6,7 @@ import Picker from "react-picker";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
+import {url} from "../../../config"
 
 // const options1 = [
 //   { value: "colombo", label: "Colombo" },
@@ -36,7 +37,7 @@ class VaccineBookingSearchBar extends Component {
   }
   async apicall() {
     const response = await fetch(
-      `http://localhost:3002/districtAndVaccinecenter`,
+      `${url.BASE_URL}/districtAndVaccinecenter`,
       { method: "GET" }
     );
     const users = await response.json();
@@ -44,7 +45,7 @@ class VaccineBookingSearchBar extends Component {
   }
   async getDistrict() {
     const response = await fetch(
-      `http://localhost:3002/getDistrictVaccinecenter`,
+      `${url.BASE_URL}/getDistrictVaccinecenter`,
       { method: "GET" }
     );
     const users = await response.json();

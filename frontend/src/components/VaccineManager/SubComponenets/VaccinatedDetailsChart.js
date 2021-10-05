@@ -5,6 +5,8 @@ import VaccinatedCalender from "./VaccinatedCalender";
 import axios from "axios";
 import { format } from "date-fns";
 import "../../../styles/VaccineMangerCard.css";
+import {url} from "../../config"
+
 const VaccinatedDetailsChart = () => {
   const [firstDoseCount1, setFirstDoseCount1] = useState(0);
   const [firstDoseCount2, setFirstDoseCount2] = useState(0);

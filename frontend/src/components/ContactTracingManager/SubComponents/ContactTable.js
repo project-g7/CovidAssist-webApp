@@ -5,6 +5,7 @@ import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import FileReader from "./FileReader";
+import {url} from "../../config"
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
@@ -66,7 +67,7 @@ export class ContactTable extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:3002/mobileUsers").then((res) => {
+    axios.get(`${url.BASE_URL}/mobileUsers`).then((res) => {
       console.log(res.data);
       this.setState({
         users: res.data,

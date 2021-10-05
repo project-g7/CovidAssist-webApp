@@ -8,6 +8,7 @@ import {
   InfoWindow,
 } from "react-google-maps";
 import mapstyles from "./mapstyles";
+import {url} from "../../../config"
 
 function Map() {
   const [facemask, setFacemask] = useState([]);
@@ -19,7 +20,7 @@ function Map() {
   }, []);
 
   const fetchData = async () => {
-    const response = await fetch(`http://localhost:3002/facemasks`, {
+    const response = await fetch(`${url.BASE_URL}/facemasks`, {
       method: "GET",
     });
     const result = await response.json();
@@ -28,7 +29,7 @@ function Map() {
   };
 
   const fethData = async () => {
-    const response = await fetch(`http://localhost:3002/notfacemasks`, {
+    const response = await fetch(`${url.BASE_URL}/notfacemasks`, {
       method: "GET",
     });
     const results = await response.json();

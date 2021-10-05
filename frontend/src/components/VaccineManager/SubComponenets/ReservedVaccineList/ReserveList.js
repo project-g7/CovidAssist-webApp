@@ -8,6 +8,7 @@ import * as BiIcons from "react-icons/bi";
 import "../../../../styles/vaccinated.css";
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import {url} from "../../../config"
 
 export class ReserveList extends Component {
   linkFormatter = (cell, row, rowIndex) => {

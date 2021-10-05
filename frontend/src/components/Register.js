@@ -26,6 +26,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
+import {url} from './config'
+
 const Register = () => {
   // const [FirstName, setFirstName] = useState("");
   // const [LastName, setLastName] = useState("");
@@ -83,7 +85,7 @@ const Register = () => {
     };
     console.log("Form data", values);
     console.log("Form data nuvin nuvn  jnvjdfb dfugh uh");
-    Axios.post("http://localhost:3002/create", formData).then((res) => {
+    Axios.post(`${url.BASE_URL}/create`, formData).then((res) => {
       setCreated(res.data.message);
       if (res.data.message == "Success") {
         window.location.href = "/";

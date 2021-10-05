@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 import BodyTempreture from "./BodyTempreture";
 import Facemasks from "./Facemasks";
 // import AddVaccineForm from './AddVaccineForm'
+import {url} from "../../../config"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

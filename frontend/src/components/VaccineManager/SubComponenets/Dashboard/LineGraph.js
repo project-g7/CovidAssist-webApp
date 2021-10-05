@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // import { Line } from "react-chartjs-2";
 import { Bar, Pie, Doughnut, Line, Bubble, Radar } from "react-chartjs-2";
 import Axios from "axios";
+import {url} from "../../../config"
 
 const data = {
   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],

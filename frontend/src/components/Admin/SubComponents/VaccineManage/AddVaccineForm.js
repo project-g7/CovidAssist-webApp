@@ -26,6 +26,8 @@ import {
 import DateFnsUtils from "@date-io/date-fns";
 import Map from "../AddLocation";
 import "../../../../styles/VaccinationAreas.css";
+import {url} from "../../../config"
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -109,7 +111,7 @@ const AddVaccineForm = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/getVaccines").then((res) => {
+    Axios.get(`${url.BASE_URL}/getVaccines`).then((res) => {
       console.log(res.data);
       setVaccineData(res.data);
     });
@@ -161,7 +163,7 @@ const AddVaccineForm = () => {
       endDate: selectedEndDate,
     };
     setOpen(false);
-    Axios.post("http://localhost:3002/addVaccineCenter", formData)
+    Axios.post(`${url.BASE_URL}/addVaccineCenter`, formData)
       .then((res) => {
         console.log(res.data);
         if(res.data == "Success"){

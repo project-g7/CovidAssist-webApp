@@ -14,6 +14,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Modal from "./Modal.js";
+import {url} from "../../../config"
 
 const useStyles = makeStyles((theme) => ({
   formControl2: {
@@ -65,7 +66,7 @@ const AddVaccine = () => {
   }, []);
 
   const fetchData = () => {
-    Axios.get("http://localhost:3002/vaccines")
+    Axios.get(`${url.BASE_URL}/vaccines`)
       .then((res) => {
         console.log(res.data);
         setVaccineList(res.data);
@@ -110,7 +111,7 @@ const AddVaccine = () => {
       dose3Amount: dose3,
     };
     setOpen(false);
-    Axios.post("http://localhost:3002/addVaccine", formData)
+    Axios.post(`${url.BASE_URL}/addVaccine`, formData)
       .then((res) => {
         console.log(res.data);
         if (res.data == "Success") {
@@ -152,7 +153,7 @@ const AddVaccine = () => {
     console.log(temparr);
     setVaccineList(temparr);
 
-    Axios.post("http://localhost:3002/updateVaccine", items)
+    Axios.post(`${url.BASE_URL}/updateVaccine`, items)
       .then((res) => {
         console.log(res.data);
         if (res.data == "Success") {

@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from "react";
 import Axios from "axios";
 import CenterTable from './CenterTable'
+import {url} from "../../../config"
 
 
 const VaccineCenters = () => {
@@ -10,7 +11,7 @@ const VaccineCenters = () => {
 
     useEffect(() => {
         // loadDataOnlyOnce();
-        Axios.get("http://localhost:3002/vaccineCenters").then(res => {
+        Axios.get(`${url.BASE_URL}/vaccineCenters`).then(res => {
         console.log(res.data);
         setCenterList(res.data);
         });

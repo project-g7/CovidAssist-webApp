@@ -14,6 +14,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
+import {url} from "../../../config"
 
 const useStyles = makeStyles((theme) => ({
   tset: {
@@ -107,14 +108,14 @@ const DisplayUnverifiedAdministrators = () => {
     // fetchVerifiedAdminVaccineCenter(id);
   }, []);
   useEffect(() => {
-    axios.get("http://localhost:3002/getVaccineCenterList").then((res) => {
+    axios.get(`${url.BASE_URL}/getVaccineCenterList`).then((res) => {
       console.log(res.data);
       setVaccineCenterList(res.data);
     });
   }, []);
   const fetchVerifiedAdminData = (id) => {
     axios
-      .get("http://localhost:3002/verifiedAdminDetails", { params: { id: id } })
+      .get(`${url.BASE_URL}/verifiedAdminDetails`, { params: { id: id } })
       .then((res) => {
         // console.log(res.data[0]);
         setData(res.data[0]);
@@ -174,7 +175,7 @@ const DisplayUnverifiedAdministrators = () => {
     };
     setRejectOpen(false);
     axios
-      .post("http://localhost:3002/rejectAdmins", formData)
+      .post(`${url.BASE_URL}/rejectAdmins`, formData)
       .then((res) => {
         console.log(res.data);
         if (res.data == "Success") {
@@ -197,7 +198,7 @@ const DisplayUnverifiedAdministrators = () => {
 
     if (data.user_role == "Vaccine Manager") {
       axios
-        .post("http://localhost:3002/assignAdmins", formData)
+        .post(`${url.BASE_URL}/assignAdmins`, formData)
         .then((res) => {
           console.log(res.data);
           if (res.data == "Success") {
@@ -212,7 +213,7 @@ const DisplayUnverifiedAdministrators = () => {
         });
     } else if (data.user_role == "Contact Tracing Manager") {
       axios
-        .post("http://localhost:3002/acceptAdmins", formData)
+        .post(`${url.BASE_URL}/acceptAdmins`, formData)
         .then((res) => {
           console.log(res.data);
           if (res.data == "Success") {

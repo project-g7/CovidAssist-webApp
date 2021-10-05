@@ -4,6 +4,7 @@ import axios from "axios";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import {url} from "../../../config"
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
@@ -60,7 +61,7 @@ export class CenterTable extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:3002/vaccineCenters").then((res) => {
+    axios.get(`${url.BASE_URL}/vaccineCenters`).then((res) => {
       console.log(res.data);
       this.setState({
         centers: res.data,

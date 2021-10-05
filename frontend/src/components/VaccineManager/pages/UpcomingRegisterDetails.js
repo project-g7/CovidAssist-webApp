@@ -7,6 +7,7 @@ import * as IoIcons from "react-icons/io5";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import axios from "axios";
 // import "../../../styles/VaccinationAreas.css";
+import {url} from "../../config"
 
 const useStyles = makeStyles((theme) => ({
 

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import FileReader from "./FileReader";
 import Sidebar from "../ContactTracingSidebar";
 import DisplayMobileUser from "./DisplayMobileUser";
+import {url} from "../../config"
 
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
@@ -68,7 +69,7 @@ export class exposureTable extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:3002/exposureUsers").then((res) => {
+    axios.get(`${url.BASE_URL}/exposureUsers`).then((res) => {
       console.log(res.data);
       this.setState({
         users: res.data,

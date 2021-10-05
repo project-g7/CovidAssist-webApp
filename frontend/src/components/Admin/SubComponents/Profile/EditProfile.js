@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
+import {url} from "../../../config"
 
 const useStyles = makeStyles((theme) => ({
   tset: {
@@ -71,7 +72,7 @@ const EditProfile = () => {
     console.log(data.user_name);
 
     axios
-      .get("http://localhost:3002/myprofile", { params: { id: data.user_id } })
+      .get(`${url.BASE_URL}/myprofile`, { params: { id: data.user_id } })
       .then((res) => {
         console.log(res.data[0]);
         setData(res.data[0]);
@@ -99,7 +100,7 @@ const EditProfile = () => {
       contactNumber: number,
     };
     axios
-      .post("http://localhost:3002/editprofile", formData)
+      .post(`${url.BASE_URL}/editprofile`, formData)
       .then((res) => {
         console.log(res.data);
       })

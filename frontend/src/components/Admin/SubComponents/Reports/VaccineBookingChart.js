@@ -3,6 +3,8 @@ import { Bar, Pie, Doughnut, Line, Bubble, Radar } from "react-chartjs-2";
 import "../../../../styles/VaccineBooking.css";
 import VaccineBookingSearchBar from "./VaccineBookingSearchBar";
 import { format } from "date-fns";
+import {url} from "../../../config"
+
 function VaccineBookingChart() {
   const [selectdistrict, setSelectDistrict] = useState("");
   const [selectcenter, setSelectCenter] = useState("");
@@ -51,7 +53,7 @@ function VaccineBookingChart() {
     const encodeVaccineCenter = encodeURIComponent(center);
     console.log(encodeVaccineCenter);
     const response = await fetch(
-      `http://localhost:3002/VaccineSelecteDistrict?selectcenter=${encodeVaccineCenter}`,
+      `${url.BASE_URL}/VaccineSelecteDistrict?selectcenter=${encodeVaccineCenter}`,
       { method: "GET" }
     );
     console.log("44444444");
@@ -69,7 +71,7 @@ function VaccineBookingChart() {
     const encodeVaccineCenter = encodeURIComponent(centers);
     console.log(encodeVaccineCenter);
     const response = await fetch(
-      `http://localhost:3002/VaccineTypeSelecteDistrict?selectcenter=${encodeVaccineCenter}`,
+      `${url.BASE_URL}/VaccineTypeSelecteDistrict?selectcenter=${encodeVaccineCenter}`,
       { method: "GET" }
     );
     console.log("99999999999999999999");
@@ -133,7 +135,7 @@ function VaccineBookingChart() {
     const encodeBookedDetails = encodeURIComponent(booked);
     console.log(encodeBookedDetails);
     const response = await fetch(
-      `http://localhost:3002/VaccineBookedDetails?selectcenter=${encodeBookedDetails}`,
+      `${url.BASE_URL}/VaccineBookedDetails?selectcenter=${encodeBookedDetails}`,
       { method: "GET" }
     );
     console.log("--------------------");
@@ -160,7 +162,7 @@ function VaccineBookingChart() {
     const encodeBookedDetails2 = encodeURIComponent(booked2);
     console.log(encodeBookedDetails2);
     const response = await fetch(
-      `http://localhost:3002/VaccineBookedDetails2?selectcenter=${encodeBookedDetails2}`,
+      `${url.BASE_URL}/VaccineBookedDetails2?selectcenter=${encodeBookedDetails2}`,
       { method: "GET" }
     );
     console.log("--------------------");
@@ -189,7 +191,7 @@ function VaccineBookingChart() {
     const encodeBookedDetails3 = encodeURIComponent(booked3);
     console.log(encodeBookedDetails3);
     const response = await fetch(
-      `http://localhost:3002/VaccineBookedDetails3?selectcenter=${encodeBookedDetails3}`,
+      `${url.BASE_URL}/VaccineBookedDetails3?selectcenter=${encodeBookedDetails3}`,
       { method: "GET" }
     );
     console.log("--------------------");
@@ -219,7 +221,7 @@ function VaccineBookingChart() {
     const encodeBookedDetails4 = encodeURIComponent(booked4);
     console.log(encodeBookedDetails4);
     const response = await fetch(
-      `http://localhost:3002/VaccineBookedDetails4?selectcenter=${encodeBookedDetails4}`,
+      `${url.BASE_URL}/VaccineBookedDetails4?selectcenter=${encodeBookedDetails4}`,
       { method: "GET" }
     );
     console.log("--------------------");

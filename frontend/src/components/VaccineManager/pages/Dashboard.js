@@ -9,6 +9,7 @@ import BarChart from "../SubComponenets/Dashboard/BarChart";
 import PieChart from "../SubComponenets/Dashboard/PieChart";
 import PieChart2 from "../SubComponenets/Dashboard/PieChart2";
 import axios from "axios";
+import {url} from "../../config"
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
